@@ -1,7 +1,0 @@
-<RCC>
-  <qresource prefix="/i18n">
-    <file alias="../../i18n/MovieMetaM_en.qm">/home/michael/Development/QT/MovieMetaM/i18n/MovieMetaM_en.qm</file>
-    <file alias="../../i18n/MovieMetaM_de.qm">/home/michael/Development/QT/MovieMetaM/i18n/MovieMetaM_de.qm</file>
-  </qresource>
-</RCC>
-
