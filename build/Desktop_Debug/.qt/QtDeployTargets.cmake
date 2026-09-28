@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_MovieMetaM_FILE /home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/MovieMetaM)
+set(__QT_DEPLOY_TARGET_MovieMetaM_TYPE EXECUTABLE)

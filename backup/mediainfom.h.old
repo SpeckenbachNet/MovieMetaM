@@ -1,0 +1,47 @@
+#ifndef MP4COVEREEXTRACTOR_H
+#define MP4COVEREEXTRACTOR_H
+
+#include <QObject>
+#include <QImage>
+#include <QString>
+#include <QFile>
+#include <QMap>
+
+class MediaInfoM : public QObject
+{
+    Q_OBJECT
+public:
+    explicit MediaInfoM(QObject *parent = nullptr);
+
+    // Gibt das Cover als QImage zurück, leer wenn nicht gefunden oder Fehler
+    QImage extractCoverImage(const QString &filePath);
+    QMap<QString, QString> extractMetadata(const QString &filePath);
+
+signals:
+    void errorOccurred(const QString &message);
+
+private:
+    QString detectFileType(const QString &filePath);
+    QImage extractCoverImageMp4(const QString &filePath);
+    QMap<QString, QString> extractMetadataMp4(const QString &filePath);
+    struct Mp4Box {
+        quint64 size;
+        QByteArray type;
+        qint64 headerSize;
+        qint64 dataPos;
+    };
+
+    bool readBoxHeader(QFile &file, Mp4Box &box);
+    bool findCoverBox(QFile &file, qint64 endPos, QByteArray &coverData);
+
+    
+    // Spezielle Funktionen zur Extraktion von Cover und Metadaten
+    void processBoxForCover(const Mp4Box &box, QFile &file, QByteArray &coverData);
+    void processBoxForMetadata(const Mp4Box &box, QFile &file, QMap<QString, QString> &metadata);
+    void parseBoxes(QFile &file, qint64 endPos, const std::function<void(const Mp4Box &, QFile &)> &visitor);
+
+    // Hilfsfunktionen zum Parsen spezifischer Metadatenfelder
+    QString readStringDataBox(QFile &file, qint64 boxEnd);
+};
+
+#endif // MP4COVEREEXTRACTOR_H
