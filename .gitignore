@@ -30,6 +30,8 @@ ui_*.h
 Makefile*
 *build-*
 build/
+build/*
+.qtcreator/
 *.qm
 *.prl
 *.qmlls.ini
@@ -55,4 +57,5 @@ compile_commands.json
 
 *_qmlcache.qrc
 
+_dev/
 _backup/
