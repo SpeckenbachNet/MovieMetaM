@@ -1,0 +1,13 @@
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/MovieMetaM.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/MovieMetaM_lupdate.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/update_translations.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/MovieMetaM_lrelease.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/release_translations.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/edit_cache.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/rebuild_cache.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/list_install_components.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/install.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/install/local.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/install/strip.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/MovieMetaM_autogen_timestamp_deps.dir
+/home/michael/Development/QT/MovieMetaM/build/Desktop_Debug/CMakeFiles/MovieMetaM_autogen.dir

@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="new.svg">ressources/icons/new.svg</file>
+        <file alias="delete.svg">ressources/icons/delete.svg</file>
+        <file alias="exit.svg">ressources/icons/exit.svg</file>
+        <file alias="save.svg">ressources/icons/save.svg</file>
+        <file alias="save_disabled.svg">ressources/icons/save_disabled.svg</file>
+        <file alias="save_all.svg">ressources/icons/save_all.svg</file>
+        <file alias="save_all_disabled.svg">ressources/icons/save_all_disabled.svg</file>
+        <file alias="search.svg">ressources/icons/search.svg</file>
+        <file alias="close.svg">ressources/icons/close.svg</file>
+        <file alias="settings.svg">ressources/icons/settings.svg</file>
+        <file alias="info.svg">ressources/icons/info.svg</file>
+        <file alias="help.svg">ressources/icons/help.svg</file>
+    </qresource>
+</RCC>
