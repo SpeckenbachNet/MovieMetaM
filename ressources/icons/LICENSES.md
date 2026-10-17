@@ -8,9 +8,9 @@
 | `settings.svg`, `back.svg` | taken from churchWorshipM | origin to be clarified |
 | `help.svg` | taken from churchWorshipM (SVG Repo) | origin to be clarified |
 | `info.svg` | taken from PhotoBoothM | origin to be clarified |
-| `new.svg`, `delete.svg`, `search.svg` | older MovieMetaM icons (replaced in the next step) | origin to be clarified |
+| `add.svg`, `remove.svg`, `search.svg` | taken from churchWorshipM | origin to be clarified |
 
-The toolbar icons are black drawings; `ToolbarM` tints them in the text color of the theme.
+The icons are black drawings; `ToolbarM` and `SearchField` tint them in the text color of the theme.
 
 ## Lucide – ISC License
 

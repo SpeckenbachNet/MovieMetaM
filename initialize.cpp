@@ -46,13 +46,6 @@ void MainWin::initializeForm() {
     QPixmap noCoverPix(":/images/noimage.svg");
     ui->coverLabel->setPixmap(noCoverPix);
 
-    // Style Toolbar
-    ui->addToolButton->setAutoRaise(true);
-    ui->addToolButton->setIconSize(QSize(32, 32));
-    ui->removeToolButton->setAutoRaise(true);
-    ui->removeToolButton->setIconSize(QSize(32, 32));
-    ui->searchToolButton->setAutoRaise(true);
-    ui->searchToolButton->setIconSize(QSize(32, 32));
 
     // Select the hole row, Only one row is allowed
     // Prevents losing selction by clickng empty space.
@@ -195,6 +188,14 @@ void MainWin::initializeToolBars()
     m_saveSettingsBtn = ui->settingsToolbar->addButton("saveSettingsBtn", tr("Save"), ":icons/save", true);
     m_saveSettingsBtn->setToolTip(tr("Save settings"));
     m_saveSettingsBtn->setEnabled(false);
+
+    // --- Toolbar below the movie list (narrow: icons only)
+    m_addBtn = ui->fileListToolbar->addButton("addBtn", "", ":icons/add");
+    m_addBtn->setToolTip(tr("Add movies"));
+    m_removeBtn = ui->fileListToolbar->addButton("removeBtn", "", ":icons/remove");
+    m_removeBtn->setToolTip(tr("Remove the selected movies"));
+    m_removeBtn->setEnabled(false);   // until a movie is selected
+    ui->fileListToolbar->addSpacer();
 
     // --- Info toolbar (becomes part of the help page)
     m_infoBackBtn = ui->infoToolbar->addButton("infoBackBtn", tr("Back"), ":icons/back", true);
@@ -414,10 +415,14 @@ void MainWin::initializeConnects() {
     // ----- Other connects
     connect(ui->searchTableView, &QTableView::doubleClicked, this, &MainWin::onSearchTableViewDoubleClicked);
     connect(ui->fileListTableView, &QTableView::clicked, this, &::MainWin::onFilelistTableViewClicked);
-    connect(ui->searchToolButton, &QToolButton::clicked, this, &MainWin::onSearchButtonClicked);
-    connect(ui->addToolButton, &QToolButton::clicked, this, &MainWin::onAddFilesButtonClicked);
-    connect(ui->removeToolButton, &QToolButton::clicked, this, &::MainWin::onRemoveFilesButtonClicked);
-    connect(ui->searchEdit, &QLineEdit::returnPressed, ui->searchToolButton, &QToolButton::click);
+    connect(ui->searchEdit, &SearchField::searchRequested, this, &MainWin::onSearchButtonClicked);
+    connect(m_addBtn, &QToolButton::clicked, this, &MainWin::onAddFilesButtonClicked);
+    connect(m_removeBtn, &QToolButton::clicked, this, &MainWin::onRemoveFilesButtonClicked);
+
+    // "Remove" only while at least one movie is selected
+    connect(ui->fileListTableView->selectionModel(), &QItemSelectionModel::selectionChanged, this, [this] {
+        m_removeBtn->setEnabled(ui->fileListTableView->selectionModel()->hasSelection());
+    });
 }
 
 void MainWin::initializeNetwork() {
