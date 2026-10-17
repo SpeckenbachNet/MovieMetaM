@@ -135,6 +135,8 @@ private:
     QToolButton *m_settingsBackBtn = nullptr;
     QToolButton *m_saveSettingsBtn = nullptr;
     QToolButton *m_infoBackBtn = nullptr;
+    QToolButton *m_addBtn = nullptr;       // below the movie list
+    QToolButton *m_removeBtn = nullptr;
 
     void showPage(QWidget *page);
     void setSignalsBlocked(bool blocked);
