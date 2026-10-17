@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.3.0")
+set(PROJECT_VERSION "0.3.1")
 
 project(
     MovieMetaM
@@ -17,6 +17,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Network)
+
+# TMDB API read access token: kept out of git in tmdb_token.txt
+set(TMDB_TOKEN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/tmdb_token.txt")
+set(TMDB_TOKEN "")
+if(EXISTS "${TMDB_TOKEN_FILE}")
+    file(READ "${TMDB_TOKEN_FILE}" TMDB_TOKEN)
+    string(STRIP "${TMDB_TOKEN}" TMDB_TOKEN)
+    # Reconfigure when the token changes
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${TMDB_TOKEN_FILE}")
+else()
+    message(WARNING "tmdb_token.txt not found: the movie search will not work")
+endif()
 
 set(TS_FILES
    i18n/MovieMetaM_en.ts
@@ -96,6 +108,7 @@ target_compile_definitions(MovieMetaM
     PRIVATE
         PROJECT_VERSION="${PROJECT_VERSION}"
         PROJECT_NAME="${PROJECT_NAME}"
+        TMDB_TOKEN="${TMDB_TOKEN}"
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

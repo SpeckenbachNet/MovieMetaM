@@ -417,6 +417,17 @@
         <source>PLEASE_ENTER_SEARCH_TERM</source>
         <translation type="unfinished">Please enter Search Term</translation>
     </message>
+    <message>
+        <source>NO_TMDB_TOKEN</source>
+        <translation>No TMDB token: the movie search is not available.</translation>
+    </message>
+    <message numerus="yes">
+        <source>FILES_SKIPPED_ONLY_MP4</source>
+        <translation>
+            <numerusform>%n file skipped: only MP4 is supported.</numerusform>
+            <numerusform>%n files skipped: only MP4 is supported.</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>SetupDialog</name>

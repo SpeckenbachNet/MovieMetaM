@@ -59,3 +59,6 @@ compile_commands.json
 
 _dev/
 _backup/
+
+# TMDB API token (read by CMake, never commit)
+tmdb_token.txt

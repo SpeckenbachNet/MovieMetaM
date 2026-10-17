@@ -19,6 +19,7 @@
 #include "mainwin.h"
 #include "./ui_mainwin.h"
 #include "htmltemplates.h"
+#include "mediainfom.h"
 
 MainWin::MainWin(QWidget *parent)
     : QMainWindow(parent),
@@ -341,7 +342,7 @@ bool MainWin::validateAndRefreshChanges() {
         qDebug() << "Description has changed";
         hasChanged = true;
     }
-    work.studio = ui->studioEdit->text();
+    work.description = ui->descriptionText->toPlainText();
 
     // DateEdit
     if (ui->releaseDateEdit->date() != original.releaseDate) {
@@ -583,8 +584,16 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
     if (filePaths.isEmpty()) return;
 
     int firstNewRowIndex = -1;
+    int skippedCount = 0;
 
     for (const QString &path : filePaths) {
+        // Only supported file types (MP4 for now)
+        if (!MediaInfoM::isSupported(path)) {
+            qDebug() << "Unsupported file type, skip:" << path;
+            ++skippedCount;
+            continue;
+        }
+
         // Check if path is already in map
         if (m_loadedMovies.contains(path)) {
             qDebug() << "File already exists, skip:" << path;
@@ -602,6 +611,10 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
         if (m_loadedMovies.contains(path)) {
             m_originalMovies[path] = m_loadedMovies[path];
         }
+    }
+
+    if (skippedCount > 0) {
+        ui->statusBar->showMessage(tr("FILES_SKIPPED_ONLY_MP4", "", skippedCount), 10000);
     }
 
     // Only select if we have actually added something NEW.
@@ -829,12 +842,18 @@ void MainWin::onFilelistTableViewClicked(const QModelIndex &index){
 
 void MainWin::onAddFilesButtonClicked()
 {
+    // Filter from the supported file types, e.g. "*.mp4 *.m4v"
+    QStringList patterns;
+    for (const QString &suffix : MediaInfoM::supportedSuffixes()) {
+        patterns << "*." + suffix;
+    }
+
     // Open filedialog
     QStringList files = QFileDialog::getOpenFileNames(
         this,                              // Parent-Widget
         tr("CHOOSE_MOVIE"),                // Title of dialog
         QString(),                         // Start-Directory (empty = Standard)
-        tr("MOVIE_FILES") + " (*.mp4 *.mkv *.avi);;" + tr("Alle Dateien") + "(*.*)" // Filter
+        tr("MOVIE_FILES") + " (" + patterns.join(' ') + ")" // Filter
     );
 
     // Check if user cancel operation
@@ -982,7 +1001,12 @@ void MainWin::startApiRequest(const QUrl &url)
     QNetworkRequest request(url);
 
     // Set Authentication-Token as header
-    const QByteArray authToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxODM3ZjY1Njg1YjNhOWYwM2MyN2Y5Mjg3NDdkZjMxNSIsIm5iZiI6MTc2NTAyNDc1Mi43ODksInN1YiI6IjY5MzQyM2YwMzdmYzMyNmM2ZjQ4ZTY5ZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.B0HZMFNnxC8BBGt_dziS39kbG23YWMcpOdBs8px3lt4";
+    // Token comes from tmdb_token.txt at build time (see CMakeLists.txt)
+    const QByteArray authToken = QByteArrayLiteral(TMDB_TOKEN);
+    if (authToken.isEmpty()) {
+        ui->statusBar->showMessage(tr("NO_TMDB_TOKEN"), 10000);
+        return;
+    }
     request.setRawHeader("Authorization", "Bearer " + authToken);
 
     // Send Get-Request

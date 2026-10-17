@@ -35,6 +35,10 @@ class MediaInfoM : public QObject
 public:
     explicit MediaInfoM(QObject *parent = nullptr);
 
+    // File types the app can handle (lower case, without dot)
+    static QStringList supportedSuffixes();
+    static bool isSupported(const QString &filePath);
+
     // Extrahiert das Cover als QImage aus einer MP4-Datei
     QImage extractCoverImage(const QString &filePath);
     QImage extractCoverImageMp4(const QString &filePath);
