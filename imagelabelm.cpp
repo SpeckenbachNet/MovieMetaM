@@ -23,7 +23,7 @@ ImageLabelM::ImageLabelM(QWidget *parent) : QLabel(parent) {
 
     // Ein bisschen modernes Styling direkt im Code
     setAlignment(Qt::AlignCenter);
-    setText("Cover hierher ziehen");
+    setText(tr("Drop cover here"));
     setStyleSheet("border: 2px dashed palette(mid); color: palette(mid);");
 }
 

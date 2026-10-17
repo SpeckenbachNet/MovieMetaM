@@ -42,7 +42,7 @@ void MainWin::initializeForm() {
     ui->infoTextBrowser->setContentsMargins(15, 15, 15, 15);
     ui->infoTextBrowser->insertHtml(getInfoHtmlTemplate());
     ui->infoHeaderLabel->setStyleSheet(cssHeadline);
-    ui->infoHeaderLabel->setText(tr("INFOABOUT") + " " + QCoreApplication::applicationName());
+    ui->infoHeaderLabel->setText(tr("About %1").arg(QCoreApplication::applicationName()));
 
     // Set noCover to CoverImage first time
     ui->coverLabel->setScaledContents(true);
@@ -101,7 +101,7 @@ void MainWin::initializeForm() {
 void MainWin::initializeAgeRating() {
 
     // --- Germany ---
-    ratingMap["DE"] = {tr("GERMANY"), "de-movie", "FSK", {
+    ratingMap["DE"] = {tr("Germany"), "de-movie", "FSK", {
        {"0", 100, "ab 0 Jahren", RatingColor::White, "square"},
        {"6", 200, "ab 6 Jahren", RatingColor::Yellow, "square"},
        {"12", 300, "ab 12 Jahren", RatingColor::Green, "square"},
@@ -110,7 +110,7 @@ void MainWin::initializeAgeRating() {
    }};
 
     // --- United Kingdom ---
-    ratingMap["UK"] = {tr("UNITEDKINGDOM"), "uk-movie", "BBFC", {
+    ratingMap["UK"] = {tr("United Kingdom"), "uk-movie", "BBFC", {
         {"U", 100, "Universal – Suitable for all", RatingColor::LightGreen, "diamond"},
         {"PG", 200, "Parental Guidance", RatingColor::Yellow, "diamond"},
         {"12A", 300, "Suitable for 12 years and over", RatingColor::Orange, "circle"},
@@ -121,7 +121,7 @@ void MainWin::initializeAgeRating() {
     }};
 
     // --- United States ---
-    ratingMap["US"] = {tr("UNITEDSTATES"), "us-movie", "MPA", {
+    ratingMap["US"] = {tr("United States"), "us-movie", "MPA", {
         {"G", 100, "General Audiences", RatingColor::Green, "square"},
         {"PG", 200, "Parental Guidance Suggested", RatingColor::Orange, "square"},
         {"PG-13", 300, "Parents Strongly Cautioned", RatingColor::USPink, "square"},
@@ -273,7 +273,7 @@ void MainWin::initializeTagWidgets() {
     if (!castContainerLayout) { castContainerLayout = new QVBoxLayout(ui->castContainer);};
     // Create TagWidget and assign the actorContainer as the parent.
     m_castWidget = new TagWidget(
-        tr("ENTER_CAST"),
+        tr("Enter actors"),
         ",",
         ui->castContainer // IMPORTANT: container is now parent
         );
@@ -288,7 +288,7 @@ void MainWin::initializeTagWidgets() {
     if (!producerContainerLayout) { producerContainerLayout = new QVBoxLayout(ui->producersContainer);};
     // Create TagWidget and assign the productionContainer as the parent.
     m_producersWidget = new TagWidget(
-        tr("ENTER_PRODUCERS"),
+        tr("Enter producers"),
         ",",
         ui->producersContainer // IMPORTANT: container is now parent
     );
@@ -303,7 +303,7 @@ void MainWin::initializeTagWidgets() {
     if (!screenwritersContainerLayout) { screenwritersContainerLayout = new QVBoxLayout(ui->screenwritersContainer);};
     // Create TagWidget and assign the scriptContainer as the parent.
     m_screenwritersWidget = new TagWidget(
-        tr("ENTER_SCREENWRITERS"),
+        tr("Enter screenwriters"),
         ",",
         ui->screenwritersContainer // IMPORTANT: container is now parent
         );
@@ -318,7 +318,7 @@ void MainWin::initializeTagWidgets() {
     if (!directorsContainerLayout) { directorsContainerLayout = new QVBoxLayout(ui->directorsContainer);};
     // Create TagWidget and assign the scriptContainer as the parent.
     m_directorsWidget = new TagWidget(
-        tr("ENTER_DIRECTORS"),
+        tr("Enter directors"),
         ",",
         ui->directorsContainer // IMPORTANT: container is now parent
         );
@@ -343,7 +343,7 @@ void MainWin::initializeDragAndDrop() {
     if (!m_FilelistModel) { m_FilelistModel = new QStandardItemModel(this); }
     // Set header
     m_FilelistModel->setColumnCount(2);
-    m_FilelistModel->setHorizontalHeaderLabels(QStringList() << tr("") << tr("FILENAME"));
+    m_FilelistModel->setHorizontalHeaderLabels(QStringList() << QString() << tr("Filename"));
     // Assign model to view (This is important for DnD so that the view knows the columns.)
     ui->fileListTableView->setModel(m_FilelistModel);
     // Allow wordwrap

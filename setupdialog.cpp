@@ -23,54 +23,57 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
 
     // initialize members
     infoLabel = new QLabel(this);
-    infoLabel->setText(tr("SETUP_INFO_TEXT"));
+    infoLabel->setText(tr("<h2>Welcome to MovieMetaM!</h2>"
+                          "<p>Since this is your first time using the program, we need to configure a few basic settings.</p>"
+                          "<p>In this step, we define how age ratings in your collection are weighted to ensure a consistent metadata structure.</p>"
+                          "<p>Note: if needed, you can choose a language other than your system language here (optional).</p>"));
     infoLabel->setWordWrap(true);
     infoLabel->setTextFormat(Qt::RichText);
     infoLabel->setOpenExternalLinks(false);
 
     ageRatingLabel = new QLabel(this);
-    ageRatingLabel->setText(tr("CHOOSE_AGE_RATING_SYSTEM"));
+    ageRatingLabel->setText(tr("Please choose an age rating system"));
     ageRatingLabel->setStyleSheet("font-weight: bold; margin-top: 10px;");
 
     ageRatingComboBox = new QComboBox(this);
     ageRatingComboBox->clear();
-    ageRatingComboBox->addItem("--- " + tr("CHOOSE_ENTRY") + " ---");
-    ageRatingComboBox->addItem(tr("GERMANY_AR"),"DE");
-    ageRatingComboBox->addItem(tr("NETHERLANDS_AR"),"NL");
-    ageRatingComboBox->addItem(tr("AUSTRIA_AR"),"AT");
-    ageRatingComboBox->addItem(tr("UNITEDSTATES_AR"),"US");
-    ageRatingComboBox->addItem(tr("FRANCE_AR"),"FR");
-    ageRatingComboBox->addItem(tr("HONKONG_AR","HK"));
-    ageRatingComboBox->addItem(tr("ITALY_AR"),"IT");
-    ageRatingComboBox->addItem(tr("JAPAN_AR"),"JP");
-    ageRatingComboBox->addItem(tr("SWITZERLAND_AR"),"CH");
-    ageRatingComboBox->addItem(tr("SOUTHKOREA_AR","KR"));
-    ageRatingComboBox->addItem(tr("REPUBLICOFCHINATAIWAN_AR"),"TW");
-    ageRatingComboBox->addItem(tr("UNITEDKINGDOM_AR","UK"));
+    ageRatingComboBox->addItem("--- " + tr("Choose an entry") + " ---");
+    ageRatingComboBox->addItem(tr("Germany (FSK)"),"DE");
+    ageRatingComboBox->addItem(tr("Netherlands (Kijkwijzer)"),"NL");
+    ageRatingComboBox->addItem(tr("Austria (JMÜ)"),"AT");
+    ageRatingComboBox->addItem(tr("United States (MPA)"),"US");
+    ageRatingComboBox->addItem(tr("France (CNC)"),"FR");
+    ageRatingComboBox->addItem(tr("Hong Kong (TELA)","HK"));
+    ageRatingComboBox->addItem(tr("Italy (MiC)"),"IT");
+    ageRatingComboBox->addItem(tr("Japan (Eirin)"),"JP");
+    ageRatingComboBox->addItem(tr("Switzerland (FSK)"),"CH");
+    ageRatingComboBox->addItem(tr("South Korea (KMRB)","KR"));
+    ageRatingComboBox->addItem(tr("Taiwan"),"TW");
+    ageRatingComboBox->addItem(tr("United Kingdom (BBFC)","UK"));
     ageRatingComboBox->model()->sort(0);
 
     languageLabel = new QLabel(this);
-    languageLabel->setText(tr("CHOOSE_ALTERNATE_LANGUAGE_OPTIONAL"));
+    languageLabel->setText(tr("Choose another language (optional)"));
     languageLabel->setStyleSheet("font-weight: bold; margin-top: 10px;");
 
     languageComboBox = new QComboBox(this);
     languageComboBox->clear();
-    languageComboBox->addItem("--- " + tr("CHOOSE_ENTRY") + " ---");
-    languageComboBox->addItem(tr("LANG_DE"));
-    languageComboBox->addItem(tr("LANG_EN"));
-    languageComboBox->addItem(tr("LANG_IT"));
-    languageComboBox->addItem(tr("LANG_FR"));
-    languageComboBox->addItem(tr("LANG_NL"));
-    languageComboBox->addItem(tr("LANG_DK"));
-    languageComboBox->addItem(tr("LANG_PL"));
-    languageComboBox->addItem(tr("LANG_JA"));
-    languageComboBox->addItem(tr("LANG_KO"));
-    languageComboBox->addItem(tr("LANG_ZH"));
+    languageComboBox->addItem("--- " + tr("Choose an entry") + " ---");
+    languageComboBox->addItem(QStringLiteral("Deutsch (de - german)"));
+    languageComboBox->addItem(QStringLiteral("English (en)"));
+    languageComboBox->addItem(QStringLiteral("Italiano (it - italian)"));
+    languageComboBox->addItem(QStringLiteral("Français (fr - french)"));
+    languageComboBox->addItem(QStringLiteral("Nederlands (nl - dutch)"));
+    languageComboBox->addItem(QStringLiteral("Dansk (da - danish)"));
+    languageComboBox->addItem(QStringLiteral("Polski (pl - polish)"));
+    languageComboBox->addItem(QStringLiteral("日本語 (ja - japanese)"));
+    languageComboBox->addItem(QStringLiteral("한국어 (ko - korean)"));
+    languageComboBox->addItem(QStringLiteral("繁體中文 (zh - chinese)"));
     languageComboBox->model()->sort(0);
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
-    buttonBox->button(QDialogButtonBox::Ok)->setText(tr("DONE"));
-    buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("CANCEL"));
+    buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Done"));
+    buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
 
     // Jetzt korrekt: Ok ist ein StandardButton
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);

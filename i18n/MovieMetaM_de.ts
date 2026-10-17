@@ -2,597 +2,374 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>ImageLabelM</name>
+    <message>
+        <location filename="../imagelabelm.cpp" line="26"/>
+        <source>Drop cover here</source>
+        <translation>Cover hierher ziehen</translation>
+    </message>
+</context>
+<context>
     <name>MainWin</name>
     <message>
-        <location filename="../mainwin.ui" line="17"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="600"/>
-        <source>MovieMetaM 0.1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mainwin.ui" line="47"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="621"/>
-        <source>MOVIE_LIST</source>
-        <translation type="unfinished">Film-Liste</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="87"/>
-        <location filename="../mainwin.ui" line="98"/>
-        <location filename="../mainwin.ui" line="438"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="623"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="624"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="643"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
+        <source>Movie List</source>
+        <translation>Filmliste</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="146"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="625"/>
-        <source>MOVIE_INFO</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="177"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="627"/>
-        <source>DESCRIPTION</source>
-        <translation type="unfinished">Beschreibung</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="513"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="646"/>
-        <source>RATING</source>
-        <translation type="unfinished">Altersfreigabe</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="197"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="629"/>
-        <source>GENRE</source>
-        <translation type="unfinished">Genre</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="293"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="634"/>
-        <source>SCREENPLAY</source>
-        <translation type="unfinished">Drehbuch</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="258"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="632"/>
-        <source>DIRECTORS</source>
-        <translation type="unfinished">Regie</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="306"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="635"/>
-        <source>ACTORS</source>
-        <translation type="unfinished">Schauspieler</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="239"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="631"/>
-        <source>PRODUCERS</source>
-        <translation type="unfinished">Produktion</translation>
+        <source>Movie Info</source>
+        <translation>Filminfo</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="170"/>
         <location filename="../mainwin.ui" line="410"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="626"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="640"/>
-        <source>COVER</source>
-        <translation type="unfinished"></translation>
+        <source>Cover</source>
+        <translation>Cover</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="177"/>
+        <source>Description</source>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="187"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="628"/>
-        <source>RELEASE_DATE</source>
-        <translation type="unfinished"></translation>
+        <source>Release Date</source>
+        <translation>Erscheinungsdatum</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="197"/>
+        <source>Genre</source>
+        <translation>Genre</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="213"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="630"/>
-        <source>AGE_RATING</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwin.ui" line="510"/>
+        <source>Age Rating</source>
+        <translation>Altersfreigabe</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="239"/>
+        <source>Producers</source>
+        <translation>Produktion</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="258"/>
+        <source>Directors</source>
+        <translation>Regie</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="277"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="633"/>
-        <source>STUDIO</source>
-        <translation type="unfinished">Studio</translation>
+        <source>Studio</source>
+        <translation>Studio</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="293"/>
+        <source>Screenplay</source>
+        <translation>Drehbuch</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="306"/>
+        <source>Actors</source>
+        <translation>Schauspieler</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="319"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="636"/>
-        <location filename="../mainwin.cpp" line="340"/>
-        <source>TITLE</source>
-        <translation type="unfinished">Titel</translation>
+        <location filename="../mainwin.cpp" line="479"/>
+        <source>Title</source>
+        <translation>Titel</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="379"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="638"/>
-        <source>RESULTS</source>
-        <translation type="unfinished">Ergebnisse</translation>
+        <source>Results</source>
+        <translation>Ergebnisse</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="405"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="639"/>
-        <source>DATA</source>
-        <translation type="unfinished">Daten</translation>
+        <source>Data</source>
+        <translation>Daten</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="418"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="641"/>
-        <source>MOVIE_SEARCH</source>
-        <translation type="unfinished"></translation>
+        <source>Movie Search</source>
+        <translation>Filmsuche</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="428"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="642"/>
         <source>Powered by</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereitgestellt von</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="573"/>
-        <location filename="../mainwin.ui" line="586"/>
-        <location filename="../mainwin.ui" line="597"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="648"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="649"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="650"/>
-        <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwin.ui" line="460"/>
+        <location filename="../mainwin.ui" line="688"/>
+        <location filename="../mainwin.ui" line="691"/>
+        <source>Settings</source>
+        <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="498"/>
+        <source>General</source>
+        <translation>Allgemein</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="541"/>
+        <location filename="../mainwin.ui" line="664"/>
+        <source>Info</source>
+        <translation>Info</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="610"/>
+        <source>Save</source>
+        <translation>Speichern</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="613"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="601"/>
-        <source>SAVE</source>
-        <translation type="unfinished"></translation>
+        <source>Save metadata to the movie</source>
+        <translation>Metadaten in den Film speichern</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="616"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="603"/>
-        <source>SAVE_METADATA_TO_MOVIE</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwin.ui" line="625"/>
+        <source>Exit</source>
+        <translation>Beenden</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="628"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="605"/>
-        <source>EXIT</source>
-        <translation type="unfinished"></translation>
+        <source>Exit the program</source>
+        <translation>Programm beenden</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="631"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="607"/>
-        <source>EXIT_PROGRAM</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwin.ui" line="640"/>
+        <source>Search</source>
+        <translation>Suchen</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="643"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="609"/>
-        <source>SEARCH</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwin.ui" line="652"/>
+        <source>Save all</source>
+        <translation>Alle speichern</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="655"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="610"/>
-        <source>SAVE_ALL</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwin.ui" line="676"/>
+        <source>Help</source>
+        <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="544"/>
-        <location filename="../mainwin.ui" line="667"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="611"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="647"/>
-        <source>INFO</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="679"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="612"/>
-        <source>HELP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="463"/>
-        <location filename="../mainwin.ui" line="691"/>
-        <location filename="../mainwin.ui" line="694"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="613"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="615"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="644"/>
-        <source>SETTINGS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="501"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="645"/>
-        <source>[GENERAL]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location filename="../mainwin.ui" line="703"/>
         <location filename="../mainwin.ui" line="706"/>
-        <location filename="../mainwin.ui" line="709"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="617"/>
-        <location filename="../build/Desktop-Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="619"/>
-        <source>CLOSE</source>
-        <translation type="unfinished"></translation>
+        <source>Close</source>
+        <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="44"/>
-        <source>INFOABOUT</source>
-        <translation type="unfinished"></translation>
+        <location filename="../mainwin.ui" line="718"/>
+        <source>Save settings</source>
+        <translation>Einstellungen speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="175"/>
-        <source>FROM0YEARS</source>
-        <translation type="unfinished">ab 0 Jahren</translation>
+        <location filename="../mainwin.cpp" line="230"/>
+        <source>Changed, saving needed</source>
+        <translation>Geändert, Speichern nötig</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="176"/>
-        <source>FROM6YEARS</source>
-        <translation type="unfinished">ab 6 Jahren</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="177"/>
-        <source>FROM12YEARS</source>
-        <translation type="unfinished">ab 12 Jahren</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="178"/>
-        <source>FROM16YEARS</source>
-        <translation type="unfinished">Ab 16 Jahren</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="179"/>
-        <source>FROM18YEARS</source>
-        <translation type="unfinished">ab 18 Jahren</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="183"/>
-        <source>GERMANY</source>
-        <translation type="unfinished">Deutschland</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="184"/>
-        <source>NETHERLANDS</source>
-        <translation type="unfinished">Niederlande</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="185"/>
-        <source>AUSTRIA</source>
-        <translation type="unfinished">Österreich</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="186"/>
-        <source>UNITEDSTATES</source>
-        <translation type="unfinished">Vereinigte Staaten</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="187"/>
-        <source>FRANCE</source>
-        <translation type="unfinished">Frankreich</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="188"/>
-        <source>HONKONG</source>
-        <translation type="unfinished">Honkong</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="189"/>
-        <source>ITALY</source>
-        <translation type="unfinished">Italien</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="190"/>
-        <source>JAPAN</source>
-        <translation type="unfinished">Japan</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="191"/>
-        <source>SWITZERLAND</source>
-        <translation type="unfinished">Schweiz</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="192"/>
-        <source>SOUTHKOREA</source>
-        <translation type="unfinished">Süd-Korea</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="193"/>
-        <source>REPUBLICOFCHINATAIWAN</source>
-        <translation type="unfinished">Rebublik China (Taiwan)</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="194"/>
-        <source>UNITEDKINGDOM</source>
-        <translation type="unfinished">Großbritanien</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="277"/>
-        <source>ENTER_CAST</source>
-        <translation type="unfinished">Schauspieler eingeben</translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="292"/>
-        <source>ENTER_PRODUCERS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="307"/>
-        <source>ENTER_SCREENWRITERS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="322"/>
-        <source>ENTER_DIRECTORS</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../initialize.cpp" line="347"/>
-        <source>FILENAME</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.cpp" line="143"/>
-        <source>DATACHANGEDSAVENEEDED</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.cpp" line="340"/>
-        <source>YEAR</source>
-        <translation type="unfinished">Jahr</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.cpp" line="482"/>
-        <source>UNCHANGED</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.cpp" line="699"/>
-        <source>CHOOSE_MOVIE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.cpp" line="701"/>
-        <source>MOVIE_FILES</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.cpp" line="701"/>
-        <source>Alle Dateien</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.cpp" line="721"/>
-        <source>REMOVE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.cpp" line="763"/>
-        <source>PLEASE_ENTER_SEARCH_TERM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NO_TMDB_TOKEN</source>
-        <translation>Kein TMDB-Token: Die Filmsuche ist nicht verfügbar.</translation>
+        <location filename="../mainwin.cpp" line="479"/>
+        <source>Year</source>
+        <translation>Jahr</translation>
     </message>
     <message numerus="yes">
-        <source>FILES_SKIPPED_ONLY_MP4</source>
+        <location filename="../mainwin.cpp" line="616"/>
+        <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation>
             <numerusform>%n Datei übersprungen: Nur MP4 wird unterstützt.</numerusform>
             <numerusform>%n Dateien übersprungen: Nur MP4 wird unterstützt.</numerusform>
         </translation>
     </message>
+    <message>
+        <location filename="../mainwin.cpp" line="638"/>
+        <source>Unchanged</source>
+        <translation>Unverändert</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="853"/>
+        <source>Choose movies</source>
+        <translation>Filme auswählen</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="855"/>
+        <source>Movie files</source>
+        <translation>Filmdateien</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="875"/>
+        <source>Remove</source>
+        <translation>Entfernen</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../mainwin.cpp" line="876"/>
+        <source>Really remove %n movie(s)?</source>
+        <translation>
+            <numerusform>%n Film wirklich entfernen?</numerusform>
+            <numerusform>%n Filme wirklich entfernen?</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="919"/>
+        <source>Please enter a search term</source>
+        <translation>Bitte einen Suchbegriff eingeben</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1006"/>
+        <source>No TMDB token: the movie search is not available.</source>
+        <translation>Kein TMDB-Token: Die Filmsuche ist nicht verfügbar.</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1092"/>
+        <source>Settings saved.</source>
+        <translation>Einstellungen gespeichert.</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1095"/>
+        <source>Error: could not save the settings!</source>
+        <translation>Fehler: Einstellungen konnten nicht gespeichert werden!</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="45"/>
+        <source>About %1</source>
+        <translation>Über %1</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="104"/>
+        <source>Germany</source>
+        <translation>Deutschland</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="113"/>
+        <source>United Kingdom</source>
+        <translation>Großbritannien</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="124"/>
+        <source>United States</source>
+        <translation>Vereinigte Staaten</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="276"/>
+        <source>Enter actors</source>
+        <translation>Schauspieler eingeben</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="291"/>
+        <source>Enter producers</source>
+        <translation>Produktion eingeben</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="306"/>
+        <source>Enter screenwriters</source>
+        <translation>Drehbuch eingeben</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="321"/>
+        <source>Enter directors</source>
+        <translation>Regie eingeben</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="346"/>
+        <source>Filename</source>
+        <translation>Dateiname</translation>
+    </message>
 </context>
 <context>
     <name>SetupDialog</name>
     <message>
-        <source>TITLE</source>
-        <translation type="obsolete">Titel</translation>
-    </message>
-    <message>
         <location filename="../setupdialog.cpp" line="26"/>
-        <source>SETUP_INFO_TEXT</source>
-        <translation type="unfinished">&lt;h2&gt;Welcome to MovieMetaM!&lt;/h2&gt;&lt;p&gt;Da dies der erste Aufruf des Programms ist, müssen wir zunächst ein paar grundlegende Einstellungen vornehmen.&lt;/p&gt;&lt;p&gt;In diesem Schritt legen wir fest, wie Altersfreigaben (Age Ratings) in Ihrer Sammlung gewichtet werden sollen, um eine einheitliche Metadaten-Struktur zu gewährleisten.&lt;/p&gt;&lt;p&gt;Hinweis: Bei Bedarf kann hier auch eine Sprache abweichend von der Systemsprache gewählt werden.&lt;/p&gt;</translation>
+        <source>&lt;h2&gt;Welcome to MovieMetaM!&lt;/h2&gt;&lt;p&gt;Since this is your first time using the program, we need to configure a few basic settings.&lt;/p&gt;&lt;p&gt;In this step, we define how age ratings in your collection are weighted to ensure a consistent metadata structure.&lt;/p&gt;&lt;p&gt;Note: if needed, you can choose a language other than your system language here (optional).&lt;/p&gt;</source>
+        <translation>&lt;h2&gt;Willkommen bei MovieMetaM!&lt;/h2&gt;&lt;p&gt;Da dies der erste Aufruf des Programms ist, müssen wir zunächst ein paar grundlegende Einstellungen vornehmen.&lt;/p&gt;&lt;p&gt;In diesem Schritt legen wir fest, wie Altersfreigaben in Ihrer Sammlung gewichtet werden sollen, um eine einheitliche Metadaten-Struktur zu gewährleisten.&lt;/p&gt;&lt;p&gt;Hinweis: Bei Bedarf kann hier auch eine Sprache abweichend von der Systemsprache gewählt werden (optional).&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="32"/>
-        <source>CHOOSE_AGE_RATING_SYSTEM</source>
-        <translation type="unfinished">Wähle bitte ein Altersfreigabe-System</translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="37"/>
-        <location filename="../setupdialog.cpp" line="58"/>
-        <source>CHOOSE_ENTRY</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>GERMANY</source>
-        <translation type="obsolete">Deutschland</translation>
-    </message>
-    <message>
-        <source>NETHERLANDS</source>
-        <translation type="obsolete">Niederlande</translation>
-    </message>
-    <message>
-        <source>AUSTRIA</source>
-        <translation type="obsolete">Österreich</translation>
-    </message>
-    <message>
-        <source>UNITEDSTATES</source>
-        <translation type="obsolete">Vereinigte Staaten</translation>
-    </message>
-    <message>
-        <source>FRANCE</source>
-        <translation type="obsolete">Frankreich</translation>
-    </message>
-    <message>
-        <source>HONKONG</source>
-        <comment>HK</comment>
-        <translation type="obsolete">Honkong</translation>
-    </message>
-    <message>
-        <source>SOUTHKOREA</source>
-        <comment>KR</comment>
-        <translation type="obsolete">Süd-Korea</translation>
-    </message>
-    <message>
-        <source>UNITEDKINGDOM</source>
-        <comment>UK</comment>
-        <translation type="obsolete">Großbritanien</translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="38"/>
-        <source>GERMANY_AR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="39"/>
-        <source>NETHERLANDS_AR</source>
-        <translation type="unfinished"></translation>
+        <location filename="../setupdialog.cpp" line="35"/>
+        <source>Please choose an age rating system</source>
+        <translation>Bitte ein Altersfreigabe-System wählen</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="40"/>
-        <source>AUSTRIA_AR</source>
-        <translation type="unfinished"></translation>
+        <location filename="../setupdialog.cpp" line="61"/>
+        <source>Choose an entry</source>
+        <translation>Eintrag auswählen</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="41"/>
-        <source>UNITEDSTATES_AR</source>
-        <translation type="unfinished"></translation>
+        <source>Germany (FSK)</source>
+        <translation>Deutschland (FSK)</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="42"/>
-        <source>FRANCE_AR</source>
-        <translation type="unfinished"></translation>
+        <source>Netherlands (Kijkwijzer)</source>
+        <translation>Niederlande (Kijkwijzer)</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="43"/>
-        <source>HONKONG_AR</source>
-        <comment>HK</comment>
-        <translation type="unfinished"></translation>
+        <source>Austria (JMÜ)</source>
+        <translation>Österreich (JMÜ)</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="44"/>
-        <source>ITALY_AR</source>
-        <translation type="unfinished"></translation>
+        <source>United States (MPA)</source>
+        <translation>Vereinigte Staaten (MPA)</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="45"/>
-        <source>JAPAN_AR</source>
-        <translation type="unfinished"></translation>
+        <source>France (CNC)</source>
+        <translation>Frankreich (CNC)</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="46"/>
-        <source>SWITZERLAND_AR</source>
-        <translation type="unfinished"></translation>
+        <source>Hong Kong (TELA)</source>
+        <comment>HK</comment>
+        <translation>Hongkong (TELA)</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="47"/>
-        <source>SOUTHKOREA_AR</source>
-        <comment>KR</comment>
-        <translation type="unfinished"></translation>
+        <source>Italy (MiC)</source>
+        <translation>Italien (MiC)</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="48"/>
-        <source>REPUBLICOFCHINATAIWAN_AR</source>
-        <translation type="unfinished"></translation>
+        <source>Japan (Eirin)</source>
+        <translation>Japan (Eirin)</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="49"/>
-        <source>UNITEDKINGDOM_AR</source>
+        <source>Switzerland (FSK)</source>
+        <translation>Schweiz (FSK)</translation>
+    </message>
+    <message>
+        <location filename="../setupdialog.cpp" line="50"/>
+        <source>South Korea (KMRB)</source>
+        <comment>KR</comment>
+        <translation>Südkorea (KMRB)</translation>
+    </message>
+    <message>
+        <location filename="../setupdialog.cpp" line="51"/>
+        <source>Taiwan</source>
+        <translation>Taiwan</translation>
+    </message>
+    <message>
+        <location filename="../setupdialog.cpp" line="52"/>
+        <source>United Kingdom (BBFC)</source>
         <comment>UK</comment>
-        <translation type="unfinished"></translation>
+        <translation>Großbritannien (BBFC)</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="53"/>
-        <source>CHOOSE_ALTERNATE_LANGUAGE_OPTIONAL</source>
-        <translation type="unfinished"></translation>
+        <location filename="../setupdialog.cpp" line="56"/>
+        <source>Choose another language (optional)</source>
+        <translation>Andere Sprache wählen (optional)</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="59"/>
-        <source>LANG_DE</source>
-        <translation type="unfinished"></translation>
+        <location filename="../setupdialog.cpp" line="75"/>
+        <source>Done</source>
+        <translation>Fertig</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="60"/>
-        <source>LANG_EN</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="61"/>
-        <source>LANG_IT</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="62"/>
-        <source>LANG_FR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="63"/>
-        <source>LANG_NL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="64"/>
-        <source>LANG_DK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="65"/>
-        <source>LANG_PL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="66"/>
-        <source>LANG_JA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="67"/>
-        <source>LANG_KO</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="68"/>
-        <source>LANG_ZH</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>HONKONG</source>
-        <translation type="obsolete">Honkong</translation>
-    </message>
-    <message>
-        <source>ITALY</source>
-        <translation type="obsolete">Italien</translation>
-    </message>
-    <message>
-        <source>JAPAN</source>
-        <translation type="obsolete">Japan</translation>
-    </message>
-    <message>
-        <source>SWITZERLAND</source>
-        <translation type="obsolete">Schweiz</translation>
-    </message>
-    <message>
-        <source>SOUTHKOREA</source>
-        <translation type="obsolete">Süd-Korea</translation>
-    </message>
-    <message>
-        <source>REPUBLICOFCHINATAIWAN</source>
-        <translation type="obsolete">Rebublik China (Taiwan)</translation>
-    </message>
-    <message>
-        <source>UNITEDKINGDOM</source>
-        <translation type="obsolete">Großbritanien</translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="72"/>
-        <source>DONE</source>
-        <translation type="unfinished">Fertig</translation>
-    </message>
-    <message>
-        <location filename="../setupdialog.cpp" line="73"/>
-        <source>CANCEL</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <location filename="../setupdialog.cpp" line="76"/>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 </TS>
