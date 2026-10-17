@@ -227,7 +227,7 @@ void MainWin::updateStatus (int row, QString status) {
     QStandardItem *statusItem = m_FilelistModel->item(row, 0);
     if (statusItem) {
         statusItem->setData(m_status, Qt::DecorationRole);
-        statusItem->setToolTip(tr("DATACHANGEDSAVENEEDED"));
+        statusItem->setToolTip(tr("Changed, saving needed"));
     }
 }
 
@@ -476,7 +476,7 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
     // Nur zwei Spalten: Titel und Datum
     QStringList headers = {"title", "release_date"};
     m_SearchModel->setColumnCount(headers.size());
-    m_SearchModel->setHorizontalHeaderLabels(QStringList() << tr("TITLE") << tr("YEAR"));
+    m_SearchModel->setHorizontalHeaderLabels(QStringList() << tr("Title") << tr("Year"));
 
     for (const QJsonValue &val : std::as_const(jsonArray)) {
         QJsonObject obj = val.toObject();
@@ -613,7 +613,7 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
     }
 
     if (skippedCount > 0) {
-        ui->statusBar->showMessage(tr("FILES_SKIPPED_ONLY_MP4", "", skippedCount), 10000);
+        ui->statusBar->showMessage(tr("%n file(s) skipped: only MP4 is supported.", "", skippedCount), 10000);
     }
 
     // Only select if we have actually added something NEW.
@@ -635,7 +635,7 @@ void MainWin::addFilePathToModel(const QString &filePath)
     // Save status in first Column and filePath in UserRole
     QStandardItem *statusItem = new QStandardItem("");
     statusItem->setData(m_statusGreen, Qt::DecorationRole);
-    statusItem->setToolTip(tr("UNCHANGED"));
+    statusItem->setToolTip(tr("Unchanged"));
     statusItem->setEditable(false);
 
     // Save filename in ListBox
@@ -850,9 +850,9 @@ void MainWin::onAddFilesButtonClicked()
     // Open filedialog
     QStringList files = QFileDialog::getOpenFileNames(
         this,                              // Parent-Widget
-        tr("CHOOSE_MOVIE"),                // Title of dialog
+        tr("Choose movies"),                // Title of dialog
         QString(),                         // Start-Directory (empty = Standard)
-        tr("MOVIE_FILES") + " (" + patterns.join(' ') + ")" // Filter
+        tr("Movie files") + " (" + patterns.join(' ') + ")" // Filter
     );
 
     // Check if user cancel operation
@@ -872,8 +872,8 @@ void MainWin::onRemoveFilesButtonClicked()
     if (selectedRows.isEmpty()) return;
 
     // Security check (optional)
-    auto answer = QMessageBox::question(this, tr("REMOVE"),
-        QString("%1 Film(e) wirklich entfernen?").arg(selectedRows.size())
+    auto answer = QMessageBox::question(this, tr("Remove"),
+        tr("Really remove %n movie(s)?", "", selectedRows.size())
     );
     if (answer != QMessageBox::Yes) return;
 
@@ -916,7 +916,7 @@ void MainWin::onSearchButtonClicked()
     QString searchText = ui->searchEdit->text();
     qDebug() << "Search Text: " << searchText;
     if(searchText == "") {
-        ui->statusBar->showMessage(tr("PLEASE_ENTER_SEARCH_TERM"), 10000);
+        ui->statusBar->showMessage(tr("Please enter a search term"), 10000);
     }
     else
     {
@@ -1003,7 +1003,7 @@ void MainWin::startApiRequest(const QUrl &url)
     // Token comes from tmdb_token.txt at build time (see CMakeLists.txt)
     const QByteArray authToken = QByteArrayLiteral(TMDB_TOKEN);
     if (authToken.isEmpty()) {
-        ui->statusBar->showMessage(tr("NO_TMDB_TOKEN"), 10000);
+        ui->statusBar->showMessage(tr("No TMDB token: the movie search is not available."), 10000);
         return;
     }
     request.setRawHeader("Authorization", "Bearer " + authToken);
@@ -1089,10 +1089,10 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     settings.sync();
     if (settings.status() == QSettings::NoError) {
         // Erfolg
-        ui->statusBar->showMessage(tr("Einstellungen erfolgreich gespeichert."), 30000); // 3 Sek. sichtbar
+        ui->statusBar->showMessage(tr("Settings saved."), 30000); // 30 s visible
     } else {
         // Fehler (z.B. Datei schreibgeschützt)
-        ui->statusBar->showMessage(tr("Fehler: Konnte Einstellungen nicht speichern!"), 50000);
+        ui->statusBar->showMessage(tr("Error: could not save the settings!"), 50000);
     }
 }
 // ***** EVENTS *****
