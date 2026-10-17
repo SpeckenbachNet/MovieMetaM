@@ -17,17 +17,128 @@
  */
 #pragma once
 
+#include <QAbstractScrollArea>
+#include <QAbstractSpinBox>
+#include <QApplication>
 #include <QColor>
+#include <QLineEdit>
 #include <QPalette>
+
+// Colors are computed once, so a theme change (light/dark) needs a restart.
+
+// Mix of two colors: amount = share of b (0 = a, 1 = b)
+inline QColor mixColor(const QColor &a, const QColor &b, qreal amount)
+{
+    return QColor::fromRgbF(a.redF()   + (b.redF()   - a.redF())   * amount,
+                            a.greenF() + (b.greenF() - a.greenF()) * amount,
+                            a.blueF()  + (b.blueF()  - a.blueF())  * amount);
+}
 
 // Grey between window background and text color, for headers and tags.
 // amount = share of the text color (0.35 looks like the selected tab on macOS).
-// Works in light and dark themes; computed once, so a theme change needs a restart.
 inline QColor accentGrey(const QPalette &pal, qreal amount = 0.35)
 {
-    const QColor bg = pal.color(QPalette::Window);
-    const QColor fg = pal.color(QPalette::WindowText);
-    return QColor::fromRgbF(bg.redF()   + (fg.redF()   - bg.redF())   * amount,
-                            bg.greenF() + (fg.greenF() - bg.greenF()) * amount,
-                            bg.blueF()  + (fg.blueF()  - bg.blueF())  * amount);
+    return mixColor(pal.color(QPalette::Window), pal.color(QPalette::WindowText), amount);
+}
+
+// Which corners of a field are rounded: an input field on top of a list
+// (TagWidget) forms one box with the list.
+enum class FieldCorners { All, Top, Bottom };
+
+// Colors and shape shared by input fields and boxes (colors as in SearchField)
+struct FieldLook {
+    static constexpr int radius = 6;
+
+    QColor fill;
+    QColor text;
+    QColor placeholder;
+    QColor border;
+    QColor focus;
+
+    FieldLook()
+    {
+        const QPalette pal = QApplication::palette();
+        fill        = pal.color(QPalette::Button);
+        text        = pal.color(QPalette::ButtonText);
+        placeholder = mixColor(fill, text, 0.50);
+        border      = mixColor(fill, text, 0.30);
+        focus       = pal.color(QPalette::Highlight);
+    }
+
+    // Style sheet rules for the corners (Top: no bottom radius, Bottom: no top border)
+    static QString cornerRules(FieldCorners corners)
+    {
+        switch (corners) {
+        case FieldCorners::Top:
+            return QStringLiteral(" border-top-left-radius: %1px; border-top-right-radius: %1px;"
+                                  " border-bottom-left-radius: 0; border-bottom-right-radius: 0;").arg(radius);
+        case FieldCorners::Bottom:
+            return QStringLiteral(" border-top: none; border-top-left-radius: 0; border-top-right-radius: 0;"
+                                  " border-bottom-left-radius: %1px; border-bottom-right-radius: %1px;").arg(radius);
+        default:
+            return QStringLiteral(" border-radius: %1px;").arg(radius);
+        }
+    }
+};
+
+// Rounded input field in the colors of SearchField, but lower and less round
+inline void applyInputStyle(QLineEdit *edit, FieldCorners corners = FieldCorners::All)
+{
+    constexpr int height = 26;
+    const FieldLook look;
+
+    edit->setFixedHeight(height);
+    edit->setAttribute(Qt::WA_MacShowFocusRect, false);   // the border shows the focus
+    edit->setStyleSheet(QStringLiteral(
+        "QLineEdit { background: %1; color: %2; placeholder-text-color: %3; border: 1px solid %4;"
+        "%5 padding: 0 6px; selection-background-color: %6; }"
+        "QLineEdit:focus { border: 1px solid %6; }")
+        .arg(look.fill.name(), look.text.name(), look.placeholder.name(), look.border.name(),
+             FieldLook::cornerRules(corners), look.focus.name()));
+}
+
+// Rounded spin box (e.g. date) like the input fields. Without visible arrow buttons: with a
+// style sheet macOS draws none; the value changes by typing, arrow keys and mouse wheel.
+// The buttons get width 0 instead of NoButtons: with NoButtons and a style sheet the text
+// field inside is only 1 px wide on macOS.
+inline void applySpinStyle(QAbstractSpinBox *spin)
+{
+    constexpr int height = 26;
+    const FieldLook look;
+
+    spin->setFixedHeight(height);
+    spin->setAttribute(Qt::WA_MacShowFocusRect, false);   // the border shows the focus
+    spin->setStyleSheet(QStringLiteral(
+        "QAbstractSpinBox { background: %1; color: %2; border: 1px solid %3;%4"
+        " selection-background-color: %5; }"
+        "QAbstractSpinBox:focus { border: 1px solid %5; }"
+        "QAbstractSpinBox::up-button, QAbstractSpinBox::down-button { width: 0px; border: none; }")
+        .arg(look.fill.name(), look.text.name(), look.border.name(),
+             FieldLook::cornerRules(FieldCorners::All), look.focus.name()));
+
+    // Distance of the text to the border, like in the input fields
+    // (a padding in the style sheet is ignored here)
+    if (QLineEdit *edit = spin->findChild<QLineEdit *>())
+        edit->setTextMargins(6, 0, 6, 0);
+}
+
+// Rounded box (text area, list) in the colors of the input fields.
+// showFocus: border in the accent color while focused (only where the user types).
+// extraStyle: further rules of the widget, e.g. for the list items.
+inline void applyBoxStyle(QAbstractScrollArea *area, bool showFocus,
+                          FieldCorners corners = FieldCorners::All,
+                          const QString &extraStyle = QString())
+{
+    const FieldLook look;
+
+    QString style = QStringLiteral(
+        "QAbstractScrollArea { background: %1; color: %2; border: 1px solid %3;"
+        "%4 padding: 2px; selection-background-color: %5; }")
+        .arg(look.fill.name(), look.text.name(), look.border.name(),
+             FieldLook::cornerRules(corners), look.focus.name());
+    if (showFocus)
+        style += QStringLiteral("QAbstractScrollArea:focus { border: 1px solid %1; }").arg(look.focus.name());
+
+    area->setAttribute(Qt::WA_MacShowFocusRect, false);
+    area->setStyleSheet(style + extraStyle);
 }

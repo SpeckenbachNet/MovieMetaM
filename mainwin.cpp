@@ -69,7 +69,7 @@ void MainWin::fillRatingComboBox(QString countryCode)
         ui->ratingComboBox->setItemData(lastIndex, entry.label, Qt::ToolTipRole);
     }
 
-    ui->ratingComboBox->setIconSize(QSize(24, 24));
+    ui->ratingComboBox->setIconSize(QSize(kRatingIconSize, kRatingIconSize + kRatingIconShift));
 }
 
 void MainWin::fillRatingSettingsComboBox()
@@ -100,23 +100,27 @@ QString MainWin::getInfoHtmlTemplate()
 }
 
 QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape) {
-    // 1. Setup: Wir erstellen eine quadratische Leinwand (z.B. 64x64)
-    int size = 32;
-    QPixmap pixmap(size, size);
+    // Square canvas in a higher resolution than shown (kRatingIconSize), so it stays
+    // sharp on Retina screens; the canvas is taller by the shift (see mainwin.h)
+    int size = 64;
+    int shift = size * kRatingIconShift / kRatingIconSize;
+    QPixmap pixmap(size, size + shift);
     pixmap.fill(Qt::transparent); // Make the background transparent
 
     QPainter painter(&pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
+    painter.translate(0, shift);   // badge in the lower part
 
-    // Das Zeichen-Rechteck (mit 2 Pixel Padding für den Rahmen)
-    QRect rect(2, 2, size - 4, size - 4);
+    // Drawing rect (padding for the border)
+    int pad = size / 16;
+    QRect rect(pad, pad, size - 2 * pad, size - 2 * pad);
 
-    // 2. Form zeichnen (Hintergrund füllen)
+    // Draw the shape (fill the background)
     painter.setBrush(color);
-    painter.setPen(QPen(Qt::black, 2)); // Schwarzer Rand, Stärke 2
+    painter.setPen(QPen(Qt::black, size / 16.0)); // black border
 
     if (shape.toLower() == "square") {
-        painter.drawRoundedRect(rect, 5, 5);
+        painter.drawRoundedRect(rect, size * 5 / 32, size * 5 / 32);
     }
     else if (shape.toLower() == "circle") {
         painter.drawEllipse(rect);

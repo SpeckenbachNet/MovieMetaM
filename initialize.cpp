@@ -27,10 +27,18 @@ void MainWin::initializeForm() {
     QString cssHeadline = "QLabel { background-color: " + accentGrey(palette()).name() + "; "
                           "color: palette(window-text); "
                           "font-weight: bold; "
-                          "padding: 6px; }";
+                          "padding: 6px; "
+                          "border: none; "   // middleLabel has a StyledPanel frame in the .ui
+                          "border-radius: " + QString::number(FieldLook::radius) + "px; }";
     ui->leftLabel->setStyleSheet(cssHeadline);
     ui->middleLabel->setStyleSheet(cssHeadline);
     ui->rightLabel->setStyleSheet(cssHeadline);
+
+    // Rounded input fields (the ones in the tag widgets style themselves)
+    applyInputStyle(ui->titleEdit);
+    applyInputStyle(ui->studioEdit);
+    applyBoxStyle(ui->descriptionText, true);
+    applySpinStyle(ui->releaseDateEdit);
 
     // fixed size of TMDB Image
     QPixmap picTmdb(":/images/tmdb.svg");
