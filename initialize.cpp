@@ -30,7 +30,6 @@ void MainWin::initializeForm() {
     ui->leftLabel->setStyleSheet(cssHeadline);
     ui->middleLabel->setStyleSheet(cssHeadline);
     ui->rightLabel->setStyleSheet(cssHeadline);
-    ui->settingsHeaderLabel->setStyleSheet(cssHeadline);
 
     // fixed size of TMDB Image
     QPixmap picTmdb(":/images/tmdb.svg");
@@ -41,8 +40,6 @@ void MainWin::initializeForm() {
     // Prepare InfoDialog
     ui->infoTextBrowser->setContentsMargins(15, 15, 15, 15);
     ui->infoTextBrowser->insertHtml(getInfoHtmlTemplate());
-    ui->infoHeaderLabel->setStyleSheet(cssHeadline);
-    ui->infoHeaderLabel->setText(tr("About %1").arg(QCoreApplication::applicationName()));
 
     // Set noCover to CoverImage first time
     ui->coverLabel->setScaledContents(true);
@@ -56,24 +53,6 @@ void MainWin::initializeForm() {
     ui->removeToolButton->setIconSize(QSize(32, 32));
     ui->searchToolButton->setAutoRaise(true);
     ui->searchToolButton->setIconSize(QSize(32, 32));
-
-    QIcon saveIcon;
-    saveIcon.addFile(":/icons/save.svg", QSize(), QIcon::Normal, QIcon::Off);
-    saveIcon.addFile(":/icons/save_disabled.svg", QSize(), QIcon::Disabled, QIcon::Off);
-    ui->actionSave->setIcon(saveIcon);
-    ui->actionSave->setEnabled(false);
-
-    QIcon saveAllIcon;
-    saveAllIcon.addFile(":/icons/save_all.svg", QSize(), QIcon::Normal, QIcon::Off);
-    saveAllIcon.addFile(":/icons/save_all_disabled.svg", QSize(), QIcon::Disabled, QIcon::Off);
-    ui->actionSaveAll->setIcon(saveAllIcon);
-    ui->actionSaveAll->setEnabled(false);
-
-    QIcon saveSettingsIcon;
-    saveSettingsIcon.addFile(":/icons/save.svg", QSize(), QIcon::Normal, QIcon::Off);
-    saveSettingsIcon.addFile(":/icons/save_disabled.svg", QSize(), QIcon::Disabled, QIcon::Off);
-    ui->actionSaveSettings->setIcon(saveSettingsIcon);
-    ui->actionSaveSettings->setEnabled(false);
 
     // Select the hole row, Only one row is allowed
     // Prevents losing selction by clickng empty space.
@@ -196,37 +175,30 @@ void MainWin::initializeComboBoxes() {
 
 void MainWin::initializeToolBars()
 {
-    // Main Toolbar
-    ui->mainToolBar->setMovable(false);
-    addExpandingSpacer(ui->mainToolBar); // Spacer before right Icons
-    ui->mainToolBar->addAction(ui->actionSettings);
-    ui->mainToolBar->addAction(ui->actionHelp);
-    ui->mainToolBar->addAction(ui->actionInfo);
-    ui->mainToolBar->addSeparator();
-    ui->mainToolBar->addAction(ui->actionExit);
+    // --- Main toolbar: saving left, settings and help right
+    m_saveBtn = ui->mainToolbar->addButton("saveBtn", tr("Save"), ":icons/save", true);
+    m_saveBtn->setToolTip(tr("Save metadata to the movie"));
+    m_saveBtn->setEnabled(false);
+    m_saveAllBtn = ui->mainToolbar->addButton("saveAllBtn", tr("Save all"), ":icons/save_all", true);
+    m_saveAllBtn->setToolTip(tr("Save the metadata of all changed movies"));
+    m_saveAllBtn->setEnabled(false);
+    ui->mainToolbar->addSpacer();
+    m_settingsBtn = ui->mainToolbar->addButton("settingsBtn", "", ":icons/settings");
+    m_settingsBtn->setToolTip(tr("Settings"));
+    m_helpBtn = ui->mainToolbar->addButton("helpBtn", "", ":icons/help");
+    m_helpBtn->setToolTip(tr("Help"));
 
-    // Info Toolbar
-    ui->infoToolBar->setMovable(false);
-    addExpandingSpacer(ui->infoToolBar); // Spacer before right Icons
-    ui->infoToolBar->addAction(ui->actionSettings);
-    ui->infoToolBar->addAction(ui->actionHelp);
-    ui->infoToolBar->addAction(ui->actionInfo);
-    ui->infoToolBar->addSeparator();
-    ui->infoToolBar->addAction(ui->actionClose);
+    // --- Settings toolbar
+    m_settingsBackBtn = ui->settingsToolbar->addButton("settingsBackBtn", tr("Back"), ":icons/back", true);
+    ui->settingsToolbar->setTitle(tr("Settings"));
+    ui->settingsToolbar->addSpacer();
+    m_saveSettingsBtn = ui->settingsToolbar->addButton("saveSettingsBtn", tr("Save"), ":icons/save", true);
+    m_saveSettingsBtn->setToolTip(tr("Save settings"));
+    m_saveSettingsBtn->setEnabled(false);
 
-    // Settings Toolbar
-    ui->settingsToolBar->setMovable(false);
-    addExpandingSpacer(ui->settingsToolBar); // Spacer before right Icons
-    ui->settingsToolBar->addAction(ui->actionSettings);
-    ui->settingsToolBar->addAction(ui->actionHelp);
-    ui->settingsToolBar->addAction(ui->actionInfo);
-    ui->settingsToolBar->addSeparator();
-    ui->settingsToolBar->addAction(ui->actionClose);
-
-    // set toolbars intial
-    ui->mainToolBar->setVisible(true);
-    ui->infoToolBar->setVisible(false);
-    ui->settingsToolBar->setVisible(false);
+    // --- Info toolbar (becomes part of the help page)
+    m_infoBackBtn = ui->infoToolbar->addButton("infoBackBtn", tr("Back"), ":icons/back", true);
+    ui->infoToolbar->setTitle(tr("About %1").arg(QCoreApplication::applicationName()));
 }
 
 void MainWin::initializeStatusIcons() {
@@ -432,12 +404,12 @@ void MainWin::initializeConnects() {
     connect(m_screenwritersWidget, &TagWidget::tagsChanged, this, &MainWin::onDataChanged);
     connect(m_producersWidget, &TagWidget::tagsChanged, this, &MainWin::onDataChanged);
 
-    // Actions
-    connect(ui->actionExit, &QAction::triggered, qApp, &QApplication::quit);
-    connect(ui->actionInfo, &QAction::triggered, this, &MainWin::handleInfoButton_Clicked);
-    connect(ui->actionSettings, &QAction::triggered, this, &MainWin::handleSettingsButton_Clicked);
-    connect(ui->actionClose, &QAction::triggered, this, &MainWin::handleCloseButton_Clicked);
-    connect(ui->actionSaveSettings, &QAction::triggered, this, &MainWin::handleSaveSettingsButton_Clicked);
+    // Toolbar buttons: page switching
+    connect(m_settingsBtn, &QToolButton::clicked, this, [this] { showPage(ui->settingsPage); });
+    connect(m_helpBtn, &QToolButton::clicked, this, [this] { showPage(ui->infoPage); });   // help topics follow
+    connect(m_settingsBackBtn, &QToolButton::clicked, this, [this] { showPage(ui->mainPage); });
+    connect(m_infoBackBtn, &QToolButton::clicked, this, [this] { showPage(ui->mainPage); });
+    connect(m_saveSettingsBtn, &QToolButton::clicked, this, &MainWin::handleSaveSettingsButton_Clicked);
 
     // ----- Other connects
     connect(ui->searchTableView, &QTableView::doubleClicked, this, &MainWin::onSearchTableViewDoubleClicked);

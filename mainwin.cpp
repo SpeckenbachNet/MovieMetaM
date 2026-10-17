@@ -213,10 +213,10 @@ void MainWin::onSettingsChanged() {
 
     if(countryCode != ui->ratingSettingsComboBox->currentData(Qt::UserRole)){
         settingsChanged = true;
-        ui->actionSaveSettings->setEnabled(true);
+        m_saveSettingsBtn->setEnabled(true);
     } else {
         settingsChanged = false;
-        ui->actionSaveSettings->setEnabled(false);
+        m_saveSettingsBtn->setEnabled(false);
     }
 }
 
@@ -433,20 +433,6 @@ bool MainWin::validateAndRefreshChanges() {
     work.status = hasChanged ? "modified" : "unchanged";
     qDebug() << "hasChanged: " << hasChanged;
     return hasChanged;
-}
-
-void MainWin::addExpandingSpacer(QToolBar *toolbar)
-{
-    if (!toolbar) return;
-
-    // Toolbar as parent
-    QWidget *spacer = new QWidget(toolbar);
-
-    // set Spacer to expanding
-    spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-    // add Spacer to toolbar
-    toolbar->addWidget(spacer);
 }
 
 void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
@@ -1046,41 +1032,10 @@ void MainWin::onApiRequestFinished(QNetworkReply *reply)
 }
 
 // ***** HANDLES *****
-void MainWin::handleExitApplication()
+// Every page brings its own toolbar, so switching the page is all there is to do
+void MainWin::showPage(QWidget *page)
 {
-    // Hier fügen Sie Ihre Logik ein (z.B. Speicherabfrage)
-
-    // Quit application
-    QApplication::quit();
-}
-
-void MainWin::handleInfoButton_Clicked()
-{
-    qDebug() << "Action INFO triggered...";
-    ui->stackedWidget->setCurrentIndex(2);
-    // set toolbar
-    ui->mainToolBar->setVisible(false);
-    ui->settingsToolBar->setVisible(false);
-    ui->infoToolBar->setVisible(true);
-}
-
-void MainWin::handleSettingsButton_Clicked()
-{
-    qDebug() << "Action SETTINGS triggered...";
-    ui->stackedWidget->setCurrentIndex(1);
-    // set toolbar
-    ui->mainToolBar->setVisible(false);
-    ui->infoToolBar->setVisible(false);
-    ui->settingsToolBar->setVisible(true);
-}
-
-void MainWin::handleCloseButton_Clicked()
-{
-    qDebug() << "Action INFO triggered...";
-    ui->stackedWidget->setCurrentIndex(0);
-    // set toolbar
-    ui->mainToolBar->setVisible(true);
-    ui->infoToolBar->setVisible(false);
+    ui->stackedWidget->setCurrentWidget(page);
 }
 
 void MainWin::handleSaveSettingsButton_Clicked() {

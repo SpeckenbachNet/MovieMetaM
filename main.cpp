@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
     a.setApplicationName(QStringLiteral(APP_NAME));
     a.setApplicationVersion(QLatin1String(APP_VERSION));
     a.setOrganizationName(QStringLiteral(COMPANY_NAME));
+    a.setWindowIcon(QIcon(QStringLiteral(":/icons/app_icon")));   // title bar, task bar, dialogs
 
     // Settings as INI file on every system (Windows would use the registry otherwise)
     QSettings::setDefaultFormat(QSettings::IniFormat);
