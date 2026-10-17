@@ -18,12 +18,13 @@
 
 #include "mainwin.h"
 #include "ui_mainwin.h"
+#include "themecolors.h"
 
 // ***** INITIALIZE *****
 void MainWin::initializeForm() {
 
-    // Style headers
-    QString cssHeadline = "QLabel { background-color: palette(mid); "
+    // Style headers (same grey as the tags)
+    QString cssHeadline = "QLabel { background-color: " + accentGrey(palette()).name() + "; "
                           "color: palette(window-text); "
                           "font-weight: bold; "
                           "padding: 6px; }";
