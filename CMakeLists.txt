@@ -17,8 +17,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Network LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network LinguistTools)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Network Svg LinguistTools)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network Svg LinguistTools)
 
 # TMDB API read access token: kept out of git in tmdb_token.txt
 set(TMDB_TOKEN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/tmdb_token.txt")
@@ -64,6 +64,8 @@ qt_add_executable(${PROJECT_NAME}
     moviedata.cpp
     mediainfom.h
     mediainfom.cpp
+    toolbarm.h
+    toolbarm.cpp
 )
 
 # Windows: icon of the .exe and version in the file properties
@@ -105,6 +107,7 @@ qt_add_translations(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Network
+    Qt${QT_VERSION_MAJOR}::Svg   # SVG icons (tinted toolbar icons, window icon)
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

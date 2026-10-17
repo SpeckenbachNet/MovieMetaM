@@ -12,154 +12,127 @@
 <context>
     <name>MainWin</name>
     <message>
-        <location filename="../mainwin.ui" line="47"/>
+        <location filename="../mainwin.ui" line="63"/>
         <source>Movie List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="146"/>
+        <location filename="../mainwin.ui" line="162"/>
         <source>Movie Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="170"/>
-        <location filename="../mainwin.ui" line="410"/>
+        <location filename="../mainwin.ui" line="186"/>
+        <location filename="../mainwin.ui" line="426"/>
         <source>Cover</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="177"/>
+        <location filename="../mainwin.ui" line="193"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="187"/>
+        <location filename="../mainwin.ui" line="203"/>
         <source>Release Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="197"/>
+        <location filename="../mainwin.ui" line="213"/>
         <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="213"/>
-        <location filename="../mainwin.ui" line="510"/>
+        <location filename="../mainwin.ui" line="229"/>
+        <location filename="../mainwin.ui" line="535"/>
         <source>Age Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="239"/>
+        <location filename="../mainwin.ui" line="255"/>
         <source>Producers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="258"/>
+        <location filename="../mainwin.ui" line="274"/>
         <source>Directors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="277"/>
+        <location filename="../mainwin.ui" line="293"/>
         <source>Studio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="293"/>
+        <location filename="../mainwin.ui" line="309"/>
         <source>Screenplay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="306"/>
+        <location filename="../mainwin.ui" line="322"/>
         <source>Actors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="319"/>
-        <location filename="../mainwin.cpp" line="479"/>
+        <location filename="../mainwin.ui" line="335"/>
+        <location filename="../mainwin.cpp" line="465"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="379"/>
+        <location filename="../mainwin.ui" line="395"/>
         <source>Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="405"/>
+        <location filename="../mainwin.ui" line="421"/>
         <source>Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="418"/>
+        <location filename="../mainwin.ui" line="434"/>
         <source>Movie Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="428"/>
+        <location filename="../mainwin.ui" line="444"/>
         <source>Powered by</source>
-        <translation type="unfinished">Powered by</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="460"/>
-        <location filename="../mainwin.ui" line="688"/>
-        <location filename="../mainwin.ui" line="691"/>
+        <location filename="../initialize.cpp" line="187"/>
+        <location filename="../initialize.cpp" line="193"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="498"/>
+        <location filename="../mainwin.ui" line="523"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="541"/>
-        <location filename="../mainwin.ui" line="664"/>
-        <source>Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="610"/>
+        <location filename="../initialize.cpp" line="179"/>
+        <location filename="../initialize.cpp" line="195"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="613"/>
+        <location filename="../initialize.cpp" line="180"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="625"/>
-        <source>Exit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="628"/>
-        <source>Exit the program</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="640"/>
-        <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="652"/>
+        <location filename="../initialize.cpp" line="182"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="676"/>
+        <location filename="../initialize.cpp" line="189"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="703"/>
-        <location filename="../mainwin.ui" line="706"/>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="718"/>
+        <location filename="../initialize.cpp" line="196"/>
         <source>Save settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -169,12 +142,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="479"/>
+        <location filename="../mainwin.cpp" line="465"/>
         <source>Year</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="616"/>
+        <location filename="../mainwin.cpp" line="602"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation>
             <numerusform>%n file skipped: only MP4 is supported.</numerusform>
@@ -182,27 +155,27 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="638"/>
+        <location filename="../mainwin.cpp" line="624"/>
         <source>Unchanged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="853"/>
+        <location filename="../mainwin.cpp" line="839"/>
         <source>Choose movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="855"/>
+        <location filename="../mainwin.cpp" line="841"/>
         <source>Movie files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="875"/>
+        <location filename="../mainwin.cpp" line="861"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="876"/>
+        <location filename="../mainwin.cpp" line="862"/>
         <source>Really remove %n movie(s)?</source>
         <translation>
             <numerusform>Really remove %n movie?</numerusform>
@@ -210,67 +183,78 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="919"/>
+        <location filename="../mainwin.cpp" line="905"/>
         <source>Please enter a search term</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1006"/>
+        <location filename="../mainwin.cpp" line="992"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1092"/>
+        <location filename="../mainwin.cpp" line="1047"/>
         <source>Settings saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1095"/>
+        <location filename="../mainwin.cpp" line="1050"/>
         <source>Error: could not save the settings!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="45"/>
+        <location filename="../initialize.cpp" line="201"/>
         <source>About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="104"/>
+        <location filename="../initialize.cpp" line="83"/>
         <source>Germany</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="113"/>
+        <location filename="../initialize.cpp" line="92"/>
         <source>United Kingdom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="124"/>
+        <location filename="../initialize.cpp" line="103"/>
         <source>United States</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="276"/>
+        <location filename="../initialize.cpp" line="183"/>
+        <source>Save the metadata of all changed movies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="192"/>
+        <location filename="../initialize.cpp" line="200"/>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="248"/>
         <source>Enter actors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="291"/>
+        <location filename="../initialize.cpp" line="263"/>
         <source>Enter producers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="306"/>
+        <location filename="../initialize.cpp" line="278"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="321"/>
+        <location filename="../initialize.cpp" line="293"/>
         <source>Enter directors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="346"/>
+        <location filename="../initialize.cpp" line="318"/>
         <source>Filename</source>
         <translation type="unfinished"></translation>
     </message>

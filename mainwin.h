@@ -46,6 +46,7 @@
 #include <QSettings>
 #include <QTableWidgetItem>
 #include <QTemporaryFile>
+#include <QToolButton>
 #include <qcombobox.h>
 
 #include "moviedata.h"
@@ -102,7 +103,6 @@ public:
     void startApiRequest(const QUrl &url);
     void startImageDownload(const QUrl &url); // Starts download an return immediately
     QIcon scaled;
-    QWidget *spacer;
     QPixmap coverPix;
     QPixmap noCoverPix;
 
@@ -127,9 +127,18 @@ private:
     TagWidget *m_producersWidget = nullptr;
     TagWidget *m_directorsWidget = nullptr;
 
+    // Toolbar buttons (ToolbarM)
+    QToolButton *m_saveBtn = nullptr;
+    QToolButton *m_saveAllBtn = nullptr;
+    QToolButton *m_settingsBtn = nullptr;
+    QToolButton *m_helpBtn = nullptr;
+    QToolButton *m_settingsBackBtn = nullptr;
+    QToolButton *m_saveSettingsBtn = nullptr;
+    QToolButton *m_infoBackBtn = nullptr;
+
+    void showPage(QWidget *page);
     void setSignalsBlocked(bool blocked);
     void displayMovie(const MovieData &movie);
-    void addExpandingSpacer(QToolBar *toolbar);
     void fillSearchTableView(const QJsonDocument &jsonDoc);
     void fillGenreComboBox(const QJsonDocument &jsonDoc);
     void fillRatingComboBox(const QJsonDocument &jsonDoc);
@@ -178,10 +187,6 @@ private slots:
     void onRemoveFilesButtonClicked();
 
     // Toolbar action-handler
-    void handleExitApplication();
-    void handleInfoButton_Clicked();
-    void handleSettingsButton_Clicked();
-    void handleCloseButton_Clicked();
     void handleSaveSettingsButton_Clicked();
 
 signals:
