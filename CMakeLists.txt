@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.3.4")
+set(PROJECT_VERSION "0.3.5")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -68,6 +68,7 @@ qt_add_executable(${PROJECT_NAME}
     toolbarm.cpp
     searchfield.h
     searchfield.cpp
+    themecolors.h
 )
 
 # Windows: icon of the .exe and version in the file properties

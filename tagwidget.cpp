@@ -16,6 +16,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 #include "tagwidget.h"
+#include "themecolors.h"
 
 TagWidget::TagWidget(
     const QString &placeholder, const QString &separator,
@@ -48,7 +49,7 @@ TagWidget::TagWidget(
 
 void TagWidget::setupUi(const QString &placeholder)
 {
-    // 1. Layout-Manager für das gesamte Widget (Vertikal)
+    // Vertical layout for the whole widget
     QVBoxLayout *mainVLayout = new QVBoxLayout(this);
     mainVLayout->setContentsMargins(0, 0, 0, 0);
     //mainVLayout->setSpacing(0);
@@ -60,11 +61,13 @@ void TagWidget::setupUi(const QString &placeholder)
     m_tagModel = new QStringListModel(this);
     m_tagView->setModel(m_tagModel);
 
-    // Style ListView Items
+    // Style ListView items: same grey as the headers, a bit stronger on hover
+    const QString tagColor = accentGrey(palette()).name();
+    const QString hoverColor = accentGrey(palette(), 0.5).name();
     m_tagView->setStyleSheet(
         "QListView {font-size: 12px;}"
-        "QListView::item { margin-top: 2px; margin-left: 2px; margin-right: 2px; background-color: palette(highlight); color: palette(highlighted-text); border-radius: 2px; font-size: 8px;}"
-        "QListView::item:hover { margin-top: 2px; margin-left: 2px; margin-right: 2px; background-color: #ffff00; color: black; border-radius: 2px; font-size: 8px;}"
+        "QListView::item { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + tagColor + "; color: palette(window-text); border-radius: 5px;}"
+        "QListView::item:hover { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + hoverColor + "; color: palette(window-text); border-radius: 5px;}"
     );
 
     // Create lineedit
@@ -79,10 +82,10 @@ void TagWidget::setupUi(const QString &placeholder)
     m_tagView->setAcceptDrops(true);
     m_tagView->setDropIndicatorShown(true);
 
-    // WICHTIG: InternalMove sorgt für das Verschieben innerhalb der Liste
+    // Important: InternalMove allows reordering within the list
     m_tagView->setDragDropMode(QAbstractItemView::InternalMove);
 
-    // Erzwingt 'Move' statt 'Copy' (verhindert oft schon Duplikate)
+    // Forces 'Move' instead of 'Copy' (avoids most duplicates)
     m_tagView->setDefaultDropAction(Qt::MoveAction);
 
     // Connections
