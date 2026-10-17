@@ -20,6 +20,17 @@
 
 MediaInfoM::MediaInfoM(QObject *parent) : QObject(parent) {}
 
+QStringList MediaInfoM::supportedSuffixes()
+{
+    // For now MP4 only (m4v is the same format with Apple's suffix)
+    return {"mp4", "m4v"};
+}
+
+bool MediaInfoM::isSupported(const QString &filePath)
+{
+    return supportedSuffixes().contains(QFileInfo(filePath).suffix().toLower());
+}
+
 quint32 MediaInfoM::boxTypeToUint32(const char boxType[4]) const
 {
     // Wandelt die 4 Big-Endian-Bytes in einen quint32 um
@@ -561,15 +572,15 @@ QMap<QString, QString> MediaInfoM::extractMetadata(const QString &filePath)
     }
     else if (fileType == "mkv") {
         emit errorOccurred("MKV-Cover-Extraktion noch nicht implementiert");
-        //return QMap();
+        return {};   // empty map: no metadata
     }
     else if (fileType == "avi") {
         emit errorOccurred("AVI-Cover-Extraktion noch nicht implementiert");
-        //return QMap();
+        return {};
     }
     else {
         emit errorOccurred("Unbekanntes oder nicht unterstütztes Format: " + fileType);
-        //return QMap();
+        return {};
     }
 }
 

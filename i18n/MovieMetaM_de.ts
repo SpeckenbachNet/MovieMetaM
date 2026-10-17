@@ -369,6 +369,17 @@
         <source>PLEASE_ENTER_SEARCH_TERM</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>NO_TMDB_TOKEN</source>
+        <translation>Kein TMDB-Token: Die Filmsuche ist nicht verfügbar.</translation>
+    </message>
+    <message numerus="yes">
+        <source>FILES_SKIPPED_ONLY_MP4</source>
+        <translation>
+            <numerusform>%n Datei übersprungen: Nur MP4 wird unterstützt.</numerusform>
+            <numerusform>%n Dateien übersprungen: Nur MP4 wird unterstützt.</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>SetupDialog</name>
