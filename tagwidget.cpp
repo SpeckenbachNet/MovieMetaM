@@ -52,7 +52,7 @@ void TagWidget::setupUi(const QString &placeholder)
     // Vertical layout for the whole widget
     QVBoxLayout *mainVLayout = new QVBoxLayout(this);
     mainVLayout->setContentsMargins(0, 0, 0, 0);
-    //mainVLayout->setSpacing(0);
+    mainVLayout->setSpacing(0);   // input field and list form one box
 
     // Create ListView
     m_tagView = new QListView(this);
@@ -61,10 +61,10 @@ void TagWidget::setupUi(const QString &placeholder)
     m_tagModel = new QStringListModel(this);
     m_tagView->setModel(m_tagModel);
 
-    // Style ListView items: same grey as the headers, a bit stronger on hover
+    // Lower part of the box; items in the same grey as the headers, a bit stronger on hover
     const QString tagColor = accentGrey(palette()).name();
     const QString hoverColor = accentGrey(palette(), 0.5).name();
-    m_tagView->setStyleSheet(
+    applyBoxStyle(m_tagView, false, FieldCorners::Bottom,
         "QListView {font-size: 12px;}"
         "QListView::item { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + tagColor + "; color: palette(window-text); border-radius: 5px;}"
         "QListView::item:hover { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + hoverColor + "; color: palette(window-text); border-radius: 5px;}"
@@ -73,6 +73,7 @@ void TagWidget::setupUi(const QString &placeholder)
     // Create lineedit
     m_lineEdit = new QLineEdit(this);
     m_lineEdit->setPlaceholderText(placeholder);
+    applyInputStyle(m_lineEdit, FieldCorners::Top);   // upper part of the box
 
     // add elements to Widget
     mainVLayout->addWidget(m_lineEdit);
