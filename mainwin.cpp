@@ -23,8 +23,7 @@
 
 MainWin::MainWin(QWidget *parent)
     : QMainWindow(parent),
-    ui(new Ui::MainWin),
-    settings(QSettings::IniFormat, QSettings::UserScope, "Speckenbach.Net", "MovieMetaM")
+    ui(new Ui::MainWin)
 {
     ui->setupUi(this);
 

@@ -28,10 +28,15 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    a.setApplicationVersion(QLatin1String(PROJECT_VERSION));
+    a.setApplicationName(QStringLiteral(APP_NAME));
+    a.setApplicationVersion(QLatin1String(APP_VERSION));
+    a.setOrganizationName(QStringLiteral(COMPANY_NAME));
+
+    // Settings as INI file on every system (Windows would use the registry otherwise)
+    QSettings::setDefaultFormat(QSettings::IniFormat);
 
     // 1. Sprache aus den QSettings laden
-    QSettings settings(QSettings::IniFormat, QSettings::UserScope,"Speckenbach.Net", "MovieMetaM");
+    QSettings settings;
     // Standardmäßig leer, falls noch nie gesetzt
     QString langCode = settings.value("language", "").toString();
 
@@ -45,12 +50,12 @@ int main(int argc, char *argv[])
     QTranslator translator;
 
     // 3. Versuchen, die Sprache zu laden (z.B. MovieMetaM_de.qm)
-    if (translator.load(":/i18n/MovieMetaM_" + langCode)) {
+    if (translator.load(":/i18n/" APP_NAME "_" + langCode)) {
         a.installTranslator(&translator);
     }
     // 4. FALLBACK: Wenn die Sprache nicht geladen werden konnte und nicht schon Englisch ist
     else if (langCode != "en") {
-        if (translator.load(":/i18n/MovieMetaM_en")) {
+        if (translator.load(":/i18n/" APP_NAME "_en")) {
             a.installTranslator(&translator);
         }
     }
@@ -79,9 +84,9 @@ int main(int argc, char *argv[])
     // === Start main window ===
     MainWin w;
     w.setWindowTitle(
-        QStringLiteral(PROJECT_NAME) +
+        QStringLiteral(APP_NAME) +
         " " +
-        QStringLiteral(PROJECT_VERSION)
+        QStringLiteral(APP_VERSION)
     );
     w.show();
     return a.exec();

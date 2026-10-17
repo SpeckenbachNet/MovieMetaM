@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B3A67"/>
+      <stop offset="1" stop-color="#141B33"/>
+    </linearGradient>
+    <linearGradient id="film" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3A3F4B"/>
+      <stop offset="1" stop-color="#1E2129"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7FD3FF"/>
+      <stop offset="1" stop-color="#3C8DDB"/>
+    </linearGradient>
+    <linearGradient id="tag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFC94D"/>
+      <stop offset="1" stop-color="#F39C1F"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- Hintergrund -->
+  <rect x="64" y="64" width="896" height="896" rx="200" fill="url(#bg)"/>
+
+  <!-- Filmstreifen, leicht gekippt -->
+  <g transform="rotate(-12 512 470)" filter="url(#shadow)">
+    <rect x="170" y="290" width="620" height="360" rx="28" fill="url(#film)"/>
+    <!-- Perforation oben/unten -->
+    <g fill="#E8ECF4">
+      <rect x="205" y="310" width="44" height="34" rx="8"/>
+      <rect x="285" y="310" width="44" height="34" rx="8"/>
+      <rect x="365" y="310" width="44" height="34" rx="8"/>
+      <rect x="445" y="310" width="44" height="34" rx="8"/>
+      <rect x="525" y="310" width="44" height="34" rx="8"/>
+      <rect x="605" y="310" width="44" height="34" rx="8"/>
+      <rect x="685" y="310" width="44" height="34" rx="8"/>
+      <rect x="205" y="596" width="44" height="34" rx="8"/>
+      <rect x="285" y="596" width="44" height="34" rx="8"/>
+      <rect x="365" y="596" width="44" height="34" rx="8"/>
+      <rect x="445" y="596" width="44" height="34" rx="8"/>
+      <rect x="525" y="596" width="44" height="34" rx="8"/>
+      <rect x="605" y="596" width="44" height="34" rx="8"/>
+      <rect x="685" y="596" width="44" height="34" rx="8"/>
+    </g>
+    <!-- Bildfelder -->
+    <rect x="200" y="368" width="270" height="204" rx="14" fill="url(#frame)"/>
+    <rect x="490" y="368" width="270" height="204" rx="14" fill="url(#frame)"/>
+    <!-- Play-Symbol -->
+    <path d="M305 425 L305 515 L385 470 Z" fill="#FFFFFF" opacity="0.95"/>
+  </g>
+
+  <!-- Metadaten-Etikett -->
+  <g transform="rotate(14 690 690)" filter="url(#shadow)">
+    <path d="M520 600 H820 a30 30 0 0 1 30 30 V800 a30 30 0 0 1 -30 30 H520 L440 715 Z" fill="url(#tag)"/>
+    <circle cx="505" cy="715" r="22" fill="#141B33"/>
+    <!-- Datenzeilen -->
+    <rect x="565" y="655" width="230" height="26" rx="13" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="565" y="702" width="180" height="26" rx="13" fill="#FFFFFF" opacity="0.75"/>
+    <rect x="565" y="749" width="210" height="26" rx="13" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+</svg>
