@@ -456,9 +456,6 @@
           <layout class="QVBoxLayout" name="settingsCentralLayout">
            <item>
             <widget class="QLabel" name="settingsHeaderLabel">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(170, 255, 255);</string>
-             </property>
              <property name="text">
               <string>SETTINGS</string>
              </property>
@@ -492,7 +489,7 @@
                  </property>
                  <property name="styleSheet">
                   <string notr="true">QGroupBox::title {  
-background-color: grey;
+background-color: palette(mid);
  subcontrol-position: top left; /* position at the top left*/ 
  padding: 2px 13px;
 }</string>

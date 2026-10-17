@@ -23,7 +23,8 @@
 void MainWin::initializeForm() {
 
     // Style headers
-    QString cssHeadline = "QLabel { background-color: grey; "
+    QString cssHeadline = "QLabel { background-color: palette(mid); "
+                          "color: palette(window-text); "
                           "font-weight: bold; "
                           "padding: 6px; }";
     ui->leftLabel->setStyleSheet(cssHeadline);

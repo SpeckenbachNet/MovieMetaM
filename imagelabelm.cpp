@@ -24,7 +24,7 @@ ImageLabelM::ImageLabelM(QWidget *parent) : QLabel(parent) {
     // Ein bisschen modernes Styling direkt im Code
     setAlignment(Qt::AlignCenter);
     setText("Cover hierher ziehen");
-    setStyleSheet("border: 2px dashed #666; color: #666;");
+    setStyleSheet("border: 2px dashed palette(mid); color: palette(mid);");
 }
 
 void ImageLabelM::clear() {
@@ -65,13 +65,19 @@ void ImageLabelM::dragEnterEvent(QDragEnterEvent *event) {
     if (event->mimeData()->hasUrls()) {
         event->acceptProposedAction();
         // Optisches Feedback: Rahmen wird hell
-        setStyleSheet("border: 2px solid #3498db; background-color: rgba(52, 152, 219, 0.1);");
+        // Highlight color of the current theme, background slightly transparent
+        QColor highlight = palette().color(QPalette::Highlight);
+        setStyleSheet(QString("border: 2px solid %1; background-color: rgba(%2, %3, %4, 0.1);")
+                          .arg(highlight.name())
+                          .arg(highlight.red())
+                          .arg(highlight.green())
+                          .arg(highlight.blue()));
     }
 }
 
 void ImageLabelM::dragLeaveEvent(QDragLeaveEvent *event) {
     // User moved the mouse away again -> Reset style
-    setStyleSheet("border: 2px dashed #666; background-color: transparent;");
+    setStyleSheet("border: 2px dashed palette(mid); background-color: transparent;");
 }
 
 void ImageLabelM::dragMoveEvent(QDragMoveEvent *event) {
@@ -83,7 +89,7 @@ void ImageLabelM::dragMoveEvent(QDragMoveEvent *event) {
 
 void ImageLabelM::dropEvent(QDropEvent *event) {
     //qDebug() << "LABEL: Drop detected!";
-    setStyleSheet("border: 2px dashed #666;"); // Back to standard
+    setStyleSheet("border: 2px dashed palette(mid);"); // Back to standard
     event->acceptProposedAction();
     const QMimeData* mime = event->mimeData();
 
