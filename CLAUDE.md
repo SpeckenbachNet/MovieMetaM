@@ -49,39 +49,67 @@ PDFDocumentScannerM) are updated later by the user – don't touch them unasked.
 ## Style of the UI
 
 - Colors from the palette (light and dark themes), no fixed colors where they meet theme colors.
+- Accent color of the system (`palette(highlight)` + `highlighted-text`) for selected entries
+  (movie list, search results, open combo list) and for tags; headings in `accentGrey()`.
+- Everything rounded, radius 6 (`FieldLook::radius`): helpers in `themecolors.h` –
+  `applyInputStyle`, `applySpinStyle`, `applyBoxStyle`, `applyComboStyle`, `applyTabStyle`.
+  Combo boxes get a plain `QStyledItemDelegate` (the default menu delegate ignores the style
+  sheet item rules); the combo arrow is the grey `chevron_down.svg` (not tinted).
 - Icons: black SVG drawings tinted in the text color (ToolbarM, SearchField); origin and
   licenses in `ressources/icons/LICENSES.md` (save icons from Lucide, ISC).
+- Painted pictures (status symbols, posters, age rating badges, cover) in the resolution of
+  the screen (`devicePixelRatioF()`, e.g. 1.25 on Linux, 2 on Retina), else they blur.
+  Icons shown in selected entries get the same pixmap for `QIcon::Selected` (Qt tints them).
+- Item views as `QListView` with one column (a `QTableView` cannot round a whole row; Breeze
+  draws its own square selection behind it).
 - Desktop reference: `../churchWorshipM` (ToolbarM per page, SearchField); style reference:
   `../PhotoBoothM` (tablet-first, so not 1:1).
 - Every page of `stackedWidget` has its own ToolbarM on top; `showPage()` switches pages.
+
+## Notes (Linux: niri, Wayland, scaling 1.25)
+
+- Drag and drop on Wayland: read the mime data in `dragEnterEvent`. Read first in `dropEvent`,
+  data from a browser (Brave/Chromium) is empty (see `ImageLabelM::readDragData`).
+- Qt debug output of an app started outside a terminal goes to the journal:
+  `journalctl _PID=<pid>`.
+- Close test instances like the window's close button (`niri msg --json windows` for the id,
+  then `niri msg action close-window --id <id>`), not with `kill`; never kill by name.
 
 ## Structure
 
 - `main.cpp` – settings, translator, setup dialog on first start, main window.
 - `mainwin.*`, `initialize.cpp` – main window: movie list (left), movie info (middle),
-  TMDB search (right); pages settings and info.
+  TMDB search (right, tabs Results / Data / Cover); pages settings and info.
 - `mediainfom.*` – reads MP4 boxes (metadata, iTunMOVI XML, cover); `moviedata.*` – data of a movie.
-- `tagwidget.*` – tag input (cast, directors, ...); `imagelabelm.*` – cover with drag and drop;
-  `tableviewm.*` – movie list with file drop; `setupdialog.*` – first start.
+- `tagwidget.*` – tag input (cast, directors, ...); `imagelabelm.*` – cover: paints itself
+  (rounded, sharp), drag and drop in (`coverDropped` / `coverUrlDropped`) and out;
+  `tableviewm.*` – movie list (`QListView`) with file drop; `setupdialog.*` – first start.
+- `themecolors.h` – shared colors and shapes (`FieldLook`, `apply…Style`).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.3.4)
+## Open points (as of 0.3.11)
 
-1. UI overhaul, next steps: settings page as cards (no sidebar yet); help page (like PhotoBoothM
-   HelpPage) with "About MovieMetaM" for now (the help button opens the info page meanwhile);
-   main page: cards instead of grey heading bars.
-2. Bugs: setup dialog `tr("…","HK")` bracket bug (also KR, UK) and language choice not saved;
+1. Step "list entries" (movie list and search results): more space (padding 4/6 px, 2 px
+   between entries), title a bit larger and file name / year smaller and dimmed (own
+   delegate), separation of the entries – show the user preview variants to choose from
+   (thin line, alternating background, entry as a small card).
+2. UI overhaul, further steps: settings page as cards (no sidebar yet); help page (like
+   PhotoBoothM HelpPage) with "About MovieMetaM" for now (the help button opens the info page
+   meanwhile); the setup dialog's combo boxes with `applyComboStyle`.
+3. Bugs: setup dialog `tr("…","HK")` bracket bug (also KR, UK) and language choice not saved;
    12 countries offered but only DE/UK/US in `ratingMap`; new rating system only after restart;
    after removing a movie the form still shows it; false "changed" for movies without date
    (1972 default) or with a genre not in the TMDB list (genres in English, search in German);
-   arrow keys in the movie list don't switch the movie; cover download can land in a new
-   search's rows; search term not URL-encoded (use QUrlQuery).
-3. Saving to the MP4 file is not implemented (saveMovieDetails / save all are empty) – needs a
+   arrow keys in the movie list don't switch the movie; clicking the empty area of the movie
+   list loses the selection; a search without results leaves the old results; search term not
+   URL-encoded (use QUrlQuery).
+4. Saving to the MP4 file is not implemented (saveMovieDetails / save all are empty) – needs a
    design decision first (own MP4 writer or a library like TagLib).
-4. Applying a TMDB search result (double click only logs the id).
-5. The old TMDB token is in the git history: revoke it at TMDB and use a new one.
-6. Origin of some icons still to be clarified (`LICENSES.md`).
-7. Age rating combo on macOS: the icon sits about 2 px too high in the closed combo box. A
-   transparent stripe above the badge fixed that but moved the icons in the open list too low
-   (reverted). Proper fix: separate drawing for the closed box and the popup list (e.g. own
-   delegate for the list) – test on the Mac.
+5. Applying a TMDB search result (double click only logs the id); the tabs "Data" and "Cover"
+   are empty placeholders for it.
+6. Tags: one click removes a tag without asking – tooltip "Click to remove" or an × on hover.
+7. The old TMDB token is in the git history: revoke it at TMDB and use a new one.
+8. Origin of some icons still to be clarified (`LICENSES.md`); unused
+   `ressources/images/statusgreen.svg` / `statusorange.svg` can go.
+9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
+   about 2 px too high with the native style; the transparent-stripe fix was reverted).
