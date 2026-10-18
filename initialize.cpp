@@ -20,6 +20,7 @@
 #include "ui_mainwin.h"
 #include "themecolors.h"
 #include "twolinedelegate.h"
+#include "posterpreview.h"
 
 // ***** INITIALIZE *****
 void MainWin::initializeForm() {
@@ -80,6 +81,8 @@ void MainWin::initializeForm() {
     // The separator lines depend on the neighbour's selection: repaint the whole list
     connect(ui->searchTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
             ui->searchTableView->viewport(), qOverload<>(&QWidget::update));
+    // Enlarged poster when the mouse rests on a result
+    new PosterPreview(ui->searchTableView, kPosterRole);
 
     // ------ DateEdit ------
     // d = Tag, M = Monat, yyyy = vierstelliges Jahr

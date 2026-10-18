@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.3.12")
+set(PROJECT_VERSION "0.3.13")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -71,6 +71,8 @@ qt_add_executable(${PROJECT_NAME}
     themecolors.h
     twolinedelegate.h
     twolinedelegate.cpp
+    posterpreview.h
+    posterpreview.cpp
 )
 
 # Windows: icon of the .exe and version in the file properties

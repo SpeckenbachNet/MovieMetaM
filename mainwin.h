@@ -113,6 +113,7 @@ private:
     QStandardItemModel *m_SearchModel = nullptr;
     int m_searchGeneration = 0;   // counts the searches: posters of an older search are dropped
     static constexpr QSize kPosterSize{40, 60};   // poster in the search results (2:3)
+    static constexpr int kPosterRole = Qt::UserRole + 1;   // poster in full resolution (preview)
     QStandardItemModel *m_FilelistModel = nullptr;
     QPixmap extractMovieCover(const QString& filePath);
     QIcon m_statusGreen;    // status symbols in the movie list (same look when selected)

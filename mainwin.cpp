@@ -498,6 +498,7 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
             icon.addPixmap(poster, QIcon::Normal);
             icon.addPixmap(poster, QIcon::Selected);
             m_SearchModel->setData(itemIndex, icon, Qt::DecorationRole);
+            m_SearchModel->setData(itemIndex, pixmap, kPosterRole);   // full resolution for the preview
         });
     }
 }
