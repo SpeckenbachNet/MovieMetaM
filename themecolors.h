@@ -21,8 +21,10 @@
 #include <QAbstractSpinBox>
 #include <QApplication>
 #include <QColor>
+#include <QComboBox>
 #include <QLineEdit>
 #include <QPalette>
+#include <QStyledItemDelegate>
 
 // Colors are computed once, so a theme change (light/dark) needs a restart.
 
@@ -120,6 +122,36 @@ inline void applySpinStyle(QAbstractSpinBox *spin)
     // (a padding in the style sheet is ignored here)
     if (QLineEdit *edit = spin->findChild<QLineEdit *>())
         edit->setTextMargins(6, 0, 6, 0);
+}
+
+// Rounded combo box like the input fields. The arrow is a grey drawing (":icons/chevron_down",
+// from PhotoBoothM): visible in light and dark themes without tinting. The open list: entries
+// selected in the accent color like the movie list (its outer corners stay square: it is a
+// window of its own).
+inline void applyComboStyle(QComboBox *combo)
+{
+    constexpr int height = 26;
+    const FieldLook look;
+    const QColor hover = mixColor(look.fill, look.text, 0.09);
+
+    combo->setFixedHeight(height);
+    combo->setAttribute(Qt::WA_MacShowFocusRect, false);   // the border shows the focus
+    // Plain delegate for the open list: the default (menu like) delegate is drawn by the
+    // style itself and ignores the item rules of the style sheet
+    combo->setItemDelegate(new QStyledItemDelegate(combo));
+    combo->setStyleSheet(QStringLiteral(
+        "QComboBox { background: %1; color: %2; border: 1px solid %3;%4 padding: 0 24px 0 6px; }"
+        "QComboBox:hover { background: %6; }"
+        "QComboBox:focus { border: 1px solid %5; }"
+        "QComboBox::drop-down { border: none; width: 22px; }"
+        "QComboBox::down-arrow { image: url(:/icons/chevron_down); width: 14px; height: 14px; }"
+        "QComboBox QAbstractItemView { background: %1; color: %2; border: 1px solid %3; padding: 2px; outline: 0; }"
+        "QComboBox QAbstractItemView::item { min-height: 24px; padding: 0 6px; border-radius: %7px; }"
+        "QComboBox QAbstractItemView::item:selected, QComboBox QAbstractItemView::item:hover"
+        " { background: palette(highlight); color: palette(highlighted-text); border: none; }")
+        .arg(look.fill.name(), look.text.name(), look.border.name(),
+             FieldLook::cornerRules(FieldCorners::All), look.focus.name(), hover.name())
+        .arg(FieldLook::radius));
 }
 
 // Rounded box (text area, list) in the colors of the input fields.
