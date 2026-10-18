@@ -465,75 +465,47 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
     } else {
         m_SearchModel->clear(); // Altes Model leeren, wenn es existiert
     }
-
-    // Nur zwei Spalten: Titel und Datum
-    QStringList headers = {"title", "release_date"};
-    m_SearchModel->setColumnCount(headers.size());
-    m_SearchModel->setHorizontalHeaderLabels(QStringList() << tr("Title") << tr("Year"));
+    // A new search: posters still loading for the old one are dropped (see the callback)
+    const int generation = ++m_searchGeneration;
 
     for (const QJsonValue &val : std::as_const(jsonArray)) {
         QJsonObject obj = val.toObject();
-        QList<QStandardItem *> rowItems;
 
-        // URL for Cover
+        // One entry: title and year as text, TMDB id in UserRole, poster as icon (loaded below)
+        QString year = obj.value("release_date").toString().left(4);
+        QString text = obj.value("title").toString();
+        if (!year.isEmpty()) {
+            text += "\n" + year;
+        }
+        QStandardItem *item = new QStandardItem(text);
+        item->setData(obj.value("id").toInt(), Qt::UserRole);
+        m_SearchModel->appendRow(item);
+
+        // Poster: loaded asynchronously; the persistent index follows the entry and becomes
+        // invalid when the model is cleared by a new search
         QString posterImage = obj.value("poster_path").toString();
-        qDebug() << posterImage;
+        if (posterImage.isEmpty()) {
+            continue;
+        }
         QUrl imageUrl("https://image.tmdb.org/t/p/w500" + posterImage);
-
-        // title
-        QStandardItem *titleItem = new QStandardItem(obj.value("title").toString());
-        titleItem->setData(obj.value("id").toInt(), Qt::UserRole);
-        rowItems.append(titleItem);
-
-        // Prepare Index varaibles
-        int rowIndex = m_SearchModel->rowCount(); // Next free row number
-        int columnIndex = 0;
-
-        // Calls the new, generic download logic.
-        // The code within this lambda is executed asynchronously,
-        // once the image has been loaded and the pixmap is complete.
-        startImageDownload(imageUrl,
-           [this, titleItem, rowIndex, columnIndex](const QPixmap &pixmap) {
-
-               // Callback part (Model-specific)
-
-               if (titleItem && m_SearchModel) {
-                // Scale cover for tableview (64x45)
-                   QIcon scaledCover(pixmap.scaled(64, 45, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-
-                   const QModelIndex itemIndex = m_SearchModel->index(rowIndex, columnIndex);
-
-                   if (itemIndex.isValid()) {
-                       // Update model with icon
-                       m_SearchModel->setData(itemIndex, scaledCover, Qt::DecorationRole);
-                       qDebug() << "Icon for" << titleItem->text() << "set over generic handler.";
-                   }
-               }
-           }
-           );
-
-        // Second column
-        QString dateStr = obj.value("release_date").toString();
-        QString year = dateStr.left(4);
-        rowItems.append(new QStandardItem(year));
-
-        // add row to model (nachdem der rowIndex für das Lambda berechnet wurde)
-        m_SearchModel->appendRow(rowItems);
+        QPersistentModelIndex itemIndex(item->index());
+        startImageDownload(imageUrl, [this, itemIndex, generation](const QPixmap &pixmap) {
+            if (generation != m_searchGeneration || !itemIndex.isValid()) {
+                return;   // result of an older search
+            }
+            // Scaled in the resolution of the screen, so it stays sharp; same picture when
+            // selected (Qt would tint it with the accent color)
+            const qreal dpr = ui->searchTableView->devicePixelRatioF();
+            QPixmap poster = pixmap.scaled(kPosterSize * dpr, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            poster.setDevicePixelRatio(dpr);
+            QIcon icon;
+            icon.addPixmap(poster, QIcon::Normal);
+            icon.addPixmap(poster, QIcon::Selected);
+            m_SearchModel->setData(itemIndex, icon, Qt::DecorationRole);
+        });
     }
 
-    // Width of TableView
-    int totalWidth = ui->layoutRight->width();
-
-    // Column Year 1/4 from Width, Title Column the rest
     ui->searchTableView->setModel(m_SearchModel);
-
-    ui->searchTableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch); // Titel-Spalte füllt Rest
-    ui->searchTableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Fixed);   // Jahr-Spalte feste Breite
-    ui->searchTableView->setColumnWidth(1, totalWidth / 4);
-
-    ui->searchTableView->verticalHeader()->setDefaultSectionSize(64);
-    QSize iconSize(64, 45);
-    ui->searchTableView->setIconSize(iconSize);
 }
 
 void MainWin::fillGenreComboBox(const QJsonDocument &jsonDoc)

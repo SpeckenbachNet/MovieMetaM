@@ -25,6 +25,7 @@
 #include <QLineEdit>
 #include <QPalette>
 #include <QStyledItemDelegate>
+#include <QTabWidget>
 
 // Colors are computed once, so a theme change (light/dark) needs a restart.
 
@@ -151,6 +152,31 @@ inline void applyComboStyle(QComboBox *combo)
         " { background: palette(highlight); color: palette(highlighted-text); border: none; }")
         .arg(look.fill.name(), look.text.name(), look.border.name(),
              FieldLook::cornerRules(FieldCorners::All), look.focus.name(), hover.name())
+        .arg(FieldLook::radius));
+}
+
+// Rounded tab widget: the area in the field color like the other boxes (square only top left,
+// where the first tab starts), tabs rounded on top. The active tab has the field color and
+// flows into the area; the others are set back (window color, dimmed text), lighter on hover.
+inline void applyTabStyle(QTabWidget *tabs)
+{
+    const FieldLook look;
+    const QPalette pal = QApplication::palette();
+    const QColor window = pal.color(QPalette::Window);
+    const QColor inactive = mixColor(window, look.text, 0.06);
+    const QColor hover = mixColor(window, look.text, 0.12);
+    const QColor dimmed = mixColor(look.fill, look.text, 0.65);
+
+    tabs->setStyleSheet(QStringLiteral(
+        "QTabWidget::pane { background: %1; border: 1px solid %2; border-radius: %7px;"
+        " border-top-left-radius: 0; top: -1px; }"
+        "QTabBar::tab { background: %4; color: %6; border: 1px solid %2; border-bottom: none;"
+        " border-top-left-radius: %7px; border-top-right-radius: %7px; padding: 4px 12px; margin-right: 2px; }"
+        "QTabBar::tab:hover { background: %5; }"
+        "QTabBar::tab:selected { background: %1; color: %3; padding-bottom: 5px; margin-bottom: -1px; }"   // covers the area's top line
+        "QTabBar::tab:!selected { margin-top: 2px; }")
+        .arg(look.fill.name(), look.border.name(), look.text.name(),
+             inactive.name(), hover.name(), dimmed.name())
         .arg(FieldLook::radius));
 }
 
