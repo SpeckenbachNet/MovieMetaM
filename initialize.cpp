@@ -50,10 +50,8 @@ void MainWin::initializeForm() {
     ui->infoTextBrowser->setContentsMargins(15, 15, 15, 15);
     ui->infoTextBrowser->insertHtml(getInfoHtmlTemplate());
 
-    // Set noCover to CoverImage first time
-    ui->coverLabel->setScaledContents(true);
-    QPixmap noCoverPix(":/images/noimage.svg");
-    ui->coverLabel->setPixmap(noCoverPix);
+    // No movie yet: the cover shows its placeholder
+    ui->coverLabel->clear();
 
 
     // Select the hole row, Only one row is allowed
@@ -374,39 +372,29 @@ void MainWin::initializeConnects() {
     });
 
     // ----- Drag and drop Cover Image
-    connect(ui->coverLabel, &ImageLabelM::imageChanged, this, [this](const QString &pathOrUrl) {
-        // Get selected row
+    // Takes a dropped cover into the shown movie: label, dataset, status
+    auto applyCover = [this](const QPixmap &cover) {
         int rowIndex = ui->fileListTableView->currentIndex().row();
         if (rowIndex < 0) return;
-
         QString movieKey = ui->fileListTableView->model()->data(ui->fileListTableView->model()->index(rowIndex, 0), Qt::UserRole).toString();
 
-        if (pathOrUrl.startsWith("http")) {
-            // Internet download
-            this->startImageDownload(pathOrUrl, [this, movieKey, rowIndex](const QPixmap &coverPix) {
-                qDebug() << "Download callback reached!";
-                if (!coverPix.isNull()) {
-                    // Set cover to label
-                    ui->coverLabel->setOriginalPixmap(coverPix.scaled(ui->coverLabel->size(),
-                         Qt::KeepAspectRatio,
-                         Qt::SmoothTransformation)
-                    );
-                    // Save cover in dataset
-                    this->m_loadedMovies[movieKey].cover = coverPix;
-                    this->updateStatus(rowIndex, "modified");
-                    this->onDataChanged();
-                }
-            });
-        } else {
-            // Load local File again and save
-            QPixmap localPix(pathOrUrl);
-            if (!localPix.isNull()) {
-                this->m_loadedMovies[movieKey].cover = localPix;
-                this->updateStatus(rowIndex, "modified");
-                this->onDataChanged();
-            }
-        }
+        ui->coverLabel->setCover(cover);
+        m_loadedMovies[movieKey].cover = cover;
+        updateStatus(rowIndex, "modified");
+        onDataChanged();
+    };
+    auto coverFailed = [this]() {
+        ui->statusBar->showMessage(tr("The image could not be loaded."), 10000);
+    };
+
+    // Local file or image data: the label already has the picture
+    connect(ui->coverLabel, &ImageLabelM::coverDropped, this, applyCover);
+    // Web link: download first
+    connect(ui->coverLabel, &ImageLabelM::coverUrlDropped, this, [this, applyCover, coverFailed](const QUrl &url) {
+        if (ui->fileListTableView->currentIndex().row() < 0) return;
+        startImageDownload(url, applyCover, coverFailed);
     });
+    connect(ui->coverLabel, &ImageLabelM::coverDropFailed, this, coverFailed);
 
     // ----- Drag and drop Files
     connect(ui->fileListTableView, &TableViewM::filesDropped, this, &MainWin::addFilesToModel);

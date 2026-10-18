@@ -103,8 +103,6 @@ public:
     void startApiRequest(const QUrl &url);
     void startImageDownload(const QUrl &url); // Starts download an return immediately
     QIcon scaled;
-    QPixmap coverPix;
-    QPixmap noCoverPix;
 
 private:
     Ui::MainWin *ui;
@@ -150,7 +148,9 @@ private:
     bool validateAndRefreshChanges();
     bool settingsChanged;
     void readTagsFromFile(const QString &filePath);
-    void startImageDownload(const QUrl &imageUrl, std::function<void(const QPixmap &pixmap)> callback);
+    // onError (optional): download failed or the data is no image
+    void startImageDownload(const QUrl &imageUrl, std::function<void(const QPixmap &pixmap)> callback,
+                            std::function<void()> onError = nullptr);
     void initializeToolBars();
     void initializeTagWidgets();
     void initializeDragAndDrop();
