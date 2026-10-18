@@ -18,18 +18,21 @@
 
 #include <QLineEdit>
 
-// SearchField 1.1.0 – master copy: ~/Development/QT/libraries/searchfield (see CHANGELOG.md there).
+// SearchField 1.2.0 – master copy: ~/Development/QT/libraries/searchfield (see CHANGELOG.md there).
 // Projects keep a copy of searchfield.h/.cpp: change the master copy first, then copy it over.
-inline constexpr const char *SearchFieldVersion = "1.1.0";
+inline constexpr const char *SearchFieldVersion = "1.2.0";
 
 // Search field in the look of the ToolbarM buttons: rounded "pill", magnifier on the left,
-// clear button on the right. Colors are derived from the palette (light and dark mode).
-// Needs the icon ":icons/search" (black drawing, tinted).
+// clear button (filled circle with x) on the right. Colors are derived from the palette
+// (light and dark mode). Needs the icon ":icons/search" (black drawing, tinted).
 class SearchField : public QLineEdit {
     Q_OBJECT
 
 public:
     explicit SearchField(QWidget *parent = nullptr);
+
+    // Corner radius (default: half the height, "pill"); limited to half the height
+    void setCornerRadius(int radius);
 
 signals:
     // Enter pressed or magnifier clicked: for searches that should not run on every key
@@ -43,5 +46,6 @@ private:
     void updateLook();
 
     QAction *m_searchAction = nullptr;
+    int      m_cornerRadius = -1;      // -1: pill
     bool     m_updating = false;   // setStyleSheet() itself triggers style/palette events
 };

@@ -18,6 +18,7 @@
 
 #include "mainwin.h"
 #include "setupdialog.h"          // My setup dialog
+#include "themecolors.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(QLatin1String(APP_VERSION));
     a.setOrganizationName(QStringLiteral(COMPANY_NAME));
     a.setWindowIcon(QIcon(QStringLiteral(":/icons/app_icon")));   // title bar, task bar, dialogs
+    fixHighlightContrast();   // readable selection also with the accent color "Graphite" (macOS)
 
     // Settings as INI file on every system (Windows would use the registry otherwise)
     QSettings::setDefaultFormat(QSettings::IniFormat);

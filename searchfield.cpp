@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-// SearchField 1.1.0 – master copy: ~/Development/QT/libraries/searchfield (see CHANGELOG.md there)
+// SearchField 1.2.0 – master copy: ~/Development/QT/libraries/searchfield (see CHANGELOG.md there)
 #include "searchfield.h"
 
 #include <QAction>
@@ -42,6 +42,26 @@ QIcon tinted(const QString &path, const QColor &color)
     QPainter p(&pm);
     p.setCompositionMode(QPainter::CompositionMode_SourceIn);
     p.fillRect(pm.rect(), color);
+    return QIcon(pm);
+}
+
+// Clear button: filled circle with a cut-out x (the field color shows through)
+QIcon clearIcon(const QColor &color)
+{
+    constexpr int size = 48;
+    QPixmap pm(size, size);
+    pm.fill(Qt::transparent);
+    QPainter p(&pm);
+    p.setRenderHint(QPainter::Antialiasing);
+    p.setPen(Qt::NoPen);
+    p.setBrush(color);
+    p.drawEllipse(QRectF(4, 4, size - 8, size - 8));
+
+    p.setCompositionMode(QPainter::CompositionMode_Clear);
+    p.setPen(QPen(Qt::black, 4.5, Qt::SolidLine, Qt::RoundCap));
+    const qreal a = size * 0.36, b = size * 0.64;
+    p.drawLine(QPointF(a, a), QPointF(b, b));
+    p.drawLine(QPointF(a, b), QPointF(b, a));
     return QIcon(pm);
 }
 
@@ -89,9 +109,19 @@ void SearchField::updateLook()
         "QLineEdit:hover { background: %6; }"
         "QLineEdit:focus { border: 1px solid %5; }")
         .arg(fill.name(), text.name(), border.name())
-        .arg(kHeight / 2)
+        .arg(m_cornerRadius < 0 ? kHeight / 2 : qMin(m_cornerRadius, kHeight / 2))
         .arg(focus.name(), hover.name()));
 
-    m_searchAction->setIcon(tinted(QStringLiteral(":icons/search"), mix(fill, text, 0.6)));
+    const QColor iconColor = mix(fill, text, 0.6);
+    m_searchAction->setIcon(tinted(QStringLiteral(":icons/search"), iconColor));
+    // The clear button of QLineEdit is an internal action with this object name
+    if (QAction *clear = findChild<QAction *>(QStringLiteral("_q_qlineeditclearaction")))
+        clear->setIcon(clearIcon(iconColor));
     m_updating = false;
+}
+
+void SearchField::setCornerRadius(int radius)
+{
+    m_cornerRadius = radius;
+    updateLook();
 }
