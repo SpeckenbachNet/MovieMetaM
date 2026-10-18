@@ -18,7 +18,7 @@
 #include "tableviewm.h"
 
 TableViewM::TableViewM(QWidget *parent)
-    : QTableView(parent)
+    : QListView(parent)
 {
     setAcceptDrops(true);
     setDragDropMode(QAbstractItemView::DropOnly);

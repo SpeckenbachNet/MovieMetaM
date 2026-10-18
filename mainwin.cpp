@@ -223,13 +223,14 @@ void MainWin::onSettingsChanged() {
 }
 
 void MainWin::updateStatus (int row, QString status) {
-    QPixmap m_status;
+    QIcon m_status;
     if (status == "modified") m_status = m_statusYellow;
     else if (status == "unchanged") m_status = m_statusGreen;
-    QStandardItem *statusItem = m_FilelistModel->item(row, 0);
-    if (statusItem) {
-        statusItem->setData(m_status, Qt::DecorationRole);
-        statusItem->setToolTip(tr("Changed, saving needed"));
+    QStandardItem *movieItem = m_FilelistModel->item(row, 0);
+    if (movieItem) {
+        movieItem->setData(m_status, Qt::DecorationRole);
+        const QString statusText = status == "modified" ? tr("Changed, saving needed") : tr("Unchanged");
+        movieItem->setToolTip(movieItem->data(Qt::UserRole).toString() + "\n" + statusText);
     }
 }
 
@@ -620,13 +621,7 @@ void MainWin::addFilePathToModel(const QString &filePath)
     m_loadedMovies.insert(filePath, movie);  // put movie to model
     m_originalMovies.insert(filePath, movie); // put movie also to memory
 
-    // Save status in first Column and filePath in UserRole
-    QStandardItem *statusItem = new QStandardItem("");
-    statusItem->setData(m_statusGreen, Qt::DecorationRole);
-    statusItem->setToolTip(tr("Unchanged"));
-    statusItem->setEditable(false);
-
-    // Save filename in ListBox
+    // One entry per movie: title + file name as text, status as icon, file path in UserRole
     QString combinedText;
     QString fileName = QFileInfo(filePath).fileName();
 
@@ -640,20 +635,20 @@ void MainWin::addFilePathToModel(const QString &filePath)
         QString noTitle = onlyTitle.replace("_"," ");
         combinedText = noTitle + "\n" + fileName;
     }
-    QStandardItem *filePathItem = new QStandardItem(combinedText);
-    filePathItem->setData(filePath, Qt::UserRole);
-    filePathItem->setToolTip(filePath);
+    QStandardItem *movieItem = new QStandardItem(combinedText);
+    movieItem->setData(filePath, Qt::UserRole);
+    movieItem->setData(m_statusGreen, Qt::DecorationRole);
+    movieItem->setToolTip(filePath + "\n" + tr("Unchanged"));
+    movieItem->setEditable(false);
 
     // Set small font size
-    QFont font = filePathItem->font();
+    QFont font = movieItem->font();
     font.setPointSize(9);
-    filePathItem->setFont(font);
-    filePathItem->setTextAlignment(Qt::AlignLeft | Qt::AlignTop);
+    movieItem->setFont(font);
+    movieItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     // Add row to model
-    QList<QStandardItem*> row;
-    row << statusItem << filePathItem;
-    m_FilelistModel->appendRow(row);
+    m_FilelistModel->appendRow(movieItem);
 }
 
 void MainWin::setSignalsBlocked(bool blocked) {
@@ -735,8 +730,8 @@ void MainWin::selectRowInTable(int row)
     if (row < 0 || row >= m_FilelistModel->rowCount())
         return;
 
-    // Get index for Column 2 (there is the UserRole!)
-    QModelIndex targetIndex = m_FilelistModel->index(row, 1);
+    // The only column holds the file path in UserRole
+    QModelIndex targetIndex = m_FilelistModel->index(row, 0);
 
     // Select and focus row visually
     ui->fileListTableView->setCurrentIndex(targetIndex);
@@ -815,7 +810,7 @@ void MainWin::onFilelistTableViewClicked(const QModelIndex &index){
     if (!index.isValid()) return;
 
     // Get path from UserRole
-    QString filePath = index.model()->data(index.model()->index(index.row(), 1), Qt::UserRole).toString();
+    QString filePath = index.model()->data(index.model()->index(index.row(), 0), Qt::UserRole).toString();
 
     // Fill map with details
     if (m_loadedMovies.contains(filePath)) {
@@ -876,7 +871,7 @@ void MainWin::onRemoveFilesButtonClicked()
         int currentRow = index.row(); // Get the current row from selector
 
         const QAbstractItemModel *model = index.model();       // Get a pointer to the model (read-only)
-        QModelIndex idx0 = model->index(currentRow, 1);        // Create an index for the row and second column
+        QModelIndex idx0 = model->index(currentRow, 0);        // The only column holds the file path
         QString movieKey = idx0.data(Qt::UserRole).toString(); // Retrieve the UserRole data as a QString
 
         // Remove from Map and clear UI

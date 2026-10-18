@@ -61,13 +61,15 @@ void TagWidget::setupUi(const QString &placeholder)
     m_tagModel = new QStringListModel(this);
     m_tagView->setModel(m_tagModel);
 
-    // Lower part of the box; items in the same grey as the headers, a bit stronger on hover
-    const QString tagColor = accentGrey(palette()).name();
-    const QString hoverColor = accentGrey(palette(), 0.5).name();
+    // Lower part of the box; items in the accent color of the system, on hover mixed a bit
+    // towards the text color (lighter in dark themes, darker in light ones)
+    const QColor accent = palette().color(QPalette::Highlight);
+    const QString tagColor = accent.name();
+    const QString hoverColor = mixColor(accent, palette().color(QPalette::WindowText), 0.20).name();
     applyBoxStyle(m_tagView, false, FieldCorners::Bottom,
-        "QListView {font-size: 12px;}"
-        "QListView::item { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + tagColor + "; color: palette(window-text); border-radius: 5px;}"
-        "QListView::item:hover { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + hoverColor + "; color: palette(window-text); border-radius: 5px;}"
+        "QListView {font-size: 12px; outline: 0;}"
+        "QListView::item { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + tagColor + "; color: palette(highlighted-text); border-radius: 5px;}"
+        "QListView::item:hover { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + hoverColor + "; color: palette(highlighted-text); border-radius: 5px;}"
     );
 
     // Create lineedit

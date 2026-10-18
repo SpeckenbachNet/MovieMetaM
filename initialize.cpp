@@ -63,8 +63,6 @@ void MainWin::initializeForm() {
     ui->fileListTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->fileListTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     ui->fileListTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->fileListTableView->verticalHeader()->hide();   // no row header
-    ui->fileListTableView->horizontalHeader()->hide(); // no column header
 
     // ------ SearchList View ------
     ui->searchTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -212,39 +210,60 @@ void MainWin::initializeToolBars()
 }
 
 void MainWin::initializeStatusIcons() {
-    int canvasWidth = 32;
-    int canvasHeight = 32;
-    int size = 11;
+    // Drawn in the resolution of the screen (e.g. 1.25 or 2), on whole device pixels:
+    // a 32 px picture enlarged by the scaling would blur all edges
+    const qreal dpr = devicePixelRatioF();
+    const int canvasSize = qRound(32 * dpr);    // icon size of the list: 32 logical px
+    const int side = qRound(11 * dpr);          // symbol: 11 logical px
+    const int origin = (canvasSize - side) / 2; // centered
+    const int line = qMax(1, qRound(dpr));      // outline: 1 logical px
+    const QRect symbolRect(origin, origin, side, side);
+    // A light, half transparent outline keeps the symbol visible on the field color,
+    // on the accent color of a selected entry and in light themes
+    const QColor outline(255, 255, 255, 170);
 
+    // Qt tints icons of selected entries with the accent color: give the selected mode the
+    // same picture, so the status colors stay true on the accent color
+    auto selectedLikeNormal = [](const QPixmap &pixmap) {
+        QIcon icon;
+        icon.addPixmap(pixmap, QIcon::Normal);
+        icon.addPixmap(pixmap, QIcon::Selected);
+        return icon;
+    };
+
+    // Outline = the symbol in the outline color, the colored symbol one line smaller on top
     auto createDot = [&](QColor color) {
-        QPixmap canvas(canvasWidth, canvasHeight);
+        QPixmap canvas(canvasSize, canvasSize);
         canvas.fill(Qt::transparent);
 
         QPainter painter(&canvas);
-        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setRenderHint(QPainter::Antialiasing);   // a circle needs smoothing
         painter.setPen(Qt::NoPen);
+        painter.setBrush(outline);
+        painter.drawEllipse(symbolRect);
         painter.setBrush(color);
-        painter.drawEllipse(6, 6, size, size);
+        painter.drawEllipse(symbolRect.adjusted(line, line, -line, -line));
+        painter.end();
 
-        return canvas;
+        canvas.setDevicePixelRatio(dpr);
+        return selectedLikeNormal(canvas);
     };
 
     auto createSquare = [&](QColor color) {
-        QPixmap canvas(canvasWidth, canvasHeight);
+        QPixmap canvas(canvasSize, canvasSize);
         canvas.fill(Qt::transparent);
 
-        QPainter painter(&canvas);
-        painter.setRenderHint(QPainter::Antialiasing);
-        painter.setBrush(color);
-        painter.setPen(Qt::NoPen);
-        painter.drawRect(6, 6, size, size);
+        QPainter painter(&canvas);                       // no smoothing: crisp edges
+        painter.fillRect(symbolRect, outline);
+        painter.fillRect(symbolRect.adjusted(line, line, -line, -line), color);
+        painter.end();
 
-        return canvas;
+        canvas.setDevicePixelRatio(dpr);
+        return selectedLikeNormal(canvas);
     };
 
-    m_statusGreen = createSquare({0, 120, 0});
-    m_statusRed = createDot(Qt::red);
-    m_statusYellow = createDot(Qt::yellow);
+    m_statusGreen = createSquare({40, 170, 70});   // lighter green than before, visible on grey and blue
+    m_statusYellow = createDot({255, 200, 0});   // amber: the white outline stands out (pure yellow is as light as it)
 }
 
 void MainWin::initializeTagWidgets() {
@@ -323,25 +342,23 @@ void MainWin::initializeDragAndDrop() {
     // ---- Drag and drop for filelist ----
     // Create model
     if (!m_FilelistModel) { m_FilelistModel = new QStandardItemModel(this); }
-    // Set header
-    m_FilelistModel->setColumnCount(2);
-    m_FilelistModel->setHorizontalHeaderLabels(QStringList() << QString() << tr("Filename"));
+    // One column: title + file name as text, status as icon, file path in UserRole
+    m_FilelistModel->setColumnCount(1);
     // Assign model to view (This is important for DnD so that the view knows the columns.)
     ui->fileListTableView->setModel(m_FilelistModel);
     // Allow wordwrap
     ui->fileListTableView->setWordWrap(false);
     // Other Settings
-    ui->fileListTableView->setShowGrid(false);
-    ui->fileListTableView->horizontalHeader()->setMinimumSectionSize(0);
-    ui->fileListTableView->setColumnWidth(0, 32);
-    ui->fileListTableView->setStyleSheet("QTableView { show-decoration-selected: 1; }"
-                                         "QTableView::item { alignment: center; }");
-    ui->fileListTableView->setStyleSheet("QTableView::item { padding: 0px; margin: 0px; }");
-    ui->fileListTableView->setTextElideMode(Qt::ElideRight); // Verhindert das "..." Kürzen
-    ui->fileListTableView->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    ui->fileListTableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed); // Titel-Spalte füllt Rest
-    ui->fileListTableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);   // Jahr-Spalte feste Breite
-    ui->fileListTableView->horizontalHeader()->setDefaultAlignment(Qt::AlignLeft | Qt::AlignTop);
+    ui->fileListTableView->setIconSize(QSize(32, 32));   // status dot (drawn on a 32 px canvas)
+    // Rounded box like the other fields; every entry is rounded, with the same distance
+    // to the left and right border; selected in the accent color of the system
+    // (outline: 0 – no focus frame around the current entry)
+    const QString radius = QString::number(FieldLook::radius);
+    applyBoxStyle(ui->fileListTableView, false, FieldCorners::All,
+        "QListView { show-decoration-selected: 1; outline: 0; }"
+        "QListView::item { margin: 1px 2px; padding: 0px; border-radius: " + radius + "px; }"
+        "QListView::item:selected { background: palette(highlight); color: palette(highlighted-text); }");
+    ui->fileListTableView->setTextElideMode(Qt::ElideRight); // long names end with "..."
 }
 
 void MainWin::initializeConnects() {
@@ -362,7 +379,7 @@ void MainWin::initializeConnects() {
         int rowIndex = ui->fileListTableView->currentIndex().row();
         if (rowIndex < 0) return;
 
-        QString movieKey = ui->fileListTableView->model()->data(ui->fileListTableView->model()->index(rowIndex, 1), Qt::UserRole).toString();
+        QString movieKey = ui->fileListTableView->model()->data(ui->fileListTableView->model()->index(rowIndex, 0), Qt::UserRole).toString();
 
         if (pathOrUrl.startsWith("http")) {
             // Internet download
@@ -423,7 +440,7 @@ void MainWin::initializeConnects() {
 
     // ----- Other connects
     connect(ui->searchTableView, &QTableView::doubleClicked, this, &MainWin::onSearchTableViewDoubleClicked);
-    connect(ui->fileListTableView, &QTableView::clicked, this, &::MainWin::onFilelistTableViewClicked);
+    connect(ui->fileListTableView, &QAbstractItemView::clicked, this, &MainWin::onFilelistTableViewClicked);
     connect(ui->searchEdit, &SearchField::searchRequested, this, &MainWin::onSearchButtonClicked);
     connect(m_addBtn, &QToolButton::clicked, this, &MainWin::onAddFilesButtonClicked);
     connect(m_removeBtn, &QToolButton::clicked, this, &MainWin::onRemoveFilesButtonClicked);

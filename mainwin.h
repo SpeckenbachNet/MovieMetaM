@@ -115,9 +115,8 @@ private:
     QStandardItemModel *m_SearchModel = nullptr;
     QStandardItemModel *m_FilelistModel = nullptr;
     QPixmap extractMovieCover(const QString& filePath);
-    QPixmap m_statusGreen;
-    QPixmap m_statusRed;
-    QPixmap m_statusYellow;
+    QIcon m_statusGreen;    // status symbols in the movie list (same look when selected)
+    QIcon m_statusYellow;
     QString getInfoHtmlTemplate();
     QString countryCode;
     QMap<QString, MovieData> m_loadedMovies;

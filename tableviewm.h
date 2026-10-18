@@ -17,17 +17,19 @@
  */
 #pragma once
 
-#include <QTableView>
+#include <QListView>
 #include <QDragEnterEvent>
 #include <QMimeData>
 
-class TableViewM : public QTableView
+// Movie list: a list (not a table), so the style sheet can draw each entry as one
+// rounded piece; accepts dropped files
+class TableViewM : public QListView
 {
     Q_OBJECT
 public:
     explicit TableViewM(QWidget *parent = nullptr);
     int selectedRow() const;
-    QString movieKey(int column = 1) const; // Spalte 1 als Standard für den Pfad/Key
+    QString movieKey(int column = 0) const; // the file path (key) is in UserRole of column 0
 
 signals:
     void filesDropped(const QStringList &paths);
