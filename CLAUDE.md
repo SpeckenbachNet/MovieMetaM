@@ -81,3 +81,7 @@ PDFDocumentScannerM) are updated later by the user – don't touch them unasked.
 4. Applying a TMDB search result (double click only logs the id).
 5. The old TMDB token is in the git history: revoke it at TMDB and use a new one.
 6. Origin of some icons still to be clarified (`LICENSES.md`).
+7. Age rating combo on macOS: the icon sits about 2 px too high in the closed combo box. A
+   transparent stripe above the badge fixed that but moved the icons in the open list too low
+   (reverted). Proper fix: separate drawing for the closed box and the popup list (e.g. own
+   delegate for the list) – test on the Mac.

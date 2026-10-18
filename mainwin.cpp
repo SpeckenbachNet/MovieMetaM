@@ -69,7 +69,7 @@ void MainWin::fillRatingComboBox(QString countryCode)
         ui->ratingComboBox->setItemData(lastIndex, entry.label, Qt::ToolTipRole);
     }
 
-    ui->ratingComboBox->setIconSize(QSize(kRatingIconSize, kRatingIconSize + kRatingIconShift));
+    ui->ratingComboBox->setIconSize(QSize(kRatingIconSize, kRatingIconSize));
 }
 
 void MainWin::fillRatingSettingsComboBox()
@@ -101,15 +101,13 @@ QString MainWin::getInfoHtmlTemplate()
 
 QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape) {
     // Square canvas in a higher resolution than shown (kRatingIconSize), so it stays
-    // sharp on Retina screens; the canvas is taller by the shift (see mainwin.h)
+    // sharp on Retina screens
     int size = 64;
-    int shift = size * kRatingIconShift / kRatingIconSize;
-    QPixmap pixmap(size, size + shift);
+    QPixmap pixmap(size, size);
     pixmap.fill(Qt::transparent); // Make the background transparent
 
     QPainter painter(&pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.translate(0, shift);   // badge in the lower part
 
     // Drawing rect (padding for the border)
     int pad = size / 16;

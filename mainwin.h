@@ -172,14 +172,8 @@ private:
     void setComboEntryByString(QComboBox *combo, QString findString, bool useData);
     QIcon createAgeRatingIcon(QString age, QColor color, QString shape);
     // Age rating icon in the combo box: 18 is the largest size that fits centered on macOS.
-    // macOS places the icon about 2 px too high: a transparent stripe of 4 px above the badge
-    // makes the icon 4 px taller, it stays centered on the same line, so the badge moves 2 px down.
+    // (macOS draws it about 2 px too high in the closed box – open point, see CLAUDE.md)
     static constexpr int kRatingIconSize = 18;
-#ifdef Q_OS_MACOS
-    static constexpr int kRatingIconShift = 4;
-#else
-    static constexpr int kRatingIconShift = 0;
-#endif
     QMap<QString, CountryRatingSystem> ratingMap;
 
 protected:
