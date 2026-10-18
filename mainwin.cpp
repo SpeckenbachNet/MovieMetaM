@@ -166,7 +166,11 @@ QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape) {
     painter.drawText(textRect, Qt::AlignCenter, age);
     painter.end();
 
-    return QIcon(pixmap);
+    // Same picture when selected: Qt would tint it with the accent color in the open list
+    QIcon icon;
+    icon.addPixmap(pixmap, QIcon::Normal);
+    icon.addPixmap(pixmap, QIcon::Selected);
+    return icon;
 }
 
 void MainWin::clearData()

@@ -9,6 +9,7 @@
 | `help.svg` | taken from churchWorshipM (SVG Repo) | origin to be clarified |
 | `info.svg` | taken from PhotoBoothM | origin to be clarified |
 | `add.svg`, `remove.svg`, `search.svg` | taken from churchWorshipM | origin to be clarified |
+| `chevron_down.svg` | taken from PhotoBoothM (grey, not tinted) | origin to be clarified |
 
 The icons are black drawings; `ToolbarM` and `SearchField` tint them in the text color of the theme.
 

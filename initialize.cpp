@@ -39,6 +39,9 @@ void MainWin::initializeForm() {
     applyInputStyle(ui->studioEdit);
     applyBoxStyle(ui->descriptionText, true);
     applySpinStyle(ui->releaseDateEdit);
+    applyComboStyle(ui->genreComboBox);
+    applyComboStyle(ui->ratingComboBox);
+    applyComboStyle(ui->ratingSettingsComboBox);
 
     // fixed size of TMDB Image
     QPixmap picTmdb(":/images/tmdb.svg");
