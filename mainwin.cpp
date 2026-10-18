@@ -460,11 +460,7 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
 
     if (jsonArray.isEmpty()) return;
 
-    if (!m_SearchModel) {
-        m_SearchModel = new QStandardItemModel(this);
-    } else {
-        m_SearchModel->clear(); // Altes Model leeren, wenn es existiert
-    }
+    m_SearchModel->clear();   // created once in initializeForm()
     // A new search: posters still loading for the old one are dropped (see the callback)
     const int generation = ++m_searchGeneration;
 
@@ -504,8 +500,6 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
             m_SearchModel->setData(itemIndex, icon, Qt::DecorationRole);
         });
     }
-
-    ui->searchTableView->setModel(m_SearchModel);
 }
 
 void MainWin::fillGenreComboBox(const QJsonDocument &jsonDoc)
@@ -617,11 +611,6 @@ void MainWin::addFilePathToModel(const QString &filePath)
     movieItem->setToolTip(filePath + "\n" + tr("Unchanged"));
     movieItem->setEditable(false);
 
-    // Set small font size
-    QFont font = movieItem->font();
-    font.setPointSize(9);
-    movieItem->setFont(font);
-    movieItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     // Add row to model
     m_FilelistModel->appendRow(movieItem);

@@ -19,6 +19,7 @@
 #include "mainwin.h"
 #include "ui_mainwin.h"
 #include "themecolors.h"
+#include "twolinedelegate.h"
 
 // ***** INITIALIZE *****
 void MainWin::initializeForm() {
@@ -71,10 +72,14 @@ void MainWin::initializeForm() {
     ui->searchTableView->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->searchTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->searchTableView->setIconSize(kPosterSize);
-    ui->searchTableView->setStyleSheet(
-        "QListView { background: transparent; border: none; outline: 0; }"
-        "QListView::item { margin: 1px 2px; padding: 2px 4px; border-radius: " + QString::number(FieldLook::radius) + "px; }"
-        "QListView::item:selected { background: palette(highlight); color: palette(highlighted-text); }");
+    ui->searchTableView->setStyleSheet("QListView { background: transparent; border: none; outline: 0; }");
+    ui->searchTableView->setItemDelegate(new TwoLineDelegate(ui->searchTableView));   // title + year
+    // One model for all searches (only cleared), so the selection model and the connection stay
+    m_SearchModel = new QStandardItemModel(this);
+    ui->searchTableView->setModel(m_SearchModel);
+    // The separator lines depend on the neighbour's selection: repaint the whole list
+    connect(ui->searchTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
+            ui->searchTableView->viewport(), qOverload<>(&QWidget::update));
 
     // ------ DateEdit ------
     // d = Tag, M = Monat, yyyy = vierstelliges Jahr
@@ -357,15 +362,13 @@ void MainWin::initializeDragAndDrop() {
     ui->fileListTableView->setWordWrap(false);
     // Other Settings
     ui->fileListTableView->setIconSize(QSize(32, 32));   // status dot (drawn on a 32 px canvas)
-    // Rounded box like the other fields; every entry is rounded, with the same distance
-    // to the left and right border; selected in the accent color of the system
-    // (outline: 0 – no focus frame around the current entry)
-    const QString radius = QString::number(FieldLook::radius);
-    applyBoxStyle(ui->fileListTableView, false, FieldCorners::All,
-        "QListView { show-decoration-selected: 1; outline: 0; }"
-        "QListView::item { margin: 1px 2px; padding: 0px; border-radius: " + radius + "px; }"
-        "QListView::item:selected { background: palette(highlight); color: palette(highlighted-text); }");
-    ui->fileListTableView->setTextElideMode(Qt::ElideRight); // long names end with "..."
+    // Rounded box like the other fields; the entries (title + file name, rounded selection in
+    // the accent color) are drawn by TwoLineDelegate (outline: 0 – no focus frame)
+    applyBoxStyle(ui->fileListTableView, false, FieldCorners::All, "QListView { outline: 0; }");
+    ui->fileListTableView->setItemDelegate(new TwoLineDelegate(ui->fileListTableView));
+    // The separator lines depend on the neighbour's selection: repaint the whole list
+    connect(ui->fileListTableView->selectionModel(), &QItemSelectionModel::selectionChanged,
+            ui->fileListTableView->viewport(), qOverload<>(&QWidget::update));
 }
 
 void MainWin::initializeConnects() {
