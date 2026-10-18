@@ -223,11 +223,17 @@ void MainWin::initializeToolBars()
     m_infoBackBtn = ui->infoToolbar->addButton("infoBackBtn", tr("Back"), ":icons/back", true);
     ui->infoToolbar->setTitle(tr("About %1").arg(QCoreApplication::applicationName()));
 
-    // Same corner radius as the fields instead of the pill shape
+    // Same corner radius as the fields instead of the pill shape,
+    // frame in one color (no darker top/left edge) like the rest of the app
     for (ToolbarM *toolbar : {ui->mainToolbar, ui->settingsToolbar, ui->fileListToolbar, ui->infoToolbar}) {
         toolbar->setButtonRadius(FieldLook::radius);
         toolbar->setToolbarRadius(FieldLook::radius);
+        ToolbarM::ShadeFactors shade = toolbar->shadeFactors();
+        shade.toolbarDarkEdge  = 0.20;
+        shade.toolbarLightEdge = 0.20;
+        toolbar->setShadeFactors(shade);
     }
+    ui->searchEdit->setCornerRadius(FieldLook::radius);
 }
 
 void MainWin::initializeStatusIcons() {

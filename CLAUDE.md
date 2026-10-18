@@ -101,7 +101,10 @@ The master copies live on the Linux machine only (not on the Mac).
    add to CHANGELOG.md:
    `## 1.3.0` – `- New: setButtonRadius() / setToolbarRadius() set the corner radius of the
    buttons / the toolbar frame (default 15 / 18, still limited to half the height).`
-   Next step in MovieMetaM: use radius 6 like the fields.
+   Same for SearchField 1.2.0 (master is 1.1.0) to `../libraries/searchfield`, CHANGELOG:
+   `## 1.2.0` – `- New: setCornerRadius() (default stays the pill shape, limited to half the
+   height).` and `- Clear button drawn as a filled circle with a cut-out x in the color of the
+   magnifier (instead of the style's x).`
 2. UI overhaul, further steps: settings page as cards (no sidebar yet); help page (like
    PhotoBoothM HelpPage) with "About MovieMetaM" for now (the help button opens the info page
    meanwhile); the setup dialog's combo boxes with `applyComboStyle`.

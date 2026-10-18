@@ -24,6 +24,8 @@
 #include <QComboBox>
 #include <QLineEdit>
 #include <QPalette>
+
+#include <cmath>
 #include <QStyledItemDelegate>
 #include <QTabWidget>
 
@@ -35,6 +37,47 @@ inline QColor mixColor(const QColor &a, const QColor &b, qreal amount)
     return QColor::fromRgbF(a.redF()   + (b.redF()   - a.redF())   * amount,
                             a.greenF() + (b.greenF() - a.greenF()) * amount,
                             a.blueF()  + (b.blueF()  - a.blueF())  * amount);
+}
+
+// Contrast ratio of two colors (WCAG, 1 = none ... 21 = black on white)
+inline qreal contrastRatio(const QColor &a, const QColor &b)
+{
+    auto luminance = [](const QColor &c) {
+        auto channel = [](qreal v) {
+            return v <= 0.03928 ? v / 12.92 : std::pow((v + 0.055) / 1.055, 2.4);
+        };
+        return 0.2126 * channel(c.redF()) + 0.7152 * channel(c.greenF()) + 0.0722 * channel(c.blueF());
+    };
+    const qreal la = luminance(a), lb = luminance(b);
+    return (qMax(la, lb) + 0.05) / (qMin(la, lb) + 0.05);
+}
+
+// Call once after creating the QApplication. With the accent color "Graphite" in dark mode
+// Qt (6.12, macOS) gives white as selection color AND white as its text: selected entries and
+// tags get unreadable. Then the accent color is used for the selection (and black or white
+// for its text). Only the corrected roles are set, the rest still follows the system theme.
+inline void fixHighlightContrast()
+{
+    constexpr qreal minContrast = 3.0;
+    const QPalette pal = QApplication::palette();
+    QPalette fixed;   // empty resolve mask: only the roles set below override the system
+    bool changed = false;
+
+    for (QPalette::ColorGroup group : {QPalette::Active, QPalette::Inactive}) {
+        QColor highlight = pal.color(group, QPalette::Highlight);
+        QColor text      = pal.color(group, QPalette::HighlightedText);
+        if (contrastRatio(highlight, text) >= minContrast)
+            continue;
+        highlight = pal.color(group, QPalette::Accent);
+        if (contrastRatio(highlight, text) < minContrast)
+            text = contrastRatio(highlight, Qt::white) >= contrastRatio(highlight, Qt::black)
+                       ? QColor(Qt::white) : QColor(Qt::black);
+        fixed.setColor(group, QPalette::Highlight, highlight);
+        fixed.setColor(group, QPalette::HighlightedText, text);
+        changed = true;
+    }
+    if (changed)
+        QApplication::setPalette(fixed);
 }
 
 // Grey between window background and text color, for headers and tags.
