@@ -27,28 +27,41 @@
 #include <QDrag>
 #include <QDir>
 
+// Cover of a movie: painted by itself (rounded like the input fields, sharp on scaled screens),
+// takes images by drag and drop and can be dragged out as a file.
 class ImageLabelM : public QLabel
 {
     Q_OBJECT
 public:
     explicit ImageLabelM(QWidget *parent = nullptr);
-    QPixmap originalPixmap() const;
-    void setOriginalPixmap(const QPixmap &pix);
-    void clear();
+
+    void setCover(const QPixmap &cover);   // full resolution; empty: placeholder
+    QPixmap cover() const { return m_cover; }
+    void clear() { setCover(QPixmap()); }
 
 private:
-    QPixmap m_fullPixmap;
-    QPixmap m_placeholderPixmap;
-    QPoint m_dragStartPos; // To avoid accidental dragging when clicking.
+    QPixmap m_cover;               // in full resolution, also for dragging out
+    bool m_dragActive = false;     // an image is dragged over the label
+    // Data of the current drag, read when it enters: on Wayland a browser (Chromium/Brave)
+    // delivers the data only while the drag runs – read first on the drop, it is empty
+    QUrl m_dropUrl;
+    QByteArray m_dropImage;
+    void readDragData(const QMimeData *mime);
+    void clearDragData();
+    QPoint m_dragStartPos;         // drag out only after the start distance (no drag by a click)
 
 protected:
+    void paintEvent(QPaintEvent *event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dragLeaveEvent(QDragLeaveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
 
 signals:
-    void imageChanged(const QString &pathOrUrl);
+    void coverDropped(const QPixmap &cover);   // image is here (local file or image data)
+    void coverUrlDropped(const QUrl &url);     // web link: to be downloaded
+    void coverDropFailed();                    // nothing usable in the drop
 };
 

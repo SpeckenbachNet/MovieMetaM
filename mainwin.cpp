@@ -687,15 +687,8 @@ void MainWin::displayMovie(const MovieData &movie) {
     // Set release Date
     ui->releaseDateEdit->setDate(movie.releaseDate);
 
-    // Insert the cover or, if none exists, a placeholder.
-    QPixmap noCoverPix(":/images/noimage.svg");
-    if (!movie.cover.isNull()) {
-        coverPix = movie.cover;
-    } else {
-        qDebug() << "No cover found. Set noCoverPix";
-        coverPix = noCoverPix;
-    }
-    ui->coverLabel->setPixmap(coverPix);
+    // Insert the cover; without one the label shows its placeholder
+    ui->coverLabel->setCover(movie.cover);
 
     // Set entry in ageRating combobox
     setComboEntryByString(ui->ratingComboBox,QString::number(movie.ratingScore),true);
@@ -910,7 +903,8 @@ void MainWin::onSearchButtonClicked()
 }
 
 // ***** NETWORK ****
-void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const QPixmap &pixmap)> callback)
+void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const QPixmap &pixmap)> callback,
+                                 std::function<void()> onError)
 {
     qDebug() << "1. Download-Funktion betreten für:" << imageUrl;
     QNetworkRequest request(imageUrl);
@@ -918,7 +912,7 @@ void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const 
 
     // Verbinden des Reply-Signals direkt mit dem verarbeitenden Lambda
     QObject::connect(reply, &QNetworkReply::finished,
-        this, [this, callback, reply]() { // 'reply' wird für deleteLater captured
+        this, [this, callback, onError, reply]() { // 'reply' wird für deleteLater captured
 
              QNetworkReply *finishedReply = qobject_cast<QNetworkReply*>(sender());
 
@@ -931,6 +925,7 @@ void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const 
                             << ":" << finishedReply->errorString();
                  finishedReply->deleteLater();
                  // On error no run of callback
+                 if (onError) onError();
                  return;
              }
              QByteArray imageData = finishedReply->readAll();
@@ -941,6 +936,7 @@ void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const 
                  callback(pixmap);
              } else {
                  qWarning() << "FEHLER: Bilddaten konnten nicht geladen werden im generischen Handler!";
+                 if (onError) onError();
              }
 
              // Ressourcen freigeben

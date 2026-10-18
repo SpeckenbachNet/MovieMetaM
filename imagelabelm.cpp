@@ -16,130 +16,174 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 #include "imagelabelm.h"
+#include "themecolors.h"
+
+#include <QApplication>
+#include <QIcon>
+#include <QPainter>
+#include <QPainterPath>
 
 ImageLabelM::ImageLabelM(QWidget *parent) : QLabel(parent) {
-    // Das ist wichtig, damit das Label überhaupt auf Drops reagiert
+    // Important, so that the label reacts to drops at all
     setAcceptDrops(true);
-
-    // Ein bisschen modernes Styling direkt im Code
-    setAlignment(Qt::AlignCenter);
-    setText(tr("Drop cover here"));
-    setStyleSheet("border: 2px dashed palette(mid); color: palette(mid);");
 }
 
-void ImageLabelM::clear() {
-    // Load placeholder
-    m_placeholderPixmap = QPixmap(":/images/noimage.svg");
+void ImageLabelM::setCover(const QPixmap &cover) {
+    m_cover = cover;
+    update();
+}
 
-    // Set placeholder
-    if (!m_placeholderPixmap.isNull()) {
-        this->setPixmap(m_placeholderPixmap.scaled(this->size(),
-                                             Qt::KeepAspectRatio,
-                                             Qt::SmoothTransformation));
+void ImageLabelM::paintEvent(QPaintEvent *event) {
+    Q_UNUSED(event);
+
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+
+    const QRectF area = QRectF(rect()).adjusted(1, 1, -1, -1);   // room for the border line
+    const qreal radius = FieldLook::radius;
+    QPainterPath rounded;
+    rounded.addRoundedRect(area, radius, radius);
+
+    if (!m_cover.isNull()) {
+        // Fill the area and cut off what sticks out (no distortion, no empty stripes);
+        // drawn from the full resolution, so it stays sharp on scaled screens
+        const QSizeF filled = QSizeF(m_cover.size()).scaled(area.size(), Qt::KeepAspectRatioByExpanding);
+        const QRectF target(area.center().x() - filled.width() / 2, area.center().y() - filled.height() / 2,
+                            filled.width(), filled.height());
+        painter.save();
+        painter.setClipPath(rounded);
+        painter.drawPixmap(target, m_cover, QRectF(m_cover.rect()));
+        painter.restore();
     } else {
-        QLabel::clear(); // Fallback, if placeholder could not be loaded
+        // Placeholder, rendered in the resolution of the screen, fitted into the area
+        const QSize placeholder = QSize(area.width(), area.height()) - QSize(16, 16);
+        const QPixmap pix = QIcon(QStringLiteral(":/images/noimage.svg")).pixmap(placeholder, devicePixelRatioF());
+        const QSizeF shown = QSizeF(pix.size()) / pix.devicePixelRatio();
+        painter.drawPixmap(QPointF(area.center().x() - shown.width() / 2, area.center().y() - shown.height() / 2), pix);
+
+        // Dashed border: here an image can be dropped
+        QPen dashed(palette().color(QPalette::Mid), 2, Qt::DashLine);
+        painter.setPen(dashed);
+        painter.setBrush(Qt::NoBrush);
+        painter.drawPath(rounded);
     }
-    qDebug() << "ImageLabelM: Internal status corrected & placeholder set.";
+
+    if (m_dragActive) {
+        // An image is dragged over the label: accent color, background slightly tinted
+        QColor accent = palette().color(QPalette::Highlight);
+        QColor tint = accent;
+        tint.setAlphaF(0.1);
+        painter.setPen(QPen(accent, 2));
+        painter.setBrush(tint);
+        painter.drawPath(rounded);
+    }
 }
 
-QPixmap ImageLabelM::originalPixmap() const {
-    return m_fullPixmap;
+void ImageLabelM::readDragData(const QMimeData *mime) {
+    clearDragData();
+
+    // First link only: a browser adds a description line to the uri-list for links
+    const QList<QUrl> urls = mime->urls();
+    if (!urls.isEmpty()) {
+        m_dropUrl = urls.first();
+    }
+
+    // Image data: image/png, image/jpeg ... or as file data, e.g. Brave:
+    // application/octet-stream;name="picture.jpg"
+    const QStringList formats = mime->formats();
+    for (const QString &format : formats) {
+        if (format.startsWith("image/") || (format.startsWith("application/octet-stream") && format.contains("name="))) {
+            m_dropImage = mime->data(format);
+            if (!m_dropImage.isEmpty()) {
+                break;
+            }
+        }
+    }
 }
 
-void ImageLabelM::setOriginalPixmap(const QPixmap &pix) {
-    m_fullPixmap = pix;
-    // Für die Anzeige im Label verkleinern wir es nur optisch
-    if (!pix.isNull()) {
-        // Anzeige-Version für das UI (skaliert)
-        setPixmap(m_fullPixmap.scaled(this->size(),
-            Qt::KeepAspectRatio,
-            Qt::SmoothTransformation)
-        );
-    } else {
-        clear(); // Falls das Bild leer ist
-    }
+void ImageLabelM::clearDragData() {
+    m_dropUrl = QUrl();
+    m_dropImage.clear();
 }
 
 void ImageLabelM::dragEnterEvent(QDragEnterEvent *event) {
-    // Wir prüfen, ob der User eine Datei (URL) hält
-    if (event->mimeData()->hasUrls()) {
+    // Read the data now (see m_dropUrl); accept files, links and image data
+    readDragData(event->mimeData());
+    if (m_dropUrl.isValid() || !m_dropImage.isEmpty()) {
         event->acceptProposedAction();
-        // Optisches Feedback: Rahmen wird hell
-        // Highlight color of the current theme, background slightly transparent
-        QColor highlight = palette().color(QPalette::Highlight);
-        setStyleSheet(QString("border: 2px solid %1; background-color: rgba(%2, %3, %4, 0.1);")
-                          .arg(highlight.name())
-                          .arg(highlight.red())
-                          .arg(highlight.green())
-                          .arg(highlight.blue()));
+        m_dragActive = true;
+        update();
     }
 }
 
 void ImageLabelM::dragLeaveEvent(QDragLeaveEvent *event) {
-    // User moved the mouse away again -> Reset style
-    setStyleSheet("border: 2px dashed palette(mid); background-color: transparent;");
+    Q_UNUSED(event);
+    // User moved the mouse away again
+    m_dragActive = false;
+    clearDragData();
+    update();
 }
 
 void ImageLabelM::dragMoveEvent(QDragMoveEvent *event) {
-    //qDebug() << "Enter dragMoveEvent";
-    // if (event->mimeData()->hasUrls()) {
-    //     event->acceptProposedAction();
-    // }
+    // Keep telling the source that we take the data: on Wayland a browser (Chromium/Brave)
+    // otherwise delivers empty data on the drop (file managers are less strict)
+    if (m_dropUrl.isValid() || !m_dropImage.isEmpty()) {
+        event->acceptProposedAction();
+    }
 }
 
 void ImageLabelM::dropEvent(QDropEvent *event) {
-    //qDebug() << "LABEL: Drop detected!";
-    setStyleSheet("border: 2px dashed palette(mid);"); // Back to standard
+    m_dragActive = false;
+    update();
+
+    // Image data from the drag first (a picture dragged out of a browser brings its file),
+    // then a local file, then a web link to download. Uses the data read on entering.
+    QPixmap pix;
+    if (!m_dropImage.isEmpty()) {
+        pix.loadFromData(m_dropImage);
+    }
+    if (pix.isNull() && m_dropUrl.isLocalFile()) {
+        pix.load(m_dropUrl.toLocalFile());
+    }
+
+    if (!pix.isNull()) {
+        emit coverDropped(pix);
+    } else if (m_dropUrl.scheme() == "http" || m_dropUrl.scheme() == "https") {
+        emit coverUrlDropped(m_dropUrl);
+    } else {
+        emit coverDropFailed();
+    }
+
+    clearDragData();
     event->acceptProposedAction();
-    const QMimeData* mime = event->mimeData();
+}
 
-    if (mime->hasUrls()) {
-
-        QUrl url = mime->urls().value(0);
-        if (url.isLocalFile()) {
-            QString path = url.toLocalFile();
-            setPixmap(QPixmap(path).scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-            emit imageChanged(path);
-        }
-        // Image URL from Browser
-        else {
-            qDebug() << "Browser-URL detected:" << url.toString();
-            qDebug() << "LABEL: Send Signal now!";
-            emit imageChanged(url.toString());
-
-        }
+void ImageLabelM::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        m_dragStartPos = event->position().toPoint();
     }
-    // The image is sent directly as a data packet
-    else if (mime->hasFormat("image/png") || mime->hasFormat("image/jpeg")) {
-        QPixmap pix;
-        pix.loadFromData(mime->data("image/png")); // Attempting to load the raw data
-        if (!pix.isNull()) {
-            setPixmap(pix.scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-            emit imageChanged("raw_data_from_browser");
-        }
-    }
+    QLabel::mousePressEvent(event);
 }
 
 void ImageLabelM::mouseMoveEvent(QMouseEvent *event)
 {
-    qDebug() << "mouseMoveEvent entered";
     if (!(event->buttons() & Qt::LeftButton)) return;
 
-    if (!this->pixmap()) {
-        qDebug() << "Abort: Labe has no Pixmap!";
-        return;
-    }
-    QPixmap pix = this->pixmap(Qt::ReturnByValue);
-
-    if (pix.isNull()) {
-        qDebug() << "Abort: Pixmap is empty!";
+    // Only after the usual distance: a click with a slightly moving hand starts no drag
+    if ((event->position().toPoint() - m_dragStartPos).manhattanLength() < QApplication::startDragDistance()) {
         return;
     }
 
-    qDebug() << "Pixmap found! Size: " << pix.size();
+    // Placeholder: nothing to drag out
+    if (m_cover.isNull()) {
+        return;
+    }
 
+    // The cover in full resolution as a file
     QString tempPath = QDir::tempPath() + "/exported_cover.jpg";
-    if (!pix.save(tempPath, "JPG", 95)) {  // JPG quality 95%
+    if (!m_cover.save(tempPath, "JPG", 95)) {  // JPG quality 95%
         qDebug() << "Could not save file to " << tempPath;
         return;
     }
@@ -149,9 +193,8 @@ void ImageLabelM::mouseMoveEvent(QMouseEvent *event)
     mimeData->setUrls({QUrl::fromLocalFile(tempPath)});
     drag->setMimeData(mimeData);
 
-    drag->setPixmap(pix.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    drag->setPixmap(m_cover.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation));
     drag->setHotSpot(QPoint(50, 50));
 
-    qDebug() << "Starte Drag-Vorgang...";
     drag->exec(Qt::CopyAction);
 }
