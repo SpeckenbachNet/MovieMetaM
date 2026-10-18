@@ -222,6 +222,12 @@ void MainWin::initializeToolBars()
     // --- Info toolbar (becomes part of the help page)
     m_infoBackBtn = ui->infoToolbar->addButton("infoBackBtn", tr("Back"), ":icons/back", true);
     ui->infoToolbar->setTitle(tr("About %1").arg(QCoreApplication::applicationName()));
+
+    // Same corner radius as the fields instead of the pill shape
+    for (ToolbarM *toolbar : {ui->mainToolbar, ui->settingsToolbar, ui->fileListToolbar, ui->infoToolbar}) {
+        toolbar->setButtonRadius(FieldLook::radius);
+        toolbar->setToolbarRadius(FieldLook::radius);
+    }
 }
 
 void MainWin::initializeStatusIcons() {

@@ -27,9 +27,9 @@
 
 class QLabel;
 
-// ToolbarM 1.2.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there).
+// ToolbarM 1.3.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there).
 // Projects keep a copy of toolbarm.h/.cpp: change the master copy first, then copy it over.
-inline constexpr const char *ToolbarMVersion = "1.2.0";
+inline constexpr const char *ToolbarMVersion = "1.3.0";
 
 // Toolbar with rounded buttons, painted with QPainter in the colors of the palette
 // (light and dark themes); icons are black drawings tinted in the text color.
@@ -54,6 +54,11 @@ public:
 
     void setShadeFactors(const ShadeFactors &factors);
     ShadeFactors shadeFactors() const { return shade; }
+
+    // Corner radius of the buttons and of the toolbar frame (default 15 / 18).
+    // Limited to half the height, so a large value gives a pill shape.
+    void setButtonRadius(qreal radius);
+    void setToolbarRadius(qreal radius);
 
     // One button function for all variants (text only, icon only, text + icon).
     // NOTE: Parameter order matches the implementation (useSeparator before iconRight).

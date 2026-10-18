@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-// ToolbarM 1.2.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there)
+// ToolbarM 1.3.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there)
 #include "toolbarm.h"
 
 #include <QEvent>
@@ -172,6 +172,20 @@ void ToolbarM::setShadeFactors(const ShadeFactors &factors)
     for (QToolButton *btn : findChildren<QToolButton*>()) {
         btn->update();
     }
+}
+
+void ToolbarM::setButtonRadius(qreal radius)
+{
+    buttonRadius = radius;
+    for (QToolButton *btn : findChildren<QToolButton*>()) {
+        btn->update();
+    }
+}
+
+void ToolbarM::setToolbarRadius(qreal radius)
+{
+    toolbarRadius = radius;
+    update();
 }
 
 void ToolbarM::changeEvent(QEvent *event)
