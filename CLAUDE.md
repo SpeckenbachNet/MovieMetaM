@@ -61,7 +61,10 @@ PDFDocumentScannerM) are updated later by the user – don't touch them unasked.
   the screen (`devicePixelRatioF()`, e.g. 1.25 on Linux, 2 on Retina), else they blur.
   Icons shown in selected entries get the same pixmap for `QIcon::Selected` (Qt tints them).
 - Item views as `QListView` with one column (a `QTableView` cannot round a whole row; Breeze
-  draws its own square selection behind it).
+  draws its own square selection behind it). Entries drawn by `TwoLineDelegate`: icon, title,
+  smaller dimmed second line (model text "title\nsecond line"), padding 7/6 px, 2 px gap, thin
+  separator line from the text start (none next to the selection – the list repaints on every
+  selection change).
 - Desktop reference: `../churchWorshipM` (ToolbarM per page, SearchField); style reference:
   `../PhotoBoothM` (tablet-first, so not 1:1).
 - Every page of `stackedWidget` has its own ToolbarM on top; `showPage()` switches pages.
@@ -84,15 +87,17 @@ PDFDocumentScannerM) are updated later by the user – don't touch them unasked.
 - `tagwidget.*` – tag input (cast, directors, ...); `imagelabelm.*` – cover: paints itself
   (rounded, sharp), drag and drop in (`coverDropped` / `coverUrlDropped`) and out;
   `tableviewm.*` – movie list (`QListView`) with file drop; `setupdialog.*` – first start.
+- `twolinedelegate.*` – entries of movie list and search results; `posterpreview.*` – enlarged
+  poster (200×300) when the mouse rests on a search result (full poster in `kPosterRole`).
 - `themecolors.h` – shared colors and shapes (`FieldLook`, `apply…Style`).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.3.11)
+## Open points (as of 0.3.13)
 
-1. Step "list entries" (movie list and search results): more space (padding 4/6 px, 2 px
-   between entries), title a bit larger and file name / year smaller and dimmed (own
-   delegate), separation of the entries – show the user preview variants to choose from
-   (thin line, alternating background, entry as a small card).
+1. ToolbarM 1.3.0: public setters `setButtonRadius()` / `setToolbarRadius()` (today private
+   constants 15 / 18, clamped to half the height, so pill-shaped); default stays. Change the
+   master copy in `../libraries/toolbarm` first (CHANGELOG), then copy; MovieMetaM may then
+   match its fields (radius 6).
 2. UI overhaul, further steps: settings page as cards (no sidebar yet); help page (like
    PhotoBoothM HelpPage) with "About MovieMetaM" for now (the help button opens the info page
    meanwhile); the setup dialog's combo boxes with `applyComboStyle`.
