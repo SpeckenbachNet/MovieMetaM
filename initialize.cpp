@@ -42,6 +42,7 @@ void MainWin::initializeForm() {
     applyComboStyle(ui->genreComboBox);
     applyComboStyle(ui->ratingComboBox);
     applyComboStyle(ui->ratingSettingsComboBox);
+    applyTabStyle(ui->tabWidget);
 
     // fixed size of TMDB Image
     QPixmap picTmdb(":/images/tmdb.svg");
@@ -66,9 +67,14 @@ void MainWin::initializeForm() {
     ui->fileListTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
     // ------ SearchList View ------
-    ui->searchTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    // One column: poster as icon, title and year as text; lies in the rounded tab area
     ui->searchTableView->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->searchTableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->searchTableView->setIconSize(kPosterSize);
+    ui->searchTableView->setStyleSheet(
+        "QListView { background: transparent; border: none; outline: 0; }"
+        "QListView::item { margin: 1px 2px; padding: 2px 4px; border-radius: " + QString::number(FieldLook::radius) + "px; }"
+        "QListView::item:selected { background: palette(highlight); color: palette(highlighted-text); }");
 
     // ------ DateEdit ------
     // d = Tag, M = Monat, yyyy = vierstelliges Jahr
@@ -430,7 +436,7 @@ void MainWin::initializeConnects() {
     connect(m_saveSettingsBtn, &QToolButton::clicked, this, &MainWin::handleSaveSettingsButton_Clicked);
 
     // ----- Other connects
-    connect(ui->searchTableView, &QTableView::doubleClicked, this, &MainWin::onSearchTableViewDoubleClicked);
+    connect(ui->searchTableView, &QAbstractItemView::doubleClicked, this, &MainWin::onSearchTableViewDoubleClicked);
     connect(ui->fileListTableView, &QAbstractItemView::clicked, this, &MainWin::onFilelistTableViewClicked);
     connect(ui->searchEdit, &SearchField::searchRequested, this, &MainWin::onSearchButtonClicked);
     connect(m_addBtn, &QToolButton::clicked, this, &MainWin::onAddFilesButtonClicked);
