@@ -46,6 +46,11 @@ void MainWin::initializeForm() {
     applyComboStyle(ui->ratingSettingsComboBox);
     applyTabStyle(ui->tabWidget);
 
+    // Status bar recognizable as its own bar on every system (macOS draws a line, Linux nothing)
+    ui->statusBar->setStyleSheet(QStringLiteral(
+        "QStatusBar { border: none; border-top: 1px solid %1; background: %2; }")
+        .arg(FieldLook().border.name(), accentGrey(palette(), 0.06).name()));
+
     // fixed size of TMDB Image
     QPixmap picTmdb(":/images/tmdb.svg");
     ui->tmdbImageLabel->setPixmap(picTmdb);
@@ -88,8 +93,17 @@ void MainWin::initializeForm() {
     // d = Tag, M = Monat, yyyy = vierstelliges Jahr
     ui->releaseDateEdit->setDisplayFormat("dd.MM.yyyy");
 
-    // Labelabstand
-    ui->descriptionLabel->setContentsMargins(0, 60, 0, 0);
+    // ------ Movie info: width ------
+    // The cover has a fixed size (a bigger cover would take the room from the description);
+    // description, date, genre and age rating fill the left column, which gets the extra width.
+    // The tag column on the right gets at most kTagColumnWidth (longer tags make no sense).
+    ui->coverLabel->setFixedSize(kCoverSize);
+    ui->middleLeftContainer->setAlignment(ui->coverLabel, Qt::AlignLeft);
+    for (QWidget *field : {static_cast<QWidget *>(ui->titleEdit), ui->castContainer, ui->directorsContainer,
+                           ui->screenwritersContainer, ui->producersContainer,
+                           static_cast<QWidget *>(ui->studioEdit)}) {
+        field->setMaximumWidth(kTagColumnWidth);
+    }
 }
 
 void MainWin::initializeAgeRating() {
@@ -188,8 +202,7 @@ void MainWin::initializeComboBoxes() {
     fillRatingSettingsComboBox();
 }
 
-void MainWin::initializeToolBars()
-{
+void MainWin::initializeToolBars() {
     // --- Main toolbar: saving left, settings and help right
     m_saveBtn = ui->mainToolbar->addButton("saveBtn", tr("Save"), ":icons/save", true);
     m_saveBtn->setToolTip(tr("Save metadata to the movie"));
