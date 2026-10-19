@@ -9,16 +9,6 @@
         {
             "key": "U",
             "code": "U",
-            "score": 50,
-            "label": "Teddy bear: suitable for children under 12",
-            "description": "Teddy bear: suitable for children under 12",
-            "color": "#00AC4C",
-            "shape": "circle",
-            "style": "filled"
-        },
-        {
-            "key": "U",
-            "code": "U",
             "score": 100,
             "label": "U",
             "description": "",

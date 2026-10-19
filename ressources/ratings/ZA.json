@@ -27,7 +27,7 @@
             "style": "filled"
         },
         {
-            "key": "7-9",
+            "key": "7",
             "code": "7-9PG",
             "score": 240,
             "label": "7-9PG",
@@ -37,7 +37,7 @@
             "style": "filled"
         },
         {
-            "key": "10-12",
+            "key": "10",
             "code": "10-12PG",
             "score": 300,
             "label": "10-12PG",
@@ -77,7 +77,7 @@
             "style": "filled"
         },
         {
-            "key": "X18",
+            "key": "X",
             "code": "X18",
             "score": 850,
             "label": "X18",
