@@ -18,7 +18,6 @@
 
 #include "mainwin.h"
 #include "./ui_mainwin.h"
-#include "htmltemplates.h"
 #include "mediainfom.h"
 
 MainWin::MainWin(QWidget *parent)
@@ -82,21 +81,6 @@ void MainWin::fillRatingSettingsComboBox()
     }
     ui->ratingSettingsComboBox->model()->sort(0);
     setComboEntryByString(ui->ratingSettingsComboBox, countryCode, true);
-}
-
-QString MainWin::getInfoHtmlTemplate()
-{
-    // 1. Das Template laden
-    QString htmlContent = AppTemplates::INFO_HTML;
-
-    // 2. Ersetzung der Platzhalter
-    htmlContent.replace("$APP_NAME$", QCoreApplication::applicationName());
-    htmlContent.replace("$APP_VERSION$", QCoreApplication::applicationVersion());
-    htmlContent.replace("$DEVELOPER_NAME$", "Michael Speckenbach");
-    htmlContent.replace("$CURRENT_YEAR$", QString::number(QDate::currentDate().year()));
-    htmlContent.replace("$LICENSE$", "GNU General Public License (GPLv3)");
-
-    return htmlContent;
 }
 
 QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape) {

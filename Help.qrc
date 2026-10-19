@@ -1,0 +1,7 @@
+<RCC>
+    <!-- Help texts (Markdown), German and English: help/<language>/<topic>.md -->
+    <qresource prefix="/help">
+        <file alias="de/about.md">help/de/about.md</file>
+        <file alias="en/about.md">help/en/about.md</file>
+    </qresource>
+</RCC>

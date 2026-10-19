@@ -66,10 +66,6 @@ void MainWin::initializeForm() {
     ui->tmdbImageLabel->setFixedHeight(17);
     ui->tmdbImageLabel->setMaximumWidth(200);
 
-    // Prepare InfoDialog
-    ui->infoTextBrowser->setContentsMargins(15, 15, 15, 15);
-    ui->infoTextBrowser->insertHtml(getInfoHtmlTemplate());
-
     // No movie yet: the cover shows its placeholder
     ui->coverLabel->clear();
 
@@ -241,13 +237,10 @@ void MainWin::initializeToolBars() {
     m_removeBtn->setToolTip(tr("Remove the selected movies"));
     m_removeBtn->setEnabled(false);   // until a movie is selected
 
-    // --- Info toolbar (becomes part of the help page)
-    m_infoBackBtn = ui->infoToolbar->addButton("infoBackBtn", tr("Back"), ":icons/back", true);
-    ui->infoToolbar->setTitle(tr("About %1").arg(QCoreApplication::applicationName()));
-
     // Same corner radius as the fields instead of the pill shape,
     // frame in one color (no darker top/left edge) like the rest of the app
-    for (ToolbarM *toolbar : {ui->mainToolbar, ui->settingsToolbar, ui->fileListToolbar, ui->infoToolbar}) {
+    // (the help page brings its toolbar with it)
+    for (ToolbarM *toolbar : {ui->mainToolbar, ui->settingsToolbar, ui->fileListToolbar, ui->helpPage->toolbar()}) {
         toolbar->setButtonRadius(FieldLook::radius);
         toolbar->setToolbarRadius(FieldLook::radius);
         ToolbarM::ShadeFactors shade = toolbar->shadeFactors();
@@ -470,9 +463,9 @@ void MainWin::initializeConnects() {
 
     // Toolbar buttons: page switching
     connect(m_settingsBtn, &QToolButton::clicked, this, [this] { showPage(ui->settingsPage); });
-    connect(m_helpBtn, &QToolButton::clicked, this, [this] { showPage(ui->infoPage); });   // help topics follow
+    connect(m_helpBtn, &QToolButton::clicked, this, [this] { showPage(ui->helpPage); });
     connect(m_settingsBackBtn, &QToolButton::clicked, this, [this] { showPage(ui->mainPage); });
-    connect(m_infoBackBtn, &QToolButton::clicked, this, [this] { showPage(ui->mainPage); });
+    connect(ui->helpPage, &HelpPage::backRequested, this, [this] { showPage(ui->mainPage); });
     connect(m_saveSettingsBtn, &QToolButton::clicked, this, &MainWin::handleSaveSettingsButton_Clicked);
 
     // ----- Other connects

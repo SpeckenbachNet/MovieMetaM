@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.3.18")
+set(PROJECT_VERSION "0.3.19")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -49,7 +49,7 @@ qt_add_executable(${PROJECT_NAME}
     ${PROJECT_SOURCES}
     Icons.qrc
     Images.qrc
-    Html.qrc
+    Help.qrc
     initialize.cpp
     setupdialog.h
     setupdialog.cpp
@@ -57,7 +57,6 @@ qt_add_executable(${PROJECT_NAME}
     imagelabelm.cpp
     tagwidget.h
     tagwidget.cpp
-    htmltemplates.h
     tableviewm.h
     tableviewm.cpp
     moviedata.h
@@ -73,6 +72,8 @@ qt_add_executable(${PROJECT_NAME}
     twolinedelegate.cpp
     posterpreview.h
     posterpreview.cpp
+    helppage.h
+    helppage.cpp
 )
 
 # Windows: icon of the .exe and version in the file properties
