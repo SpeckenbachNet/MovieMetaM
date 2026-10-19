@@ -17,7 +17,7 @@
             "style": "filled"
         },
         {
-            "key": "SAM13",
+            "key": "13",
             "code": "SAM13",
             "score": 300,
             "label": "SAM13",
@@ -37,7 +37,7 @@
             "style": "filled"
         },
         {
-            "key": "SAM16",
+            "key": "16",
             "code": "SAM16",
             "score": 375,
             "label": "SAM16",
@@ -47,7 +47,7 @@
             "style": "filled"
         },
         {
-            "key": "SAM18",
+            "key": "18",
             "code": "SAM18",
             "score": 400,
             "label": "SAM18",

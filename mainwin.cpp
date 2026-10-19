@@ -155,18 +155,30 @@ QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape, QSt
     shape = shape.toLower();
 
     // Outline of the badge; textRect: the room inside the shape where the code fits
+    // (altRect: a second room to try, the larger font wins)
     QPainterPath path;
     QRectF textRect = rect.adjusted(size * 0.08, 0, -size * 0.08, 0);
+    QRectF altRect;
     if (shape == "circle") {
         path.addEllipse(rect);
         textRect = rect.adjusted(size * 0.12, 0, -size * 0.12, 0);
     } else if (shape == "diamond") {
         path.addPolygon(regularPolygon(rect, 4, -90));
-        textRect = rect.adjusted(size * 0.22, size * 0.22, -size * 0.22, -size * 0.22);
+        // Widest in the middle: a flat line there may be almost as wide as the diamond (long
+        // codes like "21+"); short codes like "F" get larger in the square in the middle
+        textRect = QRectF(rect.center().x() - rect.width() * 0.34, rect.center().y() - rect.height() * 0.15,
+                          rect.width() * 0.68, rect.height() * 0.30);
+        altRect = rect.adjusted(size * 0.22, size * 0.22, -size * 0.22, -size * 0.22);
     } else if (shape == "triangle") {
-        path.addPolygon(QPolygonF(QList<QPointF>{QPointF(rect.center().x(), rect.top()), rect.bottomRight(),
-                                                 rect.bottomLeft()}));
-        textRect = QRectF(rect.left() + size * 0.22, rect.top() + size * 0.40, rect.width() - size * 0.44, size * 0.45);
+        // Equilateral like the logos (height = 0.866 × width), centered in the height; the code
+        // sits in the lower, wider part and may touch the border
+        const qreal height = rect.width() * 0.866;
+        const qreal top = rect.top() + (rect.height() - height) / 2;
+        path.addPolygon(QPolygonF(QList<QPointF>{QPointF(rect.center().x(), top),
+                                                 QPointF(rect.right(), top + height),
+                                                 QPointF(rect.left(), top + height)}));
+        textRect = QRectF(rect.center().x() - rect.width() * 0.31, top + height * 0.48,
+                          rect.width() * 0.62, height * 0.45);
     } else if (shape == "octagon") {
         path.addPolygon(regularPolygon(rect, 8, 22.5));
     } else if (shape == "hexagon") {
@@ -182,6 +194,8 @@ QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape, QSt
         textRect = QRectF(center.x() - 0.68 * radius, center.y() - 0.32 * radius, 1.36 * radius, 0.72 * radius);
     } else {   // square
         path.addRoundedRect(rect, size * 5 / 32, size * 5 / 32);
+        // Long codes ("NC-17", "MA15+") may reach up to the border
+        textRect = rect.adjusted(size * 0.03, 0, -size * 0.03, 0);
     }
     path.closeSubpath();
 
@@ -214,13 +228,21 @@ QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape, QSt
     // Font as large as the room inside the shape allows (long codes like "PG-13" get smaller)
     QFont font = painter.font();
     font.setBold(true);
-    int pixelSize = qRound(size * 0.45);
-    for (; pixelSize > size / 6; --pixelSize) {
-        font.setPixelSize(pixelSize);
-        const QFontMetricsF metrics(font);
-        if (metrics.horizontalAdvance(age) <= textRect.width() && metrics.capHeight() <= textRect.height()) {
-            break;
+    auto fittingSize = [&](const QRectF &room) {
+        int pixelSize = qRound(size * 0.45);
+        for (; pixelSize > size / 6; --pixelSize) {
+            font.setPixelSize(pixelSize);
+            const QFontMetricsF metrics(font);
+            if (metrics.horizontalAdvance(age) <= room.width() && metrics.capHeight() <= room.height()) {
+                break;
+            }
         }
+        return pixelSize;
+    };
+    int pixelSize = fittingSize(textRect);
+    if (!altRect.isNull() && fittingSize(altRect) > pixelSize) {
+        textRect = altRect;
+        pixelSize = fittingSize(altRect);
     }
     font.setPixelSize(pixelSize);
     painter.setFont(font);
@@ -231,6 +253,9 @@ QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape, QSt
         QPainterPath textPath;
         textPath.addText(textRect.center().x() - metrics.horizontalAdvance(age) / 2,
                          textRect.center().y() + metrics.capHeight() / 2, font, age);
+        // Bold glyphs consist of overlapping parts ("+", "P"): odd-even filling would leave
+        // the overlaps empty
+        textPath.setFillRule(Qt::WindingFill);
         painter.strokePath(textPath, QPen(fill, size / 10.0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         painter.fillPath(textPath, text);
     } else {

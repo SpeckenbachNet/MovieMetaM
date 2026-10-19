@@ -22,7 +22,7 @@
             "score": 220,
             "label": "6",
             "description": "",
-            "color": "#FAFAFA",
+            "color": "#7B7B7B",
             "shape": "circle",
             "style": "light"
         },
@@ -72,7 +72,7 @@
             "score": 460,
             "label": "18",
             "description": "",
-            "color": "#FAFAFA",
+            "color": "#B5281E",
             "shape": "circle",
             "style": "light"
         }
