@@ -53,6 +53,12 @@ void MainWin::initializeForm() {
         "QStatusBar { border: none; border-top: 1px solid %1; background: %2; }")
         .arg(FieldLook().border.name(), accentGrey(palette(), 0.06).name()));
 
+    // Columns: on the first start the middle (movie info) gets the extra width, the lists keep
+    // their preferred width; afterwards window and columns as the user left them
+    ui->splitter->setStretchFactor(1, 1);
+    restoreGeometry(settings.value("Window/Geometry").toByteArray());
+    ui->splitter->restoreState(settings.value("Window/Splitter").toByteArray());
+
     // TMDB logo: at most 200 px wide, shrinks with the search column (sharp, not distorted)
     ui->tmdbImageLabel->load(QStringLiteral(":/images/tmdb.svg"));
     ui->tmdbImageLabel->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);

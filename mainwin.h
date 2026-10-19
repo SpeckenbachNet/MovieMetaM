@@ -21,6 +21,7 @@
 
 #include <QMainWindow>
 
+#include <QCloseEvent>
 #include <QColor>
 #include <QDebug>
 #include <QDragEnterEvent>
@@ -103,6 +104,9 @@ public:
     void startApiRequest(const QUrl &url);
     void startImageDownload(const QUrl &url); // Starts download an return immediately
     QIcon scaled;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
 
 private:
     Ui::MainWin *ui;

@@ -991,6 +991,14 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     }
 }
 
+// Window size and column widths for the next start
+void MainWin::closeEvent(QCloseEvent *event)
+{
+    settings.setValue("Window/Geometry", saveGeometry());
+    settings.setValue("Window/Splitter", ui->splitter->saveState());
+    QMainWindow::closeEvent(event);
+}
+
 MainWin::~MainWin()
 {
     delete ui;
