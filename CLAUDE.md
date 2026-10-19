@@ -41,11 +41,12 @@ Age rating labels like "ab 12 Jahren" are official texts written into the files:
 ## Shared classes (`../libraries`)
 
 `~/Development/QT/libraries/` holds versioned master copies (not in git): `toolbarm/` (ToolbarM
-1.2.0) and `searchfield/` (SearchField 1.1.0), each with CHANGELOG.md and README.md. Projects
+1.3.0) and `searchfield/` (SearchField 1.2.0), each with CHANGELOG.md and README.md. Projects
 keep a copy: change the master copy first, raise the version (CHANGELOG, `...Version` constant,
 header comment), then copy. Other projects (churchWorshipM, PhotoBoothM, template,
 PDFDocumentScannerM) are updated later by the user – don't touch them unasked.
-The master copies live on the Linux machine only (not on the Mac).
+`~/Development/QT/libraries` is a link to `~/kDrive/Development/QT/libraries` (synced, Mac and
+Linux).
 
 ## Style of the UI
 
@@ -93,18 +94,9 @@ The master copies live on the Linux machine only (not on the Mac).
 - `themecolors.h` – shared colors and shapes (`FieldLook`, `apply…Style`).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.3.13)
+## Open points (as of 0.3.18)
 
-1. ToolbarM 1.3.0 was made on the Mac in MovieMetaM's copy (no master copy there). On Linux:
-   copy `toolbarm.h/.cpp` from MovieMetaM to `../libraries/toolbarm` (master is 1.2.0 –
-   check it has not changed meanwhile), raise the version in README.md if it is named there and
-   add to CHANGELOG.md:
-   `## 1.3.0` – `- New: setButtonRadius() / setToolbarRadius() set the corner radius of the
-   buttons / the toolbar frame (default 15 / 18, still limited to half the height).`
-   Same for SearchField 1.2.0 (master is 1.1.0) to `../libraries/searchfield`, CHANGELOG:
-   `## 1.2.0` – `- New: setCornerRadius() (default stays the pill shape, limited to half the
-   height).` and `- Clear button drawn as a filled circle with a cut-out x in the color of the
-   magnifier (instead of the style's x).`
+1. Linux: replace the old `~/Development/QT/libraries` by a link to the kDrive folder.
 2. UI overhaul, further steps: settings page as cards (no sidebar yet); help page (like
    PhotoBoothM HelpPage) with "About MovieMetaM" for now (the help button opens the info page
    meanwhile); the setup dialog's combo boxes with `applyComboStyle`.
