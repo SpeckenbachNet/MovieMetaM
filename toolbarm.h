@@ -27,9 +27,9 @@
 
 class QLabel;
 
-// ToolbarM 1.3.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there).
+// ToolbarM 1.4.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there).
 // Projects keep a copy of toolbarm.h/.cpp: change the master copy first, then copy it over.
-inline constexpr const char *ToolbarMVersion = "1.3.0";
+inline constexpr const char *ToolbarMVersion = "1.4.0";
 
 // Toolbar with rounded buttons, painted with QPainter in the colors of the palette
 // (light and dark themes); icons are black drawings tinted in the text color.
@@ -68,6 +68,12 @@ public:
                            bool useSeparator = false,
                            bool iconRight = false);
     void addSpacer();
+
+    // Own color for one button (e.g. an orange "Donate" button) instead of the palette color.
+    // Without text color, text and icon get black or white, whichever is easier to read on fill.
+    // Hover, pressed, border and separator are derived from these colors; disabled stays grey.
+    // An invalid fill gives the button the palette colors back.
+    void setButtonColor(QToolButton *btn, const QColor &fill, const QColor &text = QColor());
 
     // Bold title in the middle of the toolbar (empty: no title). Lies over the toolbar,
     // so it stays exactly centered whatever buttons are left and right.
