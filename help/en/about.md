@@ -11,6 +11,10 @@ Michael Speckenbach · SpeckenbachNet
 Website: [software.speckenbach.net/moviemetam](https://software.speckenbach.net/moviemetam)  
 Contact: [moviemetam@speckenbach.net](mailto:moviemetam@speckenbach.net)
 
+## Support
+
+Like MovieMetaM? Buy me a coffee: [paypal.me/michaelspeckenbach](https://paypal.me/michaelspeckenbach)
+
 ## License
 
 © 2026 Michael Speckenbach

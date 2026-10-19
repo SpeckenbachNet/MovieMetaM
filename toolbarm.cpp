@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-// ToolbarM 1.4.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there)
+// ToolbarM 1.5.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there)
 #include "toolbarm.h"
 
 #include <QEvent>
@@ -120,8 +120,10 @@ void ToolbarM::setButtonColor(QToolButton *btn, const QColor &fill, const QColor
         btn->setProperty("tbFill", QVariant::fromValue(fill));
         btn->setProperty("tbText", QVariant::fromValue(text.isValid() ? text : readableTextColor(fill)));
     } else {
-        btn->setProperty("tbFill", QVariant());   // back to the palette colors
-        btn->setProperty("tbText", QVariant());
+        // Only text color (icon and text colored, button as the others) or both invalid:
+        // back to the palette colors
+        btn->setProperty("tbFill", QVariant());
+        btn->setProperty("tbText", text.isValid() ? QVariant::fromValue(text) : QVariant());
     }
     btn->update();
 }
@@ -288,24 +290,28 @@ void ToolbarM::paintButton(QToolButton *btn)
 
     // --- 1. Colors: everything derived from button + text color -> visible in every theme
     // (own colors of the button from setButtonColor(), else the palette)
+    // Only an own text color (no own fill): just icon and text in it, the rest like the others
     const QVariant ownFill = btn->property("tbFill");
+    const QVariant ownText = btn->property("tbText");
     const QColor baseFill  = ownFill.isValid() ? ownFill.value<QColor>() : buttonColor;
-    const QColor baseText  = ownFill.isValid() ? btn->property("tbText").value<QColor>() : buttonTextColor;
+    const QColor baseText  = ownFill.isValid() ? ownText.value<QColor>() : buttonTextColor;   // for the mixes
 
-    QColor fill = baseFill;
-    QColor fg   = baseText;
+    QColor fill  = baseFill;
+    QColor lines = baseText;                                                   // border, separator
+    QColor fg    = ownText.isValid() ? ownText.value<QColor>() : baseText;   // icon, text
 
     if (!isEnabled) {
-        fill = disabledColor;
-        fg   = disabledTextColor;
+        fill  = disabledColor;
+        lines = disabledTextColor;
+        fg    = disabledTextColor;
     } else if (isPressed) {
         fill = mix(baseFill, baseText, shade.buttonPressed);
     } else if (isHovered) {
         fill = mix(baseFill, baseText, shade.buttonHover);
     }
 
-    const QColor border    = mix(fill, fg, isEnabled ? shade.buttonBorder : shade.buttonBorderOff);
-    const QColor separator = mix(fill, fg, shade.separator);
+    const QColor border    = mix(fill, lines, isEnabled ? shade.buttonBorder : shade.buttonBorderOff);
+    const QColor separator = mix(fill, lines, shade.separator);
 
     // --- 2. Button body
     const QRectF r = QRectF(btn->rect()).adjusted(0.5, 0.5, -0.5, -0.5);

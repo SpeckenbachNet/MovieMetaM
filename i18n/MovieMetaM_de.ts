@@ -114,8 +114,8 @@
         <translation>Bereitgestellt von</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="220"/>
         <location filename="../initialize.cpp" line="226"/>
+        <location filename="../initialize.cpp" line="232"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
@@ -125,28 +125,33 @@
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="212"/>
-        <location filename="../initialize.cpp" line="228"/>
+        <location filename="../initialize.cpp" line="214"/>
+        <location filename="../initialize.cpp" line="234"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="213"/>
+        <location filename="../initialize.cpp" line="215"/>
         <source>Save metadata to the movie</source>
         <translation>Metadaten in den Film speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="215"/>
+        <location filename="../initialize.cpp" line="217"/>
         <source>Save all</source>
         <translation>Alle speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="222"/>
+        <location filename="../initialize.cpp" line="223"/>
+        <source>Buy me a coffee – support MovieMetaM via PayPal</source>
+        <translation>Kaffee spendieren – MovieMetaM über PayPal unterstützen</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="228"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="229"/>
+        <location filename="../initialize.cpp" line="235"/>
         <source>Save settings</source>
         <translation>Einstellungen speichern</translation>
     </message>
@@ -213,62 +218,62 @@
         <translation>Fehler: Einstellungen konnten nicht gespeichert werden!</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="117"/>
+        <location filename="../initialize.cpp" line="119"/>
         <source>Germany</source>
         <translation>Deutschland</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="126"/>
+        <location filename="../initialize.cpp" line="128"/>
         <source>United Kingdom</source>
         <translation>Großbritannien</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="137"/>
+        <location filename="../initialize.cpp" line="139"/>
         <source>United States</source>
         <translation>Vereinigte Staaten</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="216"/>
+        <location filename="../initialize.cpp" line="218"/>
         <source>Save the metadata of all changed movies</source>
         <translation>Metadaten aller geänderten Filme speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="225"/>
+        <location filename="../initialize.cpp" line="231"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="234"/>
+        <location filename="../initialize.cpp" line="240"/>
         <source>Add movies</source>
         <translation>Filme hinzufügen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="237"/>
+        <location filename="../initialize.cpp" line="243"/>
         <source>Remove the selected movies</source>
         <translation>Ausgewählte Filme entfernen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="319"/>
+        <location filename="../initialize.cpp" line="325"/>
         <source>Enter actors</source>
         <translation>Schauspieler eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="334"/>
+        <location filename="../initialize.cpp" line="340"/>
         <source>Enter producers</source>
         <translation>Produktion eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="349"/>
+        <location filename="../initialize.cpp" line="355"/>
         <source>Enter screenwriters</source>
         <translation>Drehbuch eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="364"/>
+        <location filename="../initialize.cpp" line="370"/>
         <source>Enter directors</source>
         <translation>Regie eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="429"/>
+        <location filename="../initialize.cpp" line="435"/>
         <source>The image could not be loaded.</source>
         <translation>Das Bild konnte nicht geladen werden.</translation>
     </message>

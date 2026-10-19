@@ -22,7 +22,9 @@
 #include "twolinedelegate.h"
 #include "posterpreview.h"
 
+#include <QDesktopServices>
 #include <QSvgRenderer>
+#include <QUrl>
 
 // ***** INITIALIZE *****
 void MainWin::initializeForm() {
@@ -216,6 +218,10 @@ void MainWin::initializeToolBars() {
     m_saveAllBtn->setToolTip(tr("Save the metadata of all changed movies"));
     m_saveAllBtn->setEnabled(false);
     ui->mainToolbar->addSpacer();
+    // Donation: orange icon on a normal button, so it stands out a bit
+    m_coffeeBtn = ui->mainToolbar->addButton("coffeeBtn", "", ":icons/coffee");
+    m_coffeeBtn->setToolTip(tr("Buy me a coffee – support MovieMetaM via PayPal"));
+    ui->mainToolbar->setButtonColor(m_coffeeBtn, QColor(), QColor("#F5A623"));
     m_settingsBtn = ui->mainToolbar->addButton("settingsBtn", "", ":icons/settings");
     m_settingsBtn->setToolTip(tr("Settings"));
     m_helpBtn = ui->mainToolbar->addButton("helpBtn", "", ":icons/help");
@@ -464,6 +470,9 @@ void MainWin::initializeConnects() {
     // Toolbar buttons: page switching
     connect(m_settingsBtn, &QToolButton::clicked, this, [this] { showPage(ui->settingsPage); });
     connect(m_helpBtn, &QToolButton::clicked, this, [this] { showPage(ui->helpPage); });
+    connect(m_coffeeBtn, &QToolButton::clicked, this, [] {
+        QDesktopServices::openUrl(QUrl(QStringLiteral("https://paypal.me/michaelspeckenbach")));
+    });
     connect(m_settingsBackBtn, &QToolButton::clicked, this, [this] { showPage(ui->mainPage); });
     connect(ui->helpPage, &HelpPage::backRequested, this, [this] { showPage(ui->mainPage); });
     connect(m_saveSettingsBtn, &QToolButton::clicked, this, &MainWin::handleSaveSettingsButton_Clicked);
