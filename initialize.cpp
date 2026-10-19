@@ -22,6 +22,8 @@
 #include "twolinedelegate.h"
 #include "posterpreview.h"
 
+#include <QSvgRenderer>
+
 // ***** INITIALIZE *****
 void MainWin::initializeForm() {
 
@@ -51,11 +53,12 @@ void MainWin::initializeForm() {
         "QStatusBar { border: none; border-top: 1px solid %1; background: %2; }")
         .arg(FieldLook().border.name(), accentGrey(palette(), 0.06).name()));
 
-    // fixed size of TMDB Image
-    QPixmap picTmdb(":/images/tmdb.svg");
-    ui->tmdbImageLabel->setPixmap(picTmdb);
-    ui->tmdbImageLabel->setScaledContents(true);
-    ui->tmdbImageLabel->setFixedSize(200,17);
+    // TMDB logo: at most 200 px wide, shrinks with the search column (sharp, not distorted)
+    ui->tmdbImageLabel->load(QStringLiteral(":/images/tmdb.svg"));
+    ui->tmdbImageLabel->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
+    ui->tmdbImageLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+    ui->tmdbImageLabel->setFixedHeight(17);
+    ui->tmdbImageLabel->setMaximumWidth(200);
 
     // Prepare InfoDialog
     ui->infoTextBrowser->setContentsMargins(15, 15, 15, 15);
@@ -227,10 +230,10 @@ void MainWin::initializeToolBars() {
     // --- Toolbar below the movie list (narrow: icons only)
     m_addBtn = ui->fileListToolbar->addButton("addBtn", "", ":icons/add");
     m_addBtn->setToolTip(tr("Add movies"));
+    ui->fileListToolbar->addSpacer();
     m_removeBtn = ui->fileListToolbar->addButton("removeBtn", "", ":icons/remove");
     m_removeBtn->setToolTip(tr("Remove the selected movies"));
     m_removeBtn->setEnabled(false);   // until a movie is selected
-    ui->fileListToolbar->addSpacer();
 
     // --- Info toolbar (becomes part of the help page)
     m_infoBackBtn = ui->infoToolbar->addButton("infoBackBtn", tr("Back"), ":icons/back", true);
