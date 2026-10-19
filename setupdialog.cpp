@@ -19,6 +19,7 @@
 // setupdialog.cpp
 #include "setupdialog.h"
 #include "agerating.h"
+#include "themecolors.h"
 
 #include <algorithm>
 
@@ -70,6 +71,10 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     languageComboBox->addItem(QStringLiteral("한국어 (ko - korean)"));
     languageComboBox->addItem(QStringLiteral("繁體中文 (zh - chinese)"));
     languageComboBox->model()->sort(0);
+
+    // Rounded like the combo boxes of the main window
+    applyComboStyle(ageRatingComboBox);
+    applyComboStyle(languageComboBox);
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Done"));
