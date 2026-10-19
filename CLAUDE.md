@@ -41,7 +41,7 @@ Age rating labels like "ab 12 Jahren" are official texts written into the files:
 ## Shared classes (`../libraries`)
 
 `~/Development/QT/libraries/` holds versioned master copies (not in git): `toolbarm/` (ToolbarM
-1.3.0) and `searchfield/` (SearchField 1.2.0), each with CHANGELOG.md and README.md. Projects
+1.5.0) and `searchfield/` (SearchField 1.2.0), each with CHANGELOG.md and README.md. Projects
 keep a copy: change the master copy first, raise the version (CHANGELOG, `...Version` constant,
 header comment), then copy. Other projects (churchWorshipM, PhotoBoothM, template,
 PDFDocumentScannerM) are updated later by the user – don't touch them unasked.
@@ -70,6 +70,10 @@ Linux).
 - Desktop reference: `../churchWorshipM` (ToolbarM per page, SearchField); style reference:
   `../PhotoBoothM` (tablet-first, so not 1:1).
 - Every page of `stackedWidget` has its own ToolbarM on top; `showPage()` switches pages.
+- Donation: coffee button in the main toolbar, icon only, orange icon on a normal button
+  (`setButtonColor(btn, QColor(), "#F5A623")`), tooltip "Buy me a coffee – …", opens
+  https://paypal.me/michaelspeckenbach; the same link is in the help ("About MovieMetaM" →
+  Support).
 
 ## Notes (Linux: niri, Wayland, scaling 1.25)
 

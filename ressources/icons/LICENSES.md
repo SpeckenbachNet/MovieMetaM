@@ -5,6 +5,7 @@
 | `app_icon.svg`, `app_icon.ico`, `app_icon.icns` | own design (MovieMetaM) | GPL v3 like the app |
 | `save.svg` | [Lucide](https://lucide.dev) `save` | ISC (below) |
 | `save_all.svg` | [Lucide](https://lucide.dev) `save-all` | ISC (below) |
+| `coffee.svg` | [Lucide](https://lucide.dev) `coffee` | ISC (below) |
 | `settings.svg`, `back.svg` | taken from churchWorshipM | origin to be clarified |
 | `help.svg` | taken from churchWorshipM (SVG Repo) | origin to be clarified |
 | `info.svg` | taken from PhotoBoothM | origin to be clarified |

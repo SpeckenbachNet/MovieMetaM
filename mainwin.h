@@ -133,6 +133,7 @@ private:
     // Toolbar buttons (ToolbarM)
     QToolButton *m_saveBtn = nullptr;
     QToolButton *m_saveAllBtn = nullptr;
+    QToolButton *m_coffeeBtn = nullptr;    // donation (PayPal)
     QToolButton *m_settingsBtn = nullptr;
     QToolButton *m_helpBtn = nullptr;
     QToolButton *m_settingsBackBtn = nullptr;
