@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.3.16")
+set(PROJECT_VERSION "0.3.17")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -17,8 +17,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Network Svg LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network Svg LinguistTools)
+find_package(QT NAMES Qt6 REQUIRED COMPONENTS Widgets Network Svg SvgWidgets LinguistTools)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Network Svg SvgWidgets LinguistTools)
 
 # TMDB API read access token: kept out of git in tmdb_token.txt
 set(TMDB_TOKEN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/tmdb_token.txt")
@@ -115,6 +115,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Network
     Qt${QT_VERSION_MAJOR}::Svg   # SVG icons (tinted toolbar icons, window icon)
+    Qt${QT_VERSION_MAJOR}::SvgWidgets   # TMDB logo that shrinks with the search column
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

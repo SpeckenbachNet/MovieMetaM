@@ -341,20 +341,7 @@
              <number>0</number>
             </property>
             <item row="3" column="1" colspan="2">
-             <widget class="QLabel" name="tmdbImageLabel">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="pixmap">
-               <pixmap>:/tmdb.svg</pixmap>
-              </property>
-             </widget>
+             <widget class="QSvgWidget" name="tmdbImageLabel"/>
             </item>
             <item row="7" column="0" colspan="3">
              <widget class="QTabWidget" name="tabWidget">
@@ -540,6 +527,11 @@ background-color: palette(mid);
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header>QSvgWidget</header>
+  </customwidget>
   <customwidget>
    <class>SearchField</class>
    <extends>QLineEdit</extends>
