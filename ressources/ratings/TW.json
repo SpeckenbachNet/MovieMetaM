@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Taiwan",
+        "de": "Taiwan"
+    },
+    "system": "GSRR",
+    "id": "tw-movie",
+    "ratings": [
+        {
+            "key": "0+",
+            "code": "0+",
+            "score": 100,
+            "label": "0+",
+            "description": "",
+            "color": "#4FAD26",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "6+",
+            "code": "6+",
+            "score": 220,
+            "label": "6+",
+            "description": "",
+            "color": "#0197B5",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12+",
+            "code": "12+",
+            "score": 340,
+            "label": "12+",
+            "description": "",
+            "color": "#FFD600",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15+",
+            "code": "15+",
+            "score": 400,
+            "label": "15+",
+            "description": "",
+            "color": "#FF7800",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 460,
+            "label": "18+",
+            "description": "",
+            "color": "#F20017",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

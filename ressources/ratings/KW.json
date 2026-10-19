@@ -1,0 +1,30 @@
+{
+    "country": {
+        "en": "Kuwait",
+        "de": "Kuwait"
+    },
+    "system": "KW Rating",
+    "id": "kw-movie",
+    "ratings": [
+        {
+            "key": "R15",
+            "code": "R15",
+            "score": 400,
+            "label": "R15",
+            "description": "",
+            "color": "#D85875",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "R18",
+            "code": "R18",
+            "score": 460,
+            "label": "R18",
+            "description": "",
+            "color": "#E92C36",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

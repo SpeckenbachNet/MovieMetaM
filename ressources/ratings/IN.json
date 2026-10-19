@@ -1,0 +1,50 @@
+{
+    "country": {
+        "en": "India",
+        "de": "Indien"
+    },
+    "system": "CBFC",
+    "id": "in-movies",
+    "ratings": [
+        {
+            "key": "U",
+            "code": "U",
+            "score": 0,
+            "label": "U",
+            "description": "",
+            "color": "#FEDC00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "UA",
+            "code": "UA",
+            "score": 200,
+            "label": "UA",
+            "description": "",
+            "color": "#79ABAA",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "A",
+            "code": "A",
+            "score": 500,
+            "label": "A",
+            "description": "",
+            "color": "#EC9FC3",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "S",
+            "code": "S",
+            "score": 600,
+            "label": "Restricted to any special class of persons",
+            "description": "Restricted to any special class of persons",
+            "color": "#999999",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

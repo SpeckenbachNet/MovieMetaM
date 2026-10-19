@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Norway",
+        "de": "Norwegen"
+    },
+    "system": "Medietilsynet",
+    "id": "no-movie",
+    "ratings": [
+        {
+            "key": "A",
+            "code": "A",
+            "score": 100,
+            "label": "A",
+            "description": "",
+            "color": "#65B460",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "6",
+            "code": "6",
+            "score": 220,
+            "label": "6",
+            "description": "",
+            "color": "#65B460",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "9",
+            "code": "9",
+            "score": 280,
+            "label": "9",
+            "description": "",
+            "color": "#DBD60E",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#DBD60E",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15",
+            "code": "15",
+            "score": 400,
+            "label": "15",
+            "description": "",
+            "color": "#F26531",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#ED1D24",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

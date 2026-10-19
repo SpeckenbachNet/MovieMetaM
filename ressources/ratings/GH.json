@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Ghana",
+        "de": "Ghana"
+    },
+    "system": "NFA",
+    "id": "gh-movie",
+    "ratings": [
+        {
+            "key": "U",
+            "code": "U",
+            "score": 100,
+            "label": "U",
+            "description": "",
+            "color": "#000000",
+            "shape": "star",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 220,
+            "label": "PG",
+            "description": "",
+            "color": "#000000",
+            "shape": "star",
+            "style": "filled"
+        },
+        {
+            "key": "12+",
+            "code": "12+",
+            "score": 340,
+            "label": "12+",
+            "description": "",
+            "color": "#000000",
+            "shape": "star",
+            "style": "filled"
+        },
+        {
+            "key": "15+",
+            "code": "15+",
+            "score": 400,
+            "label": "15+",
+            "description": "",
+            "color": "#000000",
+            "shape": "star",
+            "style": "filled"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 460,
+            "label": "18+",
+            "description": "",
+            "color": "#000000",
+            "shape": "star",
+            "style": "filled"
+        },
+        {
+            "key": "NS",
+            "code": "NS",
+            "score": 900,
+            "label": "Not suitable for public exhibition",
+            "description": "Not suitable for public exhibition",
+            "color": "#000000",
+            "shape": "star",
+            "style": "filled"
+        }
+    ]
+}

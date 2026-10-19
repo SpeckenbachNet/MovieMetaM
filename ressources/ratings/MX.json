@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Mexico",
+        "de": "Mexiko"
+    },
+    "system": "RTC",
+    "id": "mx-movie",
+    "ratings": [
+        {
+            "key": "AA",
+            "code": "AA",
+            "score": 0,
+            "label": "AA",
+            "description": "",
+            "color": "#26B563",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "A",
+            "code": "A",
+            "score": 100,
+            "label": "A",
+            "description": "",
+            "color": "#26B563",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "B",
+            "code": "B",
+            "score": 300,
+            "label": "B",
+            "description": "",
+            "color": "#FFD00E",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "B-15",
+            "code": "B-15",
+            "score": 500,
+            "label": "B-15",
+            "description": "",
+            "color": "#FFD00E",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "C",
+            "code": "C",
+            "score": 600,
+            "label": "C",
+            "description": "",
+            "color": "#F51F29",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "D",
+            "code": "D",
+            "score": 700,
+            "label": "D",
+            "description": "",
+            "color": "#F51F29",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

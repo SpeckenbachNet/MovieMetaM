@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Slovakia",
+        "de": "Slowakei"
+    },
+    "system": "JSO",
+    "id": "sk-movie",
+    "ratings": [
+        {
+            "key": "U",
+            "code": "U",
+            "score": 50,
+            "label": "Teddy bear: suitable for children under 12",
+            "description": "Teddy bear: suitable for children under 12",
+            "color": "#00AC4C",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "U",
+            "code": "U",
+            "score": 100,
+            "label": "U",
+            "description": "",
+            "color": "#00AC4C",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "7",
+            "code": "7",
+            "score": 240,
+            "label": "7",
+            "description": "",
+            "color": "#EC1C22",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#EC1C22",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "15",
+            "code": "15",
+            "score": 400,
+            "label": "15",
+            "description": "",
+            "color": "#EC1C22",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#EC1C22",
+            "shape": "circle",
+            "style": "outline"
+        }
+    ]
+}

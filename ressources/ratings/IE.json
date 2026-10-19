@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Ireland",
+        "de": "Irland"
+    },
+    "system": "IFCO",
+    "id": "ie-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#AAE0FA",
+            "shape": "octagon",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 200,
+            "label": "PG",
+            "description": "",
+            "color": "#AAE0FA",
+            "shape": "octagon",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 300,
+            "label": "12",
+            "description": "",
+            "color": "#AAE0FA",
+            "shape": "octagon",
+            "style": "filled"
+        },
+        {
+            "key": "15",
+            "code": "15",
+            "score": 350,
+            "label": "15",
+            "description": "",
+            "color": "#AAE0FA",
+            "shape": "octagon",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 400,
+            "label": "18",
+            "description": "",
+            "color": "#AAE0FA",
+            "shape": "octagon",
+            "style": "filled"
+        }
+    ]
+}

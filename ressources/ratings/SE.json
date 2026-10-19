@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Sweden",
+        "de": "Schweden"
+    },
+    "system": "Mediemyndigheten",
+    "id": "se-movie",
+    "ratings": [
+        {
+            "key": "Btl",
+            "code": "Barntillåten",
+            "score": 0,
+            "label": "Barntillåten",
+            "description": "",
+            "color": "#FFFFFF",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "7",
+            "code": "Från 7 År",
+            "score": 125,
+            "label": "Från 7 År",
+            "description": "",
+            "color": "#FFCC00",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "11",
+            "code": "Från 11 År",
+            "score": 225,
+            "label": "Från 11 År",
+            "description": "",
+            "color": "#009933",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "15",
+            "code": "Från 15 År",
+            "score": 400,
+            "label": "Från 15 År",
+            "description": "",
+            "color": "#0066CC",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "Barnförbjuden",
+            "score": 500,
+            "label": "Barnförbjuden",
+            "description": "",
+            "color": "#CC0000",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

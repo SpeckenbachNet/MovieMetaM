@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Hungary",
+        "de": "Ungarn"
+    },
+    "system": "NMHH",
+    "id": "hu-movie",
+    "ratings": [
+        {
+            "key": "KN",
+            "code": "KN",
+            "score": 100,
+            "label": "KN",
+            "description": "",
+            "color": "#80FF00",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "6",
+            "code": "6",
+            "score": 220,
+            "label": "6",
+            "description": "",
+            "color": "#FFCC00",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#FFCC00",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 420,
+            "label": "16",
+            "description": "",
+            "color": "#FFCC00",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#FF0000",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "X",
+            "code": "X",
+            "score": 600,
+            "label": "X",
+            "description": "",
+            "color": "#FF0000",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

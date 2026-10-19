@@ -1,0 +1,50 @@
+{
+    "country": {
+        "en": "Indonesia",
+        "de": "Indonesien"
+    },
+    "system": "LSF",
+    "id": "id-movie",
+    "ratings": [
+        {
+            "key": "SU",
+            "code": "SU",
+            "score": 100,
+            "label": "SU",
+            "description": "",
+            "color": "#7AAD59",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "13+",
+            "code": "13+",
+            "score": 360,
+            "label": "13+",
+            "description": "",
+            "color": "#E1D758",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "17+",
+            "code": "17+",
+            "score": 440,
+            "label": "17+",
+            "description": "",
+            "color": "#AF3222",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "21+",
+            "code": "21+",
+            "score": 520,
+            "label": "21+",
+            "description": "",
+            "color": "#000000",
+            "shape": "diamond",
+            "style": "filled"
+        }
+    ]
+}

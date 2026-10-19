@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "Netherlands",
+        "de": "Niederlande"
+    },
+    "system": "Kijkwijzer",
+    "id": "nl-movie",
+    "ratings": [
+        {
+            "key": "AL",
+            "code": "AL",
+            "score": 0,
+            "label": "AL/G",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "6",
+            "code": "6",
+            "score": 100,
+            "label": "6",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "9",
+            "code": "9",
+            "score": 200,
+            "label": "9",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 300,
+            "label": "12",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "14",
+            "code": "14",
+            "score": 400,
+            "label": "14",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 500,
+            "label": "16",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 600,
+            "label": "18",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

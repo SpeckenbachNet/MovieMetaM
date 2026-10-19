@@ -1,0 +1,120 @@
+{
+    "country": {
+        "en": "New Zealand",
+        "de": "Neuseeland"
+    },
+    "system": "OFLC",
+    "id": "nz-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#44C660",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 200,
+            "label": "PG",
+            "description": "",
+            "color": "#FFE03F",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "M",
+            "code": "M",
+            "score": 300,
+            "label": "M",
+            "description": "",
+            "color": "#FFE03F",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "R13",
+            "code": "R13",
+            "score": 325,
+            "label": "R13",
+            "description": "",
+            "color": "#F03936",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "RP13",
+            "code": "RP13",
+            "score": 325,
+            "label": "RP13",
+            "description": "",
+            "color": "#F03936",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R15",
+            "code": "R15",
+            "score": 350,
+            "label": "R15",
+            "description": "",
+            "color": "#F03936",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R16",
+            "code": "R16",
+            "score": 375,
+            "label": "R16",
+            "description": "",
+            "color": "#F03936",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "RP16",
+            "code": "RP16",
+            "score": 375,
+            "label": "RP16",
+            "description": "",
+            "color": "#F03936",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R18",
+            "code": "R18",
+            "score": 400,
+            "label": "R18",
+            "description": "",
+            "color": "#F03936",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "RP18",
+            "code": "RP18",
+            "score": 400,
+            "label": "RP18",
+            "description": "",
+            "color": "#F03936",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R",
+            "code": "R",
+            "score": 500,
+            "label": "R",
+            "description": "",
+            "color": "#F03936",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

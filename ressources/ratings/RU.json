@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Russia",
+        "de": "Russland"
+    },
+    "system": "RU Rating",
+    "id": "ru-movie",
+    "ratings": [
+        {
+            "key": "0+",
+            "code": "0+",
+            "score": 0,
+            "label": "0+",
+            "description": "",
+            "color": "#E3000F",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "6+",
+            "code": "6+",
+            "score": 150,
+            "label": "6+",
+            "description": "",
+            "color": "#E3000F",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "12+",
+            "code": "12+",
+            "score": 200,
+            "label": "12+",
+            "description": "",
+            "color": "#E3000F",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "16+",
+            "code": "16+",
+            "score": 375,
+            "label": "16+",
+            "description": "",
+            "color": "#E3000F",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 400,
+            "label": "18+",
+            "description": "",
+            "color": "#E3000F",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

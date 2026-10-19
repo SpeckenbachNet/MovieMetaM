@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "Nigeria",
+        "de": "Nigeria"
+    },
+    "system": "NFVCB",
+    "id": "ng-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#009F51",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 220,
+            "label": "PG",
+            "description": "",
+            "color": "#FFF400",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#EE8C1B",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12A",
+            "code": "12A",
+            "score": 340,
+            "label": "12A",
+            "description": "",
+            "color": "#EE8C1B",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15",
+            "code": "15",
+            "score": 400,
+            "label": "15",
+            "description": "",
+            "color": "#00A6E5",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#E33D23",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "RE",
+            "code": "RE",
+            "score": 900,
+            "label": "RE",
+            "description": "",
+            "color": "#29211E",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "United Arab Emirates",
+        "de": "Vereinigte Arabische Emirate"
+    },
+    "system": "UAE Media Council",
+    "id": "ae-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#3BA6DC",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 220,
+            "label": "PG",
+            "description": "",
+            "color": "#33C3A8",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PG13",
+            "code": "PG13",
+            "score": 360,
+            "label": "PG13",
+            "description": "",
+            "color": "#2DB34A",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PG15",
+            "code": "PG15",
+            "score": 380,
+            "label": "PG15",
+            "description": "",
+            "color": "#B5BF3C",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15+",
+            "code": "15+",
+            "score": 400,
+            "label": "15+",
+            "description": "",
+            "color": "#E8732A",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 460,
+            "label": "18+",
+            "description": "",
+            "color": "#D63A2F",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "21+",
+            "code": "21+",
+            "score": 520,
+            "label": "21+",
+            "description": "",
+            "color": "#8B1E1E",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

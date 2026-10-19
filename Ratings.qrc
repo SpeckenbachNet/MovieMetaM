@@ -1,0 +1,52 @@
+<RCC>
+    <!-- Age rating systems, one file per country: <country code>.json (see agerating.h).
+         Written by tools/ratings_from_xlsx.py – do not edit by hand. -->
+    <qresource prefix="/ratings">
+        <file alias="AE.json">ressources/ratings/AE.json</file>
+        <file alias="AU.json">ressources/ratings/AU.json</file>
+        <file alias="BE.json">ressources/ratings/BE.json</file>
+        <file alias="BR.json">ressources/ratings/BR.json</file>
+        <file alias="CA.json">ressources/ratings/CA.json</file>
+        <file alias="CA-QC.json">ressources/ratings/CA-QC.json</file>
+        <file alias="CH.json">ressources/ratings/CH.json</file>
+        <file alias="CZ.json">ressources/ratings/CZ.json</file>
+        <file alias="DE.json">ressources/ratings/DE.json</file>
+        <file alias="DK.json">ressources/ratings/DK.json</file>
+        <file alias="ES.json">ressources/ratings/ES.json</file>
+        <file alias="FI.json">ressources/ratings/FI.json</file>
+        <file alias="FR.json">ressources/ratings/FR.json</file>
+        <file alias="GH.json">ressources/ratings/GH.json</file>
+        <file alias="HK.json">ressources/ratings/HK.json</file>
+        <file alias="HU.json">ressources/ratings/HU.json</file>
+        <file alias="ID.json">ressources/ratings/ID.json</file>
+        <file alias="IE.json">ressources/ratings/IE.json</file>
+        <file alias="IN.json">ressources/ratings/IN.json</file>
+        <file alias="IS.json">ressources/ratings/IS.json</file>
+        <file alias="IT.json">ressources/ratings/IT.json</file>
+        <file alias="JP.json">ressources/ratings/JP.json</file>
+        <file alias="KE.json">ressources/ratings/KE.json</file>
+        <file alias="KR.json">ressources/ratings/KR.json</file>
+        <file alias="KW.json">ressources/ratings/KW.json</file>
+        <file alias="MV.json">ressources/ratings/MV.json</file>
+        <file alias="MX.json">ressources/ratings/MX.json</file>
+        <file alias="MY.json">ressources/ratings/MY.json</file>
+        <file alias="NG.json">ressources/ratings/NG.json</file>
+        <file alias="NL.json">ressources/ratings/NL.json</file>
+        <file alias="NO.json">ressources/ratings/NO.json</file>
+        <file alias="NZ.json">ressources/ratings/NZ.json</file>
+        <file alias="PG.json">ressources/ratings/PG.json</file>
+        <file alias="PH.json">ressources/ratings/PH.json</file>
+        <file alias="PY.json">ressources/ratings/PY.json</file>
+        <file alias="RU.json">ressources/ratings/RU.json</file>
+        <file alias="SA.json">ressources/ratings/SA.json</file>
+        <file alias="SE.json">ressources/ratings/SE.json</file>
+        <file alias="SG.json">ressources/ratings/SG.json</file>
+        <file alias="SK.json">ressources/ratings/SK.json</file>
+        <file alias="TH.json">ressources/ratings/TH.json</file>
+        <file alias="TR.json">ressources/ratings/TR.json</file>
+        <file alias="TW.json">ressources/ratings/TW.json</file>
+        <file alias="UK.json">ressources/ratings/UK.json</file>
+        <file alias="US.json">ressources/ratings/US.json</file>
+        <file alias="ZA.json">ressources/ratings/ZA.json</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,50 @@
+{
+    "country": {
+        "en": "France",
+        "de": "Frankreich"
+    },
+    "system": "CNC",
+    "id": "fr-movie",
+    "ratings": [
+        {
+            "key": "TP",
+            "code": "TP",
+            "score": 0,
+            "label": "Tout public",
+            "description": "",
+            "color": "#FFFFFF",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "-12",
+            "code": "-12",
+            "score": 300,
+            "label": "-12",
+            "description": "",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "-16",
+            "code": "-16",
+            "score": 375,
+            "label": "-16",
+            "description": "",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "-18",
+            "code": "-18",
+            "score": 400,
+            "label": "-18",
+            "description": "",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

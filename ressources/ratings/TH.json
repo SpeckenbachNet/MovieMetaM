@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Thailand",
+        "de": "Thailand"
+    },
+    "system": "TH Rating",
+    "id": "th-movie",
+    "ratings": [
+        {
+            "key": "P",
+            "code": "P",
+            "score": 50,
+            "label": "ส – Promoted: educational, recommended for viewing",
+            "description": "ส – Promoted: educational, recommended for viewing",
+            "color": "#33CC33",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#33CC33",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "13+",
+            "code": "13",
+            "score": 360,
+            "label": "13+",
+            "description": "",
+            "color": "#FFFF00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15+",
+            "code": "15",
+            "score": 400,
+            "label": "15+",
+            "description": "",
+            "color": "#FFFF00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 460,
+            "label": "18+",
+            "description": "",
+            "color": "#FFFF00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "20-",
+            "code": "20",
+            "score": 500,
+            "label": "20-",
+            "description": "",
+            "color": "#CC0000",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

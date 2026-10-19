@@ -1,0 +1,90 @@
+{
+    "country": {
+        "en": "Spain",
+        "de": "Spanien"
+    },
+    "system": "ICAA",
+    "id": "es-movie",
+    "ratings": [
+        {
+            "key": "A",
+            "code": "A",
+            "score": 100,
+            "label": "A",
+            "description": "",
+            "color": "#08E200",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "Ai",
+            "code": "Ai",
+            "score": 100,
+            "label": "Ai",
+            "description": "",
+            "color": "#08E200",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "7",
+            "code": "7",
+            "score": 240,
+            "label": "7",
+            "description": "",
+            "color": "#1CCDFF",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "7i",
+            "code": "7i",
+            "score": 240,
+            "label": "7i",
+            "description": "",
+            "color": "#1CCDFF",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#FB6F30",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 420,
+            "label": "16",
+            "description": "",
+            "color": "#003DCC",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#FF0000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "X",
+            "code": "X",
+            "score": 900,
+            "label": "X",
+            "description": "",
+            "color": "#B6008D",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

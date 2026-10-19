@@ -18,6 +18,9 @@
 
 // setupdialog.cpp
 #include "setupdialog.h"
+#include "agerating.h"
+
+#include <algorithm>
 
 SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
 
@@ -37,20 +40,17 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
 
     ageRatingComboBox = new QComboBox(this);
     ageRatingComboBox->clear();
+    // The same systems as in the settings (one JSON file per country, see agerating.h);
+    // sorted by name, the "choose" entry stays on top
+    QStringList codes = AgeRatings::systems().keys();
+    std::sort(codes.begin(), codes.end(), [](const QString &a, const QString &b) {
+        return AgeRatings::systems().value(a).displayName().localeAwareCompare(
+                   AgeRatings::systems().value(b).displayName()) < 0;
+    });
     ageRatingComboBox->addItem("--- " + tr("Choose an entry") + " ---");
-    ageRatingComboBox->addItem(tr("Germany (FSK)"),"DE");
-    ageRatingComboBox->addItem(tr("Netherlands (Kijkwijzer)"),"NL");
-    ageRatingComboBox->addItem(tr("Austria (JMÜ)"),"AT");
-    ageRatingComboBox->addItem(tr("United States (MPA)"),"US");
-    ageRatingComboBox->addItem(tr("France (CNC)"),"FR");
-    ageRatingComboBox->addItem(tr("Hong Kong (TELA)","HK"));
-    ageRatingComboBox->addItem(tr("Italy (MiC)"),"IT");
-    ageRatingComboBox->addItem(tr("Japan (Eirin)"),"JP");
-    ageRatingComboBox->addItem(tr("Switzerland (FSK)"),"CH");
-    ageRatingComboBox->addItem(tr("South Korea (KMRB)","KR"));
-    ageRatingComboBox->addItem(tr("Taiwan"),"TW");
-    ageRatingComboBox->addItem(tr("United Kingdom (BBFC)","UK"));
-    ageRatingComboBox->model()->sort(0);
+    for (const QString &code : std::as_const(codes)) {
+        ageRatingComboBox->addItem(AgeRatings::systems().value(code).displayName(), code);
+    }
 
     languageLabel = new QLabel(this);
     languageLabel->setText(tr("Choose another language (optional)"));

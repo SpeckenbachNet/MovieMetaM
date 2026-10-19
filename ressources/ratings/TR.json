@@ -1,0 +1,90 @@
+{
+    "country": {
+        "en": "Turkey",
+        "de": "Türkei"
+    },
+    "system": "TR Rating",
+    "id": "tr-movie",
+    "ratings": [
+        {
+            "key": "6A",
+            "code": "6A",
+            "score": 200,
+            "label": "6A",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "6+",
+            "code": "6+",
+            "score": 220,
+            "label": "6+",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "10A",
+            "code": "10A",
+            "score": 280,
+            "label": "10A",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "10+",
+            "code": "10+",
+            "score": 300,
+            "label": "10+",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "13A",
+            "code": "13A",
+            "score": 340,
+            "label": "13A",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "13+",
+            "code": "13+",
+            "score": 360,
+            "label": "13+",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "16+",
+            "code": "16+",
+            "score": 420,
+            "label": "16+",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 460,
+            "label": "18+",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "outline"
+        }
+    ]
+}

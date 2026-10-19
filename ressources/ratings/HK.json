@@ -1,0 +1,50 @@
+{
+    "country": {
+        "en": "Hong Kong",
+        "de": "Hongkong"
+    },
+    "system": "OFNAA",
+    "id": "hk-movie",
+    "ratings": [
+        {
+            "key": "I",
+            "code": "I",
+            "score": 100,
+            "label": "I",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "IIA",
+            "code": "IIA",
+            "score": 200,
+            "label": "IIA",
+            "description": "",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "IIB",
+            "code": "IIB",
+            "score": 300,
+            "label": "IIB",
+            "description": "",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "III",
+            "code": "III",
+            "score": 400,
+            "label": "III",
+            "description": "",
+            "color": "#000000",
+            "shape": "triangle",
+            "style": "filled"
+        }
+    ]
+}

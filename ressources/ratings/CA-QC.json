@@ -1,0 +1,50 @@
+{
+    "country": {
+        "en": "Québec",
+        "de": "Québec (Kanada)"
+    },
+    "system": "RCQ",
+    "id": "qc-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#008B44",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "13+",
+            "code": "13+",
+            "score": 360,
+            "label": "13 ans et plus – may be viewed, rented or purchased only by persons 13 or over; under 13 only with an adult",
+            "description": "13 ans et plus – may be viewed, rented or purchased only by persons 13 or over; under 13 only with an adult",
+            "color": "#FFC121",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "16+",
+            "code": "16+",
+            "score": 420,
+            "label": "16+",
+            "description": "",
+            "color": "#005C8D",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 460,
+            "label": "18+",
+            "description": "",
+            "color": "#EC1C24",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}
