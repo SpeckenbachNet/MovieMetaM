@@ -217,7 +217,8 @@ inline void applyTabStyle(QTabWidget *tabs)
         " border-top-left-radius: %7px; border-top-right-radius: %7px; padding: 4px 12px; margin-right: 2px; }"
         "QTabBar::tab:hover { background: %5; }"
         "QTabBar::tab:selected { background: %1; color: %3; padding-bottom: 5px; margin-bottom: -1px; }"   // covers the area's top line
-        "QTabBar::tab:!selected { margin-top: 2px; }")
+        "QTabBar::tab:!selected { margin-top: 2px; border-bottom: 1px solid %2; }"   // they lie over the area's top line
+        "QTabWidget::tab-bar { alignment: left; }")   // macOS centers the tabs
         .arg(look.fill.name(), look.border.name(), look.text.name(),
              inactive.name(), hover.name(), dimmed.name())
         .arg(FieldLook::radius));

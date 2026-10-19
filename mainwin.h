@@ -178,12 +178,11 @@ private:
     static constexpr int kRatingIconSize = 18;
     QMap<QString, CountryRatingSystem> ratingMap;
 
-protected:
-    void resizeEvent(QResizeEvent *event) override;
-    void showEvent(QShowEvent *event) override;
+    // Movie info: fixed cover size (poster ratio 183 : 129.5) and the widest tag fields
+    static constexpr QSize kCoverSize{150, 212};
+    static constexpr int kTagColumnWidth = 240;
 
 private slots:
-    void onResizeMainWin();
     void onSearchTableViewDoubleClicked(const QModelIndex &index);
     void onFilelistTableViewClicked(const QModelIndex &index);
     void onSaveAllButtonClicked();

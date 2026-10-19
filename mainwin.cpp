@@ -709,25 +709,6 @@ void MainWin::selectRowInTable(int row)
 }
 
 // ***** SLOTS *****
-void MainWin::onResizeMainWin(){
-    // ------ Cover Label ------
-    // Calculate 1/3 of the width of the box.
-    int boxWidth = ui->middleGroupBox->width();
-    int targetWidth = boxWidth / 3;
-
-    // Set wdith for cover
-    ui->coverLabel->setFixedWidth(targetWidth);
-    ui->descriptionText->setFixedWidth(targetWidth);
-
-    // Calculate the height based on your factor (183 / 129.5)
-    int targetHeight = targetWidth * 183 / 129.5;
-    ui->coverLabel->setFixedHeight(targetHeight);
-
-    // Distance to the next element
-    ui->descriptionLabel->setContentsMargins(0, 0, 0, 0);
-    ui->middleLeftContainer->activate();
-}
-
 void MainWin::onSaveAllButtonClicked() {
     // Wir gehen durch alle geladenen Filme in der Map
     QMap<QString, MovieData>::iterator i;
@@ -1008,18 +989,6 @@ void MainWin::handleSaveSettingsButton_Clicked() {
         // Fehler (z.B. Datei schreibgeschützt)
         ui->statusBar->showMessage(tr("Error: could not save the settings!"), 50000);
     }
-}
-// ***** EVENTS *****
-void MainWin::showEvent(QShowEvent *event)
-{
-    QMainWindow::showEvent(event);
-    onResizeMainWin();
-}
-
-void MainWin::resizeEvent(QResizeEvent *event)
-{
-    QMainWindow::resizeEvent(event);
-    onResizeMainWin();
 }
 
 MainWin::~MainWin()
