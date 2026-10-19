@@ -122,7 +122,6 @@ private:
     QPixmap extractMovieCover(const QString& filePath);
     QIcon m_statusGreen;    // status symbols in the movie list (same look when selected)
     QIcon m_statusYellow;
-    QString getInfoHtmlTemplate();
     QString countryCode;
     QMap<QString, MovieData> m_loadedMovies;
     QMap<QString, MovieData> m_originalMovies;
@@ -138,7 +137,6 @@ private:
     QToolButton *m_helpBtn = nullptr;
     QToolButton *m_settingsBackBtn = nullptr;
     QToolButton *m_saveSettingsBtn = nullptr;
-    QToolButton *m_infoBackBtn = nullptr;
     QToolButton *m_addBtn = nullptr;       // below the movie list
     QToolButton *m_removeBtn = nullptr;
 

@@ -84,7 +84,11 @@ Linux).
 
 - `main.cpp` – settings, translator, setup dialog on first start, main window.
 - `mainwin.*`, `initialize.cpp` – main window: movie list (left), movie info (middle),
-  TMDB search (right, tabs Results / Data / Cover); pages settings and info.
+  TMDB search (right, tabs Results / Data / Cover); pages settings and help.
+- `helppage.*` – help page (own ToolbarM, topics list, Markdown text): texts in
+  `help/<de|en>/<topic>.md` (`Help.qrc`), placeholders `{{version}}`, `{{qt}}`; language like
+  the translator. For now one topic "About MovieMetaM" (website
+  software.speckenbach.net/moviemetam, TMDB notice with logo).
 - `mediainfom.*` – reads MP4 boxes (metadata, iTunMOVI XML, cover); `moviedata.*` – data of a movie.
 - `tagwidget.*` – tag input (cast, directors, ...); `imagelabelm.*` – cover: paints itself
   (rounded, sharp), drag and drop in (`coverDropped` / `coverUrlDropped`) and out;
@@ -97,9 +101,8 @@ Linux).
 ## Open points (as of 0.3.18)
 
 1. Linux: replace the old `~/Development/QT/libraries` by a link to the kDrive folder.
-2. UI overhaul, further steps: settings page as cards (no sidebar yet); help page (like
-   PhotoBoothM HelpPage) with "About MovieMetaM" for now (the help button opens the info page
-   meanwhile); the setup dialog's combo boxes with `applyComboStyle`.
+2. UI overhaul, further steps: settings page as cards (no sidebar yet); more help topics
+   (using the app, TMDB search, saving); the setup dialog's combo boxes with `applyComboStyle`.
 3. Bugs: setup dialog `tr("…","HK")` bracket bug (also KR, UK) and language choice not saved;
    12 countries offered but only DE/UK/US in `ratingMap`; new rating system only after restart;
    after removing a movie the form still shows it; false "changed" for movies without date

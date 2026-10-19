@@ -488,28 +488,7 @@ background-color: palette(mid);
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="infoPage">
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="ToolbarM" name="infoToolbar">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QTextBrowser" name="infoTextBrowser"/>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="helpPage"/>
+      <widget class="HelpPage" name="helpPage"/>
      </widget>
     </item>
    </layout>
@@ -527,6 +506,11 @@ background-color: palette(mid);
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>HelpPage</class>
+   <extends>QWidget</extends>
+   <header>helppage.h</header>
+  </customwidget>
   <customwidget>
    <class>QSvgWidget</class>
    <extends>QWidget</extends>
