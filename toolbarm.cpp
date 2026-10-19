@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-// ToolbarM 1.3.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there)
+// ToolbarM 1.4.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there)
 #include "toolbarm.h"
 
 #include <QEvent>
@@ -22,6 +22,30 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QVariant>
+
+#include <cmath>
+
+namespace {
+
+// Relative luminance (WCAG): 0 = black ... 1 = white
+qreal luminance(const QColor &c)
+{
+    auto channel = [](qreal v) {
+        return v <= 0.03928 ? v / 12.92 : std::pow((v + 0.055) / 1.055, 2.4);
+    };
+    return 0.2126 * channel(c.redF()) + 0.7152 * channel(c.greenF()) + 0.0722 * channel(c.blueF());
+}
+
+// Black or white, whichever has more contrast on the given color
+QColor readableTextColor(const QColor &fill)
+{
+    const qreal l = luminance(fill);
+    const qreal onBlack = (l + 0.05) / 0.05;
+    const qreal onWhite = 1.05 / (l + 0.05);
+    return onBlack >= onWhite ? QColor(Qt::black) : QColor(Qt::white);
+}
+
+} // namespace
 
 // Button of the toolbar: its size comes from the toolbar, so the width follows text and font
 // (setText() and font changes call updateGeometry(), then the layout asks sizeHint() again)
@@ -85,6 +109,21 @@ QToolButton* ToolbarM::addButton(const QString &objName, const QString &text,
     mainLayout->addWidget(btn);
 
     return btn;
+}
+
+void ToolbarM::setButtonColor(QToolButton *btn, const QColor &fill, const QColor &text)
+{
+    if (!btn) {
+        return;
+    }
+    if (fill.isValid()) {
+        btn->setProperty("tbFill", QVariant::fromValue(fill));
+        btn->setProperty("tbText", QVariant::fromValue(text.isValid() ? text : readableTextColor(fill)));
+    } else {
+        btn->setProperty("tbFill", QVariant());   // back to the palette colors
+        btn->setProperty("tbText", QVariant());
+    }
+    btn->update();
 }
 
 void ToolbarM::setTitle(const QString &title)
@@ -248,16 +287,21 @@ void ToolbarM::paintButton(QToolButton *btn)
     const bool isHovered    = btn->underMouse();
 
     // --- 1. Colors: everything derived from button + text color -> visible in every theme
-    QColor fill = buttonColor;
-    QColor fg   = buttonTextColor;
+    // (own colors of the button from setButtonColor(), else the palette)
+    const QVariant ownFill = btn->property("tbFill");
+    const QColor baseFill  = ownFill.isValid() ? ownFill.value<QColor>() : buttonColor;
+    const QColor baseText  = ownFill.isValid() ? btn->property("tbText").value<QColor>() : buttonTextColor;
+
+    QColor fill = baseFill;
+    QColor fg   = baseText;
 
     if (!isEnabled) {
         fill = disabledColor;
         fg   = disabledTextColor;
     } else if (isPressed) {
-        fill = mix(buttonColor, buttonTextColor, shade.buttonPressed);
+        fill = mix(baseFill, baseText, shade.buttonPressed);
     } else if (isHovered) {
-        fill = mix(buttonColor, buttonTextColor, shade.buttonHover);
+        fill = mix(baseFill, baseText, shade.buttonHover);
     }
 
     const QColor border    = mix(fill, fg, isEnabled ? shade.buttonBorder : shade.buttonBorderOff);
