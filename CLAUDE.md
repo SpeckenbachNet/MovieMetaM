@@ -100,15 +100,32 @@ Linux).
 - `twolinedelegate.*` – entries of movie list and search results; `posterpreview.*` – enlarged
   poster (200×300) when the mouse rests on a search result (full poster in `kPosterRole`).
 - `themecolors.h` – shared colors and shapes (`FieldLook`, `apply…Style`).
+- `agerating.*` – age rating systems as data: one JSON file per country
+  (`ressources/ratings/<code>.json`, `Ratings.qrc`; country name en/de, system, id, steps with
+  key = badge text, code = written into the file, score, label = combo text, description =
+  tooltip, color, shape, style). `AgeRatings::systems()` feeds the settings (with a preview of
+  the badges), the setup dialog and the rating combo box. Badges: `createAgeRatingIcon()` –
+  shapes square, circle, diamond, triangle, octagon, hexagon, star; styles filled, outline
+  (white, border and code in the color: JP, SK, TR), light (white, black border, code in the
+  color: US, IS), dark (#313030, code in the color: FI); the font shrinks until the
+  code fits. **The JSON files and `Ratings.qrc` are generated, not edited by hand:** change
+  the table, then `python3 tools/ratings_from_xlsx.py ~/kDrive/Development/QT/age_ratings.xlsx`
+  (needs openpyxl). 46 countries, 266 steps (as of 0.4.0).
+  Principle (decided with the user): all players read the one entry `iTunEXTC`
+  (`prefix|code|score|reason|`). Code = the form media servers know (Jellyfin lists
+  `Emby.Server.Implementations/Localization/Ratings/*.json` as reference, e.g. DE "FSK 12",
+  not Apple's "Ab 12 Jahren"); prefix and score as Apple/Subler (`Resources/Ratings.json`);
+  home video before cinema where a country has its own system (Canada: CHVRS). Working table:
+  `~/kDrive/Development/QT/age_ratings.xlsx` (not in git) – the JSON files follow it.
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
 ## Open points (as of 0.3.18)
 
 1. Linux: replace the old `~/Development/QT/libraries` by a link to the kDrive folder.
-2. UI overhaul, further steps: settings page as cards (no sidebar yet); more help topics
-   (using the app, TMDB search, saving); the setup dialog's combo boxes with `applyComboStyle`.
-3. Bugs: setup dialog `tr("…","HK")` bracket bug (also KR, UK) and language choice not saved;
-   12 countries offered but only DE/UK/US in `ratingMap`; new rating system only after restart;
+2. UI overhaul, further steps: more help topics (using the app, TMDB search, saving); the
+   setup dialog's combo boxes with `applyComboStyle`. (Settings page: cards in a centered
+   column, so far one card "General" – `settingsGeneralCard`, styled in `initializeForm()`.)
+3. Bugs: setup dialog language choice not saved; new rating system only after restart;
    after removing a movie the form still shows it; false "changed" for movies without date
    (1972 default) or with a genre not in the TMDB list (genres in English, search in German);
    arrow keys in the movie list don't switch the movie; clicking the empty area of the movie

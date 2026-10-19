@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Canada",
+        "de": "Kanada"
+    },
+    "system": "CHVRS",
+    "id": "ca-movie",
+    "ratings": [
+        {
+            "key": "E",
+            "code": "E",
+            "score": 0,
+            "label": "E",
+            "description": "",
+            "color": "#FFFFFF",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#249F8C",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 200,
+            "label": "PG",
+            "description": "",
+            "color": "#01A5D5",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "14A",
+            "code": "14A",
+            "score": 300,
+            "label": "14A",
+            "description": "",
+            "color": "#F7DD3C",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18A",
+            "code": "18A",
+            "score": 350,
+            "label": "18A",
+            "description": "",
+            "color": "#F1983D",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "R",
+            "code": "R",
+            "score": 400,
+            "label": "R",
+            "description": "",
+            "color": "#E12F33",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

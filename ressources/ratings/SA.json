@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Saudi Arabia",
+        "de": "Saudi-Arabien"
+    },
+    "system": "GCAM",
+    "id": "sa-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#49BF82",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 220,
+            "label": "PG",
+            "description": "",
+            "color": "#FED255",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "PG12",
+            "code": "PG12",
+            "score": 340,
+            "label": "PG12",
+            "description": "",
+            "color": "#F08A3C",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "PG15",
+            "code": "PG15",
+            "score": 380,
+            "label": "PG15",
+            "description": "",
+            "color": "#7A93C9",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "R15",
+            "code": "R15",
+            "score": 400,
+            "label": "R15",
+            "description": "",
+            "color": "#F4A6A0",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R18",
+            "code": "R18",
+            "score": 460,
+            "label": "R18",
+            "description": "",
+            "color": "#C8202A",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

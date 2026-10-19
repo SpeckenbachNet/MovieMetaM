@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Singapore",
+        "de": "Singapur"
+    },
+    "system": "IMDA",
+    "id": "sg-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#12AD2A",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 220,
+            "label": "PG",
+            "description": "",
+            "color": "#12AD2A",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "PG13",
+            "code": "PG13",
+            "score": 360,
+            "label": "PG13",
+            "description": "",
+            "color": "#12AD2A",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "NC16",
+            "code": "NC16",
+            "score": 420,
+            "label": "NC16",
+            "description": "",
+            "color": "#FF5A00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "M18",
+            "code": "M18",
+            "score": 460,
+            "label": "M18",
+            "description": "",
+            "color": "#FF5A00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R21",
+            "code": "R21",
+            "score": 520,
+            "label": "R21",
+            "description": "",
+            "color": "#FF5A00",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

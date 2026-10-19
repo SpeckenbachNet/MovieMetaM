@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "United States",
+        "de": "Vereinigte Staaten"
+    },
+    "system": "MPA",
+    "id": "mpaa",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "General Audiences",
+            "description": "General Audiences",
+            "color": "#006838",
+            "shape": "square",
+            "style": "light"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 200,
+            "label": "Parental Guidance Suggested",
+            "description": "Parental Guidance Suggested",
+            "color": "#F15A29",
+            "shape": "square",
+            "style": "light"
+        },
+        {
+            "key": "PG-13",
+            "code": "PG-13",
+            "score": 300,
+            "label": "Parents Strongly Cautioned",
+            "description": "Parents Strongly Cautioned",
+            "color": "#7F3F98",
+            "shape": "square",
+            "style": "light"
+        },
+        {
+            "key": "R",
+            "code": "R",
+            "score": 400,
+            "label": "Restricted",
+            "description": "Restricted",
+            "color": "#D71920",
+            "shape": "square",
+            "style": "light"
+        },
+        {
+            "key": "NC-17",
+            "code": "NC-17",
+            "score": 500,
+            "label": "Adults Only",
+            "description": "Adults Only",
+            "color": "#21409A",
+            "shape": "square",
+            "style": "light"
+        }
+    ]
+}

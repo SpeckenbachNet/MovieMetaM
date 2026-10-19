@@ -1,0 +1,70 @@
+{
+    "country": {
+        "en": "Paraguay",
+        "de": "Paraguay"
+    },
+    "system": "PY Rating",
+    "id": "py-movie",
+    "ratings": [
+        {
+            "key": "ATP",
+            "code": "ATP",
+            "score": 0,
+            "label": "ATP",
+            "description": "",
+            "color": "#FFFFFF",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "SAM13",
+            "code": "SAM13",
+            "score": 300,
+            "label": "SAM13",
+            "description": "",
+            "color": "#FFCC00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15",
+            "code": "15",
+            "score": 350,
+            "label": "15",
+            "description": "",
+            "color": "#F39C12",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "SAM16",
+            "code": "SAM16",
+            "score": 375,
+            "label": "SAM16",
+            "description": "",
+            "color": "#8E44AD",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "SAM18",
+            "code": "SAM18",
+            "score": 400,
+            "label": "SAM18",
+            "description": "",
+            "color": "#CC0000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "UR",
+            "code": "UR",
+            "score": 900,
+            "label": "UR",
+            "description": "",
+            "color": "#999999",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

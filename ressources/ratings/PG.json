@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Papua New Guinea",
+        "de": "Papua-Neuguinea"
+    },
+    "system": "PG Rating",
+    "id": "pg-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#0BA04C",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PGR",
+            "code": "PGR",
+            "score": 220,
+            "label": "PGR",
+            "description": "",
+            "color": "#FFDE15",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "M",
+            "code": "M",
+            "score": 400,
+            "label": "M",
+            "description": "",
+            "color": "#00ADEF",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R",
+            "code": "R",
+            "score": 460,
+            "label": "R",
+            "description": "",
+            "color": "#EB2026",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "RC",
+            "code": "RC",
+            "score": 900,
+            "label": "Refused Classification – illegal to publicly exhibit, sell or hire",
+            "description": "Refused Classification – illegal to publicly exhibit, sell or hire",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

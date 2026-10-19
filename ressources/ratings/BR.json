@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "Brazil",
+        "de": "Brasilien"
+    },
+    "system": "ClassInd",
+    "id": "br-movie",
+    "ratings": [
+        {
+            "key": "L",
+            "code": "L",
+            "score": 0,
+            "label": "L",
+            "description": "",
+            "color": "#00A651",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "6",
+            "code": "6",
+            "score": 25,
+            "label": "Não recomendado para menores de seis anos",
+            "description": "Não recomendado para menores de seis anos",
+            "color": "#E33493",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "10",
+            "code": "10",
+            "score": 50,
+            "label": "10",
+            "description": "",
+            "color": "#0095DA",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 100,
+            "label": "12",
+            "description": "",
+            "color": "#FCC114",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "14",
+            "code": "14",
+            "score": 300,
+            "label": "14",
+            "description": "",
+            "color": "#E9802E",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 350,
+            "label": "16",
+            "description": "",
+            "color": "#EB1C24",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 400,
+            "label": "18",
+            "description": "",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

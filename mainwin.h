@@ -50,6 +50,7 @@
 #include <QToolButton>
 #include <qcombobox.h>
 
+#include "agerating.h"
 #include "moviedata.h"
 #include "tagwidget.h"
 
@@ -59,42 +60,9 @@ class MainWin;
 }
 QT_END_NAMESPACE
 
-namespace RatingColor {
-    const QColor USBlueNC17  = QColor(0, 71, 145);
-    const QColor LightBlue   = QColor(0, 174, 239);  // Spanien "7" / Sky Blue
-    const QColor Blue        = QColor(0, 102, 204);  // FSK 16
-    const QColor Cyan        = QColor(0, 159, 221);  // Strong cyan/light blue for Taiwan 6+
-    const QColor LightGreen  = QColor(141, 198, 63);
-    const QColor Green       = QColor(0, 153, 51);   // Classical FSK/EIRIN green
-    const QColor Magenta     = QColor(255,0,255);
-    const QColor Orange      = QColor(255, 102, 0);  // UK 12A / IT 12+
-    const QColor Petrol      = QColor(0, 102, 128);  // Italy 10+
-    const QColor ESPink      = QColor(255, 0, 127);  // Specific Pink Spain-X
-    const QColor USPink      = QColor(255, 0, 102);
-    const QColor Red         = QColor(204, 0, 0);    // FSK 18 / Japanese R15+
-    const QColor White       = QColor(255, 255, 255);
-    const QColor Yellow      = QColor(255, 204, 0);  // Rich yellow
-}
-
 class MainWin : public QMainWindow
 {
     Q_OBJECT
-
-struct RatingEntry {
-    QString key;
-    int score;
-    QString label;
-    QColor color;
-    QString shape;
-};
-
-struct CountryRatingSystem {
-    QString countryName;
-    QString technicalID;
-    QString systemName;
-    QList<RatingEntry> ratings;
-};
-
 
 public:
     MainWin(QWidget *parent = nullptr);
@@ -164,7 +132,6 @@ private:
     void initializeNetwork();
     void initializeForm();
     void initializeComboBoxes();
-    void initializeAgeRating();
     void initializeStatusIcons();
     void onDataChanged();
     void onSettingsChanged();
@@ -174,12 +141,14 @@ private:
     void selectRowInTable(int row);
     void fillRatingComboBox(QString countryCode);
     void fillRatingSettingsComboBox();
+    void fillRatingPreview(const QString &countryCode);   // badges of the system chosen in the settings
     void setComboEntryByString(QComboBox *combo, QString findString, bool useData);
-    QIcon createAgeRatingIcon(QString age, QColor color, QString shape);
+    // shape: square, circle, diamond, triangle, octagon, hexagon, star; style: filled, outline, light, dark
+    QIcon createAgeRatingIcon(QString age, QColor color, QString shape, QString style = "filled");
     // Age rating icon in the combo box: 18 is the largest size that fits centered on macOS.
     // (macOS draws it about 2 px too high in the closed box – open point, see CLAUDE.md)
     static constexpr int kRatingIconSize = 18;
-    QMap<QString, CountryRatingSystem> ratingMap;
+    static constexpr int kRatingPreviewSize = 28;   // badges in the preview of the settings
 
     // Movie info: fixed cover size (poster ratio 183 : 129.5) and the widest tag fields
     static constexpr QSize kCoverSize{150, 212};

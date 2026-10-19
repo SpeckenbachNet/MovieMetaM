@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "Iceland",
+        "de": "Island"
+    },
+    "system": "FRÍSK",
+    "id": "is-movie",
+    "ratings": [
+        {
+            "key": "L",
+            "code": "L",
+            "score": 100,
+            "label": "L",
+            "description": "",
+            "color": "#13A45D",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "6",
+            "code": "6",
+            "score": 220,
+            "label": "6",
+            "description": "",
+            "color": "#FAFAFA",
+            "shape": "circle",
+            "style": "light"
+        },
+        {
+            "key": "9",
+            "code": "9",
+            "score": 280,
+            "label": "9",
+            "description": "",
+            "color": "#037AB6",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#FDDA28",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "14",
+            "code": "14",
+            "score": 380,
+            "label": "14",
+            "description": "",
+            "color": "#F18421",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 420,
+            "label": "16",
+            "description": "",
+            "color": "#D33325",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#FAFAFA",
+            "shape": "circle",
+            "style": "light"
+        }
+    ]
+}

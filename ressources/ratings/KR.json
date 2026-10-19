@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "South Korea",
+        "de": "Südkorea"
+    },
+    "system": "KMRB",
+    "id": "kr-movie",
+    "ratings": [
+        {
+            "key": "ALL",
+            "code": "ALL",
+            "score": 100,
+            "label": "ALL",
+            "description": "",
+            "color": "#00974C",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#EBBD00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15",
+            "code": "15",
+            "score": 400,
+            "label": "15",
+            "description": "",
+            "color": "#DD7218",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "19",
+            "code": "19",
+            "score": 480,
+            "label": "19",
+            "description": "",
+            "color": "#D71E28",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "RS",
+            "code": "Restricted Screening",
+            "score": 900,
+            "label": "RS",
+            "description": "",
+            "color": "#FFFFFF",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

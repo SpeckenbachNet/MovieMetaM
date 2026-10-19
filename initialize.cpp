@@ -40,6 +40,14 @@ void MainWin::initializeForm() {
     ui->middleLabel->setStyleSheet(cssHeadline);
     ui->rightLabel->setStyleSheet(cssHeadline);
 
+    // Settings as cards: rounded box in the field colors, heading like the column headers
+    const FieldLook look;
+    ui->settingsGeneralCard->setStyleSheet(QStringLiteral(
+        "QFrame#settingsGeneralCard { background: %1; border: 1px solid %2; border-radius: %3px; }")
+        .arg(look.fill.name(), look.border.name()).arg(FieldLook::radius));
+    ui->settingsGeneralLabel->setStyleSheet(cssHeadline);
+    ui->ratingSettingsComboBox->setMinimumWidth(240);
+
     // Rounded input fields (the ones in the tag widgets style themselves)
     applyInputStyle(ui->titleEdit);
     applyInputStyle(ui->studioEdit);
@@ -111,90 +119,6 @@ void MainWin::initializeForm() {
                            static_cast<QWidget *>(ui->studioEdit)}) {
         field->setMaximumWidth(kTagColumnWidth);
     }
-}
-
-void MainWin::initializeAgeRating() {
-
-    // --- Germany ---
-    ratingMap["DE"] = {tr("Germany"), "de-movie", "FSK", {
-       {"0", 100, "ab 0 Jahren", RatingColor::White, "square"},
-       {"6", 200, "ab 6 Jahren", RatingColor::Yellow, "square"},
-       {"12", 300, "ab 12 Jahren", RatingColor::Green, "square"},
-       {"16", 400, "ab 16 Jahren", RatingColor::Blue, "square"},
-       {"18", 500, "ab 18 Jahren", RatingColor::Red, "square"}
-   }};
-
-    // --- United Kingdom ---
-    ratingMap["UK"] = {tr("United Kingdom"), "uk-movie", "BBFC", {
-        {"U", 100, "Universal – Suitable for all", RatingColor::LightGreen, "diamond"},
-        {"PG", 200, "Parental Guidance", RatingColor::Yellow, "diamond"},
-        {"12A", 300, "Suitable for 12 years and over", RatingColor::Orange, "circle"},
-        {"12", 325, "Suitable for 12 years and over", RatingColor::White, "circle"},
-        {"15", 400, "Suitable only for 15 years and older", RatingColor::Magenta, "circle"},
-        {"18", 500, "Suitable only for adults", RatingColor::Red, "circle"},
-        {"R18", 600, "To be shown only in specially licensed cinemas, or supplied only in licensed sex shops, and to adults only", RatingColor::Blue, "square"},
-    }};
-
-    // --- United States ---
-    ratingMap["US"] = {tr("United States"), "us-movie", "MPA", {
-        {"G", 100, "General Audiences", RatingColor::Green, "square"},
-        {"PG", 200, "Parental Guidance Suggested", RatingColor::Orange, "square"},
-        {"PG-13", 300, "Parents Strongly Cautioned", RatingColor::USPink, "square"},
-        {"R", 400, "Restricted", RatingColor::Red, "square"},
-        {"NC-17", 500, "Adults Only", RatingColor::USBlueNC17, "square"},
-    }};
-
-   //  // --- Austria ---
-   //  masterMap["AT"] = {"at-movie", {
-   //     {"Restricted", 100, "Ohne Beschränkung"},
-   //     {"6+", 200, "ab 6 Jahren"},
-   //     {"8+", 250, "ab 8 Jahren"},
-   //     {"10+", 275, "ab 10 Jahren"},
-   //     {"12+", 300, "ab 12 Jahren"},
-   //     {"14+", 350, "ab 14 Jahren"},
-   //     {"16+", 400, "ab 16 Jahren"}
-   // }};
-
-   //  // --- Espana ---
-   //  masterMap["ES"] = {"es-movie", {
-   //     {"A(i)", 100, "Apta para todos los públicos"},
-   //     {"7(i)", 200, "No recomendada menores de 7"},
-   //     {"12", 300, "No recomendada menores de 12"},
-   //     {"16", 400, "No recomendada menores de 16"},
-   //     {"18", 500, "No recomendada menores de 18"},
-   //     {"X", 600, "Película X"}
-   // }};
-
-   //  // --- France ---
-   //  masterMap["FR"] = {"fr-movie", {
-   //     {"TP", 100, "TP (Tous Publics)"},
-   //     {"-10", 200, "Interdit aux -10 ans"},
-   //     {"-18", 300, "Interdit aux -12 ans"},
-   //     {"-16", 400, "Interdit aux -16 ans"},
-   //     {"-18", 500, "Interdit aux -18 ans"}
-   // }};
-
-
-   //  // --- Italy ---
-   //  masterMap["IT"] = {"it-movie", {
-   //     {"T", 100, "Film per tutti"},
-   //     {"6+", 200, "Non adatto ai minori di 6 anni"},
-   //     {"10+", 275, "Non adatto ai minori di 10 anni"},
-   //     {"14+", 350, "Vietato ai minori di 14 anni"},
-   //     {"18+", 500, "Vietato ai minori di 18 anni"}
-   // }};
-
-   //  // --- Switzerland ---
-   //  masterMap["CH"] = {"ch-movie", {
-   //      {"FSK0", 100, "Ohne Altersbeschränkung"},
-   //      {"FSK6", 200, "ab 6 Jahren"},
-   //      {"FSK12", 300, "ab 12 Jahren"},
-   //      {"FSK16", 400, "ab 16 Jahren"},
-   //      {"FSK18", 500, "Keine Jugendfreigabe"}
-   // }};
-
-
-
 }
 
 void MainWin::initializeComboBoxes() {
@@ -458,6 +382,10 @@ void MainWin::initializeConnects() {
     connect(ui->ratingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onDataChanged);
     connect(ui->genreComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onDataChanged);
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
+    // Preview of the chosen system at once, before saving
+    connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this] {
+        fillRatingPreview(ui->ratingSettingsComboBox->currentData().toString());
+    });
     // DateEdit
     connect(ui->releaseDateEdit, &QDateEdit::dateChanged, this, &MainWin::onDataChanged);
 

@@ -1,0 +1,90 @@
+{
+    "country": {
+        "en": "Switzerland",
+        "de": "Schweiz"
+    },
+    "system": "Kommission Jugendschutz im Film",
+    "id": "ch-movie",
+    "ratings": [
+        {
+            "key": "0",
+            "code": "0",
+            "score": 50,
+            "label": "0",
+            "description": "",
+            "color": "#FFFFFF",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "6",
+            "code": "6",
+            "score": 75,
+            "label": "6",
+            "description": "",
+            "color": "#FFCC00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "8",
+            "code": "8",
+            "score": 125,
+            "label": "8",
+            "description": "",
+            "color": "#9ACD32",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "10",
+            "code": "10",
+            "score": 150,
+            "label": "10",
+            "description": "",
+            "color": "#66B032",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 200,
+            "label": "12",
+            "description": "",
+            "color": "#009933",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "14",
+            "code": "14",
+            "score": 325,
+            "label": "14",
+            "description": "",
+            "color": "#00808F",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 375,
+            "label": "16",
+            "description": "",
+            "color": "#0066CC",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 400,
+            "label": "18",
+            "description": "",
+            "color": "#CC0000",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

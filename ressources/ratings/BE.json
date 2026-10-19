@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "Belgium",
+        "de": "Belgien"
+    },
+    "system": "Cinecheck",
+    "id": "be-movie",
+    "ratings": [
+        {
+            "key": "AL",
+            "code": "AL",
+            "score": 100,
+            "label": "AL",
+            "description": "",
+            "color": "#000000",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "6",
+            "code": "6",
+            "score": 220,
+            "label": "6",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "9",
+            "code": "9",
+            "score": 280,
+            "label": "9",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "14",
+            "code": "14",
+            "score": 380,
+            "label": "14",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 420,
+            "label": "16",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#231F20",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

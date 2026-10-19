@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Denmark",
+        "de": "Dänemark"
+    },
+    "system": "Medierådet",
+    "id": "dk-movie",
+    "ratings": [
+        {
+            "key": "F",
+            "code": "F",
+            "score": 50,
+            "label": "F",
+            "description": "",
+            "color": "#035993",
+            "shape": "diamond",
+            "style": "filled"
+        },
+        {
+            "key": "A",
+            "code": "A",
+            "score": 100,
+            "label": "A",
+            "description": "",
+            "color": "#00A650",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "7",
+            "code": "7",
+            "score": 240,
+            "label": "7",
+            "description": "",
+            "color": "#00A650",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "11",
+            "code": "11",
+            "score": 320,
+            "label": "11",
+            "description": "",
+            "color": "#FAB20B",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15",
+            "code": "15",
+            "score": 400,
+            "label": "15",
+            "description": "",
+            "color": "#C82128",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

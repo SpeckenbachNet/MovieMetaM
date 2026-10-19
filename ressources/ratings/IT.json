@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Italy",
+        "de": "Italien"
+    },
+    "system": "MiC",
+    "id": "it-movie",
+    "ratings": [
+        {
+            "key": "T",
+            "code": "T",
+            "score": 100,
+            "label": "T",
+            "description": "",
+            "color": "#FFFFFF",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "6+",
+            "code": "6+",
+            "score": 125,
+            "label": "6+",
+            "description": "",
+            "color": "#05A358",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "10+",
+            "code": "10+",
+            "score": 150,
+            "label": "10+",
+            "description": "",
+            "color": "#026D8B",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "14+",
+            "code": "14+",
+            "score": 325,
+            "label": "14+",
+            "description": "",
+            "color": "#E65317",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 400,
+            "label": "18+",
+            "description": "",
+            "color": "#E00632",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

@@ -1,0 +1,100 @@
+{
+    "country": {
+        "en": "South Africa",
+        "de": "Südafrika"
+    },
+    "system": "FPB",
+    "id": "za-movie",
+    "ratings": [
+        {
+            "key": "A",
+            "code": "A",
+            "score": 100,
+            "label": "A",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 220,
+            "label": "PG",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "7-9",
+            "code": "7-9PG",
+            "score": 240,
+            "label": "7-9PG",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "10-12",
+            "code": "10-12PG",
+            "score": 300,
+            "label": "10-12PG",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "13",
+            "code": "13",
+            "score": 360,
+            "label": "13",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 420,
+            "label": "16",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "X18",
+            "code": "X18",
+            "score": 850,
+            "label": "X18",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "XX",
+            "code": "XX",
+            "score": 900,
+            "label": "XX",
+            "description": "",
+            "color": "#0066B2",
+            "shape": "triangle",
+            "style": "filled"
+        }
+    ]
+}

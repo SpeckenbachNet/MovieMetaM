@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "Australia",
+        "de": "Australien"
+    },
+    "system": "ACB",
+    "id": "au-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#33A02C",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 200,
+            "label": "PG",
+            "description": "",
+            "color": "#FFFF00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "M",
+            "code": "M",
+            "score": 350,
+            "label": "M",
+            "description": "",
+            "color": "#00A0C6",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "MA15+",
+            "code": "MA15+",
+            "score": 375,
+            "label": "MA15+",
+            "description": "",
+            "color": "#FF0000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R18+",
+            "code": "R18+",
+            "score": 400,
+            "label": "R18+",
+            "description": "",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "X18+",
+            "code": "X18+",
+            "score": 500,
+            "label": "X18+",
+            "description": "",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "RC",
+            "code": "RC",
+            "score": 900,
+            "label": "Refused Classification – illegal to publicly exhibit, sell or hire",
+            "description": "Refused Classification – illegal to publicly exhibit, sell or hire",
+            "color": "#FFFFFF",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

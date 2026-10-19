@@ -20,6 +20,8 @@
 #include "./ui_mainwin.h"
 #include "mediainfom.h"
 
+#include <QtMath>
+
 MainWin::MainWin(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWin)
@@ -32,7 +34,6 @@ MainWin::MainWin(QWidget *parent)
 
     // Initialize
     initializeForm();
-    initializeAgeRating();
     initializeToolBars();
     initializeTagWidgets();
     initializeDragAndDrop();
@@ -49,8 +50,9 @@ void MainWin::fillRatingComboBox(QString countryCode)
 {
     ui->ratingComboBox->clear();
 
-    auto it = ratingMap.constFind(countryCode);
-    if (it == ratingMap.constEnd()) {
+    const auto &systems = AgeRatings::systems();
+    auto it = systems.constFind(countryCode);
+    if (it == systems.constEnd()) {
         qDebug() << "Country does not exist";
         return;
     }
@@ -59,13 +61,12 @@ void MainWin::fillRatingComboBox(QString countryCode)
 
     const CountryRatingSystem &system = it.value();
     for (const RatingEntry &entry : std::as_const(system.ratings)) {
-        QIcon icon = createAgeRatingIcon(entry.key,
-                                         entry.color,
-                                         entry.shape);
+        QIcon icon = createAgeRatingIcon(entry.key, entry.color, entry.shape, entry.style);
 
         ui->ratingComboBox->addItem(icon, entry.label, entry.score);
         int lastIndex = ui->ratingComboBox->count() - 1;
-        ui->ratingComboBox->setItemData(lastIndex, entry.label, Qt::ToolTipRole);
+        ui->ratingComboBox->setItemData(lastIndex, entry.description.isEmpty() ? entry.label : entry.description,
+                                        Qt::ToolTipRole);
     }
 
     ui->ratingComboBox->setIconSize(QSize(kRatingIconSize, kRatingIconSize));
@@ -74,16 +75,71 @@ void MainWin::fillRatingComboBox(QString countryCode)
 void MainWin::fillRatingSettingsComboBox()
 {
     ui->ratingSettingsComboBox->clear();
-    for (auto it = std::as_const(ratingMap).cbegin(); it != std::as_const(ratingMap).cend(); ++it) {
-        const auto &entry = it.value();
-        QString displayLabel = QString("%1 (%2)").arg(entry.countryName, entry.systemName);
-        ui->ratingSettingsComboBox->addItem(displayLabel, it.key());
+    const auto &systems = AgeRatings::systems();
+    for (auto it = systems.cbegin(); it != systems.cend(); ++it) {
+        ui->ratingSettingsComboBox->addItem(it.value().displayName(), it.key());
     }
     ui->ratingSettingsComboBox->model()->sort(0);
     setComboEntryByString(ui->ratingSettingsComboBox, countryCode, true);
+    fillRatingPreview(countryCode);
 }
 
-QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape) {
+void MainWin::fillRatingPreview(const QString &countryCode)
+{
+    // Remove the badges of the system shown before
+    QLayout *layout = ui->ratingPreviewContainer->layout();
+    while (QLayoutItem *item = layout->takeAt(0)) {
+        delete item->widget();
+        delete item;
+    }
+
+    const auto &systems = AgeRatings::systems();
+    auto it = systems.constFind(countryCode);
+    if (it != systems.constEnd()) {
+        // Badges in the resolution of the screen, the text of the step as tooltip
+        const qreal dpr = devicePixelRatioF();
+        for (const RatingEntry &entry : std::as_const(it.value().ratings)) {
+            auto *badge = new QLabel(ui->ratingPreviewContainer);
+            badge->setPixmap(createAgeRatingIcon(entry.key, entry.color, entry.shape, entry.style)
+                                 .pixmap(QSize(kRatingPreviewSize, kRatingPreviewSize), dpr));
+            badge->setToolTip(entry.description.isEmpty() ? entry.label : entry.description);
+            layout->addWidget(badge);
+        }
+    }
+    static_cast<QHBoxLayout *>(layout)->addStretch();
+}
+
+namespace {
+
+// Outline of a regular polygon with n corners in rect, the first corner at startAngle (degrees,
+// 0 = right, counted clockwise like the screen)
+QPolygonF regularPolygon(const QRectF &rect, int corners, qreal startAngle)
+{
+    QPolygonF polygon;
+    const QPointF c = rect.center();
+    for (int i = 0; i < corners; ++i) {
+        const qreal a = qDegreesToRadians(startAngle + i * 360.0 / corners);
+        polygon << QPointF(c.x() + rect.width() / 2 * qCos(a), c.y() + rect.height() / 2 * qSin(a));
+    }
+    return polygon;
+}
+
+// Five-pointed star around center, the top point up; a thick star (inner corners at 62 % of
+// the outer radius), so there is room for the code in the middle
+QPolygonF star(const QPointF &center, qreal radius)
+{
+    QPolygonF polygon;
+    for (int i = 0; i < 10; ++i) {
+        const qreal r = (i % 2 == 0 ? 1.0 : 0.62) * radius;
+        const qreal a = qDegreesToRadians(-90.0 + i * 36.0);
+        polygon << QPointF(center.x() + r * qCos(a), center.y() + r * qSin(a));
+    }
+    return polygon;
+}
+
+} // namespace
+
+QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape, QString style) {
     // Square canvas in a higher resolution than shown (kRatingIconSize), so it stays
     // sharp on Retina screens
     int size = 64;
@@ -95,59 +151,92 @@ QIcon MainWin::createAgeRatingIcon(QString age, QColor color, QString shape) {
 
     // Drawing rect (padding for the border)
     int pad = size / 16;
-    QRect rect(pad, pad, size - 2 * pad, size - 2 * pad);
+    QRectF rect(pad, pad, size - 2 * pad, size - 2 * pad);
+    shape = shape.toLower();
 
-    // Draw the shape (fill the background)
-    painter.setBrush(color);
-    painter.setPen(QPen(Qt::black, size / 16.0)); // black border
+    // Outline of the badge; textRect: the room inside the shape where the code fits
+    QPainterPath path;
+    QRectF textRect = rect.adjusted(size * 0.08, 0, -size * 0.08, 0);
+    if (shape == "circle") {
+        path.addEllipse(rect);
+        textRect = rect.adjusted(size * 0.12, 0, -size * 0.12, 0);
+    } else if (shape == "diamond") {
+        path.addPolygon(regularPolygon(rect, 4, -90));
+        textRect = rect.adjusted(size * 0.22, size * 0.22, -size * 0.22, -size * 0.22);
+    } else if (shape == "triangle") {
+        path.addPolygon(QPolygonF(QList<QPointF>{QPointF(rect.center().x(), rect.top()), rect.bottomRight(),
+                                                 rect.bottomLeft()}));
+        textRect = QRectF(rect.left() + size * 0.22, rect.top() + size * 0.40, rect.width() - size * 0.44, size * 0.45);
+    } else if (shape == "octagon") {
+        path.addPolygon(regularPolygon(rect, 8, 22.5));
+    } else if (shape == "hexagon") {
+        path.addPolygon(regularPolygon(rect, 6, 0));
+        textRect = rect.adjusted(size * 0.16, 0, -size * 0.16, 0);
+    } else if (shape == "star") {
+        // A star is 1.90 radii wide and 1.81 high (the lower points are higher than the
+        // bottom): as large as the rect allows, centered in the height
+        const qreal radius = qMin(rect.width() / 1.902, rect.height() / 1.809);
+        const QPointF center(rect.center().x(), rect.top() + (rect.height() - 1.809 * radius) / 2 + radius);
+        path.addPolygon(star(center, radius));
+        // The code may reach over the arms: it gets a contour in the star color (see below)
+        textRect = QRectF(center.x() - 0.68 * radius, center.y() - 0.32 * radius, 1.36 * radius, 0.72 * radius);
+    } else {   // square
+        path.addRoundedRect(rect, size * 5 / 32, size * 5 / 32);
+    }
+    path.closeSubpath();
 
-    if (shape.toLower() == "square") {
-        painter.drawRoundedRect(rect, size * 5 / 32, size * 5 / 32);
+    // Style: filled = colored area, black border, text black or white (whichever is easier to
+    // read); outline = white area, border and text in the color; light = white area, black
+    // border, text in the color; dark = dark area, text in the color
+    QColor fill = color;
+    QColor border = Qt::black;
+    QColor text;
+    qreal borderWidth = size / 16.0;
+    if (style == "outline") {
+        fill = Qt::white;
+        border = color;
+        text = color;
+        borderWidth = size / 11.0;
+    } else if (style == "light") {
+        fill = Qt::white;
+        text = color;
+    } else if (style == "dark") {
+        fill = QColor(0x31, 0x30, 0x30);
+        text = color;
+    } else {
+        const qreal luminance = 0.299 * color.red() + 0.587 * color.green() + 0.114 * color.blue();
+        text = luminance > 160 ? Qt::black : Qt::white;
     }
-    else if (shape.toLower() == "circle") {
-        painter.drawEllipse(rect);
-    }
-    else if (shape.toLower() == "diamond") {
-        // Die Raute über 4 Punkte (Mitte oben, rechts, unten, links)
-        QPointF points[4] = {
-            QPointF(size / 2.0, rect.top()),
-            QPointF(rect.right(), size / 2.0),
-            QPointF(size / 2.0, rect.bottom()),
-            QPointF(rect.left(), size / 2.0)
-        };
-        painter.drawPolygon(points, 4);
-    }
-    else if (shape.toLower() == "triangle") {
-        // Das Dreieck über 3 Punkte
-        QPointF points[3] = {
-            QPointF(size / 2.0, rect.top()),
-            QPointF(rect.right(), rect.bottom()),
-            QPointF(rect.left(), rect.bottom())
-        };
-        painter.drawPolygon(points, 3);
-    }
+    painter.setBrush(fill);
+    painter.setPen(QPen(border, borderWidth));
+    painter.drawPath(path);
 
-    // If the background color is light, the text is black; otherwise, it is white.
-    qreal luminance = (0.299 * color.red() + 0.587 * color.green() + 0.114 * color.blue());
-    painter.setPen(luminance > 160 ? Qt::black : Qt::white);
-
+    // Font as large as the room inside the shape allows (long codes like "PG-13" get smaller)
     QFont font = painter.font();
     font.setBold(true);
-    // Let's start with a large font.
-    font.setPixelSize(size * 0.45);
-    painter.setFont(font);
-
-    // If the text is too wide (e.g., "PG-13"), reduce the font size.
-    if (painter.fontMetrics().horizontalAdvance(age) > rect.width() - 10) {
-        font.setPixelSize(size * 0.35);
-        painter.setFont(font);
+    int pixelSize = qRound(size * 0.45);
+    for (; pixelSize > size / 6; --pixelSize) {
+        font.setPixelSize(pixelSize);
+        const QFontMetricsF metrics(font);
+        if (metrics.horizontalAdvance(age) <= textRect.width() && metrics.capHeight() <= textRect.height()) {
+            break;
+        }
     }
-
-    // In triangles, the text often appears too high; adjust it slightly downwards here.
-    QRect textRect = rect;
-    if (shape.toLower() == "triangle") textRect.setTop(rect.top() + (size * 0.15));
-
-    painter.drawText(textRect, Qt::AlignCenter, age);
+    font.setPixelSize(pixelSize);
+    painter.setFont(font);
+    if (shape == "star") {
+        // Contour in the star color: readable where the code reaches over the arms, on light
+        // and dark backgrounds
+        const QFontMetricsF metrics(font);
+        QPainterPath textPath;
+        textPath.addText(textRect.center().x() - metrics.horizontalAdvance(age) / 2,
+                         textRect.center().y() + metrics.capHeight() / 2, font, age);
+        painter.strokePath(textPath, QPen(fill, size / 10.0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        painter.fillPath(textPath, text);
+    } else {
+        painter.setPen(text);
+        painter.drawText(textRect, Qt::AlignCenter, age);
+    }
     painter.end();
 
     // Same picture when selected: Qt would tint it with the accent color in the open list

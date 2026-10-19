@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "United Kingdom",
+        "de": "Vereinigtes Königreich"
+    },
+    "system": "BBFC",
+    "id": "uk-movie",
+    "ratings": [
+        {
+            "key": "U",
+            "code": "U",
+            "score": 100,
+            "label": "Universal – Suitable for all",
+            "description": "Universal – Suitable for all",
+            "color": "#0AC700",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 200,
+            "label": "Parental Guidance",
+            "description": "Parental Guidance",
+            "color": "#FBAD00",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 300,
+            "label": "Suitable for 12 years and over",
+            "description": "Suitable for 12 years and over",
+            "color": "#FF7D13",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "12A",
+            "code": "12A",
+            "score": 325,
+            "label": "Suitable for 12 years and over",
+            "description": "Suitable for 12 years and over",
+            "color": "#FF7D13",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "15",
+            "code": "15",
+            "score": 350,
+            "label": "Suitable only for 15 years and older",
+            "description": "Suitable only for 15 years and older",
+            "color": "#FB4F93",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 400,
+            "label": "Suitable only for adults",
+            "description": "Suitable only for adults",
+            "color": "#D70723",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "R18",
+            "code": "R18",
+            "score": 600,
+            "label": "To be shown only in specially licensed cinemas, or supplied only in licensed sex shops, and to adults only",
+            "description": "To be shown only in specially licensed cinemas, or supplied only in licensed sex shops, and to adults only",
+            "color": "#006ED2",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "country": {
+        "en": "Japan",
+        "de": "Japan"
+    },
+    "system": "Eirin",
+    "id": "jp-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#009944",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "PG12",
+            "code": "PG12",
+            "score": 200,
+            "label": "PG12",
+            "description": "",
+            "color": "#00A0E9",
+            "shape": "circle",
+            "style": "outline"
+        },
+        {
+            "key": "R15+",
+            "code": "R15+",
+            "score": 300,
+            "label": "R15+",
+            "description": "",
+            "color": "#E4007F",
+            "shape": "square",
+            "style": "outline"
+        },
+        {
+            "key": "R18+",
+            "code": "18+",
+            "score": 400,
+            "label": "R18+",
+            "description": "",
+            "color": "#E60012",
+            "shape": "square",
+            "style": "outline"
+        }
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Philippines",
+        "de": "Philippinen"
+    },
+    "system": "MTRCB",
+    "id": "ph-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#0F9027",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 300,
+            "label": "PG",
+            "description": "",
+            "color": "#2D6DB5",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R-13",
+            "code": "R-13",
+            "score": 325,
+            "label": "R-13",
+            "description": "",
+            "color": "#FED026",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R-16",
+            "code": "R-16",
+            "score": 375,
+            "label": "R-16",
+            "description": "",
+            "color": "#ED6F25",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "R-18",
+            "code": "R-18",
+            "score": 400,
+            "label": "R-18",
+            "description": "",
+            "color": "#DA0002",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

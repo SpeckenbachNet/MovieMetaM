@@ -1,0 +1,80 @@
+{
+    "country": {
+        "en": "Maldives",
+        "de": "Malediven"
+    },
+    "system": "NBC",
+    "id": "mv-movie",
+    "ratings": [
+        {
+            "key": "G",
+            "code": "G",
+            "score": 100,
+            "label": "G",
+            "description": "",
+            "color": "#35AC45",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 220,
+            "label": "PG",
+            "description": "",
+            "color": "#27A857",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12+",
+            "code": "12+",
+            "score": 340,
+            "label": "12+",
+            "description": "",
+            "color": "#0D9AF4",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "15+",
+            "code": "15+",
+            "score": 400,
+            "label": "15+",
+            "description": "",
+            "color": "#F6B43B",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18+",
+            "code": "18+",
+            "score": 460,
+            "label": "18+",
+            "description": "",
+            "color": "#FA431A",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18+R",
+            "code": "18+R",
+            "score": 480,
+            "label": "18+R",
+            "description": "",
+            "color": "#C42C2A",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "PU",
+            "code": "PU",
+            "score": 900,
+            "label": "For professional use only",
+            "description": "For professional use only",
+            "color": "#000000",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Germany",
+        "de": "Deutschland"
+    },
+    "system": "FSK",
+    "id": "de-movie",
+    "ratings": [
+        {
+            "key": "0",
+            "code": "FSK 0",
+            "score": 75,
+            "label": "ab 0 Jahren",
+            "description": "ab 0 Jahren",
+            "color": "#FFFFFF",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "6",
+            "code": "FSK 6",
+            "score": 100,
+            "label": "ab 6 Jahren",
+            "description": "ab 6 Jahren",
+            "color": "#FFCC00",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "12",
+            "code": "FSK 12",
+            "score": 200,
+            "label": "ab 12 Jahren",
+            "description": "ab 12 Jahren",
+            "color": "#009933",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "FSK 16",
+            "score": 500,
+            "label": "ab 16 Jahren",
+            "description": "ab 16 Jahren",
+            "color": "#0066CC",
+            "shape": "square",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "FSK 18",
+            "score": 600,
+            "label": "ab 18 Jahren",
+            "description": "ab 18 Jahren",
+            "color": "#CC0000",
+            "shape": "square",
+            "style": "filled"
+        }
+    ]
+}

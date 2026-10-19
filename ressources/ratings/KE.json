@@ -1,0 +1,50 @@
+{
+    "country": {
+        "en": "Kenya",
+        "de": "Kenia"
+    },
+    "system": "KFCB",
+    "id": "ke-movie",
+    "ratings": [
+        {
+            "key": "GE",
+            "code": "GE",
+            "score": 100,
+            "label": "GE",
+            "description": "",
+            "color": "#059546",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "PG",
+            "code": "PG",
+            "score": 220,
+            "label": "PG",
+            "description": "",
+            "color": "#FAF110",
+            "shape": "triangle",
+            "style": "filled"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 420,
+            "label": "16",
+            "description": "",
+            "color": "#2C3A8D",
+            "shape": "circle",
+            "style": "filled"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#E91B24",
+            "shape": "circle",
+            "style": "filled"
+        }
+    ]
+}

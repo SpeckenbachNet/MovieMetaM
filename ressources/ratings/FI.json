@@ -1,0 +1,60 @@
+{
+    "country": {
+        "en": "Finland",
+        "de": "Finnland"
+    },
+    "system": "KAVI",
+    "id": "fi-movie",
+    "ratings": [
+        {
+            "key": "S",
+            "code": "S",
+            "score": 100,
+            "label": "S",
+            "description": "",
+            "color": "#69C646",
+            "shape": "circle",
+            "style": "dark"
+        },
+        {
+            "key": "7",
+            "code": "7",
+            "score": 240,
+            "label": "7",
+            "description": "",
+            "color": "#E4EA08",
+            "shape": "circle",
+            "style": "dark"
+        },
+        {
+            "key": "12",
+            "code": "12",
+            "score": 340,
+            "label": "12",
+            "description": "",
+            "color": "#FAB214",
+            "shape": "circle",
+            "style": "dark"
+        },
+        {
+            "key": "16",
+            "code": "16",
+            "score": 420,
+            "label": "16",
+            "description": "",
+            "color": "#FAB214",
+            "shape": "circle",
+            "style": "dark"
+        },
+        {
+            "key": "18",
+            "code": "18",
+            "score": 460,
+            "label": "18",
+            "description": "",
+            "color": "#EE2939",
+            "shape": "circle",
+            "style": "dark"
+        }
+    ]
+}
