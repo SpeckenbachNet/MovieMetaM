@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.7.4 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.7.5 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---

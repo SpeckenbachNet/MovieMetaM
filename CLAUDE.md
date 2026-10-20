@@ -173,10 +173,9 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.7.4; numbers kept, 1 to 7 are done)
+## Open points (as of 0.7.5; numbers kept, 1 to 7 are done)
 
-8. Origin of some icons still to be clarified (`LICENSES.md`); unused
-   `ressources/images/statusgreen.svg` / `statusorange.svg` can go.
+8. Origin of some icons still to be clarified (`LICENSES.md`).
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted).
 10. Help topics (using the app, TMDB search, saving): write them last, when saving (4) and
