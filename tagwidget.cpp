@@ -161,11 +161,13 @@ void TagWidget::setupUi(const QString &placeholder)
     // Connections
     connect(m_lineEdit, &QLineEdit::returnPressed, this, &TagWidget::handleInputFinished);
     connect(delegate, &TagDelegate::removeRequested, this, &TagWidget::removeTag);
-    // Keyboard: Delete or Backspace removes the selected tag
+    // Keyboard: Delete or Backspace removes the selected tag (only a visibly selected one,
+    // not Qt's current index, which may be set without a selection)
     for (const QKeySequence &key : {QKeySequence(Qt::Key_Delete), QKeySequence(Qt::Key_Backspace)}) {
         auto *shortcut = new QShortcut(key, m_tagView, nullptr, nullptr, Qt::WidgetShortcut);
         connect(shortcut, &QShortcut::activated, this, [this]() {
-            removeTag(m_tagView->currentIndex());
+            const QModelIndexList selected = m_tagView->selectionModel()->selectedIndexes();
+            if (!selected.isEmpty()) removeTag(selected.first());
         });
     }
 
@@ -233,6 +235,8 @@ void TagWidget::removeTag(const QModelIndex &index)
 
     // Model operation: removeRow() removes the item at the given index.
     m_tagModel->removeRow(index.row());
+    // No tag selected afterwards: else Qt selects the next one and Delete would remove it too
+    m_tagView->selectionModel()->clear();
 
     // Update the internal list and the signal
     m_tagList = m_tagModel->stringList();
