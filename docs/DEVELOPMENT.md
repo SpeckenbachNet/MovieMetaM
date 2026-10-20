@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.7.6 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.7.7 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---
@@ -319,6 +319,11 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
   `{{qt}}`); die Sprache folgt dem Übersetzer.
 - Meldungen im Log (`qDebug`, `qWarning`, `errorOccurred`) sind Englisch und werden nicht mit
   `tr()` übersetzt.
+- **Qts eigene Texte** (Standardknöpfe „Ja“ / „Nein“ / „Abbrechen“, Dateidialog) stehen im Katalog
+  `qtbase_<Sprache>.qm`. `main.cpp` lädt ihn zusätzlich zum eigenen Katalog, in der Sprache der
+  App, aus `QLibraryInfo::TranslationsPath` (Linux: `/usr/share/qt6/translations`, Mac: das Qt aus
+  dem Installer). Fehlt die Datei, bleiben die Texte Englisch. **Beim Verpacken** (Windows, Mac-
+  Bundle) müssen die `qtbase_*.qm` mitgeliefert werden; noch nicht gelöst.
 
 ---
 
