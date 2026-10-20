@@ -182,7 +182,7 @@
         <translation>Metadaten in den Film speichern</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1620"/>
+        <location filename="../mainwin.cpp" line="1633"/>
         <location filename="../initialize.cpp" line="213"/>
         <source>Save all</source>
         <translation>Alle speichern</translation>
@@ -310,55 +310,64 @@
         <translation>Filmdateien</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1359"/>
+        <location filename="../mainwin.cpp" line="1365"/>
+        <location filename="../mainwin.cpp" line="1370"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1360"/>
+        <location filename="../mainwin.cpp" line="1366"/>
         <source>Really remove %n movie(s)?</source>
         <translation>
             <numerusform>%n Film wirklich entfernen?</numerusform>
             <numerusform>%n Filme wirklich entfernen?</numerusform>
         </translation>
     </message>
+    <message numerus="yes">
+        <location filename="../mainwin.cpp" line="1368"/>
+        <source>%n movie(s) have unsaved changes that will be lost.</source>
+        <translation>
+            <numerusform>%n Film hat ungespeicherte Änderungen, die verloren gehen.</numerusform>
+            <numerusform>%n Filme haben ungespeicherte Änderungen, die verloren gehen.</numerusform>
+        </translation>
+    </message>
     <message>
-        <location filename="../mainwin.cpp" line="1405"/>
+        <location filename="../mainwin.cpp" line="1418"/>
         <source>Please enter a search term</source>
         <translation>Bitte einen Suchbegriff eingeben</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1499"/>
+        <location filename="../mainwin.cpp" line="1512"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation>Kein TMDB-Token: Die Filmsuche ist nicht verfügbar.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1522"/>
+        <location filename="../mainwin.cpp" line="1535"/>
         <source>The movie data could not be loaded.</source>
         <translation>Die Filmdaten konnten nicht geladen werden.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1579"/>
+        <location filename="../mainwin.cpp" line="1592"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation>Einstellungen gespeichert. Die Sprache ändert sich nach einem Neustart.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1580"/>
+        <location filename="../mainwin.cpp" line="1593"/>
         <source>Settings saved.</source>
         <translation>Einstellungen gespeichert.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1584"/>
+        <location filename="../mainwin.cpp" line="1597"/>
         <source>Error: could not save the settings!</source>
         <translation>Fehler: Einstellungen konnten nicht gespeichert werden!</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1617"/>
+        <location filename="../mainwin.cpp" line="1630"/>
         <source>Unsaved changes</source>
         <translation>Ungespeicherte Änderungen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1618"/>
+        <location filename="../mainwin.cpp" line="1631"/>
         <source>%n movie(s) have unsaved changes.</source>
         <translation>
             <numerusform>%n Film hat ungespeicherte Änderungen.</numerusform>
@@ -366,17 +375,18 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1619"/>
+        <location filename="../mainwin.cpp" line="1632"/>
         <source>Save the changes before closing?</source>
         <translation>Änderungen vor dem Schließen speichern?</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1621"/>
+        <location filename="../mainwin.cpp" line="1634"/>
         <source>Discard</source>
         <translation>Verwerfen</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1622"/>
+        <location filename="../mainwin.cpp" line="1371"/>
+        <location filename="../mainwin.cpp" line="1635"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>

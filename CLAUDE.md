@@ -137,7 +137,8 @@ Linux).
   5 min). Keys with (c) are UTF-8 strings in TagLib. `iTunMOVI` is built in Apple's layout (the
   reader needs it); `codirectors` are kept; `(c)ART` / `aART` are not touched; an unchanged cover
   is not written again. Closing with unsaved changes asks (`closeEvent`: Save all / Discard /
-  Cancel; "Save all" closes by itself once `savingFinished` had no error).
+  Cancel; "Save all" closes by itself once `savingFinished` had no error). "Remove" under the movie list says so
+  when a selected movie has unsaved changes (Remove / Cancel, Cancel is the default).
 - `bubble.*` – `Bubble`: rounded note window (colors of the fields, mouse events go through);
   `TooltipFilter` (installed in `main.cpp`) shows ALL tooltips of the app as a `Bubble` below the
   pointer instead of the system's square one (item views: `ToolTipRole` of the entry under the mouse).
@@ -178,7 +179,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.7.8; numbers kept, 1 to 8 are done)
+## Open points (as of 0.7.9; numbers kept, 1 to 8 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted).

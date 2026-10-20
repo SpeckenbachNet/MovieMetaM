@@ -1355,11 +1355,24 @@ void MainWin::onRemoveFilesButtonClicked()
 
     if (selectedRows.isEmpty()) return;
 
-    // Security check (optional)
-    auto answer = QMessageBox::question(this, tr("Remove"),
-        tr("Really remove %n movie(s)?", "", selectedRows.size())
-    );
-    if (answer != QMessageBox::Yes) return;
+    // Security check; movies with unsaved changes lose them: say so (form up to date first)
+    validateAndRefreshChanges();
+    int modified = 0;
+    for (const QModelIndex &index : std::as_const(selectedRows)) {
+        const QString key = index.model()->index(index.row(), 0).data(Qt::UserRole).toString();
+        if (m_loadedMovies.value(key).status == "modified") ++modified;
+    }
+    QMessageBox box(modified > 0 ? QMessageBox::Warning : QMessageBox::Question, tr("Remove"),
+                    tr("Really remove %n movie(s)?", "", selectedRows.size()), QMessageBox::NoButton, this);
+    if (modified > 0) {
+        box.setInformativeText(tr("%n movie(s) have unsaved changes that will be lost.", "", modified));
+    }
+    QPushButton *removeButton = box.addButton(tr("Remove"), QMessageBox::AcceptRole);
+    QPushButton *cancelButton = box.addButton(tr("Cancel"), QMessageBox::RejectRole);
+    box.setDefaultButton(modified > 0 ? cancelButton : removeButton);
+    box.setEscapeButton(cancelButton);
+    box.exec();
+    if (box.clickedButton() != removeButton) return;
 
     // To prevent the indexes from becoming invalid when deleted (because they shift down),
     // we need to sort them and delete them from BACK to the front.
