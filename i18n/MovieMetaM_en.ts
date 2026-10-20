@@ -25,11 +25,21 @@
     </message>
     <message>
         <location filename="../helppage.cpp" line="105"/>
-        <source>About %1</source>
+        <source>Movie Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="105"/>
+        <source>Edit, cover, age rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helppage.cpp" line="106"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="107"/>
         <source>Version, license, credits</source>
         <translation type="unfinished"></translation>
     </message>
@@ -192,8 +202,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1651"/>
         <location filename="../initialize.cpp" line="213"/>
+        <location filename="../mainwin.cpp" line="1651"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -469,8 +479,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1044"/>
         <location filename="../initialize.cpp" line="430"/>
+        <location filename="../mainwin.cpp" line="1044"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -106,7 +106,7 @@ Linux).
   `help/<de|en>/<topic>.md` (`Help.qrc`), placeholders `{{version}}`, `{{qt}}`; language like
   the translator. Topics follow the screen from left to right (`enum Topic`, the help opens
   with the first), "About MovieMetaM" last (website software.speckenbach.net/moviemetam, TMDB
-  notice with logo). Texts address the reader with "du". So far: Movie List, About.
+  notice with logo). Texts address the reader with "du". So far: Movie List, Movie Info, About.
 - `mediainfom.*` – reads MP4 boxes (metadata, iTunMOVI XML, cover); `moviedata.*` – data of a movie.
 - `tagwidget.*` – tag input (cast, directors, ...): a × on hover (`TagDelegate` inside
   `tagwidget.cpp`) removes a tag, also Delete/Backspace on the selected one
@@ -182,7 +182,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.0; numbers kept, 1 to 8 are done)
+## Open points (as of 0.8.1; numbers kept, 1 to 8 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted).
@@ -191,7 +191,7 @@ Linux).
     1. Movie List / Add, select, remove / `add` / `movielist` – **done (0.8.0)**
     2. Movie Info / Edit, cover, age rating / `app_icon` / `movieinfo` – fields, tags (×, drag,
        Delete), cover (drag in and out), video size / HD, age rating (system of the file,
-       unknown entries "prefix: code"), content advisory – **next**
+       unknown entries "prefix: code"), content advisory – **done (0.8.1)**
     3. Movie Search / Find and apply TMDB data / `search` / `moviesearch` – search, poster
        preview, double click → tab "Data", poster picker, "Apply" (empty values change nothing)
     4. Saving / Save, safe saving / `save` / `saving` – Save / Save all, the check afterwards,

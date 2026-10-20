@@ -3,6 +3,8 @@
     <qresource prefix="/help">
         <file alias="de/movielist.md">help/de/movielist.md</file>
         <file alias="en/movielist.md">help/en/movielist.md</file>
+        <file alias="de/movieinfo.md">help/de/movieinfo.md</file>
+        <file alias="en/movieinfo.md">help/en/movieinfo.md</file>
         <file alias="de/about.md">help/de/about.md</file>
         <file alias="en/about.md">help/en/about.md</file>
     </qresource>
