@@ -89,6 +89,9 @@ Linux).
 - `main.cpp` – settings, translator, setup dialog on first start, main window.
 - `mainwin.*`, `initialize.cpp` – main window: movie list (left), movie info (middle),
   TMDB search (right, tabs Results / Data / Cover); pages settings and help.
+  Status bar: `showColumnStatus(StatusColumn, text)` shows a message in a label below its
+  column (labels follow the splitter, `updateStatusLabels()`); general messages (settings) use
+  `statusBar->showMessage()`, which hides the labels meanwhile.
 - `helppage.*` – help page (own ToolbarM, topics list, Markdown text): texts in
   `help/<de|en>/<topic>.md` (`Help.qrc`), placeholders `{{version}}`, `{{qt}}`; language like
   the translator. For now one topic "About MovieMetaM" (website
@@ -130,7 +133,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.4.7; numbers kept, 1 is done)
+## Open points (as of 0.4.8; numbers kept, 1 is done)
 
 2. UI overhaul, further steps: more help topics (using the app, TMDB search, saving); the
    setup dialog's combo boxes with `applyComboStyle`. (Settings page: cards in a centered
