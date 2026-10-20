@@ -69,7 +69,11 @@ void ToastM::present(QWidget *target, const QString &text, Level level, int msec
 {
     m_text = text;
     m_level = level;
-    if (msec <= 0) msec = (level == Level::Error) ? kErrorMsec : kInfoMsec;
+    if (msec <= 0) {
+        msec = (level == Level::Error)
+                   ? kErrorMsec
+                   : qBound(kInfoMinMsec, kInfoBaseMsec + kInfoPerCharMsec * int(text.size()), kInfoMaxMsec);
+    }
 
     // Size: the text wrapped to at most 80 % of the target
     const QFontMetrics fm(font());

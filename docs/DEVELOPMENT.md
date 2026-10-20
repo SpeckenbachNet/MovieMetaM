@@ -382,7 +382,7 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
   (reiner Text). Die Klasse `ToolbarM` aus `../libraries` bleibt unverändert.
 - **Meldungen** als Toast (`ToastM`): kurz über der Spalte, zu der sie gehören, mit sanftem Ein-
   und Ausblenden; Klicks gehen hindurch. `MainWin::showColumnStatus(StatusColumn, Text, Level,
-  Dauer)`; Hinweise 3 s, Fehler 5 s. Eine Statusleiste gibt es nicht.
+  Dauer)`; Hinweise nach der Länge des Textes (1 s + 35 ms je Zeichen, 1,5 bis 4 s), Fehler 5 s. Eine Statusleiste gibt es nicht.
 - **Spende:** Kaffee-Button in der Werkzeugleiste (orange auf normalem Button), öffnet
   `https://paypal.me/michaelspeckenbach`; derselbe Link steht in der Hilfe.
 - **Drag and Drop unter Wayland:** Die Daten schon in `dragEnterEvent` lesen. Im `dropEvent`
