@@ -4,6 +4,9 @@ Editor for the metadata of movie files (Qt 6 Widgets, C++17, CMake): reads title
 directors, description, genre, age rating and cover from MP4 files, finds movie data on TMDB.
 Developer: Michael Speckenbach (SpeckenbachNet). Repository: github.com/SpeckenbachNet/MovieMetaM.
 
+Developer documentation (German, after the model of PhotoBoothM): `docs/DEVELOPMENT.md` – keep it
+up to date with larger changes.
+
 ## Working with the user
 
 - The user writes **German**; answer in German. Code, comments and `tr()` source texts are
@@ -88,11 +91,12 @@ Linux).
 
 - `main.cpp` – settings, translator, setup dialog on first start, main window.
 - `mainwin.*`, `initialize.cpp` – main window: movie list (left), movie info (middle),
-  TMDB search (right, tabs Results / Data / Cover); pages settings and help.
-  Status bar: `showColumnStatus(StatusColumn, text)` shows a message in a label below its
-  column, centered and with the edges of the boxes above (labels follow the splitter,
-  `updateStatusLabels()`); general messages (settings) use
-  `statusBar->showMessage()`, which hides the labels meanwhile.
+  TMDB search (right, tabs Results / Data / Cover); pages settings and help. Settings page:
+  cards in a centered column, so far one card "General" (`settingsGeneralCard`, styled in
+  `initializeForm()`).
+  No status bar: messages are toasts (`showColumnStatus(StatusColumn, text, level, msec)` →
+  `ToastM::show`), centered over the column they belong to (`StatusColumn::Window`: over the
+  whole window); Info 3 s, Error 5 s.
 - `helppage.*` – help page (own ToolbarM, topics list, Markdown text): texts in
   `help/<de|en>/<topic>.md` (`Help.qrc`), placeholders `{{version}}`, `{{qt}}`; language like
   the translator. For now one topic "About MovieMetaM" (website
@@ -108,6 +112,9 @@ Linux).
   Japanese data). The data languages are TMDB's primary translations, names from `QLocale`.
 - `twolinedelegate.*` – entries of movie list and search results; `posterpreview.*` – enlarged
   poster (200×300) when the mouse rests on a search result (full poster in `kPosterRole`).
+- `toastm.*` – short message over the content, fades in and out, mouse clicks go through; one
+  per window, a new message replaces the old one; position Center / Top / Bottom inside a target
+  widget, level Info / Error. May move to `../libraries` once it has proved itself.
 - `themecolors.h` – shared colors and shapes (`FieldLook`, `apply…Style`).
 - `agerating.*` – age rating systems as data: one JSON file per country
   (`ressources/ratings/<code>.json`, `Ratings.qrc`; country name en/de, system, id, steps with
@@ -134,11 +141,8 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.4.9; numbers kept, 1 and 3 are done)
+## Open points (as of 0.4.10; numbers kept, 1, 2 and 3 are done)
 
-2. UI overhaul, further steps: more help topics (using the app, TMDB search, saving); the
-   setup dialog's combo boxes with `applyComboStyle`. (Settings page: cards in a centered
-   column, so far one card "General" – `settingsGeneralCard`, styled in `initializeForm()`.)
 4. Saving to the MP4 file is not implemented (saveMovieDetails / save all are empty) – needs a
    design decision first (own MP4 writer or a library like TagLib).
 5. Applying a TMDB search result (double click only logs the id); the tabs "Data" and "Cover"
@@ -149,3 +153,5 @@ Linux).
    `ressources/images/statusgreen.svg` / `statusorange.svg` can go.
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted).
+10. Help topics (using the app, TMDB search, saving): write them last, when saving (4) and
+    applying a search result (5) work.

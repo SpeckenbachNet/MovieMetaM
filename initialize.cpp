@@ -63,12 +63,6 @@ void MainWin::initializeForm() {
     applyComboStyle(ui->dataLanguageSettingsComboBox);
     applyTabStyle(ui->tabWidget);
 
-    // Status bar recognizable as its own bar on every system (macOS draws a line, Linux nothing)
-    ui->statusBar->setStyleSheet(QStringLiteral(
-        "QStatusBar { border: none; border-top: 1px solid %1; background: %2; }")
-        .arg(FieldLook().border.name(), accentGrey(palette(), 0.06).name()));
-    initializeStatusBar();
-
     // Columns: on the first start the middle (movie info) gets the extra width, the lists keep
     // their preferred width; afterwards window and columns as the user left them
     ui->splitter->setStretchFactor(1, 1);
@@ -345,64 +339,6 @@ void MainWin::initializeDragAndDrop() {
             ui->fileListTableView->viewport(), qOverload<>(&QWidget::update));
 }
 
-// One label below each column of the splitter; they follow the columns when these are moved
-void MainWin::initializeStatusBar()
-{
-    m_statusContainer = new QWidget(this);
-    m_statusContainer->setMinimumHeight(fontMetrics().height() + 4);
-    m_statusContainer->installEventFilter(this);
-    for (int i = 0; i < 3; ++i) {
-        m_statusLabels[i] = new QLabel(m_statusContainer);
-        m_statusLabels[i]->setAlignment(Qt::AlignCenter);
-        m_statusTimers[i] = new QTimer(this);
-        m_statusTimers[i]->setSingleShot(true);
-        connect(m_statusTimers[i], &QTimer::timeout, this, [this, i] {
-            m_statusTexts[i].clear();
-            updateStatusLabels();
-        });
-        ui->splitter->widget(i)->installEventFilter(this);
-    }
-    ui->statusBar->addWidget(m_statusContainer, 1);
-    connect(ui->splitter, &QSplitter::splitterMoved, this, &MainWin::updateStatusLabels);
-}
-
-void MainWin::updateStatusLabels()
-{
-    m_statusUpdatePending = false;
-    const int origin = m_statusContainer->mapTo(this, QPoint(0, 0)).x();
-    for (int i = 0; i < 3; ++i) {
-        QWidget *column = ui->splitter->widget(i);
-        // Same edges as the boxes in the column (its layout margins)
-        const QMargins margins = column->layout() ? column->layout()->contentsMargins() : QMargins();
-        const int x = column->mapTo(this, QPoint(0, 0)).x() - origin + margins.left();
-        const int width = column->width() - margins.left() - margins.right();
-        m_statusLabels[i]->setGeometry(x, 0, width, m_statusContainer->height());
-        const int textWidth = width - 4;
-        m_statusLabels[i]->setText(m_statusLabels[i]->fontMetrics().elidedText(
-            m_statusTexts[i], Qt::ElideRight, textWidth));
-        m_statusLabels[i]->setToolTip(m_statusTexts[i]);
-    }
-}
-
-void MainWin::showColumnStatus(StatusColumn column, const QString &text, int msec)
-{
-    const int i = static_cast<int>(column);
-    m_statusTexts[i] = text;
-    m_statusTimers[i]->start(msec);
-    updateStatusLabels();
-}
-
-bool MainWin::eventFilter(QObject *watched, QEvent *event)
-{
-    // The layout is not finished when the event arrives: update once afterwards
-    if ((event->type() == QEvent::Resize || event->type() == QEvent::Move
-         || event->type() == QEvent::Show) && m_statusContainer && !m_statusUpdatePending) {
-        m_statusUpdatePending = true;
-        QTimer::singleShot(0, this, &MainWin::updateStatusLabels);
-    }
-    return QMainWindow::eventFilter(watched, event);
-}
-
 void MainWin::initializeConnects() {
     // ----- Connect finished-signal with our slot
     connect(m_ApiNetworkManager, &QNetworkAccessManager::finished,
@@ -428,7 +364,7 @@ void MainWin::initializeConnects() {
         onDataChanged();
     };
     auto coverFailed = [this]() {
-        showColumnStatus(StatusColumn::Info, tr("The image could not be loaded."));
+        showColumnStatus(StatusColumn::Info, tr("The image could not be loaded."), ToastM::Level::Error);
     };
 
     // Local file or image data: the label already has the picture
