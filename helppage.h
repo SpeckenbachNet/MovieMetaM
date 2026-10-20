@@ -27,12 +27,12 @@ class ToolbarM;
 // Help page: own ToolbarM on top ("Back", title), the topics in a list on the left, the text on
 // the right (like PhotoBoothM's HelpPage, in the look of MovieMetaM). Works without internet:
 // the texts are Markdown files in the resources (help/<language>/<topic>.md), German or English
-// like the app. For now there is one topic: the info about the app (version, license, credits).
+// like the app. The topics follow the screen from left to right, the info about the app last.
 class HelpPage : public QWidget {
     Q_OBJECT
 
 public:
-    enum Topic { About };   // order in the list
+    enum Topic { MovieList, About };   // order in the list
 
     explicit HelpPage(QWidget *parent = nullptr);
 

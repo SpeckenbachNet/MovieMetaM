@@ -101,6 +101,7 @@ HelpPage::HelpPage(QWidget *parent)
     layout->addLayout(content, 1);
 
     // Order as in enum Topic
+    addTopic(":icons/add", tr("Movie List"), tr("Add, select, remove"), "movielist");
     addTopic(":icons/info", tr("About %1").arg(QStringLiteral(APP_NAME)),
              tr("Version, license, credits"), "about");
     // The separator lines depend on the neighbour's selection: repaint the whole list
@@ -111,7 +112,7 @@ HelpPage::HelpPage(QWidget *parent)
             });
 
     restyle();
-    showTopic(About);
+    showTopic(MovieList);
 }
 
 void HelpPage::addTopic(const QString &icon, const QString &title, const QString &subtitle, const QString &file)

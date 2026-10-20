@@ -15,11 +15,21 @@
     </message>
     <message>
         <location filename="../helppage.cpp" line="104"/>
-        <source>About %1</source>
+        <source>Movie List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="104"/>
+        <source>Add, select, remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helppage.cpp" line="105"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="106"/>
         <source>Version, license, credits</source>
         <translation type="unfinished"></translation>
     </message>
