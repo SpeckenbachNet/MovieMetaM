@@ -18,6 +18,69 @@
 #include "tagwidget.h"
 #include "themecolors.h"
 
+#include <QMouseEvent>
+#include <QPainter>
+#include <QShortcut>
+#include <QStyledItemDelegate>
+
+namespace {
+
+// Tags are drawn by the style sheet; this delegate adds a × at the right end of the tag under
+// the mouse. Only a click on the × removes the tag (a click on the text selects it or starts
+// dragging to reorder).
+class TagDelegate : public QStyledItemDelegate
+{
+    Q_OBJECT
+
+public:
+    using QStyledItemDelegate::QStyledItemDelegate;
+
+    // Same as the margins in the style sheet: the visible tag inside the item rect
+    static QRect tagRect(const QRect &itemRect) { return itemRect.adjusted(2, 4, -2, 0); }
+
+    static QRectF crossRect(const QRect &itemRect)
+    {
+        const QRect tag = tagRect(itemRect);
+        const qreal size = 7.0;
+        return QRectF(tag.right() - 7.0 - size, tag.center().y() - size / 2.0 + 0.5, size, size);
+    }
+
+    void paint(QPainter *painter, const QStyleOptionViewItem &option,
+               const QModelIndex &index) const override
+    {
+        QStyledItemDelegate::paint(painter, option, index);
+        if (!(option.state & QStyle::State_MouseOver)) return;
+
+        painter->save();
+        painter->setRenderHint(QPainter::Antialiasing);
+        painter->setPen(QPen(option.palette.color(QPalette::HighlightedText), 1.5, Qt::SolidLine, Qt::RoundCap));
+        const QRectF cross = crossRect(option.rect);
+        painter->drawLine(cross.topLeft(), cross.bottomRight());
+        painter->drawLine(cross.topRight(), cross.bottomLeft());
+        painter->restore();
+    }
+
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
+                     const QModelIndex &index) override
+    {
+        if (event->type() == QEvent::MouseButtonRelease) {
+            const auto *mouse = static_cast<QMouseEvent *>(event);
+            // A bit more room than the drawn × to hit it easily
+            const QRectF hit = crossRect(option.rect).adjusted(-4, -4, 4, 4);
+            if (mouse->button() == Qt::LeftButton && hit.contains(mouse->position())) {
+                emit removeRequested(index);
+                return true;
+            }
+        }
+        return QStyledItemDelegate::editorEvent(event, model, option, index);
+    }
+
+signals:
+    void removeRequested(const QModelIndex &index);
+};
+
+} // namespace
+
 TagWidget::TagWidget(
     const QString &placeholder, const QString &separator,
     QWidget *parent
@@ -62,15 +125,19 @@ void TagWidget::setupUi(const QString &placeholder)
     m_tagView->setModel(m_tagModel);
 
     // Lower part of the box; items in the accent color of the system, on hover mixed a bit
-    // towards the text color (lighter in dark themes, darker in light ones)
+    // towards the text color (lighter in dark themes, darker in light ones); the selected tag
+    // (target of the Delete key) the same. Room on the right for the × (TagDelegate).
     const QColor accent = palette().color(QPalette::Highlight);
     const QString tagColor = accent.name();
     const QString hoverColor = mixColor(accent, palette().color(QPalette::WindowText), 0.20).name();
     applyBoxStyle(m_tagView, false, FieldCorners::Bottom,
         "QListView {font-size: 12px; outline: 0;}"
-        "QListView::item { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + tagColor + "; color: palette(highlighted-text); border-radius: 5px;}"
-        "QListView::item:hover { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 6px; background-color: " + hoverColor + "; color: palette(highlighted-text); border-radius: 5px;}"
+        "QListView::item { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 20px 2px 6px; background-color: " + tagColor + "; color: palette(highlighted-text); border-radius: 5px;}"
+        "QListView::item:hover, QListView::item:selected { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 20px 2px 6px; background-color: " + hoverColor + "; color: palette(highlighted-text); border-radius: 5px;}"
     );
+    auto *delegate = new TagDelegate(m_tagView);
+    m_tagView->setItemDelegate(delegate);
+    m_tagView->setMouseTracking(true);   // × follows the mouse
 
     // Create lineedit
     m_lineEdit = new QLineEdit(this);
@@ -93,7 +160,14 @@ void TagWidget::setupUi(const QString &placeholder)
 
     // Connections
     connect(m_lineEdit, &QLineEdit::returnPressed, this, &TagWidget::handleInputFinished);
-    connect(m_tagView, &QListView::clicked, this, &TagWidget::removeTagByClick);
+    connect(delegate, &TagDelegate::removeRequested, this, &TagWidget::removeTag);
+    // Keyboard: Delete or Backspace removes the selected tag
+    for (const QKeySequence &key : {QKeySequence(Qt::Key_Delete), QKeySequence(Qt::Key_Backspace)}) {
+        auto *shortcut = new QShortcut(key, m_tagView, nullptr, nullptr, Qt::WidgetShortcut);
+        connect(shortcut, &QShortcut::activated, this, [this]() {
+            removeTag(m_tagView->currentIndex());
+        });
+    }
 
     // The safest connects for drag & drop:
     connect(m_tagModel, &QAbstractItemModel::rowsMoved, this, &TagWidget::onRowsMoved);
@@ -153,7 +227,7 @@ QString TagWidget::getTagsCommaSeperated() const {
     return list.join(", ");       // Klebt alles mit Komma und Leerzeichen zusammen
 }
 
-void TagWidget::removeTagByClick(const QModelIndex &index)
+void TagWidget::removeTag(const QModelIndex &index)
 {
     if (!index.isValid()) return;
 
@@ -214,3 +288,5 @@ void TagWidget::handleInputFinished()
     m_tagList = currentTags;
     emit tagsChanged(m_tagList);
 }
+
+#include "tagwidget.moc"
