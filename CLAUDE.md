@@ -104,7 +104,8 @@ Linux).
 - `mediainfom.*` – reads MP4 boxes (metadata, iTunMOVI XML, cover); `moviedata.*` – data of a movie.
 - `tagwidget.*` – tag input (cast, directors, ...): a × on hover (`TagDelegate` inside
   `tagwidget.cpp`) removes a tag, also Delete/Backspace on the selected one
-  (afterwards no tag is selected; Escape or leaving the list unselects); a click on the text
+  (afterwards no tag is selected; Escape, a click outside the list – also on an
+  empty area, app-wide event filter – or leaving it with Tab unselects); a click on the text
   selects or drags to reorder; `imagelabelm.*` – cover: paints itself
   (rounded, sharp), drag and drop in (`coverDropped` / `coverUrlDropped`) and out;
   `tableviewm.*` – movie list (`QListView`) with file drop; `setupdialog.*` – first start.
@@ -172,7 +173,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.7.2; numbers kept, 1 to 6 are done)
+## Open points (as of 0.7.3; numbers kept, 1 to 6 are done)
 
 7. The old TMDB token is in the git history: revoke it at TMDB and use a new one.
 8. Origin of some icons still to be clarified (`LICENSES.md`); unused
