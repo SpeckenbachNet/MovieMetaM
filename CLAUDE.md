@@ -182,7 +182,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.4; numbers kept, 1 to 8 are done)
+## Open points (as of 0.8.5; numbers kept, 1 to 8 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted).
@@ -201,7 +201,7 @@ Linux).
        a restart) vs. data language (at once), rating system only for movies without one, safe
        saving → refers to Saving – **done (0.8.4)**
     6. About: license section to "du"; credits without Lucide, Material Icons, SVG Repo (all
-       icons are own since 0.7.6), check "symbols from churchWorshipM"
+       icons are own since 0.7.6), no more "symbols from churchWorshipM" – **done (0.8.5)**
     Own icons for Movie List / Movie Info maybe later.
 11. Movie list: no state for a file that could not be read. `MovieData::fromFile()` only logs
     the reader's errors (`qWarning`); the movie is listed green with empty fields (also when the

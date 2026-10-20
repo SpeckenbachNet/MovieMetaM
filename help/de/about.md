@@ -19,7 +19,7 @@ Gefällt dir MovieMetaM? Spendier mir einen Kaffee: [paypal.me/michaelspeckenbac
 
 © 2026 Michael Speckenbach
 
-MovieMetaM ist freie Software: Sie können sie unter den Bedingungen der **GNU General Public License**, Version 3 oder (nach Ihrer Wahl) jeder späteren Version, weitergeben und/oder verändern. Das Programm wird ohne jede Gewährleistung bereitgestellt. Den Lizenztext finden Sie unter [gnu.org/licenses](https://www.gnu.org/licenses/).
+MovieMetaM ist freie Software: Du kannst sie unter den Bedingungen der **GNU General Public License**, Version 3 oder (nach deiner Wahl) jeder späteren Version, weitergeben und/oder verändern. Das Programm wird ohne jede Gewährleistung bereitgestellt. Den Lizenztext findest du unter [gnu.org/licenses](https://www.gnu.org/licenses/).
 
 Quellcode: [github.com/SpeckenbachNet/MovieMetaM](https://github.com/SpeckenbachNet/MovieMetaM)
 
@@ -33,6 +33,4 @@ MovieMetaM sucht Filmdaten über die API von [The Movie Database (TMDB)](https:/
 
 - **Qt** – The Qt Company, LGPL v3
 - **TagLib** – schreibt die Tags in die Filmdateien, LGPL v2.1 oder MPL 1.1
-- **Lucide** – Symbole, ISC-Lizenz
-- **Material Icons** – Google, Apache License 2.0
-- Weitere Symbole aus **churchWorshipM** und von **SVG Repo**
+- Die Symbole und das Programmsymbol sind eigene Zeichnungen, ebenfalls GPL v3.
