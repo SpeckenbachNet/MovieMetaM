@@ -85,3 +85,13 @@ void TableViewM::dropEvent(QDropEvent *event)
 
     event->acceptProposedAction();
 }
+
+void TableViewM::mousePressEvent(QMouseEvent *event)
+{
+    // A click on the empty area would clear the selection while the form still shows a movie
+    if (!indexAt(event->pos()).isValid()) {
+        event->accept();
+        return;
+    }
+    QListView::mousePressEvent(event);
+}

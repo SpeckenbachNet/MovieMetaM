@@ -19,6 +19,7 @@
 
 #include <QListView>
 #include <QDragEnterEvent>
+#include <QMouseEvent>
 #include <QMimeData>
 
 // Movie list: a list (not a table), so the style sheet can draw each entry as one
@@ -38,6 +39,7 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
 
 };
 
