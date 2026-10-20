@@ -43,6 +43,9 @@ public:
 signals:
     void tagsChanged(const QStringList &newTags);
 
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override; // tag list loses the focus
+
 private slots:
     void handleInputFinished();
     void removeTag(const QModelIndex &index); // × of a tag clicked or Delete pressed

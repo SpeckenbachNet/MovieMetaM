@@ -170,11 +170,26 @@ void TagWidget::setupUi(const QString &placeholder)
             if (!selected.isEmpty()) removeTag(selected.first());
         });
     }
+    // The selection only serves the Delete key: Escape or leaving the list unselects
+    auto *escape = new QShortcut(QKeySequence(Qt::Key_Escape), m_tagView, nullptr, nullptr, Qt::WidgetShortcut);
+    connect(escape, &QShortcut::activated, m_tagView->selectionModel(), &QItemSelectionModel::clear);
+    m_tagView->installEventFilter(this);
 
     // The safest connects for drag & drop:
     connect(m_tagModel, &QAbstractItemModel::rowsMoved, this, &TagWidget::onRowsMoved);
     connect(m_tagModel, &QAbstractItemModel::layoutChanged, this, &TagWidget::onRowsMoved);
     connect(m_tagModel, &QAbstractItemModel::dataChanged, this, &TagWidget::onRowsMoved);
+}
+
+bool TagWidget::eventFilter(QObject *watched, QEvent *event)
+{
+    // Focus elsewhere: without the focus the Delete key does nothing, the selection would only
+    // mislead (a popup such as a context menu keeps it)
+    if (watched == m_tagView && event->type() == QEvent::FocusOut
+        && static_cast<QFocusEvent *>(event)->reason() != Qt::PopupFocusReason) {
+        m_tagView->selectionModel()->clear();
+    }
+    return QWidget::eventFilter(watched, event);
 }
 
 void TagWidget::onRowsMoved() {

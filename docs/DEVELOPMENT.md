@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.7.1 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.7.2 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---
@@ -85,7 +85,7 @@ Hinweise:
 | `mp4writer.*` | schreibt die Daten mit TagLib in die MP4-Datei, direkt oder über eine Kopie (Abschnitt 4) |
 | `mediainfom.*` | liest MP4-Boxen: Metadaten, `iTunMOVI`-XML, Cover |
 | `moviedata.*` | Daten eines Films, Hilfsfunktionen (`getItunExtc()`, Säubern von Texten) |
-| `tagwidget.*` | Tag-Eingabe (Besetzung, Regie, Drehbuch, Produktion); beim Überfahren zeigt ein Tag rechts ein ×, nur ein Klick darauf entfernt ihn (Entf-/Rücktaste: der gewählte Tag; danach ist kein Tag gewählt), ein Klick auf den Text wählt aus oder zieht zum Umsortieren |
+| `tagwidget.*` | Tag-Eingabe (Besetzung, Regie, Drehbuch, Produktion); beim Überfahren zeigt ein Tag rechts ein ×, nur ein Klick darauf entfernt ihn (Entf-/Rücktaste: der gewählte Tag; danach ist kein Tag gewählt; Esc oder ein Klick woanders heben die Auswahl auf), ein Klick auf den Text wählt aus oder zieht zum Umsortieren |
 | `imagelabelm.*` | Cover: zeichnet sich selbst, Drag and Drop hinein und hinaus |
 | `tableviewm.*` | Filmliste (`QListView`) mit Dateiablage; Klicks auf leere Fläche ändern die Auswahl nicht |
 | `twolinedelegate.*` | Einträge von Filmliste und Suchergebnissen |
