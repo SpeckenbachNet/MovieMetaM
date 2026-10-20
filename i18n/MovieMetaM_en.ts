@@ -45,11 +45,21 @@
     </message>
     <message>
         <location filename="../helppage.cpp" line="107"/>
-        <source>About %1</source>
+        <source>Saving</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="107"/>
+        <source>Save, safe saving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helppage.cpp" line="108"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="109"/>
         <source>Version, license, credits</source>
         <translation type="unfinished"></translation>
     </message>
