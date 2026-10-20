@@ -55,6 +55,7 @@
 #include <qcombobox.h>
 
 #include "agerating.h"
+#include "infoicon.h"
 #include "languages.h"
 #include "moviedata.h"
 #include "posterpicker.h"

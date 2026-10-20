@@ -177,6 +177,15 @@ void MainWin::initializeComboBoxes() {
     // Settings: write into a copy first (slow, but safe)
     m_safeSave = settings.value("General/SafeSave", false).toBool();
     ui->safeSaveCheckBox->setChecked(m_safeSave);
+    // The check box with the info icon (the note is its tooltip) in one row of the form
+    auto *safeSaveRow = new QWidget(ui->settingsGeneralCard);
+    auto *safeSaveLayout = new QHBoxLayout(safeSaveRow);
+    safeSaveLayout->setContentsMargins(0, 0, 0, 0);
+    ui->settingsGeneralForm->removeWidget(ui->safeSaveCheckBox);
+    safeSaveLayout->addWidget(ui->safeSaveCheckBox);
+    safeSaveLayout->addWidget(new InfoIcon(InfoIcon::savingNote(), safeSaveRow));
+    safeSaveLayout->addStretch();
+    ui->settingsGeneralForm->setWidget(4, QFormLayout::FieldRole, safeSaveRow);
 }
 
 void MainWin::initializeToolBars() {

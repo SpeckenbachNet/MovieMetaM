@@ -25,6 +25,14 @@
     </message>
 </context>
 <context>
+    <name>InfoIcon</name>
+    <message>
+        <location filename="../infoicon.cpp" line="105"/>
+        <source>The data is written directly into the movie file. If saving is interrupted (crash, power failure, lost network connection), the file can be damaged. &quot;Safe saving&quot; writes into a copy first, needs more space and is slow for big files and on network drives.</source>
+        <translation>Die Daten werden direkt in die Filmdatei geschrieben. Wird das Speichern unterbrochen (Absturz, Stromausfall, Netzwerkverbindung weg), kann die Datei beschädigt werden. &quot;Sicheres Speichern&quot; schreibt zuerst in eine Kopie, braucht mehr Platz und ist bei großen Dateien und auf Netzlaufwerken langsam.</translation>
+    </message>
+</context>
+<context>
     <name>MainWin</name>
     <message>
         <location filename="../mainwin.ui" line="60"/>
@@ -153,15 +161,9 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="544"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="561"/>
-        <source>Writes into a copy and replaces the file afterwards. Safer, but slow for big files and on network drives.</source>
-        <translation>Schreibt in eine Kopie und ersetzt danach die Datei. Sicherer, aber langsam bei großen Dateien und auf Netzlaufwerken.</translation>
-    </message>
-    <message>
-        <location filename="../mainwin.ui" line="547"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="563"/>
-        <source>Safe saving (copy the file first)</source>
-        <translation>Sicheres Speichern (Datei zuerst kopieren)</translation>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="560"/>
+        <source>Safe saving (read the info)</source>
+        <translation>Sicheres Speichern (Info lesen)</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="479"/>
@@ -176,8 +178,8 @@
         <translation>Sprache der Filmdaten</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="196"/>
-        <location filename="../initialize.cpp" line="202"/>
+        <location filename="../initialize.cpp" line="205"/>
+        <location filename="../initialize.cpp" line="211"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
@@ -188,33 +190,33 @@
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="184"/>
-        <location filename="../initialize.cpp" line="204"/>
+        <location filename="../initialize.cpp" line="193"/>
+        <location filename="../initialize.cpp" line="213"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="185"/>
+        <location filename="../initialize.cpp" line="194"/>
         <source>Save metadata to the movie</source>
         <translation>Metadaten in den Film speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="187"/>
+        <location filename="../initialize.cpp" line="196"/>
         <source>Save all</source>
         <translation>Alle speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="193"/>
+        <location filename="../initialize.cpp" line="202"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation>Kaffee spendieren – MovieMetaM über PayPal unterstützen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="198"/>
+        <location filename="../initialize.cpp" line="207"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="205"/>
+        <location filename="../initialize.cpp" line="214"/>
         <source>Save settings</source>
         <translation>Einstellungen speichern</translation>
     </message>
@@ -374,47 +376,47 @@
         <translation>Die Daten in den ausgewählten Film übernehmen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="188"/>
+        <location filename="../initialize.cpp" line="197"/>
         <source>Save the metadata of all changed movies</source>
         <translation>Metadaten aller geänderten Filme speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="201"/>
+        <location filename="../initialize.cpp" line="210"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="210"/>
+        <location filename="../initialize.cpp" line="219"/>
         <source>Add movies</source>
         <translation>Filme hinzufügen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="213"/>
+        <location filename="../initialize.cpp" line="222"/>
         <source>Remove the selected movies</source>
         <translation>Ausgewählte Filme entfernen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="295"/>
+        <location filename="../initialize.cpp" line="304"/>
         <source>Enter actors</source>
         <translation>Schauspieler eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="310"/>
+        <location filename="../initialize.cpp" line="319"/>
         <source>Enter producers</source>
         <translation>Produktion eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="325"/>
+        <location filename="../initialize.cpp" line="334"/>
         <source>Enter screenwriters</source>
         <translation>Drehbuch eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="340"/>
+        <location filename="../initialize.cpp" line="349"/>
         <source>Enter directors</source>
         <translation>Regie eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="404"/>
+        <location filename="../initialize.cpp" line="413"/>
         <location filename="../mainwin.cpp" line="1019"/>
         <source>The image could not be loaded.</source>
         <translation>Das Bild konnte nicht geladen werden.</translation>
@@ -485,37 +487,42 @@
 <context>
     <name>SetupDialog</name>
     <message>
-        <location filename="../setupdialog.cpp" line="31"/>
+        <location filename="../setupdialog.cpp" line="32"/>
         <source>&lt;h2&gt;Welcome to MovieMetaM!&lt;/h2&gt;&lt;p&gt;Since this is your first time using the program, we need to configure a few basic settings.&lt;/p&gt;&lt;p&gt;In this step, we define how age ratings in your collection are weighted to ensure a consistent metadata structure.&lt;/p&gt;&lt;p&gt;Note: both languages follow your system. You can change them below (optional) and later in the settings. The language of the app takes effect after a restart.&lt;/p&gt;</source>
         <translation>&lt;h2&gt;Willkommen bei MovieMetaM!&lt;/h2&gt;&lt;p&gt;Da dies der erste Aufruf des Programms ist, müssen wir zunächst ein paar grundlegende Einstellungen vornehmen.&lt;/p&gt;&lt;p&gt;In diesem Schritt legen wir fest, wie Altersfreigaben in Ihrer Sammlung gewichtet werden sollen, um eine einheitliche Metadaten-Struktur zu gewährleisten.&lt;/p&gt;&lt;p&gt;Hinweis: Beide Sprachen richten sich nach dem System. Sie können unten (optional) und später in den Einstellungen geändert werden. Die Sprache der App gilt nach einem Neustart.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="40"/>
+        <location filename="../setupdialog.cpp" line="41"/>
         <source>Please choose an age rating system</source>
         <translation>Bitte ein Altersfreigabe-System wählen</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="52"/>
+        <location filename="../setupdialog.cpp" line="53"/>
         <source>Choose an entry</source>
         <translation>Eintrag auswählen</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="60"/>
+        <location filename="../setupdialog.cpp" line="61"/>
         <source>Language of the app</source>
         <translation>Sprache der App</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="70"/>
+        <location filename="../setupdialog.cpp" line="71"/>
         <source>Language of the movie data (TMDB)</source>
         <translation>Sprache der Filmdaten (TMDB)</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="85"/>
+        <location filename="../setupdialog.cpp" line="81"/>
+        <source>Safe saving (read the info)</source>
+        <translation>Sicheres Speichern (Info lesen)</translation>
+    </message>
+    <message>
+        <location filename="../setupdialog.cpp" line="89"/>
         <source>Done</source>
         <translation>Fertig</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="86"/>
+        <location filename="../setupdialog.cpp" line="90"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>

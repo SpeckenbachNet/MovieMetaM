@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.6.0")
+set(PROJECT_VERSION "0.6.1")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -97,6 +97,8 @@ qt_add_executable(${PROJECT_NAME}
     twolinedelegate.cpp
     posterpreview.h
     posterpreview.cpp
+    infoicon.h
+    infoicon.cpp
     helppage.h
     helppage.cpp
     agerating.h

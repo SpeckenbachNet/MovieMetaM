@@ -95,6 +95,7 @@ Hinweise:
 | `helppage.*` | Hilfeseite (Markdown in `help/<de|en>/`, `Help.qrc`) |
 | `languages.*` | Sprachen der App und der Filmdaten |
 | `agerating.*` | Altersfreigaben als Daten (JSON je Land) |
+| `infoicon.*` | kleines Info-Symbol, das einen längeren Text in einer Sprechblase über dem Symbol zeigt (beim Überfahren und per Klick; die Blase ist ein eigenes Fenster, abgerundet in den Farben der Felder); `InfoIcon::savingNote()` ist der Hinweis zum direkten Schreiben |
 | `toastm.*` | kurze Meldung über dem Inhalt |
 | `themecolors.h` | gemeinsame Farben und Formen |
 | `toolbarm.*`, `searchfield.*` | Kopien aus `../libraries` (Master dort) |
@@ -139,7 +140,7 @@ steht im Abschnitt „TagLib (Bibliothek)“ weiter unten.
   Wenn er fertig ist, läuft `savingFinished()` im GUI-Thread: Der gespeicherte Stand wird zum
   neuen Original (`m_originalMovies`), die Symbole werden grün, ein Toast meldet das Ergebnis.
   `closeEvent()` wartet auf einen laufenden Speichervorgang.
-- **Zwei Wege** (Einstellung `General/SafeSave`, im Dialog „Safe saving (copy the file first)“):
+- **Zwei Wege** (Einstellung `General/SafeSave`, im Dialog „Safe saving (read the info)“ mit Info-Symbol, dessen Sprechblase den Hinweis zeigt; gefragt beim ersten Start im Setupdialog und später in den Einstellungen):
   - **Direkt (Standard):** TagLib schreibt in die Datei selbst. Schnell, auch bei großen Dateien
     und auf Netzlaufwerken (bei einer 4,5-GB-Datei übers Netz Sekunden). Wird das Schreiben
     unterbrochen, kann die Datei beschädigt sein; die Hilfe sagt das.

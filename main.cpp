@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
         settings.setValue("General/AgeRatingSystem", setupDialog.selectedOptionFromAgeRating());
         settings.setValue("language", setupDialog.selectedAppLanguage());
         settings.setValue("General/DataLanguage", setupDialog.selectedDataLanguage());
+        settings.setValue("General/SafeSave", setupDialog.selectedSafeSaving());
 
         // Optional: sync explicitly (usually not needed, but safe)
         settings.sync();
