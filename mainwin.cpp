@@ -527,6 +527,12 @@ void MainWin::savingFinished()
     }
 
     updateSaveButtons();
+    // "Save and remove" was waiting for the save: remove only when everything went well
+    if (!m_removeAfterSaving.isEmpty()) {
+        const QStringList toRemove = m_removeAfterSaving;
+        m_removeAfterSaving.clear();
+        if (failed.isEmpty()) removeMovies(toRemove);
+    }
     // Closing was waiting for the save: only when everything went well, else the window stays
     if (m_closeAfterSaving) {
         m_closeAfterSaving = false;
@@ -1355,49 +1361,61 @@ void MainWin::onRemoveFilesButtonClicked()
 
     if (selectedRows.isEmpty()) return;
 
-    // Security check; movies with unsaved changes lose them: say so (form up to date first)
+    // Security check; the form is brought up to date first. A movie with unsaved changes can be
+    // saved before it goes
     validateAndRefreshChanges();
-    int modified = 0;
+    QStringList keys;
+    QStringList modifiedKeys;
     for (const QModelIndex &index : std::as_const(selectedRows)) {
         const QString key = index.model()->index(index.row(), 0).data(Qt::UserRole).toString();
-        if (m_loadedMovies.value(key).status == "modified") ++modified;
+        keys << key;
+        if (m_loadedMovies.value(key).status == "modified") modifiedKeys << key;
     }
-    QMessageBox box(modified > 0 ? QMessageBox::Warning : QMessageBox::Question, tr("Remove"),
-                    tr("Really remove %n movie(s)?", "", selectedRows.size()), QMessageBox::NoButton, this);
-    if (modified > 0) {
-        box.setInformativeText(tr("%n movie(s) have unsaved changes that will be lost.", "", modified));
+    QMessageBox box(modifiedKeys.isEmpty() ? QMessageBox::Question : QMessageBox::Warning, tr("Remove"),
+                    tr("Really remove %n movie(s)?", "", keys.size()), QMessageBox::NoButton, this);
+    QPushButton *saveButton = nullptr;
+    if (!modifiedKeys.isEmpty()) {
+        box.setInformativeText(tr("%n movie(s) have unsaved changes.", "", modifiedKeys.size()) + QLatin1Char('\n')
+                               + tr("Save them before removing?"));
+        saveButton = box.addButton(tr("Save and remove"), QMessageBox::AcceptRole);
     }
-    QPushButton *removeButton = box.addButton(tr("Remove"), QMessageBox::AcceptRole);
+    QPushButton *removeButton = box.addButton(tr("Remove"), modifiedKeys.isEmpty() ? QMessageBox::AcceptRole
+                                                                                  : QMessageBox::DestructiveRole);
     QPushButton *cancelButton = box.addButton(tr("Cancel"), QMessageBox::RejectRole);
-    box.setDefaultButton(modified > 0 ? cancelButton : removeButton);
+    box.setDefaultButton(modifiedKeys.isEmpty() ? removeButton : cancelButton);
     box.setEscapeButton(cancelButton);
     box.exec();
+
+    if (saveButton && box.clickedButton() == saveButton) {
+        // The window is locked while the thread saves; savingFinished() removes the movies
+        m_removeAfterSaving = keys;
+        startSaving(modifiedKeys);
+        return;
+    }
     if (box.clickedButton() != removeButton) return;
+    removeMovies(keys);
+}
 
-    // To prevent the indexes from becoming invalid when deleted (because they shift down),
-    // we need to sort them and delete them from BACK to the front.
-    std::sort(selectedRows.begin(), selectedRows.end(), [](const QModelIndex &a, const QModelIndex &b) {
-        return a.row() > b.row();
-    });
-
-    // Removing Movie
-    for (const QModelIndex &index : std::as_const(selectedRows)) {
-        int currentRow = index.row(); // Get the current row from selector
-
-        const QAbstractItemModel *model = index.model();       // Get a pointer to the model (read-only)
-        QModelIndex idx0 = model->index(currentRow, 0);        // The only column holds the file path
-        QString movieKey = idx0.data(Qt::UserRole).toString(); // Retrieve the UserRole data as a QString
-
+// Removes movies (by file path) from memory and list; then selects the first one
+void MainWin::removeMovies(const QStringList &keys)
+{
+    QAbstractItemModel *model = ui->fileListTableView->model();
+    for (const QString &key : keys) {
         // Remove from Map and clear UI
-        removeMovie(movieKey);
+        removeMovie(key);
 
-        // Remove entry from TableView
-        ui->fileListTableView->model()->removeRow(index.row());
+        // Remove entry from TableView (the row is found by the file path, rows shift)
+        for (int row = 0; row < model->rowCount(); ++row) {
+            if (model->index(row, 0).data(Qt::UserRole).toString() == key) {
+                model->removeRow(row);
+                break;
+            }
+        }
     }
 
     // Set the selection to the first entry.
-    if (ui->fileListTableView->model()->rowCount() > 0) {
-        QModelIndex firstIndex = ui->fileListTableView->model()->index(0, 0);
+    if (model->rowCount() > 0) {
+        QModelIndex firstIndex = model->index(0, 0);
         ui->fileListTableView->setCurrentIndex(firstIndex);
         onCurrentMovieChanged(firstIndex);   // currentChanged does not fire if row 0 stays current
     } else {

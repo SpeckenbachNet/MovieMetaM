@@ -51,26 +51,26 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="228"/>
-        <location filename="../mainwin.cpp" line="896"/>
+        <location filename="../mainwin.cpp" line="902"/>
         <source>Description</source>
         <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="238"/>
-        <location filename="../mainwin.cpp" line="886"/>
+        <location filename="../mainwin.cpp" line="892"/>
         <source>Release Date</source>
         <translation>Erscheinungsdatum</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="248"/>
-        <location filename="../mainwin.cpp" line="888"/>
+        <location filename="../mainwin.cpp" line="894"/>
         <source>Genre</source>
         <translation>Genre</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="264"/>
         <location filename="../mainwin.ui" line="573"/>
-        <location filename="../mainwin.cpp" line="894"/>
+        <location filename="../mainwin.cpp" line="900"/>
         <source>Age Rating</source>
         <translation>Altersfreigabe</translation>
     </message>
@@ -81,31 +81,31 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="303"/>
-        <location filename="../mainwin.cpp" line="900"/>
+        <location filename="../mainwin.cpp" line="906"/>
         <source>Producers</source>
         <translation>Produktion</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="322"/>
-        <location filename="../mainwin.cpp" line="898"/>
+        <location filename="../mainwin.cpp" line="904"/>
         <source>Directors</source>
         <translation>Regie</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="341"/>
-        <location filename="../mainwin.cpp" line="887"/>
+        <location filename="../mainwin.cpp" line="893"/>
         <source>Studio</source>
         <translation>Studio</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="357"/>
-        <location filename="../mainwin.cpp" line="899"/>
+        <location filename="../mainwin.cpp" line="905"/>
         <source>Screenplay</source>
         <translation>Drehbuch</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="370"/>
-        <location filename="../mainwin.cpp" line="897"/>
+        <location filename="../mainwin.cpp" line="903"/>
         <source>Actors</source>
         <translation>Schauspieler</translation>
     </message>
@@ -182,7 +182,7 @@
         <translation>Metadaten in den Film speichern</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1633"/>
+        <location filename="../mainwin.cpp" line="1651"/>
         <location filename="../initialize.cpp" line="213"/>
         <source>Save all</source>
         <translation>Alle speichern</translation>
@@ -208,7 +208,7 @@
         <translation>Geändert, Speichern nötig</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1083"/>
+        <location filename="../mainwin.cpp" line="1089"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation>
             <numerusform>%n Datei übersprungen: Nur MP4 wird unterstützt.</numerusform>
@@ -217,12 +217,12 @@
     </message>
     <message>
         <location filename="../mainwin.cpp" line="375"/>
-        <location filename="../mainwin.cpp" line="1119"/>
+        <location filename="../mainwin.cpp" line="1125"/>
         <source>Unchanged</source>
         <translation>Unverändert</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="541"/>
+        <location filename="../mainwin.cpp" line="547"/>
         <source>Saved</source>
         <translation>Gespeichert</translation>
     </message>
@@ -232,17 +232,17 @@
         <translation>Speichern nicht möglich: %1</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="721"/>
+        <location filename="../mainwin.cpp" line="727"/>
         <source>No movies found</source>
         <translation>Keine Filme gefunden</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="729"/>
+        <location filename="../mainwin.cpp" line="735"/>
         <source>Showing %1 of %2 movies</source>
         <translation>%1 von %2 Filmen angezeigt</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="730"/>
+        <location filename="../mainwin.cpp" line="736"/>
         <source>%n movie(s) found</source>
         <translation>
             <numerusform>%n Film gefunden</numerusform>
@@ -250,23 +250,23 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="872"/>
+        <location filename="../mainwin.cpp" line="878"/>
         <source>Double click a search result to see its data.</source>
         <translation>Doppelklick auf ein Suchergebnis zeigt dessen Daten.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="958"/>
+        <location filename="../mainwin.cpp" line="964"/>
         <source>No text</source>
         <translation>Ohne Text</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="998"/>
-        <location filename="../mainwin.cpp" line="1280"/>
+        <location filename="../mainwin.cpp" line="1004"/>
+        <location filename="../mainwin.cpp" line="1286"/>
         <source>Select a movie first</source>
         <translation>Zuerst einen Film auswählen</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1025"/>
+        <location filename="../mainwin.cpp" line="1031"/>
         <source>Data applied</source>
         <translation>Daten übernommen</translation>
     </message>
@@ -287,7 +287,7 @@
         <translation>Speichere %1 von %2 ...</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="543"/>
+        <location filename="../mainwin.cpp" line="549"/>
         <source>%n movie(s) saved.</source>
         <translation>
             <numerusform>%n Film gespeichert.</numerusform>
@@ -295,79 +295,72 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1174"/>
+        <location filename="../mainwin.cpp" line="1180"/>
         <source>Other (%1)</source>
         <translation>Andere (%1)</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1337"/>
+        <location filename="../mainwin.cpp" line="1343"/>
         <source>Choose movies</source>
         <translation>Filme auswählen</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1339"/>
+        <location filename="../mainwin.cpp" line="1345"/>
         <source>Movie files</source>
         <translation>Filmdateien</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1365"/>
-        <location filename="../mainwin.cpp" line="1370"/>
+        <location filename="../mainwin.cpp" line="1374"/>
+        <location filename="../mainwin.cpp" line="1382"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1366"/>
+        <location filename="../mainwin.cpp" line="1375"/>
         <source>Really remove %n movie(s)?</source>
         <translation>
             <numerusform>%n Film wirklich entfernen?</numerusform>
             <numerusform>%n Filme wirklich entfernen?</numerusform>
         </translation>
     </message>
-    <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1368"/>
-        <source>%n movie(s) have unsaved changes that will be lost.</source>
-        <translation>
-            <numerusform>%n Film hat ungespeicherte Änderungen, die verloren gehen.</numerusform>
-            <numerusform>%n Filme haben ungespeicherte Änderungen, die verloren gehen.</numerusform>
-        </translation>
-    </message>
     <message>
-        <location filename="../mainwin.cpp" line="1418"/>
+        <location filename="../mainwin.cpp" line="1436"/>
         <source>Please enter a search term</source>
         <translation>Bitte einen Suchbegriff eingeben</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1512"/>
+        <location filename="../mainwin.cpp" line="1530"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation>Kein TMDB-Token: Die Filmsuche ist nicht verfügbar.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1535"/>
+        <location filename="../mainwin.cpp" line="1553"/>
         <source>The movie data could not be loaded.</source>
         <translation>Die Filmdaten konnten nicht geladen werden.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1592"/>
+        <location filename="../mainwin.cpp" line="1610"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation>Einstellungen gespeichert. Die Sprache ändert sich nach einem Neustart.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1593"/>
+        <location filename="../mainwin.cpp" line="1611"/>
         <source>Settings saved.</source>
         <translation>Einstellungen gespeichert.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1597"/>
+        <location filename="../mainwin.cpp" line="1615"/>
         <source>Error: could not save the settings!</source>
         <translation>Fehler: Einstellungen konnten nicht gespeichert werden!</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1630"/>
+        <location filename="../mainwin.cpp" line="1648"/>
         <source>Unsaved changes</source>
         <translation>Ungespeicherte Änderungen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1631"/>
+        <location filename="../mainwin.cpp" line="1378"/>
+        <location filename="../mainwin.cpp" line="1649"/>
         <source>%n movie(s) have unsaved changes.</source>
         <translation>
             <numerusform>%n Film hat ungespeicherte Änderungen.</numerusform>
@@ -375,18 +368,28 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1632"/>
+        <location filename="../mainwin.cpp" line="1379"/>
+        <source>Save them before removing?</source>
+        <translation>Vor dem Entfernen speichern?</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1380"/>
+        <source>Save and remove</source>
+        <translation>Speichern und entfernen</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1650"/>
         <source>Save the changes before closing?</source>
         <translation>Änderungen vor dem Schließen speichern?</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1634"/>
+        <location filename="../mainwin.cpp" line="1652"/>
         <source>Discard</source>
         <translation>Verwerfen</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1371"/>
-        <location filename="../mainwin.cpp" line="1635"/>
+        <location filename="../mainwin.cpp" line="1384"/>
+        <location filename="../mainwin.cpp" line="1653"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -456,7 +459,7 @@
         <translation>Regie eingeben</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1038"/>
+        <location filename="../mainwin.cpp" line="1044"/>
         <location filename="../initialize.cpp" line="430"/>
         <source>The image could not be loaded.</source>
         <translation>Das Bild konnte nicht geladen werden.</translation>

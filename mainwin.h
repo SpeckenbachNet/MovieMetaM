@@ -134,6 +134,7 @@ private:
     QString countryCode;
     QFutureWatcher<QList<SaveResult>> *m_saveWatcher = nullptr;
     bool m_saving = false;
+    QStringList m_removeAfterSaving;   // "Save and remove": the movies to remove once saving went well
     bool m_closeAfterSaving = false;   // "Save all" in the close dialog: close when saving went well
     bool m_safeSave = false;   // setting "General/SafeSave": write into a copy first
     QString dataLanguage;   // language of the movie data for TMDB, e.g. "de-DE"
@@ -176,6 +177,7 @@ private:
     void savingFinished();                      // back in the GUI thread: status, list and messages
     void updateSaveButtons();                   // "Save" / "Save all" only when there is something to save
     void removeMovie(const QString &moviePath);
+    void removeMovies(const QStringList &keys);   // memory, list and form
     bool validateAndRefreshChanges();
     bool settingsChanged;
     void readTagsFromFile(const QString &filePath);
