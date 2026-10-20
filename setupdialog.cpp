@@ -19,6 +19,7 @@
 // setupdialog.cpp
 #include "setupdialog.h"
 #include "agerating.h"
+#include "languages.h"
 #include "themecolors.h"
 
 #include <algorithm>
@@ -30,7 +31,7 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     infoLabel->setText(tr("<h2>Welcome to MovieMetaM!</h2>"
                           "<p>Since this is your first time using the program, we need to configure a few basic settings.</p>"
                           "<p>In this step, we define how age ratings in your collection are weighted to ensure a consistent metadata structure.</p>"
-                          "<p>Note: if needed, you can choose a language other than your system language here (optional).</p>"));
+                          "<p>Note: both languages follow your system. You can change them below (optional) and later in the settings. The language of the app takes effect after a restart.</p>"));
     infoLabel->setWordWrap(true);
     infoLabel->setTextFormat(Qt::RichText);
     infoLabel->setOpenExternalLinks(false);
@@ -53,28 +54,32 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
         ageRatingComboBox->addItem(AgeRatings::systems().value(code).displayName(), code);
     }
 
+    // Language of the app (German or English) and of the movie data (TMDB); both start with
+    // the one of the system
     languageLabel = new QLabel(this);
-    languageLabel->setText(tr("Choose another language (optional)"));
+    languageLabel->setText(tr("Language of the app"));
     languageLabel->setStyleSheet("font-weight: bold; margin-top: 10px;");
 
     languageComboBox = new QComboBox(this);
-    languageComboBox->clear();
-    languageComboBox->addItem("--- " + tr("Choose an entry") + " ---");
-    languageComboBox->addItem(QStringLiteral("Deutsch (de - german)"));
-    languageComboBox->addItem(QStringLiteral("English (en)"));
-    languageComboBox->addItem(QStringLiteral("Italiano (it - italian)"));
-    languageComboBox->addItem(QStringLiteral("Français (fr - french)"));
-    languageComboBox->addItem(QStringLiteral("Nederlands (nl - dutch)"));
-    languageComboBox->addItem(QStringLiteral("Dansk (da - danish)"));
-    languageComboBox->addItem(QStringLiteral("Polski (pl - polish)"));
-    languageComboBox->addItem(QStringLiteral("日本語 (ja - japanese)"));
-    languageComboBox->addItem(QStringLiteral("한국어 (ko - korean)"));
-    languageComboBox->addItem(QStringLiteral("繁體中文 (zh - chinese)"));
-    languageComboBox->model()->sort(0);
+    for (const Languages::Language &language : Languages::appLanguages()) {
+        languageComboBox->addItem(language.name, language.code);
+    }
+    languageComboBox->setCurrentIndex(qMax(0, languageComboBox->findData(Languages::appLanguage())));
+
+    dataLanguageLabel = new QLabel(this);
+    dataLanguageLabel->setText(tr("Language of the movie data (TMDB)"));
+    dataLanguageLabel->setStyleSheet("font-weight: bold; margin-top: 10px;");
+
+    dataLanguageComboBox = new QComboBox(this);
+    for (const Languages::Language &language : Languages::dataLanguages()) {
+        dataLanguageComboBox->addItem(language.name, language.code);
+    }
+    dataLanguageComboBox->setCurrentIndex(qMax(0, dataLanguageComboBox->findData(Languages::dataLanguage())));
 
     // Rounded like the combo boxes of the main window
     applyComboStyle(ageRatingComboBox);
     applyComboStyle(languageComboBox);
+    applyComboStyle(dataLanguageComboBox);
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Done"));
@@ -96,11 +101,13 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(infoLabel);
     layout->addSpacing(10);
-    layout->addWidget(ageRatingLabel);
-    layout->addWidget(ageRatingComboBox);
-    layout->addSpacing(10);
     layout->addWidget(languageLabel);
     layout->addWidget(languageComboBox);
+    layout->addWidget(dataLanguageLabel);
+    layout->addWidget(dataLanguageComboBox);
+    layout->addSpacing(10);
+    layout->addWidget(ageRatingLabel);
+    layout->addWidget(ageRatingComboBox);
     layout->addStretch();
     layout->addWidget(buttonBox);
 
@@ -110,4 +117,14 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
 QString SetupDialog::selectedOptionFromAgeRating() const
 {
     return ageRatingComboBox->currentData().toString();
+}
+
+QString SetupDialog::selectedAppLanguage() const
+{
+    return languageComboBox->currentData().toString();
+}
+
+QString SetupDialog::selectedDataLanguage() const
+{
+    return dataLanguageComboBox->currentData().toString();
 }

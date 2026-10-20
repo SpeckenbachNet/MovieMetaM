@@ -97,6 +97,11 @@ Linux).
 - `tagwidget.*` – tag input (cast, directors, ...); `imagelabelm.*` – cover: paints itself
   (rounded, sharp), drag and drop in (`coverDropped` / `coverUrlDropped`) and out;
   `tableviewm.*` – movie list (`QListView`) with file drop; `setupdialog.*` – first start.
+- `languages.*` – two languages (decided with the user): the app (German / English, setting
+  `language`, takes effect after a restart) and the movie data for TMDB (genre list and search,
+  e.g. `ja-JP`, setting `General/DataLanguage`, takes effect at once). Both follow the system
+  until chosen in the setup dialog or the settings (a Japanese user gets the English app with
+  Japanese data). The data languages are TMDB's primary translations, names from `QLocale`.
 - `twolinedelegate.*` – entries of movie list and search results; `posterpreview.*` – enlarged
   poster (200×300) when the mouse rests on a search result (full poster in `kPosterRole`).
 - `themecolors.h` – shared colors and shapes (`FieldLook`, `apply…Style`).
@@ -125,16 +130,12 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.3.18)
+## Open points (as of 0.4.4; numbers kept, 1 is done)
 
-1. Linux: replace the old `~/Development/QT/libraries` by a link to the kDrive folder.
 2. UI overhaul, further steps: more help topics (using the app, TMDB search, saving); the
    setup dialog's combo boxes with `applyComboStyle`. (Settings page: cards in a centered
    column, so far one card "General" – `settingsGeneralCard`, styled in `initializeForm()`.)
-3. Bugs: setup dialog language choice not saved; after removing a movie the form still shows it; false "changed" for movies without date
-   (1972 default) or with a genre not in the TMDB list (genres in English, search in German);
-   arrow keys in the movie list don't switch the movie; clicking the empty area of the movie
-   list loses the selection; a search without results leaves the old results; search term not
+3. Bugs: clicking the empty area of the movie list loses the selection; a search without results leaves the old results; search term not
    URL-encoded (use QUrlQuery).
 4. Saving to the MP4 file is not implemented (saveMovieDetails / save all are empty) – needs a
    design decision first (own MP4 writer or a library like TagLib).

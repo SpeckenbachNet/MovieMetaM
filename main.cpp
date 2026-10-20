@@ -18,6 +18,7 @@
 
 #include "mainwin.h"
 #include "setupdialog.h"          // My setup dialog
+#include "languages.h"
 #include "themecolors.h"
 
 #include <QApplication>
@@ -38,30 +39,18 @@ int main(int argc, char *argv[])
     // Settings as INI file on every system (Windows would use the registry otherwise)
     QSettings::setDefaultFormat(QSettings::IniFormat);
 
-    // 1. Sprache aus den QSettings laden
     QSettings settings;
-    // Standardmäßig leer, falls noch nie gesetzt
-    QString langCode = settings.value("language", "").toString();
 
-    // 2. Falls Config leer ist, Systemsprache als Basis nehmen
-    if (langCode.isEmpty()) {
-        // bcp47Name() liefert z.B. "de" oder "en".
-        // Wir nehmen nur die ersten zwei Zeichen für das 2-Letter-Kürzel
-        langCode = QLocale::system().name().left(2);
-    }
-
+    // Language of the app: from the settings, else the one of the system (German or English)
     QTranslator translator;
-
-    // 3. Versuchen, die Sprache zu laden (z.B. MovieMetaM_de.qm)
-    if (translator.load(":/i18n/" APP_NAME "_" + langCode)) {
-        a.installTranslator(&translator);
-    }
-    // 4. FALLBACK: Wenn die Sprache nicht geladen werden konnte und nicht schon Englisch ist
-    else if (langCode != "en") {
-        if (translator.load(":/i18n/" APP_NAME "_en")) {
+    auto loadTranslation = [&a, &translator](const QString &langCode) {
+        a.removeTranslator(&translator);
+        if (translator.load(":/i18n/" APP_NAME "_" + langCode)) {
             a.installTranslator(&translator);
         }
-    }
+    };
+    QString langCode = Languages::appLanguage();
+    loadTranslation(langCode);
 
     // === Set up the application as needed. ===
     // Check if the initial setup has already been completed.
@@ -79,9 +68,16 @@ int main(int argc, char *argv[])
 
         // Werte aus dem Dialog in die Settings übernehmen
         settings.setValue("General/AgeRatingSystem", setupDialog.selectedOptionFromAgeRating());
+        settings.setValue("language", setupDialog.selectedAppLanguage());
+        settings.setValue("General/DataLanguage", setupDialog.selectedDataLanguage());
 
         // Optional: Explizit synchronisieren (meist nicht nötig, aber sicher)
         settings.sync();
+
+        // Another language of the app chosen: the main window starts in it
+        if (setupDialog.selectedAppLanguage() != langCode) {
+            loadTranslation(setupDialog.selectedAppLanguage());
+        }
     }
 
     // === Start main window ===

@@ -162,7 +162,7 @@ void TagWidget::removeTagByClick(const QModelIndex &index)
 
     // Interne Liste und Signal aktualisieren
     m_tagList = m_tagModel->stringList();
-    qDebug() << "Signal tagsChanged wird gleich gesendet";
+    qDebug() << "The tagsChanged signal will be sent shortly";
     emit tagsChanged(m_tagList);
 }
 

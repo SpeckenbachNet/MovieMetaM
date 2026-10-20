@@ -466,6 +466,9 @@
              </item>
              <item>
               <layout class="QFormLayout" name="settingsGeneralForm">
+               <property name="fieldGrowthPolicy">
+                <enum>QFormLayout::FieldGrowthPolicy::AllNonFixedFieldsGrow</enum>
+               </property>
                <property name="horizontalSpacing">
                 <number>18</number>
                </property>
@@ -476,23 +479,43 @@
                 <number>6</number>
                </property>
                <item row="0" column="0">
+                <widget class="QLabel" name="settingsLanguageLabel">
+                 <property name="text">
+                  <string>Language</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QComboBox" name="languageSettingsComboBox"/>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="settingsDataLanguageLabel">
+                 <property name="text">
+                  <string>Movie data language</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QComboBox" name="dataLanguageSettingsComboBox"/>
+               </item>
+               <item row="2" column="0">
                 <widget class="QLabel" name="settingsRatingLabel">
                  <property name="text">
                   <string>Age Rating</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
+               <item row="2" column="1">
                 <widget class="QComboBox" name="ratingSettingsComboBox"/>
                </item>
-               <item row="1" column="0">
+               <item row="3" column="0">
                 <widget class="QLabel" name="settingsPreviewLabel">
                  <property name="text">
                   <string>Preview</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
+               <item row="3" column="1">
                 <widget class="QWidget" name="ratingPreviewContainer" native="true">
                  <layout class="QHBoxLayout" name="ratingPreviewLayout">
                   <property name="spacing">

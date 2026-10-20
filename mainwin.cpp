@@ -30,7 +30,8 @@ MainWin::MainWin(QWidget *parent)
 
     // Get countryCode from INI-File for AgeRating System
     countryCode = settings.value("General/AgeRatingSystem").toString();
-    qDebug() << "Country Code at beginnign: " << countryCode;
+    qDebug() << "Country Code at beginning: " << countryCode;
+    dataLanguage = Languages::dataLanguage();
 
     // Initialize
     initializeForm();
@@ -347,7 +348,9 @@ void MainWin::onDataChanged() {
 
 void MainWin::onSettingsChanged() {
 
-    if(countryCode != ui->ratingSettingsComboBox->currentData(Qt::UserRole)){
+    if (countryCode != ui->ratingSettingsComboBox->currentData(Qt::UserRole)
+        || Languages::appLanguage() != ui->languageSettingsComboBox->currentData().toString()
+        || dataLanguage != ui->dataLanguageSettingsComboBox->currentData().toString()) {
         settingsChanged = true;
         m_saveSettingsBtn->setEnabled(true);
     } else {
@@ -429,8 +432,8 @@ void MainWin::saveMovieDetails()
     // Die aktuelle Liste der Genres abrufen
     //QStringList currentGenres = m_genreWidget->getTags();
 
-    //qDebug() << "Gespeicherte Schauspieler:" << currentActors;
-    //qDebug() << "Gespeicherte Genres:" << currentGenres;
+    //qDebug() << "Saved cast:" << currentActors;
+    //qDebug() << "Saved genres:" << currentGenres;
 
     // Hier folgt die Logik, um diese Listen in Ihrem QStandardItemModel oder Ihrer Datenbank zu speichern
     // ...
@@ -481,7 +484,10 @@ bool MainWin::validateAndRefreshChanges() {
     work.description = ui->descriptionText->toPlainText();
 
     // DateEdit
-    if (ui->releaseDateEdit->date() != original.releaseDate) {
+    // A movie without date shows the default of the field (clearData): not a change
+    const bool noDateUnchanged = !original.releaseDate.isValid()
+                                 && ui->releaseDateEdit->date() == QDate(1972, 1, 1);
+    if (!noDateUnchanged && ui->releaseDateEdit->date() != original.releaseDate) {
         qDebug() << "Release Date has changed.";
         hasChanged = true;
     }
@@ -543,7 +549,7 @@ bool MainWin::validateAndRefreshChanges() {
     }else {
         qDebug() << "Current: " << currentCastList;
         qDebug() << "Original " << original.cast;
-        qDebug() << "Datensatz ist wieder gleich!";
+        qDebug() << "The dataset is the same again!";
     }
     // Set current Cast to working map
 
@@ -586,7 +592,7 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
     QJsonObject rootObj = jsonDoc.object();
 
     if (!rootObj.contains("results") || !rootObj.value("results").isArray()) {
-        qWarning() << "'results' ist kein Array oder fehlt";
+        qWarning() << "'Results' is not an array or is missing";
         return;
     }
 
@@ -647,7 +653,7 @@ void MainWin::fillGenreComboBox(const QJsonDocument &jsonDoc)
     QJsonObject rootObj = jsonDoc.object();
 
     if (!rootObj.contains("genres") || !rootObj.value("genres").isArray()) {
-        qWarning() << "'genres' ist kein Array oder fehlt";
+        qWarning() << "'Genres' is not an array or is missing";
         return;
     }
 
@@ -667,9 +673,19 @@ void MainWin::fillGenreComboBox(const QJsonDocument &jsonDoc)
         }
     }
 
+    // Filled again after a change of the language: keep the genre of the current movie
+    // selected, without a "changed"
+    const QSignalBlocker blocker(ui->genreComboBox);
+    const QString currentGenre = ui->genreComboBox->currentText();
     ui->genreComboBox->clear();
     ui->genreComboBox->addItem("");
     ui->genreComboBox->addItems(genreNames);
+    setComboEntryByString(ui->genreComboBox, currentGenre, false);
+}
+
+void MainWin::requestGenres()
+{
+    startApiRequest(QUrl("https://api.themoviedb.org/3/genre/movie/list?language=" + dataLanguage));
 }
 
 void MainWin::addFilesToModel(const QStringList &filePaths)
@@ -814,6 +830,10 @@ void MainWin::setComboEntryByString(QComboBox *combo, QString findString, bool u
         qDebug() << "NotUseData: " << findString;
         index = combo->findText(findString, Qt::MatchExactly);
     }
+    if (index == -1 && combo->isEditable() && !findString.isEmpty()) {
+        combo->setCurrentText(findString);   // free text, not in the list
+        return;
+    }
     combo->setCurrentIndex(index != -1 ? index : 0);
 }
 
@@ -874,13 +894,13 @@ void MainWin::onSearchTableViewDoubleClicked(const QModelIndex &index){
 
     if (idData.isValid()) {
         int id = idData.toInt();
-        qDebug() << "ID der ausgewählten Zeile:" << id;
+        qDebug() << "ID of selected Row:" << id;
     } else {
-        qDebug() << "Keine ID gefunden!";
+        qDebug() << "No ID found!";
     }
 }
 
-void MainWin::onFilelistTableViewClicked(const QModelIndex &index){
+void MainWin::onCurrentMovieChanged(const QModelIndex &index){
     if (!index.isValid()) return;
 
     // Get path from UserRole
@@ -959,6 +979,7 @@ void MainWin::onRemoveFilesButtonClicked()
     if (ui->fileListTableView->model()->rowCount() > 0) {
         QModelIndex firstIndex = ui->fileListTableView->model()->index(0, 0);
         ui->fileListTableView->setCurrentIndex(firstIndex);
+        onCurrentMovieChanged(firstIndex);   // currentChanged does not fire if row 0 stays current
     } else {
         // If the list is empty: clear and lock the UI
         clearData();
@@ -978,7 +999,7 @@ void MainWin::onSearchButtonClicked()
     else
     {
         searchText.replace(" ", "+");
-        QString url_search = "https://api.themoviedb.org/3/search/movie?query="+ searchText+"&language=de-DE";
+        QString url_search = "https://api.themoviedb.org/3/search/movie?query="+ searchText+"&language=" + dataLanguage;
         startApiRequest(url_search);
     }
 }
@@ -987,7 +1008,7 @@ void MainWin::onSearchButtonClicked()
 void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const QPixmap &pixmap)> callback,
                                  std::function<void()> onError)
 {
-    qDebug() << "1. Download-Funktion betreten für:" << imageUrl;
+    qDebug() << "Enter Download function:" << imageUrl;
     QNetworkRequest request(imageUrl);
     QNetworkReply *reply = m_ImageNetworkManager->get(request);
 
@@ -1002,7 +1023,7 @@ void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const 
              }
 
              if (finishedReply->error() != QNetworkReply::NoError) {
-                 qWarning() << "Download Fehler für" << finishedReply->url().toString()
+                 qWarning() << "Download Error for " << finishedReply->url().toString()
                             << ":" << finishedReply->errorString();
                  finishedReply->deleteLater();
                  // On error no run of callback
@@ -1016,7 +1037,7 @@ void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const 
                  // if SUCCESS: run callback and deliver Pixmap
                  callback(pixmap);
              } else {
-                 qWarning() << "FEHLER: Bilddaten konnten nicht geladen werden im generischen Handler!";
+                 qWarning() << "ERROR: Image data could not be loaded in the generic handler!";
                  if (onError) onError();
              }
 
@@ -1027,7 +1048,7 @@ void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const 
 
 void MainWin::onImageDownloadFinished(QNetworkReply *reply)
 {
-    qDebug() << "Download Finsh Function";
+    qDebug() << "Download finsh function";
     // Get URL from Mapping
     QUrl originalUrl = reply->property("OriginalUrl").toUrl();
 
@@ -1114,11 +1135,19 @@ void MainWin::showPage(QWidget *page)
 
 void MainWin::handleSaveSettingsButton_Clicked() {
     qDebug() << "Action Save Setting triggered.";
+    const QString newAppLanguage = ui->languageSettingsComboBox->currentData().toString();
+    const bool appLanguageChanged = newAppLanguage != Languages::appLanguage();
+    const QString newDataLanguage = ui->dataLanguageSettingsComboBox->currentData().toString();
+
     settings.setValue("General/AgeRatingSystem", ui->ratingSettingsComboBox->currentData().toString());
+    settings.setValue("language", newAppLanguage);
+    settings.setValue("General/DataLanguage", newDataLanguage);
     settings.sync();
     if (settings.status() == QSettings::NoError) {
-        // Erfolg
-        ui->statusBar->showMessage(tr("Settings saved."), 30000); // 30 s visible
+        // Erfolg; the language of the app only changes with the next start
+        ui->statusBar->showMessage(appLanguageChanged
+                                       ? tr("Settings saved. The language changes after a restart.")
+                                       : tr("Settings saved."), 30000); // 30 s visible
     } else {
         // Fehler (z.B. Datei schreibgeschützt)
         ui->statusBar->showMessage(tr("Error: could not save the settings!"), 50000);
@@ -1133,6 +1162,12 @@ void MainWin::handleSaveSettingsButton_Clicked() {
         displayMovie(m_loadedMovies.value(movieKey));
     } else {
         fillRatingComboBox(countryCode);
+    }
+
+    // Genres in the new language of the movie data
+    if (newDataLanguage != dataLanguage) {
+        dataLanguage = newDataLanguage;
+        requestGenres();
     }
 }
 

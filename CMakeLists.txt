@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.4.3")
+set(PROJECT_VERSION "0.4.4")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -77,6 +77,8 @@ qt_add_executable(${PROJECT_NAME}
     helppage.cpp
     agerating.h
     agerating.cpp
+    languages.h
+    languages.cpp
 )
 
 # Windows: icon of the .exe and version in the file properties
