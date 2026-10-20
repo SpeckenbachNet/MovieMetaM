@@ -104,6 +104,7 @@ HelpPage::HelpPage(QWidget *parent)
     addTopic(":icons/add", tr("Movie List"), tr("Add, select, remove"), "movielist");
     addTopic(":icons/app_icon", tr("Movie Info"), tr("Edit, cover, age rating"), "movieinfo");
     addTopic(":icons/search", tr("Movie Search"), tr("Find and apply TMDB data"), "moviesearch");
+    addTopic(":icons/save", tr("Saving"), tr("Save, safe saving"), "saving");
     addTopic(":icons/info", tr("About %1").arg(QStringLiteral(APP_NAME)),
              tr("Version, license, credits"), "about");
     // The separator lines depend on the neighbour's selection: repaint the whole list

@@ -15,14 +15,6 @@ Kontakt: [moviemetam@speckenbach.net](mailto:moviemetam@speckenbach.net)
 
 Gefällt dir MovieMetaM? Spendier mir einen Kaffee: [paypal.me/michaelspeckenbach](https://paypal.me/michaelspeckenbach)
 
-## Speichern
-
-MovieMetaM schreibt die Daten wie die meisten Tag-Editoren **direkt in die Filmdatei**. Das geht schnell, auch bei großen Dateien und auf Netzlaufwerken. Wird das Schreiben unterbrochen (Absturz, Stromausfall, Netzwerkverbindung weg), kann die Datei beschädigt werden. Bewahre von wichtigen Dateien eine Kopie auf.
-
-Für mehr Sicherheit schalte in den Einstellungen **Sicheres Speichern** ein: Die Daten werden dann in eine Kopie geschrieben, die Kopie wird geprüft, und erst danach ersetzt sie die Datei. Das braucht Platz für eine zweite Kopie der Datei und dauert bei großen Dateien und auf Netzlaufwerken deutlich länger.
-
-Nach dem Speichern liest MovieMetaM die Datei noch einmal und prüft Titel, Beschreibung, Altersfreigabe und Cover.
-
 ## Lizenz
 
 © 2026 Michael Speckenbach
