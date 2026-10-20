@@ -173,9 +173,8 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.7.4; numbers kept, 1 to 6 are done)
+## Open points (as of 0.7.4; numbers kept, 1 to 7 are done)
 
-7. The old TMDB token is in the git history: revoke it at TMDB and use a new one.
 8. Origin of some icons still to be clarified (`LICENSES.md`); unused
    `ressources/images/statusgreen.svg` / `statusorange.svg` can go.
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
