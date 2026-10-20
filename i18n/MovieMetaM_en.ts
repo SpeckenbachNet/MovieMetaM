@@ -55,11 +55,21 @@
     </message>
     <message>
         <location filename="../helppage.cpp" line="108"/>
-        <source>About %1</source>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="108"/>
+        <source>Languages, age rating, saving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../helppage.cpp" line="109"/>
+        <source>About %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="110"/>
         <source>Version, license, credits</source>
         <translation type="unfinished"></translation>
     </message>
