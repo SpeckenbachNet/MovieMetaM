@@ -994,16 +994,20 @@ void MainWin::onSearchButtonClicked()
 {
     // Logic for "Search":
     qDebug() << "Action SEARCH triggered...";
-    QString searchText = ui->searchEdit->text();
+    const QString searchText = ui->searchEdit->text().trimmed();
     qDebug() << "Search Text: " << searchText;
-    if(searchText == "") {
+    if (searchText.isEmpty()) {
         showColumnStatus(StatusColumn::Search, tr("Please enter a search term"));
     }
     else
     {
-        searchText.replace(" ", "+");
-        QString url_search = "https://api.themoviedb.org/3/search/movie?query="+ searchText+"&language=" + dataLanguage;
-        startApiRequest(url_search);
+        // QUrlQuery encodes the search term (&, #, +, % ...)
+        QUrl url("https://api.themoviedb.org/3/search/movie");
+        QUrlQuery query;
+        query.addQueryItem("query", searchText);
+        query.addQueryItem("language", dataLanguage);
+        url.setQuery(query);
+        startApiRequest(url);
     }
 }
 
