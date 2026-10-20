@@ -53,4 +53,8 @@ namespace AgeRatings {
 // All systems by country code ("DE", "UK", ...); read once on the first call
 const QMap<QString, CountryRatingSystem> &systems();
 
+// Country code of the system with this ID (prefix in the file, e.g. "de-movie" → "DE");
+// empty if the app doesn't know the system
+QString countryOfSystem(const QString &technicalID);
+
 } // namespace AgeRatings

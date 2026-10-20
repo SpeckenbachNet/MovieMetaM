@@ -67,9 +67,41 @@ void MainWin::fillRatingComboBox(QString countryCode)
         int lastIndex = ui->ratingComboBox->count() - 1;
         ui->ratingComboBox->setItemData(lastIndex, entry.description.isEmpty() ? entry.label : entry.description,
                                         Qt::ToolTipRole);
+        ui->ratingComboBox->setItemData(lastIndex, entry.code, kRatingCodeRole);
+        ui->ratingComboBox->setItemData(lastIndex, system.technicalID, kRatingSystemRole);
     }
 
     ui->ratingComboBox->setIconSize(QSize(kRatingIconSize, kRatingIconSize));
+}
+
+// The system in the file decides which steps the list shows; the settings only apply to movies
+// without an age rating. An entry the app doesn't know stays as it is, on top of the list.
+void MainWin::showMovieRating(const MovieData &movie)
+{
+    const QString fileCountry = AgeRatings::countryOfSystem(movie.ratingSystem);
+    fillRatingComboBox(fileCountry.isEmpty() ? countryCode : fileCountry);
+
+    if (movie.ratingSystem.isEmpty()) {
+        ui->ratingComboBox->setCurrentIndex(0);
+        return;
+    }
+
+    // By code; older texts (e.g. Apple's "ab 12 Jahren") by the score of the same system
+    int index = -1;
+    if (!fileCountry.isEmpty()) {
+        index = ui->ratingComboBox->findData(movie.ratingText, kRatingCodeRole);
+        if (index < 0) {
+            index = ui->ratingComboBox->findData(movie.ratingScore, Qt::UserRole);
+        }
+    }
+
+    if (index < 0) {
+        index = qMin(1, ui->ratingComboBox->count());   // below the empty entry
+        ui->ratingComboBox->insertItem(index, movie.ratingSystem + ": " + movie.ratingText, movie.ratingScore);
+        ui->ratingComboBox->setItemData(index, movie.ratingText, kRatingCodeRole);
+        ui->ratingComboBox->setItemData(index, movie.ratingSystem, kRatingSystemRole);
+    }
+    ui->ratingComboBox->setCurrentIndex(index);
 }
 
 void MainWin::fillRatingSettingsComboBox()
@@ -462,12 +494,16 @@ bool MainWin::validateAndRefreshChanges() {
     }
     work.genre = ui->genreComboBox->currentText();
 
+    // Age rating: only system and step count (an older text of the same step is no change)
     int currentScore = ui->ratingComboBox->currentData(Qt::UserRole).toInt();
-    if (currentScore != original.ratingScore) {
+    QString currentSystem = ui->ratingComboBox->currentData(kRatingSystemRole).toString();
+    if (currentScore != original.ratingScore || currentSystem != original.ratingSystem) {
         qDebug() << "AgeRating has changed.";
         hasChanged = true;
     }
     work.ratingScore = currentScore;
+    work.ratingSystem = currentSystem;
+    work.ratingText = ui->ratingComboBox->currentData(kRatingCodeRole).toString();
 
     // ----- Cover Label -----
     QPixmap currentCover = work.cover;
@@ -754,8 +790,8 @@ void MainWin::displayMovie(const MovieData &movie) {
     // Insert the cover; without one the label shows its placeholder
     ui->coverLabel->setCover(movie.cover);
 
-    // Set entry in ageRating combobox
-    setComboEntryByString(ui->ratingComboBox,QString::number(movie.ratingScore),true);
+    // Fill the age rating combobox with the system of the file and select its entry
+    showMovieRating(movie);
 
     // Set Entry in genre combobox
     if (!movie.genre.isEmpty()) {
@@ -1086,6 +1122,17 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     } else {
         // Fehler (z.B. Datei schreibgeschützt)
         ui->statusBar->showMessage(tr("Error: could not save the settings!"), 50000);
+    }
+
+    // The new system applies at once: show the current movie again (its list may change)
+    countryCode = ui->ratingSettingsComboBox->currentData().toString();
+    settingsChanged = false;
+    m_saveSettingsBtn->setEnabled(false);
+    const QString movieKey = ui->fileListTableView->movieKey();
+    if (m_loadedMovies.contains(movieKey)) {
+        displayMovie(m_loadedMovies.value(movieKey));
+    } else {
+        fillRatingComboBox(countryCode);
     }
 }
 

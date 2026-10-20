@@ -89,3 +89,17 @@ const QMap<QString, CountryRatingSystem> &AgeRatings::systems()
     static const QMap<QString, CountryRatingSystem> systems = load();
     return systems;
 }
+
+QString AgeRatings::countryOfSystem(const QString &technicalID)
+{
+    if (technicalID.isEmpty()) {
+        return QString();
+    }
+    const auto &all = systems();
+    for (auto it = all.cbegin(); it != all.cend(); ++it) {
+        if (it.value().technicalID == technicalID) {
+            return it.key();
+        }
+    }
+    return QString();
+}
