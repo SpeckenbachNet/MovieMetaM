@@ -35,11 +35,21 @@
     </message>
     <message>
         <location filename="../helppage.cpp" line="106"/>
+        <source>Movie Search</source>
+        <translation>Filmsuche</translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="106"/>
+        <source>Find and apply TMDB data</source>
+        <translation>TMDB-Daten finden und übernehmen</translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="107"/>
         <source>About %1</source>
         <translation>Über %1</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="107"/>
+        <location filename="../helppage.cpp" line="108"/>
         <source>Version, license, credits</source>
         <translation>Version, Lizenz, Danksagungen</translation>
     </message>

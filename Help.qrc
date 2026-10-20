@@ -5,6 +5,8 @@
         <file alias="en/movielist.md">help/en/movielist.md</file>
         <file alias="de/movieinfo.md">help/de/movieinfo.md</file>
         <file alias="en/movieinfo.md">help/en/movieinfo.md</file>
+        <file alias="de/moviesearch.md">help/de/moviesearch.md</file>
+        <file alias="en/moviesearch.md">help/en/moviesearch.md</file>
         <file alias="de/about.md">help/de/about.md</file>
         <file alias="en/about.md">help/en/about.md</file>
     </qresource>
