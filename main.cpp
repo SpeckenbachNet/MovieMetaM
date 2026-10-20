@@ -66,12 +66,12 @@ int main(int argc, char *argv[])
             return 0; // Cancel -> Exit Application
         }
 
-        // Werte aus dem Dialog in die Settings übernehmen
+        // Take the values from the dialog into the settings
         settings.setValue("General/AgeRatingSystem", setupDialog.selectedOptionFromAgeRating());
         settings.setValue("language", setupDialog.selectedAppLanguage());
         settings.setValue("General/DataLanguage", setupDialog.selectedDataLanguage());
 
-        // Optional: Explizit synchronisieren (meist nicht nötig, aber sicher)
+        // Optional: sync explicitly (usually not needed, but safe)
         settings.sync();
 
         // Another language of the app chosen: the main window starts in it

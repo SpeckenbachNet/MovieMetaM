@@ -12,10 +12,10 @@ class TagDelegate : public QStyledItemDelegate
 public:
     TagDelegate(const QString &styleSheet, QObject *parent = nullptr);
 
-    // Überschreibt die Draw-Funktion, um das Aussehen zu steuern
+    // Overrides the draw function to control the look
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
-    // Überschreibt die Größe, um dem View mitzuteilen, wie groß die Zelle sein muss
+    // Overrides the size to tell the view how big the cell must be
     QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
 private:

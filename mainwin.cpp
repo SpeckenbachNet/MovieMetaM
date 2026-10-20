@@ -377,7 +377,7 @@ void MainWin::formatTextByLength(int limit)
     ui->descriptionText->blockSignals(true);
     int scrollPos = ui->descriptionText->verticalScrollBar()->value();
 
-    // Aktuellen Cursor des Widgets holen (enthält die Position des Users)
+    // Get the widget's current cursor (holds the user's position)
     QTextCursor userCursor = ui->descriptionText->textCursor();
     int oldPos = userCursor.position();
 
@@ -385,10 +385,10 @@ void MainWin::formatTextByLength(int limit)
     QString text = ui->descriptionText->toPlainText();
     int totalLength = text.length();
 
-    // Wir erstellen einen Arbeits-Cursor für die Formatierung
+    // Create a working cursor for the formatting
     QTextCursor editCursor(ui->descriptionText->document());
 
-    // Holt die Standard-Textfarbe des aktuellen System-Themes
+    // Gets the default text color of the current system theme
     QColor defaultColor = ui->descriptionText->palette().color(QPalette::Text);
 
     // --- Format-Definitionen ---
@@ -400,25 +400,25 @@ void MainWin::formatTextByLength(int limit)
 
     // --- 3. Formatierung anwenden ---
 
-    // A. Gesamten Text zuerst auf Standard (Schwarz) zurücksetzen
+    // A. Reset the whole text to the default color first
     editCursor.select(QTextCursor::Document);
     editCursor.setCharFormat(defaultFormat);
 
-    // B. Wenn Limit überschritten, ab dem Limit rot einfärben
+    // B. If the limit is exceeded, color the text red from the limit on
     if (totalLength > limit) {
         editCursor.setPosition(limit);
         editCursor.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
         editCursor.mergeCharFormat(warningFormat);
     }
 
-    // --- 4. Cursor und UI wiederherstellen ---
+    // --- 4. Restore cursor and UI ---
 
-    // Den ursprünglichen Cursor des Users wiederherstellen
-    // qMin stellt sicher, dass wir nicht außerhalb des Textes landen
+    // Restore the user's original cursor
+    // qMin makes sure we do not end up outside the text
     userCursor.setPosition(qMin(oldPos, totalLength));
     ui->descriptionText->setTextCursor(userCursor);
 
-    // Scrollbar wieder an die alte Stelle setzen
+    // Put the scroll bar back to its old position
     ui->descriptionText->verticalScrollBar()->setValue(scrollPos);
 
     ui->descriptionText->blockSignals(false);
@@ -426,16 +426,16 @@ void MainWin::formatTextByLength(int limit)
 
 void MainWin::saveMovieDetails()
 {
-    // Die aktuelle Liste der Schauspieler abrufen
+    // Get the current list of actors
     //QStringList currentActors = m_actorWidget->getTags();
 
-    // Die aktuelle Liste der Genres abrufen
+    // Get the current list of genres
     //QStringList currentGenres = m_genreWidget->getTags();
 
     //qDebug() << "Saved cast:" << currentActors;
     //qDebug() << "Saved genres:" << currentGenres;
 
-    // Hier folgt die Logik, um diese Listen in Ihrem QStandardItemModel oder Ihrer Datenbank zu speichern
+    // The logic to store these lists follows here
     // ...
 }
 
@@ -706,7 +706,7 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
         // Check if path is already in map
         if (m_loadedMovies.contains(path)) {
             qDebug() << "File already exists, skip:" << path;
-            continue; // Springe zur nächsten Datei in der Liste
+            continue; // Skip to the next file in the list
         }
 
         // If new: Note where the first NEW film lands.
@@ -768,10 +768,10 @@ void MainWin::addFilePathToModel(const QString &filePath)
 }
 
 void MainWin::setSignalsBlocked(bool blocked) {
-    // Liste aller Widgets, die Signale senden könnten
+    // List of all widgets that could send signals
     //ui->middleGroupBox->blockSignals(blocked);
 
-    // Oder direkt alle Kinder eines bestimmten Layouts/Widgets durchlaufen:
+    // Or go through all children of a certain layout/widget directly:
     const auto children = ui->middleGroupBox->findChildren<QWidget*>();
     for (QWidget* child : children) {
         child->blockSignals(blocked);
@@ -864,20 +864,20 @@ void MainWin::selectRowInTable(int row)
 
 // ***** SLOTS *****
 void MainWin::onSaveAllButtonClicked() {
-    // Wir gehen durch alle geladenen Filme in der Map
+    // Go through all loaded movies in the map
     QMap<QString, MovieData>::iterator i;
     for (i = m_loadedMovies.begin(); i != m_loadedMovies.end(); ++i) {
 
-        MovieData &movie = i.value(); // Referenz auf den Film
-        QString path = i.key();      // Der Dateipfad
+        MovieData &movie = i.value(); // reference to the movie
+        QString path = i.key();      // the file path
 
         //if (movie.status) {
-            // 1. In Datei schreiben (deine Logik)
+            // 1. Write to the file
             // if (movie.saveToFile(path)) {
-            //     // 2. Status zurücksetzen
+            //     // 2. Reset the status
             //     movie.isDirty = false;
 
-            //     // 3. UI aktualisieren: Wir müssen die Zeile in der Tabelle finden
+            //     // 3. Update the UI: find the row in the table
             //     updateRowIconToGreen(path);
             // }
         //}
@@ -888,7 +888,7 @@ void MainWin::onSearchTableViewDoubleClicked(const QModelIndex &index){
     if (!index.isValid())
         return;
 
-    // Index der ersten Spalte in der gleichen Zeile
+    // Index of the first column in the same row
     QModelIndex idIndex = index.sibling(index.row(), 0);
     QVariant idData = idIndex.data(Qt::UserRole);
 
@@ -989,7 +989,7 @@ void MainWin::onRemoveFilesButtonClicked()
 
 void MainWin::onSearchButtonClicked()
 {
-    // Logik für "Search":
+    // Logic for "Search":
     qDebug() << "Action SEARCH triggered...";
     QString searchText = ui->searchEdit->text();
     qDebug() << "Search Text: " << searchText;
@@ -1012,9 +1012,9 @@ void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const 
     QNetworkRequest request(imageUrl);
     QNetworkReply *reply = m_ImageNetworkManager->get(request);
 
-    // Verbinden des Reply-Signals direkt mit dem verarbeitenden Lambda
+    // Connect the reply signal directly to the processing lambda
     QObject::connect(reply, &QNetworkReply::finished,
-        this, [this, callback, onError, reply]() { // 'reply' wird für deleteLater captured
+        this, [this, callback, onError, reply]() { // 'reply' is captured for deleteLater
 
              QNetworkReply *finishedReply = qobject_cast<QNetworkReply*>(sender());
 
@@ -1113,12 +1113,12 @@ void MainWin::onApiRequestFinished(QNetworkReply *reply)
 
     if (requestUrl.contains("/genre/movie/list"))
     {
-        // Ruft die Funktion auf, die die Genre-ComboBox/Listbox füllt
+        // Calls the function that fills the genre combo box
         fillGenreComboBox(jsonDoc);
 
     } else if (requestUrl.contains("/search/movie"))
     {
-        // Ruft die Funktion auf, die die Film-ListView füllt
+        // Calls the function that fills the movie list
         fillSearchTableView(jsonDoc);
     }
 
@@ -1149,7 +1149,7 @@ void MainWin::handleSaveSettingsButton_Clicked() {
                                        ? tr("Settings saved. The language changes after a restart.")
                                        : tr("Settings saved."), 30000); // 30 s visible
     } else {
-        // Fehler (z.B. Datei schreibgeschützt)
+        // Error (e.g. file is read-only)
         ui->statusBar->showMessage(tr("Error: could not save the settings!"), 50000);
     }
 
