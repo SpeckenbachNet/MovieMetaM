@@ -359,7 +359,7 @@ void MediaInfoM::readStringDataBox(QFile &file, QString key, QMap<QString, QStri
             // ------ Fallback ------
             // Attempt: Classic date (1950-12-18)
             if (!date.isValid()) {
-                date = QDate::fromString(result, "yyyy-M-d");
+                date = QDate::fromString(result.section('T', 0, 0).trimmed(), "yyyy-M-d");   // also "1987-10-6T12:00:00Z"
             }
 
             // Attempt: Only the year

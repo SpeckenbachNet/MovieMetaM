@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.5 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.6.0 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---
@@ -21,7 +21,7 @@ und sucht Filmdaten bei **TMDB** (The Movie Database).
 | Altersfreigaben nach dem System der Datei (46 Länder) | fertig |
 | TMDB-Suche mit Postern, Genreliste | fertig |
 | TMDB-Treffer übernehmen (Tab „Data“: Daten, Poster-Auswahl, Altersfreigabe, „Apply“) | fertig |
-| Speichern in die MP4-Datei | offen (Entscheidung: eigener Writer oder TagLib) |
+| Speichern in die MP4-Datei (TagLib) | fertig |
 | Hilfeseite | ein Thema („About MovieMetaM“) |
 
 Unterstützt sind bisher nur MP4 und M4V (`MediaInfoM::supportedSuffixes()`). Andere Dateien
@@ -34,7 +34,7 @@ werden mit einer Meldung übersprungen.
                                                                       │
         Suchbegriff ──► TMDB-Ergebnisse ──Doppelklick──► Tab „Data“ ──Apply──► Film
                                                                       │
-                                                  (offen) Speichern in die MP4-Datei
+                                                  Speichern in die MP4-Datei (TagLib)
 ```
 
 Die Oberfläche hat drei Spalten: Filmliste (links), Filminfo (Mitte), TMDB-Suche (rechts, Tabs
@@ -82,6 +82,7 @@ Hinweise:
 |---|---|
 | `main.cpp` | Einstellungen, Übersetzer, Setupdialog beim ersten Start, Hauptfenster |
 | `mainwin.*`, `initialize.cpp` | Hauptfenster: Filmliste, Filminfo, TMDB-Suche; Seiten Einstellungen und Hilfe |
+| `mp4writer.*` | schreibt die Daten mit TagLib in die MP4-Datei, direkt oder über eine Kopie (Abschnitt 4) |
 | `mediainfom.*` | liest MP4-Boxen: Metadaten, `iTunMOVI`-XML, Cover |
 | `moviedata.*` | Daten eines Films, Hilfsfunktionen (`getItunExtc()`, Säubern von Texten) |
 | `tagwidget.*`, `tagdelegate.*` | Tag-Eingabe (Besetzung, Regie, Drehbuch, Produktion) |
@@ -125,9 +126,80 @@ Hinweise:
 - Das Cover (`covr`) liest `extractCoverImageMp4()` über `findCoverBox()`.
 - Fehler gehen über das Signal `errorOccurred` ins Log (`qWarning`).
 
-**Schreiben** ist noch nicht umgesetzt (`saveMovieDetails()` und „Alle speichern“ sind leer).
-Vorher ist eine Entscheidung nötig: eigener MP4-Writer (Offset-Tabellen `stco`/`co64` müssen
-nachgeführt werden, wenn `moov` vor `mdat` liegt) oder eine Bibliothek wie TagLib (LGPL).
+**Schreiben** (`Mp4Writer`, `mp4writer.*`) macht die Bibliothek TagLib. Wie sie eingebunden ist,
+steht im Abschnitt „TagLib (Bibliothek)“ weiter unten.
+
+- „Save“ speichert den ausgewählten Film (`saveMovieDetails()`), „Save all“ alle geänderten
+  (`onSaveAllButtonClicked()`); beide rufen `startSaving()`. `updateSaveButtons()` schaltet die
+  Knöpfe.
+- **Im Thread:** `startSaving()` kopiert die Daten der Filme in `SaveJob`s (ohne `QPixmap`: das
+  gehört zum GUI-Thread, die Cover gehen als `QImage`), sperrt das Fenster
+  (`centralWidget()->setEnabled(false)`, damit sich unter dem Thread nichts ändert) und startet
+  `QtConcurrent::run`. Der Thread meldet den Fortschritt mit einem Toast („Saving 2 of 5 ...“).
+  Wenn er fertig ist, läuft `savingFinished()` im GUI-Thread: Der gespeicherte Stand wird zum
+  neuen Original (`m_originalMovies`), die Symbole werden grün, ein Toast meldet das Ergebnis.
+  `closeEvent()` wartet auf einen laufenden Speichervorgang.
+- **Zwei Wege** (Einstellung `General/SafeSave`, im Dialog „Safe saving (copy the file first)“):
+  - **Direkt (Standard):** TagLib schreibt in die Datei selbst. Schnell, auch bei großen Dateien
+    und auf Netzlaufwerken (bei einer 4,5-GB-Datei übers Netz Sekunden). Wird das Schreiben
+    unterbrochen, kann die Datei beschädigt sein; die Hilfe sagt das.
+  - **Sicher:** `Mp4Writer::save()` prüft den freien Platz, kopiert die Datei neben das Original
+    (`name.tmp.mp4`; die Endung muss bleiben, der Leser erkennt das Format daran), schreibt dort
+    und ersetzt erst nach der Prüfung das Original (es geht zuerst nach `.bak` und wird danach
+    gelöscht). Bei jedem Fehler bleibt das Original unberührt. Der Preis ist die Kopie der ganzen
+    Datei: lokal etwa die Zeit des Kopierens (4,5 GB: 12 s), übers Netz Minuten (4,5 GB: 5 min).
+  - In beiden Wegen liest `verify()` die Datei danach mit `MediaInfoM` (Titel, Beschreibung,
+    Altersfreigabe, Cover). Die Mediendaten prüft es nicht (bei GB-Dateien zu langsam).
+- Geschrieben werden `©nam`, `ldes` und `desc` (auf 255 Zeichen gekürzt), `©gen`, `©day`
+  (ISO), die freien Einträge `iTunEXTC` (`System|Code|Score|`) und `iTunMOVI` (Besetzung, Regie,
+  Drehbuch, Produktion, Studio) sowie `covr`. `iTunMOVI` baut `buildItunMovi()` im Layout von
+  Apple (Zeilenumbrüche und Tabs, so liest es unser Leser); `codirectors` des alten Eintrags
+  bleiben. `©ART` und `aART` werden nicht angefasst. Ein unverändertes Cover wird nicht neu
+  kodiert. Ein leerer Wert entfernt den Eintrag.
+- Die Schlüssel mit dem ©-Zeichen müssen für TagLib UTF-8-Strings sein (`key("\xC2\xA9nam")`);
+  als Latin-1 schreibt TagLib stillschweigend einen falschen Eintrag.
+- Offen: Warnung beim Beenden mit ungespeicherten Änderungen, andere Formate als MP4.
+
+### TagLib (Bibliothek)
+
+TagLib ist eine fertige C++-Bibliothek zum Lesen und Schreiben von Audio- und Video-Tags. Wir
+nutzen nur den MP4-Teil (`TagLib::MP4::File`, `Tag`, `Item`, `CoverArt`). Eine Bibliothek ist
+kein Programm, das man startet: Ihr Quelltext wird übersetzt und in die App gebunden, die App
+ruft ihre Funktionen auf wie die von Qt.
+
+- **Version, Lizenz:** TagLib 2.3.2, LGPL 2.1 oder MPL 1.1 (wir verwenden die LGPL-Seite; sie ist
+  mit unserer GPL v3 vereinbar). Zur Weitergabe der App gehören die Lizenztexte (`COPYING.LGPL`
+  im TagLib-Archiv); die Hilfe nennt TagLib.
+- **Wie sie in den Build kommt (`CMakeLists.txt`):** Weg „Download beim Bauen“, damit das
+  Repository klein bleibt (TagLib liegt nicht in Git). `FetchContent_Declare(taglib ...)` nennt
+  die feste Adresse des Release-Archivs
+  `https://github.com/taglib/taglib/releases/download/v2.3.2/taglib-2.3.2.tar.gz` und seine
+  SHA-256-Prüfsumme. Beim ersten CMake-Lauf lädt CMake das Archiv in den Build-Ordner
+  (`build/.../_deps/taglib-src`), prüft die Summe und baut TagLib mit. Weitere Läufe laden nichts
+  mehr, solange der Build-Ordner bleibt. Das **erste Bauen braucht also Netz**, die fertige App
+  nicht: TagLib ist als statische Bibliothek in sie eingebaut. Bevor `FetchContent_MakeAvailable`
+  läuft, schalten `BUILD_SHARED_LIBS`, `BUILD_TESTING`, `BUILD_EXAMPLES` und `BUILD_BINDINGS`
+  auf `OFF`.
+- **Include-Verzeichnisse:** TagLib setzt seine Include-Pfade nur für den eigenen Build (nicht an
+  das Ziel `tag` gebunden). Deshalb liest `CMakeLists.txt` sie nach dem Einbinden aus
+  (`get_directory_property(... INCLUDE_DIRECTORIES)`), fügt sie unserem Ziel hinzu und dazu das
+  Verzeichnis mit `taglib_config.h`. Im Code heißen die Header deshalb flach
+  (`#include <mp4file.h>`), nicht `<taglib/mp4file.h>`.
+- **Gelinkt wird** das Ziel `tag`. TagLib nutzt zlib, wenn es vorhanden ist (optional).
+- **Auf eine neue Version wechseln:** In `CMakeLists.txt` die Adresse (`v2.3.2` und den Dateinamen)
+  und die Prüfsumme ändern. Die Summe berechnet man vom heruntergeladenen Archiv mit
+  `shasum -a 256 taglib-x.y.z.tar.gz`. Danach CMake neu laufen lassen (bei einem alten
+  Build-Ordner den Ordner `_deps` löschen).
+- **Ohne Netz bauen:** Das entpackte TagLib-Verzeichnis angeben mit
+  `-DFETCHCONTENT_SOURCE_DIR_TAGLIB=<Pfad>` (dann lädt CMake nichts), oder mit
+  `-DFETCHCONTENT_FULLY_DISCONNECTED=ON`, wenn `_deps` schon gefüllt ist.
+- **Versuche:** Mein Prototyp (TagLib bauen, in eine Kopie schreiben, wieder lesen, Mediendaten
+  per Prüfsumme vergleichen, mit `moov` hinten und vorn) liegt in `_dev/` (nicht in Git). Er
+  zeigt: TagLib ändert die Datei direkt und braucht dafür nur Millisekunden; wächst das `moov`
+  über den vorhandenen Platz und liegt es vor den Mediendaten, verschiebt TagLib sie und führt
+  die Offset-Tabellen (`stco`/`co64`) nach. Die lange Zeit des sicheren Wegs ist allein das Kopieren.
+- **Threads:** TagLib selbst ist unkritisch. `Mp4Writer` benutzt keine GUI-Klassen (daher die
+  `QImage`-Parameter statt `QPixmap`).
 
 ---
 
@@ -245,6 +317,7 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
 |---|---|
 | `language` | Sprache der App (Code, z. B. `de`) |
 | `General/DataLanguage` | Sprache der Filmdaten für TMDB (z. B. `de-DE`) |
+| `General/SafeSave` | `true`: beim Speichern erst in eine Kopie schreiben (sicher, aber langsam); Standard `false` |
 | `General/AgeRatingSystem` | Land des Altersfreigabe-Systems (für Filme ohne Freigabe) |
 | `Window/Geometry` | Größe und Lage des Fensters |
 | `Window/Splitter` | Breiten der drei Spalten |
@@ -288,6 +361,8 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
 ## 10. Ressourcen und Lizenzen
 
 - Quelltext: GPL v3 (`LICENSE`). Kopfzeilen in den Quelldateien.
+- TagLib 2.3.2 (schreibt die Tags): LGPL 2.1 oder MPL 1.1, wird statisch eingebaut. Die Lizenztexte
+  (`COPYING.LGPL`) gehören zu jeder Weitergabe der App; die Hilfe nennt TagLib.
 - Icons: `ressources/icons/LICENSES.md` (Speichern-Icons von Lucide, ISC). Die Herkunft einiger
   Icons ist noch zu klären.
 - TMDB: Logo (`ressources/images/tmdb.svg`) und Hinweis laut den Bedingungen von TMDB.

@@ -173,6 +173,10 @@ void MainWin::initializeComboBoxes() {
         ui->dataLanguageSettingsComboBox->addItem(language.name, language.code);
     }
     setComboEntryByString(ui->dataLanguageSettingsComboBox, dataLanguage, true);
+
+    // Settings: write into a copy first (slow, but safe)
+    m_safeSave = settings.value("General/SafeSave", false).toBool();
+    ui->safeSaveCheckBox->setChecked(m_safeSave);
 }
 
 void MainWin::initializeToolBars() {
@@ -425,6 +429,7 @@ void MainWin::initializeConnects() {
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
     connect(ui->languageSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
     connect(ui->dataLanguageSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
+    connect(ui->safeSaveCheckBox, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
     // Preview of the chosen system at once, before saving
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this] {
         fillRatingPreview(ui->ratingSettingsComboBox->currentData().toString());
@@ -453,6 +458,11 @@ void MainWin::initializeConnects() {
     connect(ui->fileListTableView->selectionModel(), &QItemSelectionModel::currentChanged, this, &MainWin::onCurrentMovieChanged);
     connect(ui->searchEdit, &SearchField::searchRequested, this, &MainWin::onSearchButtonClicked);
     connect(m_addBtn, &QToolButton::clicked, this, &MainWin::onAddFilesButtonClicked);
+    // Saving runs in a thread
+    m_saveWatcher = new QFutureWatcher<QList<SaveResult>>(this);
+    connect(m_saveWatcher, &QFutureWatcher<QList<SaveResult>>::finished, this, &MainWin::savingFinished);
+    connect(m_saveBtn, &QToolButton::clicked, this, &MainWin::saveMovieDetails);
+    connect(m_saveAllBtn, &QToolButton::clicked, this, &MainWin::onSaveAllButtonClicked);
     connect(m_removeBtn, &QToolButton::clicked, this, &MainWin::onRemoveFilesButtonClicked);
 
     // "Remove" only while at least one movie is selected
