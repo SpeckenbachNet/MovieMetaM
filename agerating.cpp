@@ -103,3 +103,21 @@ QString AgeRatings::countryOfSystem(const QString &technicalID)
     }
     return QString();
 }
+
+const RatingEntry *AgeRatings::findEntry(const QString &countryCode, const QString &certification)
+{
+    const auto normalized = [](QString text) { return text.remove(' ').toLower(); };
+    const QString wanted = normalized(certification);
+    const auto &all = systems();
+    const auto system = all.constFind(countryCode);
+    if (wanted.isEmpty() || system == all.constEnd()) {
+        return nullptr;
+    }
+    for (const RatingEntry &entry : system.value().ratings) {
+        if (normalized(entry.key) == wanted) return &entry;
+    }
+    for (const RatingEntry &entry : system.value().ratings) {
+        if (normalized(entry.code) == wanted) return &entry;
+    }
+    return nullptr;
+}

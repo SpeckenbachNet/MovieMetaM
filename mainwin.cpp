@@ -599,6 +599,7 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
     QJsonArray jsonArray = rootObj.value("results").toArray();
 
     m_SearchModel->clear();   // created once in initializeForm()
+    ui->tabWidget->setCurrentWidget(ui->tab_1);   // a new search shows its results
     // A new search: posters still loading for the old one are dropped (see the callback)
     const int generation = ++m_searchGeneration;
 
@@ -625,6 +626,7 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
             }
             QStandardItem *item = new QStandardItem(text);
             item->setData(obj.value("id").toInt(), Qt::UserRole);
+            item->setData(obj.value("poster_path").toString(), kPosterPathRole);
             m_SearchModel->appendRow(item);
 
             // Poster: loaded asynchronously; the persistent index follows the entry and becomes
@@ -694,6 +696,234 @@ void MainWin::fillGenreComboBox(const QJsonDocument &jsonDoc)
     ui->genreComboBox->addItem("");
     ui->genreComboBox->addItems(genreNames);
     setComboEntryByString(ui->genreComboBox, currentGenre, false);
+}
+
+// Reads the details of a movie from TMDB (with credits) into m_tmdbMovie and shows them
+void MainWin::fillDetailsTab(const QJsonDocument &jsonDoc)
+{
+    if (jsonDoc.isNull() || !jsonDoc.isObject()) {
+        qWarning() << "Error: Invalid or empty JSON document for the movie details.";
+        return;
+    }
+    const QJsonObject root = jsonDoc.object();
+
+    MovieData movie;
+    movie.title = root.value("title").toString();
+    movie.description = root.value("overview").toString();
+    movie.releaseDate = QDate::fromString(root.value("release_date").toString(), Qt::ISODate);
+    movie.studio = root.value("production_companies").toArray().at(0).toObject().value("name").toString();
+    movie.genre = root.value("genres").toArray().at(0).toObject().value("name").toString();
+
+    // Names of people: no one twice (the same person can have several jobs)
+    const auto names = [](const QStringList &list) {
+        QStringList unique;
+        for (const QString &name : list) {
+            if (!name.isEmpty() && !unique.contains(name)) unique << name;
+        }
+        return unique;
+    };
+    const QJsonObject credits = root.value("credits").toObject();
+    QStringList cast;
+    for (const QJsonValue &person : credits.value("cast").toArray()) {
+        cast << person.toObject().value("name").toString();
+    }
+    cast = names(cast).mid(0, kCastLimit);
+    const auto crew = [&](const QStringList &jobs) {
+        QStringList found;
+        for (const QJsonValue &person : credits.value("crew").toArray()) {
+            const QJsonObject obj = person.toObject();
+            if (jobs.contains(obj.value("job").toString())) found << obj.value("name").toString();
+        }
+        return names(found).join(", ");
+    };
+    movie.cast = cast.join(", ");
+    movie.directors = crew({"Director"});
+    movie.screenwriters = crew({"Screenplay", "Writer"});
+    movie.producers = crew({"Producer"});
+
+    m_tmdbMovie = movie;
+    m_tmdbReleaseDates = root.value("release_dates").toObject().value("results").toArray();
+    showTmdbDetails();
+    ui->tabWidget->setCurrentWidget(ui->tab_2);
+}
+
+void MainWin::showTmdbDetails()
+{
+    const MovieData &movie = m_tmdbMovie;
+    const bool loaded = !movie.title.isEmpty();
+    m_applyBtn->setEnabled(loaded);
+    m_detailsTitle->setVisible(loaded);
+    m_posterPicker->setVisible(loaded);
+    if (!loaded) {
+        m_detailsView->setPlainText(tr("Double click a search result to see its data."));
+        return;
+    }
+
+    m_detailsTitle->setText(movie.releaseDate.isValid()
+                                ? QStringLiteral("%1 (%2)").arg(movie.title).arg(movie.releaseDate.year())
+                                : movie.title);
+
+    QString html;
+    const auto row = [&html](const QString &label, const QString &value) {
+        if (!value.isEmpty()) {
+            html += QStringLiteral("<p><b>%1</b><br>%2</p>").arg(label.toHtmlEscaped(), value.toHtmlEscaped());
+        }
+    };
+    row(tr("Release Date"), movie.releaseDate.isValid() ? movie.releaseDate.toString("dd.MM.yyyy") : QString());
+    row(tr("Studio"), movie.studio);
+    row(tr("Genre"), movie.genre);
+    // Age rating in the system the selected movie follows (nothing if TMDB has none for it)
+    const QString key = ui->fileListTableView->movieKey();
+    QString systemID;
+    RatingEntry rating;
+    if (m_loadedMovies.contains(key) && findTmdbRating(ratingCountry(m_loadedMovies.value(key)), systemID, rating)) {
+        row(tr("Age Rating"), rating.code);
+    }
+    row(tr("Description"), movie.description);
+    row(tr("Actors"), movie.cast);
+    row(tr("Directors"), movie.directors);
+    row(tr("Screenplay"), movie.screenwriters);
+    row(tr("Producers"), movie.producers);
+    m_detailsView->setHtml(html);
+}
+
+// The country whose age rating system a movie follows: the one in the file, else the one of the settings
+QString MainWin::ratingCountry(const MovieData &movie) const
+{
+    const QString fileCountry = AgeRatings::countryOfSystem(movie.ratingSystem);
+    return fileCountry.isEmpty() ? countryCode : fileCountry;
+}
+
+// The age rating TMDB has for the country, as a step of our system. Home video before cinema
+// (like the age rating systems, see CLAUDE.md); false if TMDB has none or it fits no step
+bool MainWin::findTmdbRating(const QString &country, QString &systemID, RatingEntry &entry) const
+{
+    const QString tmdbCountry = (country == QLatin1String("UK")) ? QStringLiteral("GB") : country;
+    static const int typeOrder[] = {5, 4, 3, 2, 6, 1};   // physical, digital, cinema, limited, TV, premiere
+    for (const QJsonValue &value : m_tmdbReleaseDates) {
+        const QJsonObject result = value.toObject();
+        if (result.value("iso_3166_1").toString() != tmdbCountry) continue;
+
+        const QJsonArray releases = result.value("release_dates").toArray();
+        for (const int type : typeOrder) {
+            for (const QJsonValue &release : releases) {
+                const QJsonObject obj = release.toObject();
+                if (obj.value("type").toInt() != type) continue;
+                if (const RatingEntry *found = AgeRatings::findEntry(country, obj.value("certification").toString())) {
+                    entry = *found;
+                    systemID = AgeRatings::systems().value(country).technicalID;
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+// The posters TMDB has for the movie: list for the picker, thumbnails and the first one load
+void MainWin::fillPosters(const QJsonDocument &jsonDoc)
+{
+    if (jsonDoc.isNull() || !jsonDoc.isObject()) {
+        qWarning() << "Error: Invalid or empty JSON document for the posters.";
+        return;
+    }
+    const QJsonArray posters = jsonDoc.object().value("posters").toArray();
+    const int generation = m_detailsGeneration;
+
+    QStringList texts;
+    m_posterPaths.clear();
+    int current = 0;
+    for (const QJsonValue &value : posters) {
+        if (m_posterPaths.size() >= kPosterLimit) break;
+        const QJsonObject poster = value.toObject();
+        const QString path = poster.value("file_path").toString();
+        if (path.isEmpty()) continue;
+
+        // Language of the printing in its own name ("Deutsch"); without printing: "No text"
+        const QString iso = poster.value("iso_639_1").toString();
+        QString language = tr("No text");
+        if (!iso.isEmpty()) {
+            language = QLocale(iso).nativeLanguageName();
+            language = language.isEmpty() ? iso.toUpper() : language.left(1).toUpper() + language.mid(1);
+        }
+        const QString size = QStringLiteral("%1 \u00D7 %2").arg(poster.value("width").toInt()).arg(poster.value("height").toInt());
+        const QString vote = QLocale().toString(poster.value("vote_average").toDouble(), 'f', 1);
+        texts << language + "\n" + size + QStringLiteral(" \u00B7 \u2605 ") + vote;
+        if (path == m_tmdbPosterPath) current = int(m_posterPaths.size());
+        m_posterPaths << path;
+    }
+    if (m_posterPaths.isEmpty()) return;
+
+    m_posterPicker->setEntries(texts, current);
+    for (int i = 0; i < m_posterPaths.size(); ++i) {
+        startImageDownload(QUrl("https://image.tmdb.org/t/p/w185" + m_posterPaths.at(i)),
+                           [this, i, generation](const QPixmap &pixmap) {
+            if (generation == m_detailsGeneration) m_posterPicker->setThumbnail(i, pixmap);
+        });
+    }
+    showTmdbPoster(current);
+}
+
+// The large poster in the tab "Data"
+void MainWin::showTmdbPoster(int row)
+{
+    if (row < 0 || row >= m_posterPaths.size()) return;
+    const int generation = m_detailsGeneration;
+    startImageDownload(QUrl("https://image.tmdb.org/t/p/w342" + m_posterPaths.at(row)),
+                       [this, row, generation](const QPixmap &pixmap) {
+        // Only if it is still the chosen one of the same result
+        if (generation == m_detailsGeneration && row == m_posterPicker->current()) m_posterPicker->setPoster(pixmap);
+    });
+}
+
+// Takes everything TMDB knows into the selected movie; empty values change nothing
+void MainWin::applyTmdbMovie()
+{
+    const QString key = ui->fileListTableView->movieKey();
+    if (!m_loadedMovies.contains(key)) {
+        showColumnStatus(StatusColumn::Search, tr("Select a movie first"));
+        return;
+    }
+    MovieData movie = m_loadedMovies.value(key);
+    const MovieData &tmdb = m_tmdbMovie;
+    if (!tmdb.title.isEmpty())         movie.title = tmdb.title;
+    if (!tmdb.description.isEmpty())   movie.description = tmdb.description;
+    if (tmdb.releaseDate.isValid())    movie.releaseDate = tmdb.releaseDate;
+    if (!tmdb.studio.isEmpty())        movie.studio = tmdb.studio;
+    if (!tmdb.genre.isEmpty())         movie.genre = tmdb.genre;
+    if (!tmdb.cast.isEmpty())          movie.cast = tmdb.cast;
+    if (!tmdb.directors.isEmpty())     movie.directors = tmdb.directors;
+    if (!tmdb.screenwriters.isEmpty()) movie.screenwriters = tmdb.screenwriters;
+    if (!tmdb.producers.isEmpty())     movie.producers = tmdb.producers;
+
+    QString systemID;
+    RatingEntry rating;
+    if (findTmdbRating(ratingCountry(movie), systemID, rating)) {
+        movie.ratingSystem = systemID;
+        movie.ratingText = rating.code;
+        movie.ratingScore = rating.score;
+    }
+
+    // Shown in the form; onDataChanged then compares it with the original (status "changed")
+    m_loadedMovies[key] = movie;
+    displayMovie(movie);
+    onDataChanged();
+    showColumnStatus(StatusColumn::Info, tr("Data applied"));
+
+    // The chosen poster as cover: loaded in a bigger size, then taken into the same movie
+    const int poster = m_posterPicker->current();
+    if (poster >= 0 && poster < m_posterPaths.size()) {
+        startImageDownload(QUrl("https://image.tmdb.org/t/p/w780" + m_posterPaths.at(poster)),
+                           [this, key](const QPixmap &cover) {
+            if (ui->fileListTableView->movieKey() != key) return;   // another movie is shown now
+            ui->coverLabel->setCover(cover);
+            m_loadedMovies[key].cover = cover;
+            updateStatus(ui->fileListTableView->selectedRow(), "modified");
+            onDataChanged();
+        }, [this]() {
+            showColumnStatus(StatusColumn::Info, tr("The image could not be loaded."), ToastM::Level::Error);
+        });
+    }
 }
 
 void MainWin::requestGenres()
@@ -918,12 +1148,40 @@ void MainWin::onSearchTableViewDoubleClicked(const QModelIndex &index){
     QModelIndex idIndex = index.sibling(index.row(), 0);
     QVariant idData = idIndex.data(Qt::UserRole);
 
-    if (idData.isValid()) {
-        int id = idData.toInt();
-        qDebug() << "ID of selected Row:" << id;
-    } else {
+    if (!idData.isValid()) {
         qDebug() << "No ID found!";
+        return;
     }
+
+    // The data is meant for a movie of the list
+    if (!m_loadedMovies.contains(ui->fileListTableView->movieKey())) {
+        showColumnStatus(StatusColumn::Search, tr("Select a movie first"));
+        return;
+    }
+
+    // A new result: what is shown of the old one goes away, its answers are dropped
+    ++m_detailsGeneration;
+    m_tmdbPosterPath = idIndex.data(kPosterPathRole).toString();
+    m_tmdbMovie = MovieData();
+    m_tmdbReleaseDates = QJsonArray();
+    m_posterPaths.clear();
+    m_posterPicker->clear();
+    showTmdbDetails();
+
+    // Details and credits (cast, crew) in one request
+    QUrl url(QStringLiteral("https://api.themoviedb.org/3/movie/%1").arg(idData.toInt()));
+    QUrlQuery query;
+    query.addQueryItem("language", dataLanguage);
+    query.addQueryItem("append_to_response", "credits,release_dates");
+    url.setQuery(query);
+    startApiRequest(url);
+
+    // The posters: in the language of the data, English and without text
+    QUrl imagesUrl(QStringLiteral("https://api.themoviedb.org/3/movie/%1/images").arg(idData.toInt()));
+    QUrlQuery imagesQuery;
+    imagesQuery.addQueryItem("include_image_language", dataLanguage.left(2) + ",en,null");
+    imagesUrl.setQuery(imagesQuery);
+    startApiRequest(imagesUrl);
 }
 
 void MainWin::onCurrentMovieChanged(const QModelIndex &index){
@@ -1131,8 +1389,14 @@ void MainWin::onApiRequestFinished(QNetworkReply *reply)
     QString requestUrl = reply->url().toString();
 
     // Error handling
+    static const QRegularExpression movieUrl(QStringLiteral("/3/movie/\\d+"));
+    static const QRegularExpression detailsUrl(QStringLiteral("/3/movie/\\d+\\?"));
+    static const QRegularExpression imagesUrl(QStringLiteral("/3/movie/\\d+/images"));
     if (reply->error() != QNetworkReply::NoError) {
         qWarning() << "Network-Error: " << reply->errorString();
+        if (movieUrl.match(requestUrl).hasMatch()) {
+            showColumnStatus(StatusColumn::Search, tr("The movie data could not be loaded."), ToastM::Level::Error);
+        }
         reply->deleteLater();
         return;
     }
@@ -1150,6 +1414,16 @@ void MainWin::onApiRequestFinished(QNetworkReply *reply)
     {
         // Calls the function that fills the movie list
         fillSearchTableView(jsonDoc);
+
+    } else if (detailsUrl.match(requestUrl).hasMatch())
+    {
+        // Calls the function that fills the tab "Data"
+        fillDetailsTab(jsonDoc);
+
+    } else if (imagesUrl.match(requestUrl).hasMatch())
+    {
+        // Calls the function that fills the posters of the tab "Data"
+        fillPosters(jsonDoc);
     }
 
     // free request

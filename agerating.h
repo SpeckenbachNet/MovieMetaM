@@ -57,4 +57,8 @@ const QMap<QString, CountryRatingSystem> &systems();
 // empty if the app doesn't know the system
 QString countryOfSystem(const QString &technicalID);
 
+// The step of the system of this country that a certification text (e.g. from TMDB: "12",
+// "PG-13") stands for: compared with key and code, ignoring case and spaces; null if none fits
+const RatingEntry *findEntry(const QString &countryCode, const QString &certification);
+
 } // namespace AgeRatings
