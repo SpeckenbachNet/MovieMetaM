@@ -2,7 +2,5 @@
     <qresource prefix="/images">
         <file alias="tmdb.svg">ressources/images/tmdb.svg</file>
         <file alias="noimage.svg">ressources/images/noimage.svg</file>
-        <file alias="statusgreen.svg">ressources/images/statusgreen.svg</file>
-        <file alias="statusorange">ressources/images/statusorange.svg</file>
     </qresource>
 </RCC>
