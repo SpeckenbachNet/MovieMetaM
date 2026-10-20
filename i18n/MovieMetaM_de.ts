@@ -25,11 +25,21 @@
     </message>
     <message>
         <location filename="../helppage.cpp" line="105"/>
+        <source>Movie Info</source>
+        <translation>Filminfo</translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="105"/>
+        <source>Edit, cover, age rating</source>
+        <translation>Bearbeiten, Cover, Altersfreigabe</translation>
+    </message>
+    <message>
+        <location filename="../helppage.cpp" line="106"/>
         <source>About %1</source>
         <translation>Über %1</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="106"/>
+        <location filename="../helppage.cpp" line="107"/>
         <source>Version, license, credits</source>
         <translation>Version, Lizenz, Danksagungen</translation>
     </message>
@@ -192,8 +202,8 @@
         <translation>Metadaten in den Film speichern</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1651"/>
         <location filename="../initialize.cpp" line="213"/>
+        <location filename="../mainwin.cpp" line="1651"/>
         <source>Save all</source>
         <translation>Alle speichern</translation>
     </message>
@@ -469,8 +479,8 @@
         <translation>Regie eingeben</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1044"/>
         <location filename="../initialize.cpp" line="430"/>
+        <location filename="../mainwin.cpp" line="1044"/>
         <source>The image could not be loaded.</source>
         <translation>Das Bild konnte nicht geladen werden.</translation>
     </message>
