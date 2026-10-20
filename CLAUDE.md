@@ -137,7 +137,8 @@ Linux).
   the saving note (`InfoIcon::savingNote()`) beside the check box "Safe saving" in the setup dialog
   and the settings page.
 - Content advisory (`rtng`: 0 none, 2 clean, 1/4 explicit) is an editable combo box; the video
-  size (`MediaInfoM::readVideoSize`, `tkhd` of the video track) is shown under the cover and sets
+  size (`MediaInfoM::readVideoSize`, `tkhd` of the video track) is shown centered under the cover (chip "1080p" in
+  the tag look, size beside it; `formatRow` keeps its room when hidden) and sets
   the HD flag `hdvd` when saving (`MovieData::hdFlag`, by the width).
 - `toastm.*` – short message over the content, fades in and out, mouse clicks go through; one
   per window, a new message replaces the old one; position Center / Top / Bottom inside a target
@@ -168,7 +169,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.6.0; numbers kept, 1, 2, 3, 4 and 5 are done)
+## Open points (as of 0.6.3; numbers kept, 1, 2, 3, 4 and 5 are done)
 
 6. Tags: one click removes a tag without asking – tooltip "Click to remove" or an × on hover.
 7. The old TMDB token is in the git history: revoke it at TMDB and use a new one.

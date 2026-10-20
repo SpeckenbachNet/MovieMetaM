@@ -323,7 +323,7 @@ void MainWin::clearData()
     ui->genreComboBox->setCurrentIndex(0);
     ui->ratingComboBox->setCurrentIndex(0);
     ui->advisoryComboBox->setCurrentIndex(0);
-    ui->formatLabel->clear();
+    ui->formatRow->hide();
 
     // tagWidgets
     m_castWidget->clearTags();
@@ -1168,11 +1168,15 @@ void MainWin::displayMovie(const MovieData &movie) {
     }
     ui->advisoryComboBox->setCurrentIndex(advisoryIndex);
 
-    // Format of the video (information)
-    ui->formatLabel->setText(movie.videoSize.isValid()
-                                 ? QStringLiteral("%1 \u00D7 %2 \u00B7 %3").arg(movie.videoSize.width())
-                                       .arg(movie.videoSize.height()).arg(MovieData::hdName(MovieData::hdFlag(movie.videoSize)))
-                                 : QString());
+    // Format of the video (information): chip "1080p" and the size; no size, no row
+    if (movie.videoSize.isValid()) {
+        ui->hdChipLabel->setText(MovieData::hdName(MovieData::hdFlag(movie.videoSize)));
+        ui->videoSizeLabel->setText(QStringLiteral("%1 \u00D7 %2").arg(movie.videoSize.width())
+                                        .arg(movie.videoSize.height()));
+        ui->formatRow->show();
+    } else {
+        ui->formatRow->hide();
+    }
 
     // Set Entry in genre combobox
     if (!movie.genre.isEmpty()) {
