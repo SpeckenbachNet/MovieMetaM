@@ -33,6 +33,4 @@ MovieMetaM finds movie data with the API of [The Movie Database (TMDB)](https://
 
 - **Qt** – The Qt Company, LGPL v3
 - **TagLib** – writes the tags into the movie files, LGPL v2.1 or MPL 1.1
-- **Lucide** – icons, ISC license
-- **Material Icons** – Google, Apache License 2.0
-- More icons from **churchWorshipM** and **SVG Repo**
+- The icons and the app icon are own drawings, also GPL v3.
