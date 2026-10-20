@@ -28,168 +28,175 @@
     <name>MainWin</name>
     <message>
         <location filename="../mainwin.ui" line="60"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="528"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="524"/>
         <source>Movie List</source>
         <translation>Filmliste</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="136"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="529"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="525"/>
         <source>Movie Info</source>
         <translation>Filminfo</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="160"/>
-        <location filename="../mainwin.ui" line="375"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="530"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="543"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="526"/>
         <source>Cover</source>
         <translation>Cover</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="167"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="531"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="527"/>
+        <location filename="../mainwin.cpp" line="781"/>
         <source>Description</source>
         <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="177"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="532"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="528"/>
+        <location filename="../mainwin.cpp" line="771"/>
         <source>Release Date</source>
         <translation>Erscheinungsdatum</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="187"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="533"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="529"/>
+        <location filename="../mainwin.cpp" line="773"/>
         <source>Genre</source>
         <translation>Genre</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="203"/>
-        <location filename="../mainwin.ui" line="504"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="534"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="549"/>
+        <location filename="../mainwin.ui" line="499"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="530"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="544"/>
+        <location filename="../mainwin.cpp" line="779"/>
         <source>Age Rating</source>
         <translation>Altersfreigabe</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="229"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="535"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="531"/>
+        <location filename="../mainwin.cpp" line="785"/>
         <source>Producers</source>
         <translation>Produktion</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="248"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="536"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="532"/>
+        <location filename="../mainwin.cpp" line="783"/>
         <source>Directors</source>
         <translation>Regie</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="267"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="537"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="533"/>
+        <location filename="../mainwin.cpp" line="772"/>
         <source>Studio</source>
         <translation>Studio</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="283"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="538"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="534"/>
+        <location filename="../mainwin.cpp" line="784"/>
         <source>Screenplay</source>
         <translation>Drehbuch</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="296"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="539"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="535"/>
+        <location filename="../mainwin.cpp" line="782"/>
         <source>Actors</source>
         <translation>Schauspieler</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="309"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="540"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="536"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="356"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="541"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="537"/>
         <source>Results</source>
         <translation>Ergebnisse</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="370"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="542"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="538"/>
         <source>Data</source>
         <translation>Daten</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="383"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="544"/>
+        <location filename="../mainwin.ui" line="378"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="539"/>
         <source>Movie Search</source>
         <translation>Filmsuche</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="393"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="545"/>
+        <location filename="../mainwin.ui" line="388"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="540"/>
         <source>Powered by</source>
         <translation>Bereitgestellt von</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="514"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="550"/>
+        <location filename="../mainwin.ui" line="509"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="545"/>
         <source>Preview</source>
         <translation>Vorschau</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="484"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="547"/>
+        <location filename="../mainwin.ui" line="479"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="542"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="494"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="548"/>
+        <location filename="../mainwin.ui" line="489"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="543"/>
         <source>Movie data language</source>
         <translation>Sprache der Filmdaten</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="159"/>
-        <location filename="../initialize.cpp" line="165"/>
+        <location filename="../initialize.cpp" line="192"/>
+        <location filename="../initialize.cpp" line="198"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="463"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="546"/>
+        <location filename="../mainwin.ui" line="458"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="541"/>
         <source>General</source>
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="147"/>
-        <location filename="../initialize.cpp" line="167"/>
+        <location filename="../initialize.cpp" line="180"/>
+        <location filename="../initialize.cpp" line="200"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="148"/>
+        <location filename="../initialize.cpp" line="181"/>
         <source>Save metadata to the movie</source>
         <translation>Metadaten in den Film speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="150"/>
+        <location filename="../initialize.cpp" line="183"/>
         <source>Save all</source>
         <translation>Alle speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="156"/>
+        <location filename="../initialize.cpp" line="189"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation>Kaffee spendieren – MovieMetaM über PayPal unterstützen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="161"/>
+        <location filename="../initialize.cpp" line="194"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="168"/>
+        <location filename="../initialize.cpp" line="201"/>
         <source>Save settings</source>
         <translation>Einstellungen speichern</translation>
     </message>
@@ -199,7 +206,7 @@
         <translation>Geändert, Speichern nötig</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="739"/>
+        <location filename="../mainwin.cpp" line="968"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation>
             <numerusform>%n Datei übersprungen: Nur MP4 wird unterstützt.</numerusform>
@@ -208,7 +215,7 @@
     </message>
     <message>
         <location filename="../mainwin.cpp" line="369"/>
-        <location filename="../mainwin.cpp" line="775"/>
+        <location filename="../mainwin.cpp" line="1004"/>
         <source>Unchanged</source>
         <translation>Unverändert</translation>
     </message>
@@ -231,22 +238,43 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="956"/>
+        <location filename="../mainwin.cpp" line="757"/>
+        <source>Double click a search result to see its data.</source>
+        <translation>Doppelklick auf ein Suchergebnis zeigt dessen Daten.</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="843"/>
+        <source>No text</source>
+        <translation>Ohne Text</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="883"/>
+        <location filename="../mainwin.cpp" line="1157"/>
+        <source>Select a movie first</source>
+        <translation>Zuerst einen Film auswählen</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="910"/>
+        <source>Data applied</source>
+        <translation>Daten übernommen</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1213"/>
         <source>Choose movies</source>
         <translation>Filme auswählen</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="958"/>
+        <location filename="../mainwin.cpp" line="1215"/>
         <source>Movie files</source>
         <translation>Filmdateien</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="978"/>
+        <location filename="../mainwin.cpp" line="1235"/>
         <source>Remove</source>
         <translation>Entfernen</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="979"/>
+        <location filename="../mainwin.cpp" line="1236"/>
         <source>Really remove %n movie(s)?</source>
         <translation>
             <numerusform>%n Film wirklich entfernen?</numerusform>
@@ -254,72 +282,88 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1023"/>
+        <location filename="../mainwin.cpp" line="1280"/>
         <source>Please enter a search term</source>
         <translation>Bitte einen Suchbegriff eingeben</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1117"/>
+        <location filename="../mainwin.cpp" line="1374"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation>Kein TMDB-Token: Die Filmsuche ist nicht verfügbar.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1179"/>
+        <location filename="../mainwin.cpp" line="1397"/>
+        <source>The movie data could not be loaded.</source>
+        <translation>Die Filmdaten konnten nicht geladen werden.</translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1452"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation>Einstellungen gespeichert. Die Sprache ändert sich nach einem Neustart.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1180"/>
+        <location filename="../mainwin.cpp" line="1453"/>
         <source>Settings saved.</source>
         <translation>Einstellungen gespeichert.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1184"/>
+        <location filename="../mainwin.cpp" line="1457"/>
         <source>Error: could not save the settings!</source>
         <translation>Fehler: Einstellungen konnten nicht gespeichert werden!</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="151"/>
+        <location filename="../initialize.cpp" line="141"/>
+        <source>Apply</source>
+        <translation>Übernehmen</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="142"/>
+        <source>Take the data into the selected movie</source>
+        <translation>Die Daten in den ausgewählten Film übernehmen</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="184"/>
         <source>Save the metadata of all changed movies</source>
         <translation>Metadaten aller geänderten Filme speichern</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="164"/>
+        <location filename="../initialize.cpp" line="197"/>
         <source>Back</source>
         <translation>Zurück</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="173"/>
+        <location filename="../initialize.cpp" line="206"/>
         <source>Add movies</source>
         <translation>Filme hinzufügen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="176"/>
+        <location filename="../initialize.cpp" line="209"/>
         <source>Remove the selected movies</source>
         <translation>Ausgewählte Filme entfernen</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="258"/>
+        <location filename="../initialize.cpp" line="291"/>
         <source>Enter actors</source>
         <translation>Schauspieler eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="273"/>
+        <location filename="../initialize.cpp" line="306"/>
         <source>Enter producers</source>
         <translation>Produktion eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="288"/>
+        <location filename="../initialize.cpp" line="321"/>
         <source>Enter screenwriters</source>
         <translation>Drehbuch eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="303"/>
+        <location filename="../initialize.cpp" line="336"/>
         <source>Enter directors</source>
         <translation>Regie eingeben</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="367"/>
+        <location filename="../initialize.cpp" line="400"/>
+        <location filename="../mainwin.cpp" line="923"/>
         <source>The image could not be loaded.</source>
         <translation>Das Bild konnte nicht geladen werden.</translation>
     </message>

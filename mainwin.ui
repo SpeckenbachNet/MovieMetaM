@@ -370,11 +370,6 @@
                 <string>Data</string>
                </attribute>
               </widget>
-              <widget class="QWidget" name="tab_3">
-               <attribute name="title">
-                <string>Cover</string>
-               </attribute>
-              </widget>
              </widget>
             </item>
             <item row="0" column="0" colspan="3">

@@ -62,6 +62,7 @@ void MainWin::initializeForm() {
     applyComboStyle(ui->languageSettingsComboBox);
     applyComboStyle(ui->dataLanguageSettingsComboBox);
     applyTabStyle(ui->tabWidget);
+    initializeDetailsTab();
 
     // Columns: on the first start the middle (movie info) gets the extra width, the lists keep
     // their preferred width; afterwards window and columns as the user left them
@@ -119,6 +120,38 @@ void MainWin::initializeForm() {
                            static_cast<QWidget *>(ui->studioEdit)}) {
         field->setMaximumWidth(kTagColumnWidth);
     }
+}
+
+// Tab "Data": the details TMDB has for a search result and the button that takes them over
+void MainWin::initializeDetailsTab()
+{
+    m_detailsTitle = new QLabel(ui->tab_2);
+    QFont titleFont = m_detailsTitle->font();
+    titleFont.setBold(true);
+    m_detailsTitle->setFont(titleFont);
+    m_detailsTitle->setWordWrap(true);
+    m_detailsTitle->setAlignment(Qt::AlignCenter);
+
+    m_posterPicker = new PosterPicker(ui->tab_2);
+
+    m_detailsView = new QTextBrowser(ui->tab_2);
+    m_detailsView->setOpenLinks(false);
+    m_detailsView->setStyleSheet("QTextBrowser { background: transparent; border: none; }");
+
+    m_applyBtn = new QPushButton(tr("Apply"), ui->tab_2);
+    m_applyBtn->setToolTip(tr("Take the data into the selected movie"));
+    m_applyBtn->setEnabled(false);   // until the details of a result are loaded
+
+    // Title, poster, the other data, button
+    auto *layout = new QVBoxLayout(ui->tab_2);
+    layout->addWidget(m_detailsTitle);
+    layout->addWidget(m_posterPicker, 0, Qt::AlignHCenter);
+    layout->addWidget(m_detailsView, 1);
+    layout->addWidget(m_applyBtn);
+    connect(m_applyBtn, &QPushButton::clicked, this, &MainWin::applyTmdbMovie);
+    connect(m_posterPicker, &PosterPicker::posterChosen, this, &MainWin::showTmdbPoster);
+
+    showTmdbDetails();
 }
 
 void MainWin::initializeComboBoxes() {

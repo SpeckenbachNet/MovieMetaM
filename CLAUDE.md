@@ -91,7 +91,7 @@ Linux).
 
 - `main.cpp` – settings, translator, setup dialog on first start, main window.
 - `mainwin.*`, `initialize.cpp` – main window: movie list (left), movie info (middle),
-  TMDB search (right, tabs Results / Data / Cover); pages settings and help. Settings page:
+  TMDB search (right, tabs Results / Data); pages settings and help. Settings page:
   cards in a centered column, so far one card "General" (`settingsGeneralCard`, styled in
   `initializeForm()`).
   No status bar: messages are toasts (`showColumnStatus(StatusColumn, text, level, msec)` →
@@ -112,6 +112,14 @@ Linux).
   Japanese data). The data languages are TMDB's primary translations, names from `QLocale`.
 - `twolinedelegate.*` – entries of movie list and search results; `posterpreview.*` – enlarged
   poster (200×300) when the mouse rests on a search result (full poster in `kPosterRole`).
+- TMDB data (double click on a result, tab "Data"): `onSearchTableViewDoubleClicked` loads
+  `/movie/{id}` (`append_to_response=credits,release_dates`) and `/movie/{id}/images`;
+  `fillDetailsTab`, `fillPosters`; "Apply" (`applyTmdbMovie`) takes everything found into the
+  selected movie (empty values change nothing). `posterpicker.*` – the large poster with a badge
+  "n / m"; a click opens a list (`TwoLineDelegate`) of up to 30 posters (language, size,
+  rating). Age rating: `findTmdbRating` takes the entry of the country of the movie's system
+  (home video before cinema) and `AgeRatings::findEntry` matches it to a step (key, then code);
+  TMDB's texts may not fit every country – extend when a country does not match.
 - `toastm.*` – short message over the content, fades in and out, mouse clicks go through; one
   per window, a new message replaces the old one; position Center / Top / Bottom inside a target
   widget, level Info / Error. May move to `../libraries` once it has proved itself.
@@ -141,12 +149,10 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.4.10; numbers kept, 1, 2 and 3 are done)
+## Open points (as of 0.5; numbers kept, 1, 2, 3 and 5 are done)
 
 4. Saving to the MP4 file is not implemented (saveMovieDetails / save all are empty) – needs a
    design decision first (own MP4 writer or a library like TagLib).
-5. Applying a TMDB search result (double click only logs the id); the tabs "Data" and "Cover"
-   are empty placeholders for it.
 6. Tags: one click removes a tag without asking – tooltip "Click to remove" or an × on hover.
 7. The old TMDB token is in the git history: revoke it at TMDB and use a new one.
 8. Origin of some icons still to be clarified (`LICENSES.md`); unused

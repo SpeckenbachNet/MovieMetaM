@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.4.10")
+set(PROJECT_VERSION "0.5")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -60,6 +60,8 @@ qt_add_executable(${PROJECT_NAME}
     tagwidget.cpp
     tableviewm.h
     tableviewm.cpp
+    posterpicker.h
+    posterpicker.cpp
     toastm.h
     toastm.cpp
     moviedata.h

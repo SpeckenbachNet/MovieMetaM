@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.4.10 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.5 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---
@@ -20,7 +20,7 @@ und sucht Filmdaten bei **TMDB** (The Movie Database).
 | Formular: Titel, Studio, Beschreibung, Datum, Genre, Altersfreigabe, Tags, Cover | fertig |
 | Altersfreigaben nach dem System der Datei (46 Länder) | fertig |
 | TMDB-Suche mit Postern, Genreliste | fertig |
-| TMDB-Treffer übernehmen (Tabs „Data“ und „Cover“) | offen |
+| TMDB-Treffer übernehmen (Tab „Data“: Daten, Poster-Auswahl, Altersfreigabe, „Apply“) | fertig |
 | Speichern in die MP4-Datei | offen (Entscheidung: eigener Writer oder TagLib) |
 | Hilfeseite | ein Thema („About MovieMetaM“) |
 
@@ -32,13 +32,13 @@ werden mit einer Meldung übersprungen.
 ```
  Dateien hinzufügen ──► Liste (Statussymbol grün/gelb) ──Auswahl──► Formular
                                                                       │
-        Suchbegriff ──► TMDB-Ergebnisse ──Doppelklick──► (offen) übernehmen
+        Suchbegriff ──► TMDB-Ergebnisse ──Doppelklick──► Tab „Data“ ──Apply──► Film
                                                                       │
                                                   (offen) Speichern in die MP4-Datei
 ```
 
 Die Oberfläche hat drei Spalten: Filmliste (links), Filminfo (Mitte), TMDB-Suche (rechts, Tabs
-Ergebnisse / Daten / Cover). Dazu die Seiten Einstellungen und Hilfe (`stackedWidget`, jede mit
+Ergebnisse / Daten). Dazu die Seiten Einstellungen und Hilfe (`stackedWidget`, jede mit
 eigener Werkzeugleiste, `showPage()` wechselt).
 
 ---
@@ -88,6 +88,7 @@ Hinweise:
 | `imagelabelm.*` | Cover: zeichnet sich selbst, Drag and Drop hinein und hinaus |
 | `tableviewm.*` | Filmliste (`QListView`) mit Dateiablage; Klicks auf leere Fläche ändern die Auswahl nicht |
 | `twolinedelegate.*` | Einträge von Filmliste und Suchergebnissen |
+| `posterpicker.*` | großes Poster im Tab „Data“ mit Abzeichen „n / m“; ein Klick öffnet eine Liste der Poster |
 | `posterpreview.*` | vergrößertes Poster (200 × 300), wenn die Maus auf einem Ergebnis ruht |
 | `setupdialog.*` | Dialog beim ersten Start |
 | `helppage.*` | Hilfeseite (Markdown in `help/<de|en>/`, `Help.qrc`) |
@@ -147,6 +148,24 @@ nachgeführt werden, wenn `moov` vor `mdat` liegt) oder eine Bibliothek wie TagL
 - Nach jeder Suche zeigt ein Toast die Zahl der Treffer („%n movie(s) found“, oder „Showing 20 of
   143 movies“, denn TMDB liefert nur eine Seite mit höchstens 20 Treffern; `total_results` ist die
   Gesamtzahl). Eine Suche ohne Treffer leert die Liste und zeigt „No movies found“.
+- **Daten übernehmen** (Doppelklick auf ein Ergebnis, Tab „Data“): `onSearchTableViewDoubleClicked()`
+  braucht einen ausgewählten Film (sonst „Select a movie first“) und schickt zwei Anfragen:
+  - `/3/movie/{id}?append_to_response=credits,release_dates`: Titel, Beschreibung, Datum, Studio,
+    Genre, Besetzung (die ersten 20), Regie, Drehbuch, Produktion und die Freigaben je Land
+    (`fillDetailsTab()`).
+  - `/3/movie/{id}/images?include_image_language=<Sprache>,en,null`: die Poster
+    (`fillPosters()`, höchstens `kPosterLimit` = 30; Vorschaubilder `w185`, großes Poster `w342`,
+    Cover beim Übernehmen `w780`). `m_detailsGeneration` verwirft Antworten eines älteren
+    Doppelklicks. Eine neue Suche schaltet auf den Tab „Results“ zurück.
+- **Apply** (`applyTmdbMovie()`) nimmt alles Gefundene in den ausgewählten Film (leere Werte ändern
+  nichts), zeigt ihn neu und setzt den Status auf „geändert“. Das gewählte Poster lädt danach und
+  wird als Cover gesetzt, falls noch derselbe Film ausgewählt ist. Gespeichert wird nicht.
+- **Altersfreigabe von TMDB:** `findTmdbRating()` nimmt das Land des Systems, dem der Film folgt
+  (Datei, sonst Einstellungen; `UK` heißt bei TMDB `GB`) und dort den Eintrag nach „Heimvideo vor
+  Kino“ (Typ 5, 4, 3, 2, 6, 1). `AgeRatings::findEntry()` ordnet den Text einer Stufe zu (erst
+  `key`, dann `code`, ohne Groß-/Kleinschreibung und Leerzeichen). Passt nichts, bleibt die
+  Freigabe unverändert. Die Texte von TMDB passen nicht in jedem Land zu unseren `key`; bei
+  Abweichungen ist die Zuordnung zu ergänzen.
 - Das TMDB-Logo und der Hinweis stehen in der Hilfe und in der Suchspalte (die Bedingung von
   TMDB für die Nutzung der Daten).
 

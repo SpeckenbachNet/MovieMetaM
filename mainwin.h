@@ -40,11 +40,13 @@
 #include <QNetworkReply>
 #include <QPainter>
 #include <QPainterPath>
+#include <QPushButton>
 #include <QStandardItemModel>
 #include <QScrollBar>
 #include <QString>
 #include <QSet>
 #include <QSettings>
+#include <QTextBrowser>
 #include <QTableWidgetItem>
 #include <QTemporaryFile>
 #include <QUrlQuery>
@@ -54,6 +56,7 @@
 #include "agerating.h"
 #include "languages.h"
 #include "moviedata.h"
+#include "posterpicker.h"
 #include "tagwidget.h"
 #include "toastm.h"
 
@@ -91,9 +94,22 @@ private:
     QHash<QNetworkReply*, QUrl> m_urlMapping;
     QTemporaryFile *m_tempFile = nullptr;
     QStandardItemModel *m_SearchModel = nullptr;
+    // Tab "Data": the details of the search result that was double clicked
+    QLabel *m_detailsTitle = nullptr;
+    PosterPicker *m_posterPicker = nullptr;     // the posters TMDB has for it
+    QTextBrowser *m_detailsView = nullptr;
+    QJsonArray m_tmdbReleaseDates;              // certifications of the result, by country
+    QString m_tmdbPosterPath;                   // poster of the search result (preselected)
+    QStringList m_posterPaths;                  // TMDB file paths of the entries of m_posterPicker
+    int m_detailsGeneration = 0;                // counts the double clicks: older answers are dropped
+    QPushButton *m_applyBtn = nullptr;
+    MovieData m_tmdbMovie;                      // what TMDB knows about it (see fillDetailsTab)
+    static constexpr int kCastLimit = 20;       // TMDB lists far more names than make sense
     int m_searchGeneration = 0;   // counts the searches: posters of an older search are dropped
     static constexpr QSize kPosterSize{40, 60};   // poster in the search results (2:3)
     static constexpr int kPosterRole = Qt::UserRole + 1;   // poster in full resolution (preview)
+    static constexpr int kPosterPathRole = Qt::UserRole + 2;   // TMDB path of the poster
+    static constexpr int kPosterLimit = 30;     // posters offered for one movie
     QStandardItemModel *m_FilelistModel = nullptr;
     QPixmap extractMovieCover(const QString& filePath);
     QIcon m_statusGreen;    // status symbols in the movie list (same look when selected)
@@ -124,6 +140,13 @@ private:
     void fillSearchTableView(const QJsonDocument &jsonDoc);
     void requestGenres();   // genre list from TMDB in the language of the movie data
     void fillGenreComboBox(const QJsonDocument &jsonDoc);
+    void fillDetailsTab(const QJsonDocument &jsonDoc);
+    void fillPosters(const QJsonDocument &jsonDoc);
+    void showTmdbPoster(int row);               // the large poster in the tab "Data"
+    QString ratingCountry(const MovieData &movie) const;   // system the age rating of a movie follows
+    bool findTmdbRating(const QString &country, QString &systemID, RatingEntry &entry) const;
+    void showTmdbDetails();                     // text of the tab "Data"
+    void applyTmdbMovie();                      // takes everything found into the current movie
     void fillRatingComboBox(const QJsonDocument &jsonDoc);
     void addFilesToModel(const QStringList &filePaths);
     void addFilePathToModel(const QString &filePath);
@@ -137,6 +160,7 @@ private:
                             std::function<void()> onError = nullptr);
     void initializeToolBars();
     void initializeTagWidgets();
+    void initializeDetailsTab();
     void initializeDragAndDrop();
     void initializeConnects();
     void initializeNetwork();
