@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.7.5 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.7.6 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---
@@ -351,8 +351,9 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
   `applyInputStyle`, `applySpinStyle`, `applyBoxStyle`, `applyComboStyle`, `applyTabStyle`.
   Auswahlfelder bekommen einen einfachen `QStyledItemDelegate` (der Standard des Menüs
   ignoriert die Regeln des Style Sheets); der Pfeil ist die graue `chevron_down.svg`.
-- **Icons:** schwarze SVG-Zeichnungen, in der Textfarbe getönt (ToolbarM, SearchField). Herkunft
-  und Lizenzen: `ressources/icons/LICENSES.md`.
+- **Icons:** eigene schwarze Liniezeichnungen (24 × 24, Strich 2, runde Enden), in der Textfarbe
+  getönt (ToolbarM, SearchField). Herkunft und Lizenz: `ressources/icons/LICENSES.md`. Die
+  Stammkopie samt Regeln für neue Icons liegt in `../libraries/icons/`.
 - **Gezeichnete Bilder** (Statussymbole, Poster, Abzeichen, Cover) in der Auflösung des
   Bildschirms (`devicePixelRatioF()`), sonst sind sie unscharf. Icons in ausgewählten Einträgen
   bekommen dasselbe Bild für `QIcon::Selected`.
@@ -382,8 +383,7 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
 - Quelltext: GPL v3 (`LICENSE`). Kopfzeilen in den Quelldateien.
 - TagLib 2.3.2 (schreibt die Tags): LGPL 2.1 oder MPL 1.1, wird statisch eingebaut. Die Lizenztexte
   (`COPYING.LGPL`) gehören zu jeder Weitergabe der App; die Hilfe nennt TagLib.
-- Icons: `ressources/icons/LICENSES.md` (Speichern-Icons von Lucide, ISC). Die Herkunft einiger
-  Icons ist noch zu klären.
+- Icons: alle eigene Zeichnungen, GPL v3 (`ressources/icons/LICENSES.md`).
 - TMDB: Logo (`ressources/images/tmdb.svg`) und Hinweis laut den Bedingungen von TMDB.
 - Ressourcen: `Icons.qrc`, `Images.qrc`, `Ratings.qrc`, `Help.qrc`.
 
