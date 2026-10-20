@@ -21,6 +21,8 @@
 #include "twolinedelegate.h"
 
 #include <QFrame>
+#include <QGuiApplication>
+#include <QScreen>
 #include <QListView>
 #include <QMouseEvent>
 #include <QPainter>
@@ -106,11 +108,33 @@ void PosterPicker::mousePressEvent(QMouseEvent *event)
 
 void PosterPicker::openList()
 {
-    // Below the poster; about six entries high, wider than the poster
+    // About six entries high, wider than the poster
     const int rowHeight = m_list->sizeHintForRow(0) > 0 ? m_list->sizeHintForRow(0) : kThumbSize.height() + 30;
-    const int rows = qMin(count(), 6);
-    m_popup->resize(qMax(width(), 260), rows * rowHeight + 2 * m_list->frameWidth() + 6);
-    m_popup->move(mapToGlobal(QPoint(0, height() + 4)));
+    const int extra = 2 * m_list->frameWidth() + 6;
+    const int wantedHeight = qMin(count(), 6) * rowHeight + extra;
+    const int popupWidth = qMax(width(), 260);
+
+    // Below the poster; if that does not fit on the screen: above it, or smaller (scrolls)
+    const QRect screen = (window()->screen() ? window()->screen() : QGuiApplication::primaryScreen())->availableGeometry();
+    const QPoint below = mapToGlobal(QPoint(0, height() + 4));
+    const QPoint above = mapToGlobal(QPoint(0, -4));
+    const int spaceBelow = screen.bottom() - below.y();
+    const int spaceAbove = above.y() - screen.top();
+
+    int height = wantedHeight;
+    int y = below.y();
+    if (wantedHeight > spaceBelow) {
+        if (spaceAbove > spaceBelow) {
+            height = qMin(wantedHeight, spaceAbove);
+            y = above.y() - height;
+        } else {
+            height = qMax(spaceBelow, qMin(wantedHeight, 2 * rowHeight + extra));
+        }
+    }
+    const int x = qBound(screen.left(), below.x(), qMax(screen.left(), screen.right() - popupWidth));
+
+    m_popup->resize(popupWidth, height);
+    m_popup->move(x, y);
     if (m_current >= 0) m_list->scrollTo(m_model.index(m_current, 0));
     m_popup->show();
     m_list->setFocus();
