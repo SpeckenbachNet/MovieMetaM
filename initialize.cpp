@@ -353,8 +353,7 @@ void MainWin::initializeStatusBar()
     m_statusContainer->installEventFilter(this);
     for (int i = 0; i < 3; ++i) {
         m_statusLabels[i] = new QLabel(m_statusContainer);
-        m_statusLabels[i]->setMargin(0);
-        m_statusLabels[i]->setContentsMargins(6, 0, 6, 0);
+        m_statusLabels[i]->setAlignment(Qt::AlignCenter);
         m_statusTimers[i] = new QTimer(this);
         m_statusTimers[i]->setSingleShot(true);
         connect(m_statusTimers[i], &QTimer::timeout, this, [this, i] {
@@ -373,9 +372,12 @@ void MainWin::updateStatusLabels()
     const int origin = m_statusContainer->mapTo(this, QPoint(0, 0)).x();
     for (int i = 0; i < 3; ++i) {
         QWidget *column = ui->splitter->widget(i);
-        const int x = column->mapTo(this, QPoint(0, 0)).x() - origin;
-        m_statusLabels[i]->setGeometry(x, 0, column->width(), m_statusContainer->height());
-        const int textWidth = column->width() - 12;
+        // Same edges as the boxes in the column (its layout margins)
+        const QMargins margins = column->layout() ? column->layout()->contentsMargins() : QMargins();
+        const int x = column->mapTo(this, QPoint(0, 0)).x() - origin + margins.left();
+        const int width = column->width() - margins.left() - margins.right();
+        m_statusLabels[i]->setGeometry(x, 0, width, m_statusContainer->height());
+        const int textWidth = width - 4;
         m_statusLabels[i]->setText(m_statusLabels[i]->fontMetrics().elidedText(
             m_statusTexts[i], Qt::ElideRight, textWidth));
         m_statusLabels[i]->setToolTip(m_statusTexts[i]);
