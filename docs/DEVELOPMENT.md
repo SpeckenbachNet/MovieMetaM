@@ -125,6 +125,17 @@ Hinweise:
 - Besetzung, Regie, Drehbuch, Produktion und Studio liegen als XML (`iTunMOVI`) in der Datei:
   `parseItunMoviXml()` und `parseNameArray()`.
 - Die Altersfreigabe steht im Eintrag `iTunEXTC` (Abschnitt 6).
+- **Inhaltshinweis** (`rtng`, Apples „content advisory“, 1 Byte): 0 keiner, 2 „clean“, 1 oder 4
+  „explicit“. Das Formular hat dafür die Auswahl „Content Advisory“ (None / Clean / Explicit; ein
+  anderer Wert bleibt als Eintrag „Other (n)“ erhalten). `readIntegerDataBox()` liest ihn.
+  Geschrieben wird er nur, wenn er nicht 0 ist oder schon in der Datei steht (Explicit als 1;
+  AtomicParsley liest 1 als „Explicit Content“). Apple-Geräte zeigen ein „E“ und werten ihn in
+  der Kindersicherung aus; andere Player (Jellyfin, Plex, VLC) meist nicht.
+- **Format:** `readVideoSize()` liest Breite und Höhe aus dem `tkhd` der ersten Videospur (16.16
+  Festkomma, die letzten 8 Bytes der Box; die Spur erkennt es am `hdlr` „vide“). Das Formular zeigt
+  sie unter dem Cover („1280 × 720 · 720p“), nur zur Information. `hdvd` (Apples HD-Etikett:
+  0 SD, 1 720p, 2 1080p, 3 4K) setzt `Mp4Writer` beim Speichern aus der Größe, nach der Breite
+  (`MovieData::hdFlag()`; ein zugeschnittener Breitwandfilm mit 1920 × 800 ist 1080p).
 - Das Cover (`covr`) liest `extractCoverImageMp4()` über `findCoverBox()`.
 - Fehler gehen über das Signal `errorOccurred` ins Log (`qWarning`).
 

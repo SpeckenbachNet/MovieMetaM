@@ -162,6 +162,13 @@
                   </widget>
                  </item>
                  <item>
+                  <widget class="QLabel" name="formatLabel">
+                   <property name="alignment">
+                    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QLabel" name="descriptionLabel">
                    <property name="text">
                     <string>Description</string>
@@ -209,6 +216,19 @@
                  </item>
                  <item>
                   <widget class="QComboBox" name="ratingComboBox"/>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="advisoryLabel">
+                   <property name="text">
+                    <string>Content Advisory</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="advisoryComboBox"/>
                  </item>
                 </layout>
                </item>

@@ -68,6 +68,26 @@ QString MovieData::normalizeTagString(const QString &input) {
     return list.join(", ");
 }
 
+// By the width: a wide screen movie is cropped in height (1920 x 800 is 1080p)
+int MovieData::hdFlag(const QSize &size)
+{
+    if (!size.isValid()) return 0;
+    if (size.width() >= 3200) return 3;
+    if (size.width() >= 1900) return 2;
+    if (size.width() >= 1260) return 1;
+    return 0;
+}
+
+QString MovieData::hdName(int flag)
+{
+    switch (flag) {
+    case 3: return QStringLiteral("4K");
+    case 2: return QStringLiteral("1080p");
+    case 1: return QStringLiteral("720p");
+    default: return QStringLiteral("SD");
+    }
+}
+
 MovieData MovieData::fromFile(const QString &filePath) {
     MovieData movie;
     movie.filePath = filePath;
@@ -101,6 +121,10 @@ MovieData MovieData::fromFile(const QString &filePath) {
             movie.ratingText   = parts[1];          // ab 12 Jahren
             movie.ratingScore  = parts[2].toInt();  // 300
         }
+
+        // Content advisory and the size of the video
+        movie.advisory = metaTags.value("advisory").toInt();
+        movie.videoSize = extractorTags.readVideoSize(filePath);
 
         // Cover Image
         movie.cover = QPixmap::fromImage(extractorTags.extractCoverImage(filePath));

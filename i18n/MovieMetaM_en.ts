@@ -27,7 +27,7 @@
 <context>
     <name>InfoIcon</name>
     <message>
-        <location filename="../infoicon.cpp" line="105"/>
+        <location filename="../infoicon.cpp" line="45"/>
         <source>The data is written directly into the movie file. If saving is interrupted (crash, power failure, lost network connection), the file can be damaged. &quot;Safe saving&quot; writes into a copy first, needs more space and is slow for big files and on network drives.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -36,197 +36,203 @@
     <name>MainWin</name>
     <message>
         <location filename="../mainwin.ui" line="60"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="537"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="557"/>
         <source>Movie List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="136"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="538"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="558"/>
         <source>Movie Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="160"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="539"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="559"/>
         <source>Cover</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="167"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="540"/>
-        <location filename="../mainwin.cpp" line="877"/>
+        <location filename="../mainwin.ui" line="174"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="560"/>
+        <location filename="../mainwin.cpp" line="888"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="177"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="541"/>
-        <location filename="../mainwin.cpp" line="867"/>
+        <location filename="../mainwin.ui" line="184"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="561"/>
+        <location filename="../mainwin.cpp" line="878"/>
         <source>Release Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="187"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="542"/>
-        <location filename="../mainwin.cpp" line="869"/>
+        <location filename="../mainwin.ui" line="194"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="562"/>
+        <location filename="../mainwin.cpp" line="880"/>
         <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="203"/>
-        <location filename="../mainwin.ui" line="499"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="543"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="557"/>
-        <location filename="../mainwin.cpp" line="875"/>
+        <location filename="../mainwin.ui" line="210"/>
+        <location filename="../mainwin.ui" line="519"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="563"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="578"/>
+        <location filename="../mainwin.cpp" line="886"/>
         <source>Age Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="229"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="544"/>
-        <location filename="../mainwin.cpp" line="881"/>
+        <location filename="../mainwin.ui" line="223"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="564"/>
+        <source>Content Advisory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="249"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="565"/>
+        <location filename="../mainwin.cpp" line="892"/>
         <source>Producers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="248"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="545"/>
-        <location filename="../mainwin.cpp" line="879"/>
+        <location filename="../mainwin.ui" line="268"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="566"/>
+        <location filename="../mainwin.cpp" line="890"/>
         <source>Directors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="267"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="546"/>
-        <location filename="../mainwin.cpp" line="868"/>
+        <location filename="../mainwin.ui" line="287"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="567"/>
+        <location filename="../mainwin.cpp" line="879"/>
         <source>Studio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="283"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="547"/>
-        <location filename="../mainwin.cpp" line="880"/>
+        <location filename="../mainwin.ui" line="303"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="568"/>
+        <location filename="../mainwin.cpp" line="891"/>
         <source>Screenplay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="296"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="548"/>
-        <location filename="../mainwin.cpp" line="878"/>
+        <location filename="../mainwin.ui" line="316"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="569"/>
+        <location filename="../mainwin.cpp" line="889"/>
         <source>Actors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="309"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="549"/>
+        <location filename="../mainwin.ui" line="329"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="570"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="356"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="550"/>
+        <location filename="../mainwin.ui" line="376"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="571"/>
         <source>Results</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="370"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="551"/>
+        <location filename="../mainwin.ui" line="390"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="572"/>
         <source>Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="378"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="552"/>
+        <location filename="../mainwin.ui" line="398"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="573"/>
         <source>Movie Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="388"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="553"/>
+        <location filename="../mainwin.ui" line="408"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="574"/>
         <source>Powered by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="509"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="558"/>
+        <location filename="../mainwin.ui" line="529"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="579"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="537"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="559"/>
+        <location filename="../mainwin.ui" line="557"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="580"/>
         <source>Saving</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="544"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="560"/>
+        <location filename="../mainwin.ui" line="564"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="581"/>
         <source>Safe saving (read the info)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="479"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="555"/>
+        <location filename="../mainwin.ui" line="499"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="576"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="489"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="556"/>
+        <location filename="../mainwin.ui" line="509"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="577"/>
         <source>Movie data language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="205"/>
-        <location filename="../initialize.cpp" line="211"/>
+        <location filename="../initialize.cpp" line="212"/>
+        <location filename="../initialize.cpp" line="218"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.ui" line="458"/>
-        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="554"/>
+        <location filename="../mainwin.ui" line="478"/>
+        <location filename="../build/Qt_6_12_0_for_macOS_Debug/MovieMetaM_autogen/include/ui_mainwin.h" line="575"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="193"/>
-        <location filename="../initialize.cpp" line="213"/>
+        <location filename="../initialize.cpp" line="200"/>
+        <location filename="../initialize.cpp" line="220"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="194"/>
+        <location filename="../initialize.cpp" line="201"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="196"/>
+        <location filename="../initialize.cpp" line="203"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="202"/>
+        <location filename="../initialize.cpp" line="209"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="207"/>
+        <location filename="../initialize.cpp" line="214"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="214"/>
+        <location filename="../initialize.cpp" line="221"/>
         <source>Save settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="373"/>
+        <location filename="../mainwin.cpp" line="375"/>
         <source>Changed, saving needed</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1064"/>
+        <location filename="../mainwin.cpp" line="1075"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation>
             <numerusform>%n file skipped: only MP4 is supported.</numerusform>
@@ -234,33 +240,33 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="373"/>
-        <location filename="../mainwin.cpp" line="1100"/>
+        <location filename="../mainwin.cpp" line="375"/>
+        <location filename="../mainwin.cpp" line="1111"/>
         <source>Unchanged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="531"/>
+        <location filename="../mainwin.cpp" line="533"/>
         <source>Saved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="511"/>
+        <location filename="../mainwin.cpp" line="513"/>
         <source>Could not save: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="702"/>
+        <location filename="../mainwin.cpp" line="713"/>
         <source>No movies found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="710"/>
+        <location filename="../mainwin.cpp" line="721"/>
         <source>Showing %1 of %2 movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="711"/>
+        <location filename="../mainwin.cpp" line="722"/>
         <source>%n movie(s) found</source>
         <translation>
             <numerusform>%n movie found</numerusform>
@@ -268,44 +274,44 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="853"/>
+        <location filename="../mainwin.cpp" line="864"/>
         <source>Double click a search result to see its data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="939"/>
+        <location filename="../mainwin.cpp" line="950"/>
         <source>No text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="979"/>
-        <location filename="../mainwin.cpp" line="1241"/>
+        <location filename="../mainwin.cpp" line="990"/>
+        <location filename="../mainwin.cpp" line="1268"/>
         <source>Select a movie first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1006"/>
+        <location filename="../mainwin.cpp" line="1017"/>
         <source>Data applied</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="510"/>
+        <location filename="../mainwin.cpp" line="512"/>
         <source>Could not save %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="475"/>
+        <location filename="../mainwin.cpp" line="477"/>
         <source>Saving ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="474"/>
-        <location filename="../mainwin.cpp" line="483"/>
+        <location filename="../mainwin.cpp" line="476"/>
+        <location filename="../mainwin.cpp" line="485"/>
         <source>Saving %1 of %2 ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="533"/>
+        <location filename="../mainwin.cpp" line="535"/>
         <source>%n movie(s) saved.</source>
         <translation>
             <numerusform>%n movie saved.</numerusform>
@@ -313,22 +319,27 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1298"/>
+        <location filename="../mainwin.cpp" line="1166"/>
+        <source>Other (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1325"/>
         <source>Choose movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1300"/>
+        <location filename="../mainwin.cpp" line="1327"/>
         <source>Movie files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1320"/>
+        <location filename="../mainwin.cpp" line="1347"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1321"/>
+        <location filename="../mainwin.cpp" line="1348"/>
         <source>Really remove %n movie(s)?</source>
         <translation>
             <numerusform>Really remove %n movie?</numerusform>
@@ -336,88 +347,103 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1366"/>
+        <location filename="../mainwin.cpp" line="1393"/>
         <source>Please enter a search term</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1460"/>
+        <location filename="../mainwin.cpp" line="1487"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1483"/>
+        <location filename="../mainwin.cpp" line="1510"/>
         <source>The movie data could not be loaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1540"/>
+        <location filename="../mainwin.cpp" line="1567"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1541"/>
+        <location filename="../mainwin.cpp" line="1568"/>
         <source>Settings saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1545"/>
+        <location filename="../mainwin.cpp" line="1572"/>
         <source>Error: could not save the settings!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="141"/>
+        <location filename="../initialize.cpp" line="143"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="142"/>
+        <location filename="../initialize.cpp" line="144"/>
         <source>Take the data into the selected movie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="197"/>
+        <location filename="../initialize.cpp" line="170"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="171"/>
+        <source>Clean</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="172"/>
+        <source>Explicit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="204"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="210"/>
+        <location filename="../initialize.cpp" line="217"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="219"/>
+        <location filename="../initialize.cpp" line="226"/>
         <source>Add movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="222"/>
+        <location filename="../initialize.cpp" line="229"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="304"/>
+        <location filename="../initialize.cpp" line="311"/>
         <source>Enter actors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="319"/>
+        <location filename="../initialize.cpp" line="326"/>
         <source>Enter producers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="334"/>
+        <location filename="../initialize.cpp" line="341"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="349"/>
+        <location filename="../initialize.cpp" line="356"/>
         <source>Enter directors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="413"/>
-        <location filename="../mainwin.cpp" line="1019"/>
+        <location filename="../initialize.cpp" line="420"/>
+        <location filename="../mainwin.cpp" line="1030"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -430,43 +456,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mp4writer.cpp" line="157"/>
+        <location filename="../mp4writer.cpp" line="166"/>
         <source>The tags could not be written.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mp4writer.cpp" line="192"/>
+        <location filename="../mp4writer.cpp" line="201"/>
         <source>The file does not exist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mp4writer.cpp" line="196"/>
+        <location filename="../mp4writer.cpp" line="205"/>
         <source>The file is not writable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mp4writer.cpp" line="204"/>
+        <location filename="../mp4writer.cpp" line="213"/>
         <source>The file was written, but the check failed. Please look at the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mp4writer.cpp" line="212"/>
+        <location filename="../mp4writer.cpp" line="221"/>
         <source>Not enough free space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mp4writer.cpp" line="222"/>
+        <location filename="../mp4writer.cpp" line="231"/>
         <source>The file could not be copied.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mp4writer.cpp" line="232"/>
+        <location filename="../mp4writer.cpp" line="241"/>
         <source>The saved file could not be verified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mp4writer.cpp" line="242"/>
-        <location filename="../mp4writer.cpp" line="248"/>
+        <location filename="../mp4writer.cpp" line="251"/>
+        <location filename="../mp4writer.cpp" line="257"/>
         <source>The file could not be replaced.</source>
         <translation type="unfinished"></translation>
     </message>

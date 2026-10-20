@@ -322,6 +322,8 @@ void MainWin::clearData()
     // comboBoxes
     ui->genreComboBox->setCurrentIndex(0);
     ui->ratingComboBox->setCurrentIndex(0);
+    ui->advisoryComboBox->setCurrentIndex(0);
+    ui->formatLabel->clear();
 
     // tagWidgets
     m_castWidget->clearTags();
@@ -605,6 +607,15 @@ bool MainWin::validateAndRefreshChanges() {
     work.ratingScore = currentScore;
     work.ratingSystem = currentSystem;
     work.ratingText = ui->ratingComboBox->currentData(kRatingCodeRole).toString();
+
+    // ----- Content advisory (4 and 1 are both explicit: no change) -----
+    const int currentAdvisory = ui->advisoryComboBox->currentData().toInt();
+    const int originalAdvisory = (original.advisory == 4) ? 1 : original.advisory;
+    if (currentAdvisory != originalAdvisory) {
+        qDebug() << "Content advisory has changed.";
+        hasChanged = true;
+    }
+    work.advisory = (currentAdvisory == originalAdvisory) ? original.advisory : currentAdvisory;
 
     // ----- Cover Label -----
     QPixmap currentCover = work.cover;
@@ -1146,6 +1157,22 @@ void MainWin::displayMovie(const MovieData &movie) {
 
     // Fill the age rating combobox with the system of the file and select its entry
     showMovieRating(movie);
+
+    // Content advisory: 4 is explicit as well; another value stays as it is (extra entry)
+    while (ui->advisoryComboBox->count() > 3) ui->advisoryComboBox->removeItem(3);
+    const int advisory = (movie.advisory == 4) ? 1 : movie.advisory;
+    int advisoryIndex = ui->advisoryComboBox->findData(advisory);
+    if (advisoryIndex < 0) {
+        ui->advisoryComboBox->addItem(tr("Other (%1)").arg(movie.advisory), movie.advisory);
+        advisoryIndex = ui->advisoryComboBox->count() - 1;
+    }
+    ui->advisoryComboBox->setCurrentIndex(advisoryIndex);
+
+    // Format of the video (information)
+    ui->formatLabel->setText(movie.videoSize.isValid()
+                                 ? QStringLiteral("%1 \u00D7 %2 \u00B7 %3").arg(movie.videoSize.width())
+                                       .arg(movie.videoSize.height()).arg(MovieData::hdName(MovieData::hdFlag(movie.videoSize)))
+                                 : QString());
 
     // Set Entry in genre combobox
     if (!movie.genre.isEmpty()) {

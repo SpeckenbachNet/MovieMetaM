@@ -58,6 +58,8 @@ void MainWin::initializeForm() {
     ui->genreComboBox->setEditable(true);
     ui->genreComboBox->setInsertPolicy(QComboBox::NoInsert);
     applyComboStyle(ui->ratingComboBox);
+    applyComboStyle(ui->advisoryComboBox);
+    ui->formatLabel->setEnabled(false);   // dimmed: only information
     applyComboStyle(ui->ratingSettingsComboBox);
     applyComboStyle(ui->languageSettingsComboBox);
     applyComboStyle(ui->dataLanguageSettingsComboBox);
@@ -163,6 +165,11 @@ void MainWin::initializeComboBoxes() {
 
     //fill settings rating combobox
     fillRatingSettingsComboBox();
+
+    // Content advisory (Apple's "rtng"): none, clean, explicit
+    ui->advisoryComboBox->addItem(tr("None"), 0);
+    ui->advisoryComboBox->addItem(tr("Clean"), 2);
+    ui->advisoryComboBox->addItem(tr("Explicit"), 1);
 
     // Settings: language of the app and of the movie data
     for (const Languages::Language &language : Languages::appLanguages()) {
@@ -434,6 +441,7 @@ void MainWin::initializeConnects() {
     connect(ui->descriptionText, &QTextEdit::textChanged, this, &MainWin::onDataChanged);
     // ComboBoxes
     connect(ui->ratingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onDataChanged);
+    connect(ui->advisoryComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onDataChanged);
     connect(ui->genreComboBox, &QComboBox::editTextChanged, this, &MainWin::onDataChanged);
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
     connect(ui->languageSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);

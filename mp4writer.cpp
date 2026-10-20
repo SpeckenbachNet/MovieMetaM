@@ -135,6 +135,15 @@ bool Mp4Writer::writeTags(const QString &path, const MovieData &movie, const QIm
     }
     setText(tag, moviKey, buildItunMovi(movie, existing));
 
+    // Content advisory ("rtng") and the HD flag ("hdvd") are one byte each
+    const TagLib::String advisoryKey = key("rtng");
+    if (movie.advisory != 0 || tag->contains(advisoryKey)) {
+        tag->setItem(advisoryKey, TagLib::MP4::Item(static_cast<unsigned char>(movie.advisory)));
+    }
+    if (movie.videoSize.isValid()) {
+        tag->setItem(key("hdvd"), TagLib::MP4::Item(static_cast<unsigned char>(MovieData::hdFlag(movie.videoSize))));
+    }
+
     // Cover: only if it changed (an unchanged one would be encoded again and lose quality)
     if (cover.isNull() != originalCover.isNull() || (!cover.isNull() && cover != originalCover)) {
         if (cover.isNull()) {

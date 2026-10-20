@@ -47,10 +47,16 @@ public:
     QMap<QString, QString> extractMetadata(const QString &filePath);
     QMap<QString, QString> extractMetadataMp4(const QString &filePath);
 
+    // Width and height of the video as the file shows it (track header of the first video track);
+    // invalid if there is none
+    QSize readVideoSize(const QString &filePath);
+
 signals:
     void errorOccurred(const QString &message);
 
 private:
+    void readIntegerDataBox(QFile &file, const QString &key, QMap<QString, QString> &metadata, qint64 parentBoxEnd);
+
     struct Mp4Box {
         quint64 size;
         qint64 headerSize;
