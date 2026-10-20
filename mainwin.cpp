@@ -527,6 +527,14 @@ void MainWin::savingFinished()
     }
 
     updateSaveButtons();
+    // Closing was waiting for the save: only when everything went well, else the window stays
+    if (m_closeAfterSaving) {
+        m_closeAfterSaving = false;
+        if (failed.isEmpty()) {
+            close();
+            return;
+        }
+    }
     if (!failed.isEmpty()) {
         showColumnStatus(StatusColumn::Window, failed, ToastM::Level::Error);
     } else if (results.size() == 1) {
@@ -1014,7 +1022,7 @@ void MainWin::applyTmdbMovie()
     m_loadedMovies[key] = movie;
     displayMovie(movie);
     onDataChanged();
-    showColumnStatus(StatusColumn::Info, tr("Data applied"));
+    showColumnStatus(StatusColumn::Info, tr("Data applied"), ToastM::Level::Info, 1500);
 
     // The chosen poster as cover: loaded in a bigger size, then taken into the same movie
     const int poster = m_posterPicker->current();
@@ -1598,6 +1606,36 @@ void MainWin::handleSaveSettingsButton_Clicked() {
 void MainWin::closeEvent(QCloseEvent *event)
 {
     if (m_saving) m_saveWatcher->waitForFinished();   // do not leave a file half written
+
+    // Unsaved changes: ask first (the form is brought up to date, then the status counts)
+    validateAndRefreshChanges();
+    int modified = 0;
+    for (const MovieData &movie : std::as_const(m_loadedMovies)) {
+        if (movie.status == "modified") ++modified;
+    }
+    if (modified > 0) {
+        QMessageBox box(QMessageBox::Warning, tr("Unsaved changes"),
+                        tr("%n movie(s) have unsaved changes.", "", modified), QMessageBox::NoButton, this);
+        box.setInformativeText(tr("Save the changes before closing?"));
+        QPushButton *saveButton = box.addButton(tr("Save all"), QMessageBox::AcceptRole);
+        QPushButton *discardButton = box.addButton(tr("Discard"), QMessageBox::DestructiveRole);
+        QPushButton *cancelButton = box.addButton(tr("Cancel"), QMessageBox::RejectRole);
+        box.setDefaultButton(cancelButton);
+        box.setEscapeButton(cancelButton);
+        box.exec();
+        if (box.clickedButton() == saveButton) {
+            // The window stays open while the thread saves; savingFinished() closes it again
+            m_closeAfterSaving = true;
+            event->ignore();
+            onSaveAllButtonClicked();
+            return;
+        }
+        if (box.clickedButton() != discardButton) {
+            event->ignore();   // cancel
+            return;
+        }
+    }
+
     settings.setValue("Window/Geometry", saveGeometry());
     settings.setValue("Window/Splitter", ui->splitter->saveState());
     QMainWindow::closeEvent(event);
