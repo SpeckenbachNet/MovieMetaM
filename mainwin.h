@@ -47,6 +47,7 @@
 #include <QSettings>
 #include <QTableWidgetItem>
 #include <QTemporaryFile>
+#include <QTimer>
 #include <QToolButton>
 #include <qcombobox.h>
 
@@ -74,8 +75,13 @@ public:
     void startImageDownload(const QUrl &url); // Starts download an return immediately
     QIcon scaled;
 
+    // The columns of the main window; each shows its messages in the status bar below it
+    enum class StatusColumn { Movies, Info, Search };
+    void showColumnStatus(StatusColumn column, const QString &text, int msec = 10000);
+
 protected:
     void closeEvent(QCloseEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;   // status labels follow the columns
 
 private:
     Ui::MainWin *ui;
@@ -110,6 +116,15 @@ private:
     QToolButton *m_saveSettingsBtn = nullptr;
     QToolButton *m_addBtn = nullptr;       // below the movie list
     QToolButton *m_removeBtn = nullptr;
+
+    // Status bar: one label below each column (a message over the whole bar hides them)
+    QWidget *m_statusContainer = nullptr;
+    QLabel *m_statusLabels[3] = {};
+    QString m_statusTexts[3];
+    QTimer *m_statusTimers[3] = {};
+    bool m_statusUpdatePending = false;
+    void initializeStatusBar();
+    void updateStatusLabels();
 
     void showPage(QWidget *page);
     void setSignalsBlocked(bool blocked);

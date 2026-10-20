@@ -603,7 +603,7 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
     const int generation = ++m_searchGeneration;
 
     if (jsonArray.isEmpty()) {
-        ui->statusBar->showMessage(tr("No movies found"), 10000);
+        showColumnStatus(StatusColumn::Search, tr("No movies found"));
         return;
     }
 
@@ -726,7 +726,7 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
     }
 
     if (skippedCount > 0) {
-        ui->statusBar->showMessage(tr("%n file(s) skipped: only MP4 is supported.", "", skippedCount), 10000);
+        showColumnStatus(StatusColumn::Movies, tr("%n file(s) skipped: only MP4 is supported.", "", skippedCount));
     }
 
     // Only select if we have actually added something NEW.
@@ -997,7 +997,7 @@ void MainWin::onSearchButtonClicked()
     QString searchText = ui->searchEdit->text();
     qDebug() << "Search Text: " << searchText;
     if(searchText == "") {
-        ui->statusBar->showMessage(tr("Please enter a search term"), 10000);
+        showColumnStatus(StatusColumn::Search, tr("Please enter a search term"));
     }
     else
     {
@@ -1087,7 +1087,7 @@ void MainWin::startApiRequest(const QUrl &url)
     // Token comes from tmdb_token.txt at build time (see CMakeLists.txt)
     const QByteArray authToken = QByteArrayLiteral(TMDB_TOKEN);
     if (authToken.isEmpty()) {
-        ui->statusBar->showMessage(tr("No TMDB token: the movie search is not available."), 10000);
+        showColumnStatus(StatusColumn::Search, tr("No TMDB token: the movie search is not available."));
         return;
     }
     request.setRawHeader("Authorization", "Bearer " + authToken);
