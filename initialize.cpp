@@ -54,8 +54,13 @@ void MainWin::initializeForm() {
     applyBoxStyle(ui->descriptionText, true);
     applySpinStyle(ui->releaseDateEdit);
     applyComboStyle(ui->genreComboBox);
+    // The genre may also be typed: the list only suggests the TMDB genres
+    ui->genreComboBox->setEditable(true);
+    ui->genreComboBox->setInsertPolicy(QComboBox::NoInsert);
     applyComboStyle(ui->ratingComboBox);
     applyComboStyle(ui->ratingSettingsComboBox);
+    applyComboStyle(ui->languageSettingsComboBox);
+    applyComboStyle(ui->dataLanguageSettingsComboBox);
     applyTabStyle(ui->tabWidget);
 
     // Status bar recognizable as its own bar on every system (macOS draws a line, Linux nothing)
@@ -122,15 +127,24 @@ void MainWin::initializeForm() {
 }
 
 void MainWin::initializeComboBoxes() {
-    // Fill genre combobox
-    QString url_genre = "https://api.themoviedb.org/3/genre/movie/list?language=en";
-    startApiRequest(url_genre);
+    // Fill genre combobox (in the language of the movie data)
+    requestGenres();
 
     //fill age rating combobox
     fillRatingComboBox(countryCode);
 
     //fill settings rating combobox
     fillRatingSettingsComboBox();
+
+    // Settings: language of the app and of the movie data
+    for (const Languages::Language &language : Languages::appLanguages()) {
+        ui->languageSettingsComboBox->addItem(language.name, language.code);
+    }
+    setComboEntryByString(ui->languageSettingsComboBox, Languages::appLanguage(), true);
+    for (const Languages::Language &language : Languages::dataLanguages()) {
+        ui->dataLanguageSettingsComboBox->addItem(language.name, language.code);
+    }
+    setComboEntryByString(ui->dataLanguageSettingsComboBox, dataLanguage, true);
 }
 
 void MainWin::initializeToolBars() {
@@ -380,8 +394,10 @@ void MainWin::initializeConnects() {
     connect(ui->descriptionText, &QTextEdit::textChanged, this, &MainWin::onDataChanged);
     // ComboBoxes
     connect(ui->ratingComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onDataChanged);
-    connect(ui->genreComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onDataChanged);
+    connect(ui->genreComboBox, &QComboBox::editTextChanged, this, &MainWin::onDataChanged);
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
+    connect(ui->languageSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
+    connect(ui->dataLanguageSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
     // Preview of the chosen system at once, before saving
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this] {
         fillRatingPreview(ui->ratingSettingsComboBox->currentData().toString());
@@ -407,7 +423,7 @@ void MainWin::initializeConnects() {
 
     // ----- Other connects
     connect(ui->searchTableView, &QAbstractItemView::doubleClicked, this, &MainWin::onSearchTableViewDoubleClicked);
-    connect(ui->fileListTableView, &QAbstractItemView::clicked, this, &MainWin::onFilelistTableViewClicked);
+    connect(ui->fileListTableView->selectionModel(), &QItemSelectionModel::currentChanged, this, &MainWin::onCurrentMovieChanged);
     connect(ui->searchEdit, &SearchField::searchRequested, this, &MainWin::onSearchButtonClicked);
     connect(m_addBtn, &QToolButton::clicked, this, &MainWin::onAddFilesButtonClicked);
     connect(m_removeBtn, &QToolButton::clicked, this, &MainWin::onRemoveFilesButtonClicked);

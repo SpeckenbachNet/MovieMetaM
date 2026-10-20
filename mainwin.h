@@ -51,6 +51,7 @@
 #include <qcombobox.h>
 
 #include "agerating.h"
+#include "languages.h"
 #include "moviedata.h"
 #include "tagwidget.h"
 
@@ -91,6 +92,7 @@ private:
     QIcon m_statusGreen;    // status symbols in the movie list (same look when selected)
     QIcon m_statusYellow;
     QString countryCode;
+    QString dataLanguage;   // language of the movie data for TMDB, e.g. "de-DE"
     QMap<QString, MovieData> m_loadedMovies;
     QMap<QString, MovieData> m_originalMovies;
     TagWidget *m_castWidget = nullptr;
@@ -113,6 +115,7 @@ private:
     void setSignalsBlocked(bool blocked);
     void displayMovie(const MovieData &movie);
     void fillSearchTableView(const QJsonDocument &jsonDoc);
+    void requestGenres();   // genre list from TMDB in the language of the movie data
     void fillGenreComboBox(const QJsonDocument &jsonDoc);
     void fillRatingComboBox(const QJsonDocument &jsonDoc);
     void addFilesToModel(const QStringList &filePaths);
@@ -160,7 +163,7 @@ private:
 
 private slots:
     void onSearchTableViewDoubleClicked(const QModelIndex &index);
-    void onFilelistTableViewClicked(const QModelIndex &index);
+    void onCurrentMovieChanged(const QModelIndex &index);
     void onSaveAllButtonClicked();
     void onApiRequestFinished(QNetworkReply *reply);
     void onImageDownloadFinished(QNetworkReply *reply);

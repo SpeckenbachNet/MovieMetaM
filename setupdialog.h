@@ -35,12 +35,16 @@ public:
     ~SetupDialog() = default;
 
     QString selectedOptionFromAgeRating() const;
+    QString selectedAppLanguage() const;    // "de" or "en"
+    QString selectedDataLanguage() const;   // e.g. "de-DE"
 
 private:
     QLabel *infoLabel;
     QLabel *ageRatingLabel;
     QLabel *languageLabel;
+    QLabel *dataLanguageLabel;
     QComboBox *ageRatingComboBox;
     QComboBox *languageComboBox;
+    QComboBox *dataLanguageComboBox;
     QDialogButtonBox *buttonBox;
 };

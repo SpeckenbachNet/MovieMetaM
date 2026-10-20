@@ -418,7 +418,7 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
     QByteArray xmpUuid = QByteArray::fromHex("89744C6888494002A819B7D8D85F8E56");
 
     if (uuid == xmpUuid) {
-        qDebug() << "XMP: Standard XMP UUID gefunden. Lese XML-Daten...";
+        qDebug() << "XMP: Found standard XMP UUID. Read XML data...";
 
         // 2. Restliche Daten lesen (XML-Struktur)
         qint64 xmlDataSize = boxDataEnd - file.pos();
@@ -431,15 +431,15 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
             // OPTION 1: XML-Daten als Roh-String speichern (empfohlen als erster Schritt)
             //metadata.insert("XMP_RAW_XML", xmlString);
 
-            qDebug() << "XMP: XML-Daten erfolgreich ausgelesen (" << xmlDataSize << " Bytes).";
+            qDebug() << "XMP: XML data successfully read (" << xmlDataSize << " Bytes).";
 
             // HINWEIS: Hier müsste später die Logik zum Parsen der XML-Struktur (mit QXmlStreamReader) folgen.
 
         } else {
-            qDebug() << "XMP: UUID gefunden, aber keine XML-Daten vorhanden.";
+            qDebug() << "XMP: UUID found, but no XML data present.";
         }
     } else {
-        qDebug() << "XMP: uuid Box gefunden, aber keine XMP Standard UUID (" << uuid.toHex() << "). Überspringe.";
+        qDebug() << "XMP: UUID box found, but no standard XMP UUID (" << uuid.toHex() << "). Skip.";
     }
 
     // 3. Unbedingte Zeigerkorrektur

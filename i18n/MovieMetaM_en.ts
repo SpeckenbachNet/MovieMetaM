@@ -119,8 +119,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="150"/>
-        <location filename="../initialize.cpp" line="156"/>
+        <location filename="../mainwin.ui" line="519"/>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwin.ui" line="529"/>
+        <source>Movie data language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="161"/>
+        <location filename="../initialize.cpp" line="167"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
@@ -130,43 +140,43 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="138"/>
-        <location filename="../initialize.cpp" line="158"/>
+        <location filename="../initialize.cpp" line="149"/>
+        <location filename="../initialize.cpp" line="169"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="139"/>
+        <location filename="../initialize.cpp" line="150"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="141"/>
+        <location filename="../initialize.cpp" line="152"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="147"/>
+        <location filename="../initialize.cpp" line="158"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="152"/>
+        <location filename="../initialize.cpp" line="163"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="159"/>
+        <location filename="../initialize.cpp" line="170"/>
         <source>Save settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="245"/>
+        <location filename="../mainwin.cpp" line="369"/>
         <source>Changed, saving needed</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="585"/>
+        <location filename="../mainwin.cpp" line="723"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation>
             <numerusform>%n file skipped: only MP4 is supported.</numerusform>
@@ -174,28 +184,28 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="245"/>
-        <location filename="../mainwin.cpp" line="621"/>
+        <location filename="../mainwin.cpp" line="369"/>
+        <location filename="../mainwin.cpp" line="759"/>
         <source>Unchanged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="785"/>
+        <location filename="../mainwin.cpp" line="923"/>
         <source>Choose movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="787"/>
+        <location filename="../mainwin.cpp" line="925"/>
         <source>Movie files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="807"/>
+        <location filename="../mainwin.cpp" line="945"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="808"/>
+        <location filename="../mainwin.cpp" line="946"/>
         <source>Really remove %n movie(s)?</source>
         <translation>
             <numerusform>Really remove %n movie?</numerusform>
@@ -203,67 +213,72 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="851"/>
+        <location filename="../mainwin.cpp" line="989"/>
         <source>Please enter a search term</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="941"/>
+        <location filename="../mainwin.cpp" line="1079"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="996"/>
+        <location filename="../mainwin.cpp" line="1141"/>
+        <source>Settings saved. The language changes after a restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1142"/>
         <source>Settings saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="999"/>
+        <location filename="../mainwin.cpp" line="1145"/>
         <source>Error: could not save the settings!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="142"/>
+        <location filename="../initialize.cpp" line="153"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="155"/>
+        <location filename="../initialize.cpp" line="166"/>
         <source>Back</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="164"/>
+        <location filename="../initialize.cpp" line="175"/>
         <source>Add movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="167"/>
+        <location filename="../initialize.cpp" line="178"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="249"/>
+        <location filename="../initialize.cpp" line="260"/>
         <source>Enter actors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="264"/>
+        <location filename="../initialize.cpp" line="275"/>
         <source>Enter producers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="279"/>
+        <location filename="../initialize.cpp" line="290"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="294"/>
+        <location filename="../initialize.cpp" line="305"/>
         <source>Enter directors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="359"/>
+        <location filename="../initialize.cpp" line="370"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -284,33 +299,37 @@
 <context>
     <name>SetupDialog</name>
     <message>
-        <location filename="../setupdialog.cpp" line="29"/>
-        <source>&lt;h2&gt;Welcome to MovieMetaM!&lt;/h2&gt;&lt;p&gt;Since this is your first time using the program, we need to configure a few basic settings.&lt;/p&gt;&lt;p&gt;In this step, we define how age ratings in your collection are weighted to ensure a consistent metadata structure.&lt;/p&gt;&lt;p&gt;Note: if needed, you can choose a language other than your system language here (optional).&lt;/p&gt;</source>
+        <location filename="../setupdialog.cpp" line="31"/>
+        <source>&lt;h2&gt;Welcome to MovieMetaM!&lt;/h2&gt;&lt;p&gt;Since this is your first time using the program, we need to configure a few basic settings.&lt;/p&gt;&lt;p&gt;In this step, we define how age ratings in your collection are weighted to ensure a consistent metadata structure.&lt;/p&gt;&lt;p&gt;Note: both languages follow your system; change them here if needed (optional).&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="38"/>
+        <location filename="../setupdialog.cpp" line="40"/>
         <source>Please choose an age rating system</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="50"/>
-        <location filename="../setupdialog.cpp" line="61"/>
+        <location filename="../setupdialog.cpp" line="52"/>
         <source>Choose an entry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="56"/>
-        <source>Choose another language (optional)</source>
+        <location filename="../setupdialog.cpp" line="60"/>
+        <source>Language of the app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="75"/>
+        <location filename="../setupdialog.cpp" line="70"/>
+        <source>Language of the movie data (TMDB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setupdialog.cpp" line="85"/>
         <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="76"/>
+        <location filename="../setupdialog.cpp" line="86"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
