@@ -180,6 +180,12 @@ void TagWidget::setupUi(const QString &placeholder)
     connect(m_tagModel, &QAbstractItemModel::rowsMoved, this, &TagWidget::onRowsMoved);
     connect(m_tagModel, &QAbstractItemModel::layoutChanged, this, &TagWidget::onRowsMoved);
     connect(m_tagModel, &QAbstractItemModel::dataChanged, this, &TagWidget::onRowsMoved);
+
+    // After dragging no tag stays selected: depending on the direction Qt leaves the selection
+    // on the moved tag or on its neighbour. At once, not delayed: a drag may insert a copy and
+    // remove the original only afterwards.
+    connect(m_tagModel, &QAbstractItemModel::rowsMoved, m_tagView->selectionModel(), &QItemSelectionModel::clear);
+    connect(m_tagModel, &QAbstractItemModel::rowsRemoved, m_tagView->selectionModel(), &QItemSelectionModel::clear);
 }
 
 bool TagWidget::eventFilter(QObject *watched, QEvent *event)
