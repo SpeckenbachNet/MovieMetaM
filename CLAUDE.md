@@ -60,8 +60,10 @@ Linux).
   `applyInputStyle`, `applySpinStyle`, `applyBoxStyle`, `applyComboStyle`, `applyTabStyle`.
   Combo boxes get a plain `QStyledItemDelegate` (the default menu delegate ignores the style
   sheet item rules); the combo arrow is the grey `chevron_down.svg` (not tinted).
-- Icons: black SVG drawings tinted in the text color (ToolbarM, SearchField); origin and
-  licenses in `ressources/icons/LICENSES.md` (save icons from Lucide, ISC).
+- Icons: own black line drawings (24 × 24, stroke 2, round caps and joins) tinted in the text
+  color (ToolbarM, SearchField); origin and license (all own, GPL v3) in
+  `ressources/icons/LICENSES.md`. Master copy and rules for new icons (Inkscape: unit px, scale 1;
+  never open the project's files directly, work on a copy): `../libraries/icons/`.
 - Painted pictures (status symbols, posters, age rating badges, cover) in the resolution of
   the screen (`devicePixelRatioF()`, e.g. 1.25 on Linux, 2 on Retina), else they blur.
   Icons shown in selected entries get the same pixmap for `QIcon::Selected` (Qt tints them).
@@ -173,9 +175,8 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.7.5; numbers kept, 1 to 7 are done)
+## Open points (as of 0.7.6; numbers kept, 1 to 8 are done)
 
-8. Origin of some icons still to be clarified (`LICENSES.md`).
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted).
 10. Help topics (using the app, TMDB search, saving): write them last, when saving (4) and

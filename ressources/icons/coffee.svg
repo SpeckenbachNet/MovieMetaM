@@ -1,16 +1,10 @@
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 2v2" />
-  <path d="M14 2v2" />
-  <path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" />
-  <path d="M6 2v2" />
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g transform="matrix(1.074219,0,0,1.074219,1.000000,1.241699)">
+    <path style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000000;stroke-width:2.15655;stroke-dasharray:none" d="m 15.770523,7.1609597 a 3.0946414,4.421814 0 0 1 3.122914,1.9248104 3.0946414,4.421814 0 0 1 0,4.8596529 3.0946414,4.421814 0 0 1 -3.122915,1.92481" />
+    <path style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000000;stroke-width:2.14611;stroke-dasharray:none" d="M 3.009558,6.0095577 H 18.990444 V 18.990447 a 2,2 135 0 1 -2,2 H 5.009558 a 2,2 45 0 1 -2,-2 z" transform="matrix(0.88705394,0,0,0.9179534,-1.7177826,-0.22394035)" />
+    <path style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000000;stroke-width:1.22757;stroke-dasharray:none" d="m 2.0829822,3.5344949 c 0,0 0.00517,-1.0762779 2.01595,-1.9749609 0.931279,-0.4162196 0.93355,-1.55831355 0.93355,-1.55831355" />
+    <path style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000000;stroke-width:1.22519;stroke-dasharray:none" d="m 5.7372469,3.5382001 c 0,0 0.00516,-1.0741942 2.0120468,-1.9711372 0.929475,-0.4154136 0.931742,-1.55529625 0.931742,-1.55529625" />
+    <path style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000000;stroke-width:1.22309;stroke-dasharray:none" d="m 9.3020827,3.5383061 c 0,0 0.0051,-1.0723454 2.0085843,-1.9677445 0.927877,-0.4146988 0.93014,-1.55261955 0.93014,-1.55261955" />
+    <path style="fill:none;stroke-linecap:round;stroke-linejoin:round;stroke:#000000;stroke-width:1.22399;stroke-dasharray:none" d="m 13.127072,3.5431979 c 0,0 0.0051,-1.0731426 2.010076,-1.9692072 0.928566,-0.4150068 0.930831,-1.55377345 0.930831,-1.55377345" />
+  </g>
 </svg>
