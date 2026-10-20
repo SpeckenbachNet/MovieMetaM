@@ -32,7 +32,7 @@ class HelpPage : public QWidget {
     Q_OBJECT
 
 public:
-    enum Topic { MovieList, MovieInfo, About };   // order in the list
+    enum Topic { MovieList, MovieInfo, MovieSearch, About };   // order in the list
 
     explicit HelpPage(QWidget *parent = nullptr);
 
