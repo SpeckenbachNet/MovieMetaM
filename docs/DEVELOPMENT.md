@@ -95,7 +95,8 @@ Hinweise:
 | `helppage.*` | Hilfeseite (Markdown in `help/<de|en>/`, `Help.qrc`) |
 | `languages.*` | Sprachen der App und der Filmdaten |
 | `agerating.*` | Altersfreigaben als Daten (JSON je Land) |
-| `infoicon.*` | kleines Info-Symbol, das einen längeren Text in einer Sprechblase über dem Symbol zeigt (beim Überfahren und per Klick; die Blase ist ein eigenes Fenster, abgerundet in den Farben der Felder); `InfoIcon::savingNote()` ist der Hinweis zum direkten Schreiben |
+| `bubble.*` | `Bubble`: abgerundete Sprechblase (eigenes Fenster, Farben der Felder); `TooltipFilter` zeigt **alle** Tooltips der App als Blase (statt der eckigen des Systems), installiert in `main.cpp` |
+| `infoicon.*` | kleines Info-Symbol, das einen längeren Text in einer `Bubble` über dem Symbol zeigt (beim Überfahren und per Klick); `InfoIcon::savingNote()` ist der Hinweis zum direkten Schreiben |
 | `toastm.*` | kurze Meldung über dem Inhalt |
 | `themecolors.h` | gemeinsame Farben und Formen |
 | `toolbarm.*`, `searchfield.*` | Kopien aus `../libraries` (Master dort) |
@@ -346,6 +347,11 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
 - **Listen** als `QListView` mit einer Spalte (eine `QTableView` kann keine ganze Zeile runden).
   Die Einträge zeichnet `TwoLineDelegate`: Icon, Titel, kleinere gedimmte zweite Zeile (Text
   „Titel\nzweite Zeile“), Abstand 7/6 px, dünne Trennlinie.
+- **Tooltips:** `TooltipFilter` (`bubble.cpp`, ein Filter auf `qApp`) fängt `QEvent::ToolTip` jedes
+  Widgets ab, holt den Text (bei Listen den `ToolTipRole` des Eintrags unter der Maus) und zeigt
+  eine `Bubble` unter dem Mauszeiger statt des Systemtooltips. Sie geht bei Mausbewegung (mehr
+  als 24 px), Klick, Taste, Rad, Verlassen des Widgets und nach 12 s. Formatierung wird entfernt
+  (reiner Text). Die Klasse `ToolbarM` aus `../libraries` bleibt unverändert.
 - **Meldungen** als Toast (`ToastM`): kurz über der Spalte, zu der sie gehören, mit sanftem Ein-
   und Ausblenden; Klicks gehen hindurch. `MainWin::showColumnStatus(StatusColumn, Text, Level,
   Dauer)`; Hinweise 3 s, Fehler 5 s. Eine Statusleiste gibt es nicht.

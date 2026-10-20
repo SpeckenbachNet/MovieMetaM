@@ -19,6 +19,8 @@
 
 #include <QLabel>
 
+class Bubble;
+
 // A small "i" icon (tinted in the text color) that shows a longer text in a bubble above it on
 // hover and on a click. For notes that should not take room in a dialog.
 class InfoIcon : public QLabel
@@ -44,5 +46,5 @@ private:
     void hideBubble();
 
     QString m_text;
-    QWidget *m_bubble = nullptr;   // window of its own, created at the first use
+    Bubble *m_bubble = nullptr;   // window of its own, created at the first use
 };

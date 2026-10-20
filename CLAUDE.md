@@ -129,6 +129,9 @@ Linux).
   5 min). Keys with (c) are UTF-8 strings in TagLib. `iTunMOVI` is built in Apple's layout (the
   reader needs it); `codirectors` are kept; `(c)ART` / `aART` are not touched; an unchanged cover
   is not written again. Not done: a warning when closing with unsaved changes.
+- `bubble.*` – `Bubble`: rounded note window (colors of the fields, mouse events go through);
+  `TooltipFilter` (installed in `main.cpp`) shows ALL tooltips of the app as a `Bubble` below the
+  pointer instead of the system's square one (item views: `ToolTipRole` of the entry under the mouse).
 - `infoicon.*` – small info icon (tinted in the text color), a rounded bubble (window of its own) above it on hover
   and on click, not the system tooltip; used for
   the saving note (`InfoIcon::savingNote()`) beside the check box "Safe saving" in the setup dialog
