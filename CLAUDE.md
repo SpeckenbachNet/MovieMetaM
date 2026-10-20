@@ -130,13 +130,12 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.4.4; numbers kept, 1 is done)
+## Open points (as of 0.4.7; numbers kept, 1 is done)
 
 2. UI overhaul, further steps: more help topics (using the app, TMDB search, saving); the
    setup dialog's combo boxes with `applyComboStyle`. (Settings page: cards in a centered
    column, so far one card "General" – `settingsGeneralCard`, styled in `initializeForm()`.)
-3. Bugs: clicking the empty area of the movie list loses the selection; a search without results leaves the old results; search term not
-   URL-encoded (use QUrlQuery).
+3. Bugs: search term not URL-encoded (use QUrlQuery).
 4. Saving to the MP4 file is not implemented (saveMovieDetails / save all are empty) – needs a
    design decision first (own MP4 writer or a library like TagLib).
 5. Applying a TMDB search result (double click only logs the id); the tabs "Data" and "Cover"

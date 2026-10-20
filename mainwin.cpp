@@ -598,11 +598,14 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
 
     QJsonArray jsonArray = rootObj.value("results").toArray();
 
-    if (jsonArray.isEmpty()) return;
-
     m_SearchModel->clear();   // created once in initializeForm()
     // A new search: posters still loading for the old one are dropped (see the callback)
     const int generation = ++m_searchGeneration;
+
+    if (jsonArray.isEmpty()) {
+        ui->statusBar->showMessage(tr("No movies found"), 10000);
+        return;
+    }
 
     for (const QJsonValue &val : std::as_const(jsonArray)) {
         QJsonObject obj = val.toObject();
