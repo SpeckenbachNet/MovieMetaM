@@ -26,6 +26,7 @@
 #include <QTranslator>
 #include <QStringLiteral>
 #include <QDebug>
+#include "bubble.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(QLatin1String(APP_VERSION));
     a.setOrganizationName(QStringLiteral(COMPANY_NAME));
     a.setWindowIcon(QIcon(QStringLiteral(":/icons/app_icon")));   // title bar, task bar, dialogs
+    TooltipFilter::install();   // tooltips as rounded bubbles, like the rest of the app
     fixHighlightContrast();   // readable selection also with the accent color "Graphite" (macOS)
 
     // Settings as INI file on every system (Windows would use the registry otherwise)
