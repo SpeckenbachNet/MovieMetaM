@@ -39,6 +39,10 @@ public:
     static QStringList supportedSuffixes();
     static bool isSupported(const QString &filePath);
 
+    // True if the file opens and has an intact 'moov' box (the box with the metadata and the tracks).
+    // A readable file without tags is fine; a broken or cut-off one is not.
+    bool isReadableMp4(const QString &filePath);
+
     // Extracts the cover as a QImage from an MP4 file
     QImage extractCoverImage(const QString &filePath);
     QImage extractCoverImageMp4(const QString &filePath);

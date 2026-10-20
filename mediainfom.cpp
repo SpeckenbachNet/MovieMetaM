@@ -31,6 +31,24 @@ bool MediaInfoM::isSupported(const QString &filePath)
     return supportedSuffixes().contains(QFileInfo(filePath).suffix().toLower());
 }
 
+bool MediaInfoM::isReadableMp4(const QString &filePath)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) return false;
+
+    // Walk the top-level boxes by their headers (no content is read)
+    while (file.pos() < file.size()) {
+        Mp4Box box;
+        const qint64 startPos = file.pos();
+        if (!readBoxHeader(file, box)) return false;
+        const qint64 boxEnd = startPos + qint64(box.size);
+        if (boxEnd > file.size()) return false;   // cut off
+        if (QByteArray(box.type, 4) == "moov") return true;
+        if (!file.seek(boxEnd)) return false;
+    }
+    return false;
+}
+
 quint32 MediaInfoM::boxTypeToUint32(const char boxType[4]) const
 {
     // Converts the 4 big-endian bytes to a quint32
