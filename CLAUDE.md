@@ -117,6 +117,12 @@ Linux).
   not Apple's "Ab 12 Jahren"); prefix and score as Apple/Subler (`Resources/Ratings.json`);
   home video before cinema where a country has its own system (Canada: CHVRS). Working table:
   `~/kDrive/Development/QT/age_ratings.xlsx` (not in git) – the JSON files follow it.
+  Showing a movie (`showMovieRating()`, decided with the user): the system in the file
+  (`iTunEXTC` prefix, `AgeRatings::countryOfSystem()`) decides which steps the combo shows; the
+  system of the settings only applies to movies without an age rating. Selected by code, else by
+  score (older Apple texts). An unknown system or step stays as it is: an extra entry
+  "prefix: code" below the empty one, selected, no "changed". "Changed" = system or score differ.
+  Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
 ## Open points (as of 0.3.18)
@@ -125,8 +131,7 @@ Linux).
 2. UI overhaul, further steps: more help topics (using the app, TMDB search, saving); the
    setup dialog's combo boxes with `applyComboStyle`. (Settings page: cards in a centered
    column, so far one card "General" – `settingsGeneralCard`, styled in `initializeForm()`.)
-3. Bugs: setup dialog language choice not saved; new rating system only after restart;
-   after removing a movie the form still shows it; false "changed" for movies without date
+3. Bugs: setup dialog language choice not saved; after removing a movie the form still shows it; false "changed" for movies without date
    (1972 default) or with a genre not in the TMDB list (genres in English, search in German);
    arrow keys in the movie list don't switch the movie; clicking the empty area of the movie
    list loses the selection; a search without results leaves the old results; search term not

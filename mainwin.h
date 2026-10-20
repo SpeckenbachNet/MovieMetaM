@@ -140,6 +140,10 @@ private:
     void clearData();
     void selectRowInTable(int row);
     void fillRatingComboBox(QString countryCode);
+    void showMovieRating(const MovieData &movie);   // fills the list with the system of the file
+    // Entries of the age rating combo box: score in Qt::UserRole, code and system ID of the file
+    static constexpr int kRatingCodeRole = Qt::UserRole + 1;
+    static constexpr int kRatingSystemRole = Qt::UserRole + 2;
     void fillRatingSettingsComboBox();
     void fillRatingPreview(const QString &countryCode);   // badges of the system chosen in the settings
     void setComboEntryByString(QComboBox *combo, QString findString, bool useData);
