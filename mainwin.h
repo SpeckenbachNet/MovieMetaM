@@ -48,6 +48,7 @@
 #include <QTableWidgetItem>
 #include <QTemporaryFile>
 #include <QTimer>
+#include <QUrlQuery>
 #include <QToolButton>
 #include <qcombobox.h>
 
