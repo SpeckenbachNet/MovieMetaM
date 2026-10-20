@@ -45,16 +45,16 @@ signals:
 
 private slots:
     void handleInputFinished();
-    void removeTagByClick(const QModelIndex &index); // NEU: Slot für das Löschen
+    void removeTagByClick(const QModelIndex &index); // slot for removing a tag
     void onRowsMoved(); // Konsistent zum Signal-Namen
 
 private:
-    void setupUi(const QString &placeholder); // NEU: Initialisierung ausgelagert
+    void setupUi(const QString &placeholder); // initialization moved out
 
     // Member
-    QStringList m_tagList; // Interne Liste für einfache Verwaltung
+    QStringList m_tagList; // internal list for easy handling
     QString m_separator;
-    QString m_tokenStyle; // Wird für das Styling der Tags im View benötigt (mittels Delegate)
+    QString m_tokenStyle; // needed for styling the tags in the view (via delegate)
 
     QStringListModel *m_tagModel = nullptr;
     QListView *m_tagView = nullptr;

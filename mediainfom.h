@@ -39,11 +39,11 @@ public:
     static QStringList supportedSuffixes();
     static bool isSupported(const QString &filePath);
 
-    // Extrahiert das Cover als QImage aus einer MP4-Datei
+    // Extracts the cover as a QImage from an MP4 file
     QImage extractCoverImage(const QString &filePath);
     QImage extractCoverImageMp4(const QString &filePath);
 
-    // Extrahiert ausgewählte Metadaten als Map aus einer MP4-Datei
+    // Extracts selected metadata from an MP4 file as a map
     QMap<QString, QString> extractMetadata(const QString &filePath);
     QMap<QString, QString> extractMetadataMp4(const QString &filePath);
 

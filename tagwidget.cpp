@@ -26,8 +26,8 @@ TagWidget::TagWidget(
 {
     setupUi(placeholder);
 
-    // // --- HIER DIE KONFIGURATION ---
-    // // Wir greifen auf die ListBox zu, die in setupUi erstellt wurde
+    // // --- CONFIGURATION ---
+    // // Access the list box created in setupUi
     // m_tagView->setDragEnabled(true);
     // m_tagView->setAcceptDrops(true);
     // m_tagView->setDropIndicatorShown(true);
@@ -37,13 +37,13 @@ TagWidget::TagWidget(
     // m_tagModel = new QStringListModel(this);
     // m_tagView->setModel(m_tagModel);
 
-    // // 1. Wenn Zeilen physisch verschoben werden (InternalMove)
+    // // 1. When rows are physically moved (InternalMove)
     // connect(m_tagModel, &QAbstractItemModel::rowsMoved, this, &TagWidget::onRowsMoved);
 
-    // // 2. Wenn das Layout aktualisiert wird
+    // // 2. When the layout is updated
     // connect(m_tagModel, &QAbstractItemModel::layoutChanged, this, &TagWidget::onRowsMoved);
 
-    // // 3. Wenn Daten geändert werden (falls ein Item beim Drop überschrieben wird)
+    // // 3. When data changes (if an item is overwritten by a drop)
     // connect(m_tagModel, &QAbstractItemModel::dataChanged, this, &TagWidget::onRowsMoved);
 }
 
@@ -95,7 +95,7 @@ void TagWidget::setupUi(const QString &placeholder)
     connect(m_lineEdit, &QLineEdit::returnPressed, this, &TagWidget::handleInputFinished);
     connect(m_tagView, &QListView::clicked, this, &TagWidget::removeTagByClick);
 
-    // Die sichersten Connects für Drag & Drop:
+    // The safest connects for drag & drop:
     connect(m_tagModel, &QAbstractItemModel::rowsMoved, this, &TagWidget::onRowsMoved);
     connect(m_tagModel, &QAbstractItemModel::layoutChanged, this, &TagWidget::onRowsMoved);
     connect(m_tagModel, &QAbstractItemModel::dataChanged, this, &TagWidget::onRowsMoved);
@@ -106,7 +106,7 @@ void TagWidget::onRowsMoved() {
     QTimer::singleShot(0, this, [this]() {
         QStringList list = getTags();
 
-        // 2. Sende die Liste (jetzt passt der Typ zum Signal)
+        // 2. Send the list (the type now matches the signal)
         emit tagsChanged(list);
         qDebug() << "Order after moving (onRowsMoved)";
     });
@@ -114,14 +114,14 @@ void TagWidget::onRowsMoved() {
 
 void TagWidget::setTags(const QString &tags)
 {
-    // 1. Vorbereitung der Daten
+    // 1. Prepare the data
     QStringList newTags;
     if (!tags.isEmpty()) {
         newTags = tags.split(',', Qt::SkipEmptyParts);
         for (QString &tag : newTags) {
             tag = tag.trimmed();
         }
-        newTags.removeAll(QString()); // Leere Einträge nach dem Trimmen raus
+        newTags.removeAll(QString()); // drop empty entries after trimming
         newTags.removeDuplicates();   // Optional: Doppelte vermeiden
     }
 
@@ -136,7 +136,7 @@ QStringList TagWidget::getTags() const
     int rows = m_tagModel->rowCount();
 
     for (int i = 0; i < rows; ++i) {
-        // Wir holen uns den Wert an jedem Index (0 bis Ende)
+        // Get the value at every index (0 to end)
         QModelIndex index = m_tagModel->index(i, 0);
         QString tag = m_tagModel->data(index, Qt::DisplayRole).toString().trimmed();
 
@@ -157,10 +157,10 @@ void TagWidget::removeTagByClick(const QModelIndex &index)
 {
     if (!index.isValid()) return;
 
-    // Model-Operation: removeRow() entfernt das Element am gegebenen Index.
+    // Model operation: removeRow() removes the item at the given index.
     m_tagModel->removeRow(index.row());
 
-    // Interne Liste und Signal aktualisieren
+    // Update the internal list and the signal
     m_tagList = m_tagModel->stringList();
     qDebug() << "The tagsChanged signal will be sent shortly";
     emit tagsChanged(m_tagList);
@@ -193,10 +193,10 @@ void TagWidget::handleInputFinished()
         return;
     }
 
-    // Aufteilen der Eingabe (falls mehrere Tags mit Separator eingegeben wurden)
+    // Split the input (if several tags were entered with a separator)
     QStringList newTags = input.split(m_separator, Qt::SkipEmptyParts);
 
-    // Model-Daten abrufen (ist immer die aktuellste Liste)
+    // Get the model data (always the latest list)
     QStringList currentTags = m_tagModel->stringList();
 
     for (const QString &tag : std::as_const(newTags)) {
@@ -206,11 +206,11 @@ void TagWidget::handleInputFinished()
         }
     }
 
-    // Model aktualisieren und UI wird automatisch neu gezeichnet
+    // Update the model, the UI is redrawn automatically
     m_tagModel->setStringList(currentTags);
     m_lineEdit->clear();
 
-    // Interne Liste und Signal aktualisieren
+    // Update the internal list and the signal
     m_tagList = currentTags;
     emit tagsChanged(m_tagList);
 }

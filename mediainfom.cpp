@@ -33,7 +33,7 @@ bool MediaInfoM::isSupported(const QString &filePath)
 
 quint32 MediaInfoM::boxTypeToUint32(const char boxType[4]) const
 {
-    // Wandelt die 4 Big-Endian-Bytes in einen quint32 um
+    // Converts the 4 big-endian bytes to a quint32
     return (quint32(boxType[0]) << 24) |
            (quint32(boxType[1]) << 16) |
            (quint32(boxType[2]) << 8)  |
@@ -95,7 +95,7 @@ bool MediaInfoM::readBoxHeader(QFile &file, Mp4Box &box)
     QByteArray sizeData = file.read(4); // read 4 bytes size
     QByteArray typeData = file.read(4); // read 4 bytes type
     quint32 size32;
-    // 1. Verwenden Sie die manuelle Bit-Shift-Logik, die in Qt-Dateien üblich ist:
+    // Manual bit-shift logic (big-endian size):
     size32 = (quint8(sizeData[0]) << 24) |
              (quint8(sizeData[1]) << 16) |
              (quint8(sizeData[2]) << 8)  |
@@ -161,7 +161,7 @@ void MediaInfoM::parseBoxes(QFile &file, qint64 endPos, const std::function<void
         visitor(box, file);
 
         // --- SICHERHEITS-FALLBACK ---
-        // Stellt sicher, dass der Dateiposition am Ende der Box landet.
+        // Makes sure the file position ends up at the end of the box.
         if (file.pos() < boxEnd) {
             qDebug() << "WARNING: Visitor did not consume box " << QString::fromUtf8(box.type)
             << ". Forcing seek from" << file.pos() << "to" << boxEnd;
@@ -245,7 +245,7 @@ QMap<QString, QString> MediaInfoM::extractMetadataMp4(const QString &filePath) {
     QMap<QString, QString> metadata;
     if (!file.open(QIODevice::ReadOnly)) return metadata;
 
-    // Kompatible Initialisierung für QSet
+    // Compatible initialization for QSet
     QList<quint32> keys = standardTags.keys();
     QSet<quint32> relevantTagValues;
     for(quint32 k : std::as_const(keys)) relevantTagValues.insert(k);
@@ -308,10 +308,10 @@ QString MediaInfoM::readProprietaryKey(QFile &file, qint64 parentBoxEnd) {
     if (containerData.contains("iTunMOVI")) return "iTunMOVI";
     if (containerData.contains("iTunEXTC")) return "iTunEXTC";
 
-    // Fallback: Suche nach der 'name' Box Signatur
+    // Fallback: search for the 'name' box signature
     int nameIdx = containerData.indexOf("name");
     if (nameIdx >= 4 && nameIdx + 8 < containerData.size()) {
-        // Wir nehmen die nächsten 20 Bytes nach dem "name" Header als Text
+        // Take the bytes after the "name" header as text
         return QString::fromUtf8(containerData.mid(nameIdx + 4, 24)).trimmed();
     }
     return "";
@@ -347,9 +347,9 @@ void MediaInfoM::readStringDataBox(QFile &file, QString key, QMap<QString, QStri
     if (!result.isEmpty()) {
         // --- Normalisierung Start ---
         if (key == "releaseDate") {
-            // Gehen wir mal davon aus, dass das Datum in folgendem Format ist:
-            // ISO date: 2000-12-14T12:00:00Z oder 2000-1-1T12:00:00Z
-            // Dann Fallback auf anderer Formate oder nur das Jahr.
+            // Assume the date is in this format:
+            // ISO date: 2000-12-14T12:00:00Z or 2000-1-1T12:00:00Z
+            // Otherwise fall back to other formats or just the year.
             QDate date;
             QDateTime rdate = QDateTime::fromString(result, Qt::ISODate);
             if (rdate.isValid()) {
@@ -364,7 +364,7 @@ void MediaInfoM::readStringDataBox(QFile &file, QString key, QMap<QString, QStri
 
             // Attempt: Only the year
             if (!date.isValid()) {
-                // Wir nehmen die ersten 4 Zeichen, falls dort "2004-..." steht
+                // Take the first 4 characters if it starts with "2004-..."
                 date = QDate::fromString(result.left(4), "yyyy");
             }
 
@@ -372,12 +372,12 @@ void MediaInfoM::readStringDataBox(QFile &file, QString key, QMap<QString, QStri
             if (date.isValid()) {
                 result = date.toString("yyyy-MM-dd");
             } else {
-                // Falls gar nichts geht: Debug-Ausgabe, um das Format zu finden
+                // If nothing works: debug output to find the format
                 qDebug() << "Unknown date format:" << result;
             }
         }
         // else if (key == "ageRating") {
-        //     // Falls es der Apple-String ist "de-de|fsk|12|", extrahieren wir die Zahl
+        //     // If it is the Apple string "de-de|fsk|12|", extract the number
         //     if (result.contains("|")) {
         //         QStringList parts = result.split("|", Qt::SkipEmptyParts);
         //         for (const QString &part : std::as_const(parts)) {
@@ -401,12 +401,12 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
 {
     qint64 currentPos = file.pos();
 
-    // Die XMP-Datenbox (uuid) besteht aus: 16 Bytes UUID + XML-Daten
+    // The XMP data box (uuid) consists of: 16 bytes UUID + XML data
     const qint64 uuidSize = 16;
 
     if (currentPos + uuidSize > boxDataEnd) {
         qDebug() << "readXmpData: Box size too small to contain UUID.";
-        file.seek(boxDataEnd); // Korrektur, falls Pointer zu weit ist
+        file.seek(boxDataEnd); // correction if the pointer is too far
         return;
     }
 
@@ -414,7 +414,7 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
     QByteArray uuid = file.read(uuidSize);
 
     // Standard-XMP-UUID: 89744C68-8849-4002-A819-B7D8D85F8E56
-    // Die Box enthält die Bytes ohne Bindestriche (Big-Endian)
+    // The box holds the bytes without hyphens (big-endian)
     QByteArray xmpUuid = QByteArray::fromHex("89744C6888494002A819B7D8D85F8E56");
 
     if (uuid == xmpUuid) {
@@ -433,7 +433,7 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
 
             qDebug() << "XMP: XML data successfully read (" << xmlDataSize << " Bytes).";
 
-            // HINWEIS: Hier müsste später die Logik zum Parsen der XML-Struktur (mit QXmlStreamReader) folgen.
+            // NOTE: parsing the XML structure (QXmlStreamReader) could follow here.
 
         } else {
             qDebug() << "XMP: UUID found, but no XML data present.";
@@ -453,7 +453,7 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
 void MediaInfoM::parseItunMoviXml(const QString &xmlData, QMap<QString, QString> &metadata) {
     if (xmlData.isEmpty()) return;
 
-    // Hilfsfunktion, um einen Block zu isolieren und die Namen zu extrahieren
+    // Helper function to isolate a block and extract the names
     auto extractList = [&](QString appleKey) -> QString {
         int keyPos = xmlData.indexOf("<key>" + appleKey + "</key>");
         if (keyPos == -1) return "";
@@ -465,7 +465,7 @@ void MediaInfoM::parseItunMoviXml(const QString &xmlData, QMap<QString, QString>
         QString block = xmlData.mid(arrayStart, arrayEnd - arrayStart);
         QStringList names;
 
-        // Suche alle Inhalte zwischen <string>...</string>
+        // Find all contents between <string>...</string>
         QRegularExpression re("<string>(.*?)</string>");
         QRegularExpressionMatchIterator i = re.globalMatch(block);
         while (i.hasNext()) {
@@ -474,7 +474,7 @@ void MediaInfoM::parseItunMoviXml(const QString &xmlData, QMap<QString, QString>
         return names.join(", ");
     };
 
-    // Jetzt füllen wir die Map mit DEINEN Wunschbegriffen
+    // Now fill the map with the wanted keys
     QString cast = extractList("cast");
     if (!cast.isEmpty()) metadata.insert("Cast", cast);
 
@@ -487,7 +487,7 @@ void MediaInfoM::parseItunMoviXml(const QString &xmlData, QMap<QString, QString>
     QString screenwriters = extractList("screenwriters");
     if (!screenwriters.isEmpty()) metadata.insert("Screenwriters", screenwriters);
 
-    // Studio ist kein Array, sondern ein direkter String nach dem Key
+    // Studio is not an array but a direct string after the key
     QRegularExpression reStudio("<key>studio</key>\\s*<string>(.*?)</string>");
     QRegularExpressionMatch m = reStudio.match(xmlData);
     if (m.hasMatch()) metadata.insert("Studio", m.captured(1));
@@ -571,15 +571,15 @@ QMap<QString, QString> MediaInfoM::extractMetadata(const QString &filePath)
         return extractMetadataMp4(filePath);
     }
     else if (fileType == "mkv") {
-        emit errorOccurred("MKV-Cover-Extraktion noch nicht implementiert");
+        emit errorOccurred("MKV cover extraction not implemented yet");
         return {};   // empty map: no metadata
     }
     else if (fileType == "avi") {
-        emit errorOccurred("AVI-Cover-Extraktion noch nicht implementiert");
+        emit errorOccurred("AVI cover extraction not implemented yet");
         return {};
     }
     else {
-        emit errorOccurred("Unbekanntes oder nicht unterstütztes Format: " + fileType);
+        emit errorOccurred("Unknown or unsupported format: " + fileType);
         return {};
     }
 }
@@ -592,15 +592,15 @@ QImage MediaInfoM::extractCoverImage(const QString &filePath)
         return extractCoverImageMp4(filePath);
     }
     else if (fileType == "mkv") {
-        emit errorOccurred("MKV-Cover-Extraktion noch nicht implementiert");
+        emit errorOccurred("MKV cover extraction not implemented yet");
         return QImage();
     }
     else if (fileType == "avi") {
-        emit errorOccurred("AVI-Cover-Extraktion noch nicht implementiert");
+        emit errorOccurred("AVI cover extraction not implemented yet");
         return QImage();
     }
     else {
-        emit errorOccurred("Unbekanntes oder nicht unterstütztes Format: " + fileType);
+        emit errorOccurred("Unknown or unsupported format: " + fileType);
         return QImage();
     }
 }

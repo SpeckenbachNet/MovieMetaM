@@ -25,15 +25,15 @@ MovieData::MovieData()
 }
 
 /**
- * Erzeugt den normierten Apple-Rating-String.
- * Sorgt dafür, dass keine Pipes im Text das Format zerstören.
+ * Builds the normalized Apple rating string.
+ * Makes sure no pipes in the text break the format.
  */
 QString MovieData::getItunExtc() const {
     if (ratingSystem.isEmpty() || ratingText.isEmpty()) {
         return "";
     }
 
-    // Sicherstellen, dass keine Pipes im Text sind (Sanitizing)
+    // Make sure there are no pipes in the text (sanitizing)
     QString cleanText = sanitizeInput(ratingText);
 
     return QString("%1|%2|%3|").arg(
@@ -44,7 +44,7 @@ QString MovieData::getItunExtc() const {
 }
 
 /**
- * Prüft, ob die Datenbasis konsistent ist.
+ * Checks whether the data is consistent.
  */
 // bool MovieData::isValid() const {
 //     if (title.trimmed().isEmpty()) return false;
@@ -55,7 +55,7 @@ QString MovieData::getItunExtc() const {
 // }
 
 /**
- * Entfernt Zeichen, die in MP4-Tags Probleme machen könnten.
+ * Removes characters that could cause problems in MP4 tags.
  */
 QString MovieData::sanitizeInput(QString input) {
     // Pipe-Zeichen entfernen, da diese als Trenner in iTunEXTC dienen

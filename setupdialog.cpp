@@ -85,7 +85,7 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Done"));
     buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
 
-    // Jetzt korrekt: Ok ist ein StandardButton
+    // Ok is a standard button
     QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setEnabled(false);
 

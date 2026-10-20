@@ -4,34 +4,31 @@
 #include <QPainter>
 #include <QStyleOptionViewItem>
 
-// **1. Konstruktor-Implementierung**
+// 1. Constructor
 TagDelegate::TagDelegate(const QString &styleSheet, QObject *parent)
     : QStyledItemDelegate(parent),
     m_styleSheet(styleSheet)
 {
-    // Hier können Sie das Styling für die spätere Verwendung speichern
+    // The styling is kept for later use
 }
 
-// **2. paint() Implementierung**
+// 2. paint()
 void TagDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    // *** Wichtig: Momentan wird nur der Standard-Text gezeichnet ***
-    // Hier müsste die eigentliche Logik zum Zeichnen des Hintergrunds und der abgerundeten Ecken
-    // mit QPainter hinzukommen.
+    // For now only the default text is drawn; drawing the background and
+    // the rounded corners with QPainter is still missing.
 
-    // Fürs Erste rufen wir die Basisklasse auf, um den Text zu zeichnen.
+    // For now call the base class to draw the text.
     QStyledItemDelegate::paint(painter, option, index);
 }
 
-// **3. sizeHint() Implementierung**
+// 3. sizeHint()
 QSize TagDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    // *** Wichtig: Hier muss die korrekte Größe des Tags berechnet werden ***
-
-    // Wir verwenden die Standardgröße der Basisklasse, die meistens zu klein ist,
-    // aber den Linker-Fehler behebt. Wir müssen das später anpassen.
+    // The correct size of the tag still has to be calculated: for now the
+    // base class size, which is usually too small, is used.
     QSize baseSize = QStyledItemDelegate::sizeHint(option, index);
 
-    // Fügen Sie etwas Polsterung hinzu, um den Text nicht abzuschneiden
+    // Add some padding so the text is not cut off
     return QSize(baseSize.width() + 10, baseSize.height() + 4);
 }

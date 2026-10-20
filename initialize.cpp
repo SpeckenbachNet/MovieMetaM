@@ -317,9 +317,8 @@ void MainWin::initializeTagWidgets() {
     // Set Size Policy to expanding.
     //m_actorWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    // 5. **Stretch hinzufügen.**
-    // Stellt sicher, dass das TagWidget am oberen Rand des Containers verankert bleibt
-    // und nicht den gesamten vertikalen Platz unnötig füllt.
+    // 5. Add a stretch: keeps the TagWidget at the top of the container
+    // so it does not fill all the vertical space.
     //containerLayout->addStretch();
 
 }
