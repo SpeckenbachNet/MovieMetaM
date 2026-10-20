@@ -134,6 +134,7 @@ private:
     QString countryCode;
     QFutureWatcher<QList<SaveResult>> *m_saveWatcher = nullptr;
     bool m_saving = false;
+    bool m_closeAfterSaving = false;   // "Save all" in the close dialog: close when saving went well
     bool m_safeSave = false;   // setting "General/SafeSave": write into a copy first
     QString dataLanguage;   // language of the movie data for TMDB, e.g. "de-DE"
     QMap<QString, MovieData> m_loadedMovies;

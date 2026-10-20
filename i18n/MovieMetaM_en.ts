@@ -51,26 +51,26 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="228"/>
-        <location filename="../mainwin.cpp" line="888"/>
+        <location filename="../mainwin.cpp" line="896"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="238"/>
-        <location filename="../mainwin.cpp" line="878"/>
+        <location filename="../mainwin.cpp" line="886"/>
         <source>Release Date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="248"/>
-        <location filename="../mainwin.cpp" line="880"/>
+        <location filename="../mainwin.cpp" line="888"/>
         <source>Genre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="264"/>
         <location filename="../mainwin.ui" line="573"/>
-        <location filename="../mainwin.cpp" line="886"/>
+        <location filename="../mainwin.cpp" line="894"/>
         <source>Age Rating</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81,31 +81,31 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="303"/>
-        <location filename="../mainwin.cpp" line="892"/>
+        <location filename="../mainwin.cpp" line="900"/>
         <source>Producers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="322"/>
-        <location filename="../mainwin.cpp" line="890"/>
+        <location filename="../mainwin.cpp" line="898"/>
         <source>Directors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="341"/>
-        <location filename="../mainwin.cpp" line="879"/>
+        <location filename="../mainwin.cpp" line="887"/>
         <source>Studio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="357"/>
-        <location filename="../mainwin.cpp" line="891"/>
+        <location filename="../mainwin.cpp" line="899"/>
         <source>Screenplay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="370"/>
-        <location filename="../mainwin.cpp" line="889"/>
+        <location filename="../mainwin.cpp" line="897"/>
         <source>Actors</source>
         <translation type="unfinished"></translation>
     </message>
@@ -182,6 +182,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../mainwin.cpp" line="1620"/>
         <location filename="../initialize.cpp" line="213"/>
         <source>Save all</source>
         <translation type="unfinished"></translation>
@@ -207,7 +208,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1075"/>
+        <location filename="../mainwin.cpp" line="1083"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation>
             <numerusform>%n file skipped: only MP4 is supported.</numerusform>
@@ -216,12 +217,12 @@
     </message>
     <message>
         <location filename="../mainwin.cpp" line="375"/>
-        <location filename="../mainwin.cpp" line="1111"/>
+        <location filename="../mainwin.cpp" line="1119"/>
         <source>Unchanged</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="533"/>
+        <location filename="../mainwin.cpp" line="541"/>
         <source>Saved</source>
         <translation type="unfinished"></translation>
     </message>
@@ -231,17 +232,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="713"/>
+        <location filename="../mainwin.cpp" line="721"/>
         <source>No movies found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="721"/>
+        <location filename="../mainwin.cpp" line="729"/>
         <source>Showing %1 of %2 movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="722"/>
+        <location filename="../mainwin.cpp" line="730"/>
         <source>%n movie(s) found</source>
         <translation>
             <numerusform>%n movie found</numerusform>
@@ -249,23 +250,23 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="864"/>
+        <location filename="../mainwin.cpp" line="872"/>
         <source>Double click a search result to see its data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="950"/>
+        <location filename="../mainwin.cpp" line="958"/>
         <source>No text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="990"/>
-        <location filename="../mainwin.cpp" line="1272"/>
+        <location filename="../mainwin.cpp" line="998"/>
+        <location filename="../mainwin.cpp" line="1280"/>
         <source>Select a movie first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1017"/>
+        <location filename="../mainwin.cpp" line="1025"/>
         <source>Data applied</source>
         <translation type="unfinished"></translation>
     </message>
@@ -286,7 +287,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="535"/>
+        <location filename="../mainwin.cpp" line="543"/>
         <source>%n movie(s) saved.</source>
         <translation>
             <numerusform>%n movie saved.</numerusform>
@@ -294,27 +295,27 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1166"/>
+        <location filename="../mainwin.cpp" line="1174"/>
         <source>Other (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1329"/>
+        <location filename="../mainwin.cpp" line="1337"/>
         <source>Choose movies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1331"/>
+        <location filename="../mainwin.cpp" line="1339"/>
         <source>Movie files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1351"/>
+        <location filename="../mainwin.cpp" line="1359"/>
         <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1352"/>
+        <location filename="../mainwin.cpp" line="1360"/>
         <source>Really remove %n movie(s)?</source>
         <translation>
             <numerusform>Really remove %n movie?</numerusform>
@@ -322,33 +323,61 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1397"/>
+        <location filename="../mainwin.cpp" line="1405"/>
         <source>Please enter a search term</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1491"/>
+        <location filename="../mainwin.cpp" line="1499"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1514"/>
+        <location filename="../mainwin.cpp" line="1522"/>
         <source>The movie data could not be loaded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1571"/>
+        <location filename="../mainwin.cpp" line="1579"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1572"/>
+        <location filename="../mainwin.cpp" line="1580"/>
         <source>Settings saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1576"/>
+        <location filename="../mainwin.cpp" line="1584"/>
         <source>Error: could not save the settings!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1617"/>
+        <source>Unsaved changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../mainwin.cpp" line="1618"/>
+        <source>%n movie(s) have unsaved changes.</source>
+        <translation>
+            <numerusform>%n movie has unsaved changes.</numerusform>
+            <numerusform>%n movies have unsaved changes.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1619"/>
+        <source>Save the changes before closing?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1621"/>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="1622"/>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -417,7 +446,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1030"/>
+        <location filename="../mainwin.cpp" line="1038"/>
         <location filename="../initialize.cpp" line="430"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished"></translation>

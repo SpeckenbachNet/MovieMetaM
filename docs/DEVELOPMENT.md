@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.7.7 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.7.8 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---
@@ -172,7 +172,12 @@ steht im Abschnitt „TagLib (Bibliothek)“ weiter unten.
   kodiert. Ein leerer Wert entfernt den Eintrag.
 - Die Schlüssel mit dem ©-Zeichen müssen für TagLib UTF-8-Strings sein (`key("\xC2\xA9nam")`);
   als Latin-1 schreibt TagLib stillschweigend einen falschen Eintrag.
-- Offen: Warnung beim Beenden mit ungespeicherten Änderungen, andere Formate als MP4.
+- **Beenden mit ungespeicherten Änderungen:** `closeEvent` bringt das Formular auf den Stand
+  (`validateAndRefreshChanges()`), zählt die Filme mit Status „modified“ und fragt: „Alle
+  speichern“ / „Verwerfen“ / „Abbrechen“ (Standard). „Alle speichern“ ignoriert das Schließen,
+  speichert wie gewohnt im Thread und schließt in `savingFinished()` von selbst
+  (`m_closeAfterSaving`), aber nur ohne Fehler.
+- Offen: andere Formate als MP4.
 
 ### TagLib (Bibliothek)
 
