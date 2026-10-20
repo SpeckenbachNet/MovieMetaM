@@ -34,11 +34,16 @@ public:
     enum class Level { Info, Error };                 // Error: red border, stays longer
     enum class Position { Center, Top, Bottom };      // inside the target widget
 
-    static constexpr int kInfoMsec = 3000;
+    // Info: the time follows the text (a short "Saved" goes quickly): base + per character,
+    // within the limits; Error: fixed
+    static constexpr int kInfoBaseMsec = 1000;
+    static constexpr int kInfoPerCharMsec = 35;
+    static constexpr int kInfoMinMsec = 1500;
+    static constexpr int kInfoMaxMsec = 4000;
     static constexpr int kErrorMsec = 5000;
 
     // target: the toast appears over this widget (a column, or the main window).
-    // msec = 0: the default of the level.
+    // msec = 0: the default of the level (Info: by the length of the text).
     static void show(QWidget *target, const QString &text, Level level = Level::Info,
                      int msec = 0, Position position = Position::Center);
 

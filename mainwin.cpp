@@ -1028,7 +1028,7 @@ void MainWin::applyTmdbMovie()
     m_loadedMovies[key] = movie;
     displayMovie(movie);
     onDataChanged();
-    showColumnStatus(StatusColumn::Info, tr("Data applied"), ToastM::Level::Info, 1500);
+    showColumnStatus(StatusColumn::Info, tr("Data applied"));
 
     // The chosen poster as cover: loaded in a bigger size, then taken into the same movie
     const int poster = m_posterPicker->current();

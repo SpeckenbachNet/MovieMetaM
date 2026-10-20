@@ -100,7 +100,8 @@ Linux).
   `initializeForm()`).
   No status bar: messages are toasts (`showColumnStatus(StatusColumn, text, level, msec)` →
   `ToastM::show`), centered over the column they belong to (`StatusColumn::Window`: over the
-  whole window); Info 3 s, Error 5 s.
+  whole window); Info by the length of the text
+  (1 s + 35 ms per character, 1.5 to 4 s), Error 5 s.
 - `helppage.*` – help page (own ToolbarM, topics list, Markdown text): texts in
   `help/<de|en>/<topic>.md` (`Help.qrc`), placeholders `{{version}}`, `{{qt}}`; language like
   the translator. For now one topic "About MovieMetaM" (website
