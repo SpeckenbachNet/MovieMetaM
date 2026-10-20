@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.7.9 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.7.10 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---
@@ -177,9 +177,11 @@ steht im Abschnitt „TagLib (Bibliothek)“ weiter unten.
   speichern“ / „Verwerfen“ / „Abbrechen“ (Standard). „Alle speichern“ ignoriert das Schließen,
   speichert wie gewohnt im Thread und schließt in `savingFinished()` von selbst
   (`m_closeAfterSaving`), aber nur ohne Fehler.
-- **Entfernen** (Knopf unter der Filmliste): Ist einer der gewählten Filme geändert, warnt die Frage
-  („%n Film(e) haben ungespeicherte Änderungen, die verloren gehen“); Knöpfe „Entfernen“ /
-  „Abbrechen“, Standard ist „Abbrechen“. Speichern wird dort nicht angeboten.
+- **Entfernen** (Knopf unter der Filmliste): Ist einer der gewählten Filme geändert, fragt der
+  Dialog wie beim Beenden: „Speichern und entfernen“ / „Entfernen“ / „Abbrechen“ (Standard).
+  „Speichern und entfernen“ speichert nur die geänderten Filme im Thread und merkt sich die Liste
+  in `m_removeAfterSaving`; `savingFinished()` entfernt sie dann über `removeMovies()`, aber nur
+  ohne Fehler.
 - Offen: andere Formate als MP4.
 
 ### TagLib (Bibliothek)
