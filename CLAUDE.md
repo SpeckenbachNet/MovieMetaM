@@ -182,10 +182,10 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.5; numbers kept, 1 to 8 are done)
+## Open points (as of 0.8.6; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
-   about 2 px too high with the native style; the transparent-stripe fix was reverted).
+   about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**
 10. Help topics, one at a time (text first in the chat, de + en, then the files). Plan agreed
     with the user (title / second line / icon / file):
     1. Movie List / Add, select, remove / `add` / `movielist` – **done (0.8.0)**
@@ -203,6 +203,7 @@ Linux).
     6. About: license section to "du"; credits without Lucide, Material Icons, SVG Repo (all
        icons are own since 0.7.6), no more "symbols from churchWorshipM" – **done (0.8.5)**
     Own icons for Movie List / Movie Info maybe later.
-11. Movie list: no state for a file that could not be read. `MovieData::fromFile()` only logs
-    the reader's errors (`qWarning`); the movie is listed green with empty fields (also when the
-    file is missing). Idea: a red state. After the help topics.
+11. Movie list: a file that cannot be read is not added (decided with the user, no red state:
+    nothing to edit or save in it). `MediaInfoM::isReadableMp4()` walks the top-level boxes and
+    wants an intact `moov` (a readable file without tags is fine); `addFilesToModel` counts the
+    others and shows "n file(s) could not be read." (Error toast) – **done (0.8.6)**

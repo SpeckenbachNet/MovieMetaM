@@ -25,7 +25,10 @@ und sucht Filmdaten bei **TMDB** (The Movie Database).
 | Hilfeseite | Themen von links nach rechts: Filmliste, Filminfo, Filmsuche, Speichern und Einstellungen fertig; „About MovieMetaM“ |
 
 Unterstützt sind bisher nur MP4 und M4V (`MediaInfoM::supportedSuffixes()`). Andere Dateien
-werden mit einer Meldung übersprungen.
+werden mit einer Meldung übersprungen. Eine MP4, die sich nicht lesen lässt (kaputt oder
+abgeschnitten, `MediaInfoM::isReadableMp4()`: die oberste Box-Ebene muss eine vollständige
+`moov`-Box enthalten), kommt nicht in die Liste; eine Fehlermeldung nennt ihre Anzahl. Eine MP4
+ohne Tags ist lesbar und kommt hinein.
 
 **Ablauf**
 

@@ -1057,6 +1057,8 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
 
     int firstNewRowIndex = -1;
     int skippedCount = 0;
+    int unreadableCount = 0;
+    MediaInfoM reader;
 
     for (const QString &path : filePaths) {
         // Only supported file types (MP4 for now)
@@ -1072,6 +1074,13 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
             continue; // Skip to the next file in the list
         }
 
+        // A broken or cut-off file is of no use in the list: nothing to edit, nothing to save
+        if (!reader.isReadableMp4(path)) {
+            qWarning() << "File could not be read as MP4, skip:" << path;
+            ++unreadableCount;
+            continue;
+        }
+
         // If new: Note where the first NEW film lands.
         if (firstNewRowIndex == -1) {
             firstNewRowIndex = m_FilelistModel->rowCount();
@@ -1085,8 +1094,16 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
         }
     }
 
+    QStringList messages;
     if (skippedCount > 0) {
-        showColumnStatus(StatusColumn::Movies, tr("%n file(s) skipped: only MP4 is supported.", "", skippedCount));
+        messages << tr("%n file(s) skipped: only MP4 is supported.", "", skippedCount);
+    }
+    if (unreadableCount > 0) {
+        messages << tr("%n file(s) could not be read.", "", unreadableCount);
+    }
+    if (!messages.isEmpty()) {
+        showColumnStatus(StatusColumn::Movies, messages.join(QLatin1Char(' ')),
+                         unreadableCount > 0 ? ToastM::Level::Error : ToastM::Level::Info);
     }
 
     // Only select if we have actually added something NEW.
