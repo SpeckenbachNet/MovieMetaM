@@ -45,7 +45,7 @@ signals:
 
 private slots:
     void handleInputFinished();
-    void removeTagByClick(const QModelIndex &index); // slot for removing a tag
+    void removeTag(const QModelIndex &index); // × of a tag clicked or Delete pressed
     void onRowsMoved(); // Konsistent zum Signal-Namen
 
 private:
