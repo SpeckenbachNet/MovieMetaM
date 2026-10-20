@@ -19,6 +19,9 @@
 #include "mainwin.h"
 #include "./ui_mainwin.h"
 #include "mediainfom.h"
+#include "mp4writer.h"
+
+#include <QtConcurrent>
 
 #include <QtMath>
 
@@ -337,20 +340,21 @@ void MainWin::onDataChanged() {
     if (this->validateAndRefreshChanges()) {
         qDebug() << "Dataset Changed";
         this->updateStatus(row, "modified");
-        // Placeholder save buttons
     }
     else {
 
         this->updateStatus(row, "unchanged");
         qDebug() << "Dataset unchanged!";
     }
+    updateSaveButtons();
 }
 
 void MainWin::onSettingsChanged() {
 
     if (countryCode != ui->ratingSettingsComboBox->currentData(Qt::UserRole)
         || Languages::appLanguage() != ui->languageSettingsComboBox->currentData().toString()
-        || dataLanguage != ui->dataLanguageSettingsComboBox->currentData().toString()) {
+        || dataLanguage != ui->dataLanguageSettingsComboBox->currentData().toString()
+        || m_safeSave != ui->safeSaveCheckBox->isChecked()) {
         settingsChanged = true;
         m_saveSettingsBtn->setEnabled(true);
     } else {
@@ -424,19 +428,110 @@ void MainWin::formatTextByLength(int limit)
     ui->descriptionText->blockSignals(false);
 }
 
+// "Save" and "Save all" only when there is something to save
+void MainWin::updateSaveButtons()
+{
+    if (!m_saveBtn || !m_saveAllBtn) return;
+    const QString key = ui->fileListTableView->movieKey();
+    m_saveBtn->setEnabled(m_loadedMovies.contains(key) && m_loadedMovies.value(key).status == "modified");
+    bool any = false;
+    for (const MovieData &movie : std::as_const(m_loadedMovies)) {
+        if (movie.status == "modified") { any = true; break; }
+    }
+    m_saveAllBtn->setEnabled(any);
+}
+
+// "Save": the selected movie
 void MainWin::saveMovieDetails()
 {
-    // Get the current list of actors
-    //QStringList currentActors = m_actorWidget->getTags();
+    const QString key = ui->fileListTableView->movieKey();
+    if (m_loadedMovies.contains(key)) startSaving({key});
+}
 
-    // Get the current list of genres
-    //QStringList currentGenres = m_genreWidget->getTags();
+// Writes the movies in a thread: a big file takes a while (on a network drive minutes in the safe
+// mode) and the window must not freeze. Meanwhile it is locked, so nothing changes under the thread.
+void MainWin::startSaving(const QStringList &keys)
+{
+    if (m_saving || keys.isEmpty()) return;
+    if (keys.contains(ui->fileListTableView->movieKey())) validateAndRefreshChanges();   // the form is up to date
 
-    //qDebug() << "Saved cast:" << currentActors;
-    //qDebug() << "Saved genres:" << currentGenres;
+    QList<SaveJob> jobs;
+    for (const QString &key : keys) {
+        if (!m_loadedMovies.contains(key)) continue;
+        SaveJob job;
+        job.key = key;
+        job.movie = m_loadedMovies.value(key);
+        job.cover = job.movie.cover.toImage();
+        job.originalCover = m_originalMovies.value(key).cover.toImage();
+        job.movie.cover = QPixmap();   // the thread gets no pixmap
+        jobs << job;
+    }
+    if (jobs.isEmpty()) return;
 
-    // The logic to store these lists follows here
-    // ...
+    m_saving = true;
+    centralWidget()->setEnabled(false);
+    const bool safe = m_safeSave;
+    showColumnStatus(StatusColumn::Window, jobs.size() > 1 ? tr("Saving %1 of %2 ...").arg(1).arg(jobs.size())
+                                                           : tr("Saving ..."),
+                     ToastM::Level::Info, 3600000);
+
+    m_saveWatcher->setFuture(QtConcurrent::run([this, jobs, safe]() {
+        QList<SaveResult> results;
+        for (int i = 0; i < jobs.size(); ++i) {
+            if (jobs.size() > 1 && i > 0) {
+                QMetaObject::invokeMethod(this, [this, i, total = jobs.size()]() {
+                    showColumnStatus(StatusColumn::Window, tr("Saving %1 of %2 ...").arg(i + 1).arg(total),
+                                     ToastM::Level::Info, 3600000);
+                }, Qt::QueuedConnection);
+            }
+            SaveResult result;
+            result.key = jobs.at(i).key;
+            result.ok = Mp4Writer::save(jobs.at(i).movie, jobs.at(i).cover, jobs.at(i).originalCover,
+                                        safe, &result.error);
+            results << result;
+        }
+        return results;
+    }));
+}
+
+// Back in the GUI thread: the saved state is the new original; messages
+void MainWin::savingFinished()
+{
+    const QList<SaveResult> results = m_saveWatcher->result();
+    m_saving = false;
+    centralWidget()->setEnabled(true);
+
+    int saved = 0;
+    QString failed;   // the first one that could not be saved
+    for (const SaveResult &result : results) {
+        if (!result.ok) {
+            if (failed.isEmpty()) {
+                failed = results.size() > 1
+                             ? tr("Could not save %1: %2").arg(QFileInfo(result.key).fileName(), result.error)
+                             : tr("Could not save: %1").arg(result.error);
+            }
+            continue;
+        }
+        ++saved;
+        MovieData &work = m_loadedMovies[result.key];
+        work.status = "unchanged";
+        m_originalMovies[result.key] = work;
+        for (int row = 0; row < m_FilelistModel->rowCount(); ++row) {
+            if (m_FilelistModel->item(row, 0)->data(Qt::UserRole).toString() == result.key) {
+                updateStatus(row, "unchanged");
+                break;
+            }
+        }
+    }
+
+    updateSaveButtons();
+    if (!failed.isEmpty()) {
+        showColumnStatus(StatusColumn::Window, failed, ToastM::Level::Error);
+    } else if (results.size() == 1) {
+        showColumnStatus(StatusColumn::Window, tr("Saved"));
+    } else {
+        showColumnStatus(StatusColumn::Window, tr("%n movie(s) saved.", "", saved));
+    }
 }
 
 void MainWin::removeMovie(const QString &moviePath) {
@@ -1120,24 +1215,12 @@ void MainWin::showColumnStatus(StatusColumn column, const QString &text, ToastM:
 
 // ***** SLOTS *****
 void MainWin::onSaveAllButtonClicked() {
-    // Go through all loaded movies in the map
-    QMap<QString, MovieData>::iterator i;
-    for (i = m_loadedMovies.begin(); i != m_loadedMovies.end(); ++i) {
-
-        MovieData &movie = i.value(); // reference to the movie
-        QString path = i.key();      // the file path
-
-        //if (movie.status) {
-            // 1. Write to the file
-            // if (movie.saveToFile(path)) {
-            //     // 2. Reset the status
-            //     movie.isDirty = false;
-
-            //     // 3. Update the UI: find the row in the table
-            //     updateRowIconToGreen(path);
-            // }
-        //}
+    // All changed movies (the keys first: saving changes the map)
+    QStringList keys;
+    for (auto i = m_loadedMovies.cbegin(); i != m_loadedMovies.cend(); ++i) {
+        if (i.value().status == "modified") keys << i.key();
     }
+    startSaving(keys);
 }
 
 void MainWin::onSearchTableViewDoubleClicked(const QModelIndex &index){
@@ -1198,6 +1281,7 @@ void MainWin::onCurrentMovieChanged(const QModelIndex &index){
         // Display movie data
         displayMovie(movie);
     }
+    updateSaveButtons();
 }
 
 void MainWin::onAddFilesButtonClicked()
@@ -1269,6 +1353,7 @@ void MainWin::onRemoveFilesButtonClicked()
         clearData();
         ui->middleGroupBox->setEnabled(false);
     }
+    updateSaveButtons();
 }
 
 void MainWin::onSearchButtonClicked()
@@ -1446,6 +1531,8 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     settings.setValue("General/AgeRatingSystem", ui->ratingSettingsComboBox->currentData().toString());
     settings.setValue("language", newAppLanguage);
     settings.setValue("General/DataLanguage", newDataLanguage);
+    settings.setValue("General/SafeSave", ui->safeSaveCheckBox->isChecked());
+    m_safeSave = ui->safeSaveCheckBox->isChecked();
     settings.sync();
     if (settings.status() == QSettings::NoError) {
         // Success; the language of the app only changes with the next start
@@ -1479,6 +1566,7 @@ void MainWin::handleSaveSettingsButton_Clicked() {
 // Window size and column widths for the next start
 void MainWin::closeEvent(QCloseEvent *event)
 {
+    if (m_saving) m_saveWatcher->waitForFinished();   // do not leave a file half written
     settings.setValue("Window/Geometry", saveGeometry());
     settings.setValue("Window/Splitter", ui->splitter->saveState());
     QMainWindow::closeEvent(event);

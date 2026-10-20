@@ -24,6 +24,7 @@
 #include <QCloseEvent>
 #include <QColor>
 #include <QDebug>
+#include <QFutureWatcher>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QFileDialog>
@@ -59,6 +60,21 @@
 #include "posterpicker.h"
 #include "tagwidget.h"
 #include "toastm.h"
+
+// One movie to save: a copy of the data for the thread (without the pixmap: QPixmap belongs to
+// the GUI thread, the covers go as QImage)
+struct SaveJob {
+    QString key;
+    MovieData movie;
+    QImage cover;
+    QImage originalCover;
+};
+
+struct SaveResult {
+    QString key;
+    bool ok = false;
+    QString error;
+};
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -115,6 +131,9 @@ private:
     QIcon m_statusGreen;    // status symbols in the movie list (same look when selected)
     QIcon m_statusYellow;
     QString countryCode;
+    QFutureWatcher<QList<SaveResult>> *m_saveWatcher = nullptr;
+    bool m_saving = false;
+    bool m_safeSave = false;   // setting "General/SafeSave": write into a copy first
     QString dataLanguage;   // language of the movie data for TMDB, e.g. "de-DE"
     QMap<QString, MovieData> m_loadedMovies;
     QMap<QString, MovieData> m_originalMovies;
@@ -150,7 +169,10 @@ private:
     void fillRatingComboBox(const QJsonDocument &jsonDoc);
     void addFilesToModel(const QStringList &filePaths);
     void addFilePathToModel(const QString &filePath);
-    void saveMovieDetails();
+    void saveMovieDetails();                    // the selected movie into its file
+    void startSaving(const QStringList &keys);  // writes the movies in a thread (the window is locked meanwhile)
+    void savingFinished();                      // back in the GUI thread: status, list and messages
+    void updateSaveButtons();                   // "Save" / "Save all" only when there is something to save
     void removeMovie(const QString &moviePath);
     bool validateAndRefreshChanges();
     bool settingsChanged;

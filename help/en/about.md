@@ -15,6 +15,14 @@ Contact: [moviemetam@speckenbach.net](mailto:moviemetam@speckenbach.net)
 
 Like MovieMetaM? Buy me a coffee: [paypal.me/michaelspeckenbach](https://paypal.me/michaelspeckenbach)
 
+## Saving
+
+MovieMetaM writes the data **directly into the movie file**, as most tag editors do. This is fast, also for big files and on network drives. If the writing is interrupted (crash, power failure, lost network connection), the file can be damaged. Keep a copy of files that are important to you.
+
+For more safety switch on **Safe saving** in the settings: the data is then written into a copy, the copy is checked, and only then it replaces the file. This needs room for a second copy of the file and takes much longer for big files and on network drives.
+
+After saving, MovieMetaM reads the file again and checks title, description, age rating and cover.
+
 ## License
 
 © 2026 Michael Speckenbach
@@ -32,6 +40,7 @@ MovieMetaM finds movie data with the API of [The Movie Database (TMDB)](https://
 ## Credits
 
 - **Qt** – The Qt Company, LGPL v3
+- **TagLib** – writes the tags into the movie files, LGPL v2.1 or MPL 1.1
 - **Lucide** – icons, ISC license
 - **Material Icons** – Google, Apache License 2.0
 - More icons from **churchWorshipM** and **SVG Repo**

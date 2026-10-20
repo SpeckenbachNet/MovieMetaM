@@ -120,6 +120,15 @@ Linux).
   rating). Age rating: `findTmdbRating` takes the entry of the country of the movie's system
   (home video before cinema) and `AgeRatings::findEntry` matches it to a step (key, then code);
   TMDB's texts may not fit every country – extend when a country does not match.
+- Saving (`Mp4Writer`, TagLib 2.3.2 via FetchContent, static, LGPL 2.1; details in
+  `docs/DEVELOPMENT.md`): "Save" / "Save all" → `startSaving()` runs `QtConcurrent` (the window is
+  locked meanwhile; `SaveJob`s carry covers as `QImage`, no `QPixmap` in the thread) →
+  `savingFinished()`. Default: TagLib writes directly into the file (fast, also on network
+  drives); setting `General/SafeSave` = copy first (`name.tmp.mp4`, the suffix matters for the
+  reader), check, replace (original to `.bak` first) – slow for big files (4.5 GB over the network:
+  5 min). Keys with (c) are UTF-8 strings in TagLib. `iTunMOVI` is built in Apple's layout (the
+  reader needs it); `codirectors` are kept; `(c)ART` / `aART` are not touched; an unchanged cover
+  is not written again. Not done: a warning when closing with unsaved changes.
 - `toastm.*` – short message over the content, fades in and out, mouse clicks go through; one
   per window, a new message replaces the old one; position Center / Top / Bottom inside a target
   widget, level Info / Error. May move to `../libraries` once it has proved itself.
@@ -149,10 +158,8 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.5; numbers kept, 1, 2, 3 and 5 are done)
+## Open points (as of 0.6.0; numbers kept, 1, 2, 3, 4 and 5 are done)
 
-4. Saving to the MP4 file is not implemented (saveMovieDetails / save all are empty) – needs a
-   design decision first (own MP4 writer or a library like TagLib).
 6. Tags: one click removes a tag without asking – tooltip "Click to remove" or an × on hover.
 7. The old TMDB token is in the git history: revoke it at TMDB and use a new one.
 8. Origin of some icons still to be clarified (`LICENSES.md`); unused
