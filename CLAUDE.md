@@ -136,6 +136,9 @@ Linux).
   and on click, not the system tooltip; used for
   the saving note (`InfoIcon::savingNote()`) beside the check box "Safe saving" in the setup dialog
   and the settings page.
+- Content advisory (`rtng`: 0 none, 2 clean, 1/4 explicit) is an editable combo box; the video
+  size (`MediaInfoM::readVideoSize`, `tkhd` of the video track) is shown under the cover and sets
+  the HD flag `hdvd` when saving (`MovieData::hdFlag`, by the width).
 - `toastm.*` – short message over the content, fades in and out, mouse clicks go through; one
   per window, a new message replaces the old one; position Center / Top / Bottom inside a target
   widget, level Info / Error. May move to `../libraries` once it has proved itself.

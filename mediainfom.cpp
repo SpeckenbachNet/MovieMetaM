@@ -234,6 +234,8 @@ QImage MediaInfoM::extractCoverImageMp4(const QString &filePath)
 QMap<QString, QString> MediaInfoM::extractMetadataMp4(const QString &filePath) {
     const quint32 DASH_BOX_NUM = 0x2D2D2D2D;
     const quint32 UUID_BOX_NUM = 0x75756964;
+    const quint32 RTNG_BOX_NUM = 0x72746E67;   // "rtng"
+    const quint32 HDVD_BOX_NUM = 0x68647664;   // "hdvd"
 
     const QMap<quint32, QString> standardTags = {
         {0xA96E616D, "title"}, {0xA9415254, "artist"}, {0x61415254, "albumArtist"},
@@ -266,6 +268,12 @@ QMap<QString, QString> MediaInfoM::extractMetadataMp4(const QString &filePath) {
             file.seek(startPos);
             if (!key.isEmpty()) readStringDataBox(file, key, metadata, boxDataEnd);
             file.seek(boxDataEnd);
+        } else if (boxTypeNum == RTNG_BOX_NUM) {
+            readIntegerDataBox(file, "advisory", metadata, boxDataEnd);   // content advisory
+            file.seek(boxDataEnd);
+        } else if (boxTypeNum == HDVD_BOX_NUM) {
+            readIntegerDataBox(file, "hdVideo", metadata, boxDataEnd);   // HD flag
+            file.seek(boxDataEnd);
         } else if (relevantTagValues.contains(boxTypeNum)) {
             readStringDataBox(file, standardTags[boxTypeNum], metadata, boxDataEnd);
             file.seek(boxDataEnd);
@@ -297,6 +305,54 @@ QMap<QString, QString> MediaInfoM::extractMetadataMp4(const QString &filePath) {
     }
 
     return metadata;
+}
+
+// An integer tag ("data" box: size, "data", type and locale 4 bytes each, then the value, big endian)
+void MediaInfoM::readIntegerDataBox(QFile &file, const QString &key, QMap<QString, QString> &metadata, qint64 parentBoxEnd) {
+    const qint64 currentPos = file.pos();
+    if (parentBoxEnd <= currentPos) return;
+    const QByteArray buffer = file.read(parentBoxEnd - currentPos);
+    const int dataIdx = buffer.indexOf("data");
+    if (dataIdx < 0) return;
+    const QByteArray payload = buffer.mid(dataIdx + 12);
+    if (payload.isEmpty() || payload.size() > 4) return;
+    quint32 value = 0;
+    for (const char byte : payload) value = (value << 8) | quint8(byte);
+    metadata.insert(key, QString::number(value));
+}
+
+QSize MediaInfoM::readVideoSize(const QString &filePath) {
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) return QSize();
+
+    QSize found;        // the video track
+    QSize trackSize;    // of the track being read
+    bool isVideo = false;
+
+    std::function<void(const Mp4Box &, QFile &)> visitor = [&](const Mp4Box &box, QFile &f) {
+        const QString type = QString::fromUtf8(box.type, 4);
+        const qint64 boxDataEnd = f.pos() + box.size - box.headerSize;
+        if (type == "moov" || type == "mdia") {
+            parseBoxes(f, boxDataEnd, visitor);
+        } else if (type == "trak") {
+            trackSize = QSize();
+            isVideo = false;
+            parseBoxes(f, boxDataEnd, visitor);
+            if (isVideo && trackSize.isValid() && !found.isValid()) found = trackSize;
+        } else if (type == "tkhd" && boxDataEnd - f.pos() >= 8) {
+            // Width and height are the last two numbers of the box, 16.16 fixed point
+            f.seek(boxDataEnd - 8);
+            const QByteArray size = f.read(8);
+            trackSize = QSize(qFromBigEndian<quint32>(size.constData()) >> 16,
+                              qFromBigEndian<quint32>(size.constData() + 4) >> 16);
+        } else if (type == "hdlr") {
+            f.seek(f.pos() + 8);   // version, flags, pre-defined
+            isVideo = (f.read(4) == "vide");
+        }
+        f.seek(boxDataEnd);
+    };
+    parseBoxes(file, file.size(), visitor);
+    return found;
 }
 
 // Read/parse functions

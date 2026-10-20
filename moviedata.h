@@ -21,6 +21,7 @@
 #include <QPixmap>
 #include <QStringList>
 #include <QDate>
+#include <QSize>
 
 class MovieData {
 public:
@@ -43,6 +44,14 @@ public:
     QString ratingText;   // e.g. "ab 12 Jahren"
     QString ratingSystem; // e.g. "de-movie"
     int ratingScore;      // e.g. 300
+
+    // Content advisory ("rtng"): 0 none, 2 clean, 1 and 4 explicit; other values stay as they are
+    int advisory = 0;
+    QSize videoSize;      // as the file shows it (read only); the HD flag follows it when saving
+
+    // The HD flag of Apple ("hdvd") for a size: 0 SD, 1 720p, 2 1080p, 3 4K
+    static int hdFlag(const QSize &size);
+    static QString hdName(int flag);
 
     // Validating and help functions
     QString status = "unchanged";
