@@ -39,6 +39,8 @@ complete (0 unfinished); `MovieMetaM_en.ts` only fills `<numerusform>` for `%n` 
 Non-translatable ui strings get `notr="true"`. After changing texts: lupdate with
 `-no-obsolete` (or target `update_translations`), fill every unfinished German entry. The .qm
 files are built and embedded by `qt_add_translations` (`:/i18n`) and are not in git.
+Qt's own texts (standard buttons, file dialog) come from `qtbase_<lang>.qm`, loaded in `main.cpp`
+from `QLibraryInfo::TranslationsPath` in the app language (to ship with a bundle/installer: open).
 Age rating labels like "ab 12 Jahren" are official texts written into the files: not translated.
 
 ## Shared classes (`../libraries`)
@@ -175,7 +177,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.7.6; numbers kept, 1 to 8 are done)
+## Open points (as of 0.7.7; numbers kept, 1 to 8 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted).

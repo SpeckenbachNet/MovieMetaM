@@ -22,6 +22,7 @@
 #include "themecolors.h"
 
 #include <QApplication>
+#include <QLibraryInfo>
 #include <QLocale>
 #include <QTranslator>
 #include <QStringLiteral>
@@ -44,11 +45,18 @@ int main(int argc, char *argv[])
     QSettings settings;
 
     // Language of the app: from the settings, else the one of the system (German or English)
+    // and Qt's own texts (standard buttons "Yes" / "No" / "Cancel", file dialog) in the same language
     QTranslator translator;
-    auto loadTranslation = [&a, &translator](const QString &langCode) {
+    QTranslator qtTranslator;
+    auto loadTranslation = [&a, &translator, &qtTranslator](const QString &langCode) {
         a.removeTranslator(&translator);
         if (translator.load(":/i18n/" APP_NAME "_" + langCode)) {
             a.installTranslator(&translator);
+        }
+        a.removeTranslator(&qtTranslator);
+        if (qtTranslator.load(QLocale(langCode), QStringLiteral("qtbase"), QStringLiteral("_"),
+                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+            a.installTranslator(&qtTranslator);
         }
     };
     QString langCode = Languages::appLanguage();
