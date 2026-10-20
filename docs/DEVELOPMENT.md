@@ -22,7 +22,7 @@ und sucht Filmdaten bei **TMDB** (The Movie Database).
 | TMDB-Suche mit Postern, Genreliste | fertig |
 | TMDB-Treffer übernehmen (Tab „Data“: Daten, Poster-Auswahl, Altersfreigabe, „Apply“) | fertig |
 | Speichern in die MP4-Datei (TagLib) | fertig |
-| Hilfeseite | ein Thema („About MovieMetaM“) |
+| Hilfeseite | Themen von links nach rechts: Filmliste fertig, Filminfo, Filmsuche, Speichern, Einstellungen offen; „About MovieMetaM“ |
 
 Unterstützt sind bisher nur MP4 und M4V (`MediaInfoM::supportedSuffixes()`). Andere Dateien
 werden mit einer Meldung übersprungen.

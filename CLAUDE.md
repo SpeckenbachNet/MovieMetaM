@@ -104,8 +104,9 @@ Linux).
   (1 s + 35 ms per character, 1.5 to 4 s), Error 5 s.
 - `helppage.*` – help page (own ToolbarM, topics list, Markdown text): texts in
   `help/<de|en>/<topic>.md` (`Help.qrc`), placeholders `{{version}}`, `{{qt}}`; language like
-  the translator. For now one topic "About MovieMetaM" (website
-  software.speckenbach.net/moviemetam, TMDB notice with logo).
+  the translator. Topics follow the screen from left to right (`enum Topic`, the help opens
+  with the first), "About MovieMetaM" last (website software.speckenbach.net/moviemetam, TMDB
+  notice with logo). Texts address the reader with "du". So far: Movie List, About.
 - `mediainfom.*` – reads MP4 boxes (metadata, iTunMOVI XML, cover); `moviedata.*` – data of a movie.
 - `tagwidget.*` – tag input (cast, directors, ...): a × on hover (`TagDelegate` inside
   `tagwidget.cpp`) removes a tag, also Delete/Backspace on the selected one
@@ -181,9 +182,27 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.7.10; numbers kept, 1 to 8 are done)
+## Open points (as of 0.8.0; numbers kept, 1 to 8 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted).
-10. Help topics (using the app, TMDB search, saving): write them last, when saving (4) and
-    applying a search result (5) work.
+10. Help topics, one at a time (text first in the chat, de + en, then the files). Plan agreed
+    with the user (title / second line / icon / file):
+    1. Movie List / Add, select, remove / `add` / `movielist` – **done (0.8.0)**
+    2. Movie Info / Edit, cover, age rating / `app_icon` / `movieinfo` – fields, tags (×, drag,
+       Delete), cover (drag in and out), video size / HD, age rating (system of the file,
+       unknown entries "prefix: code"), content advisory – **next**
+    3. Movie Search / Find and apply TMDB data / `search` / `moviesearch` – search, poster
+       preview, double click → tab "Data", poster picker, "Apply" (empty values change nothing)
+    4. Saving / Save, safe saving / `save` / `saving` – Save / Save all, the check afterwards,
+       safe saving, questions on closing and removing; the section "Speichern" moves here out
+       of `about.md`
+    5. Settings / Languages, age rating, saving / `settings` / `settings` – app language (after
+       a restart) vs. data language (at once), rating system only for movies without one, safe
+       saving → refers to Saving
+    6. About: license section to "du"; credits without Lucide, Material Icons, SVG Repo (all
+       icons are own since 0.7.6), check "symbols from churchWorshipM"
+    Own icons for Movie List / Movie Info maybe later.
+11. Movie list: no state for a file that could not be read. `MovieData::fromFile()` only logs
+    the reader's errors (`qWarning`); the movie is listed green with empty fields (also when the
+    file is missing). Idea: a red state. After the help topics.
