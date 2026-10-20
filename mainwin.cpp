@@ -606,44 +606,54 @@ void MainWin::fillSearchTableView(const QJsonDocument &jsonDoc)
         showColumnStatus(StatusColumn::Search, tr("No movies found"));
         return;
     }
+    else {
+        // TMDB sends one page (up to 20 hits); total_results is the number of all hits
+        const int shown = int(jsonArray.size());
+        const int total = rootObj.value("total_results").toInt(shown);
+        showColumnStatus(StatusColumn::Search,
+                         total > shown ? tr("Showing %1 of %2 movies").arg(shown).arg(total)
+                                       : tr("%n movie(s) found", "", total));
 
-    for (const QJsonValue &val : std::as_const(jsonArray)) {
-        QJsonObject obj = val.toObject();
+        for (const QJsonValue &val : std::as_const(jsonArray)) {
+            QJsonObject obj = val.toObject();
 
-        // One entry: title and year as text, TMDB id in UserRole, poster as icon (loaded below)
-        QString year = obj.value("release_date").toString().left(4);
-        QString text = obj.value("title").toString();
-        if (!year.isEmpty()) {
-            text += "\n" + year;
-        }
-        QStandardItem *item = new QStandardItem(text);
-        item->setData(obj.value("id").toInt(), Qt::UserRole);
-        m_SearchModel->appendRow(item);
-
-        // Poster: loaded asynchronously; the persistent index follows the entry and becomes
-        // invalid when the model is cleared by a new search
-        QString posterImage = obj.value("poster_path").toString();
-        if (posterImage.isEmpty()) {
-            continue;
-        }
-        QUrl imageUrl("https://image.tmdb.org/t/p/w500" + posterImage);
-        QPersistentModelIndex itemIndex(item->index());
-        startImageDownload(imageUrl, [this, itemIndex, generation](const QPixmap &pixmap) {
-            if (generation != m_searchGeneration || !itemIndex.isValid()) {
-                return;   // result of an older search
+            // One entry: title and year as text, TMDB id in UserRole, poster as icon (loaded below)
+            QString year = obj.value("release_date").toString().left(4);
+            QString text = obj.value("title").toString();
+            if (!year.isEmpty()) {
+                text += "\n" + year;
             }
-            // Scaled in the resolution of the screen, so it stays sharp; same picture when
-            // selected (Qt would tint it with the accent color)
-            const qreal dpr = ui->searchTableView->devicePixelRatioF();
-            QPixmap poster = pixmap.scaled(kPosterSize * dpr, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-            poster.setDevicePixelRatio(dpr);
-            QIcon icon;
-            icon.addPixmap(poster, QIcon::Normal);
-            icon.addPixmap(poster, QIcon::Selected);
-            m_SearchModel->setData(itemIndex, icon, Qt::DecorationRole);
-            m_SearchModel->setData(itemIndex, pixmap, kPosterRole);   // full resolution for the preview
-        });
+            QStandardItem *item = new QStandardItem(text);
+            item->setData(obj.value("id").toInt(), Qt::UserRole);
+            m_SearchModel->appendRow(item);
+
+            // Poster: loaded asynchronously; the persistent index follows the entry and becomes
+            // invalid when the model is cleared by a new search
+            QString posterImage = obj.value("poster_path").toString();
+            if (posterImage.isEmpty()) {
+                continue;
+            }
+            QUrl imageUrl("https://image.tmdb.org/t/p/w500" + posterImage);
+            QPersistentModelIndex itemIndex(item->index());
+            startImageDownload(imageUrl, [this, itemIndex, generation](const QPixmap &pixmap) {
+                if (generation != m_searchGeneration || !itemIndex.isValid()) {
+                    return;   // result of an older search
+                }
+                // Scaled in the resolution of the screen, so it stays sharp; same picture when
+                // selected (Qt would tint it with the accent color)
+                const qreal dpr = ui->searchTableView->devicePixelRatioF();
+                QPixmap poster = pixmap.scaled(kPosterSize * dpr, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                poster.setDevicePixelRatio(dpr);
+                QIcon icon;
+                icon.addPixmap(poster, QIcon::Normal);
+                icon.addPixmap(poster, QIcon::Selected);
+                m_SearchModel->setData(itemIndex, icon, Qt::DecorationRole);
+                m_SearchModel->setData(itemIndex, pixmap, kPosterRole);   // full resolution for the preview
+            });
+        }
+
     }
+
 }
 
 void MainWin::fillGenreComboBox(const QJsonDocument &jsonDoc)
@@ -863,6 +873,19 @@ void MainWin::selectRowInTable(int row)
         MovieData movie = m_loadedMovies.value(filePath);
         displayMovie(movie);
     }
+}
+
+// Message as a toast over the column it belongs to (or over the whole window)
+void MainWin::showColumnStatus(StatusColumn column, const QString &text, ToastM::Level level, int msec)
+{
+    QWidget *target = this;
+    switch (column) {
+    case StatusColumn::Movies: target = ui->splitter->widget(0); break;
+    case StatusColumn::Info:   target = ui->splitter->widget(1); break;
+    case StatusColumn::Search: target = ui->splitter->widget(2); break;
+    case StatusColumn::Window: break;
+    }
+    ToastM::show(target, text, level, msec);
 }
 
 // ***** SLOTS *****
@@ -1091,7 +1114,7 @@ void MainWin::startApiRequest(const QUrl &url)
     // Token comes from tmdb_token.txt at build time (see CMakeLists.txt)
     const QByteArray authToken = QByteArrayLiteral(TMDB_TOKEN);
     if (authToken.isEmpty()) {
-        showColumnStatus(StatusColumn::Search, tr("No TMDB token: the movie search is not available."));
+        showColumnStatus(StatusColumn::Search, tr("No TMDB token: the movie search is not available."), ToastM::Level::Error);
         return;
     }
     request.setRawHeader("Authorization", "Bearer " + authToken);
@@ -1151,13 +1174,14 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     settings.setValue("General/DataLanguage", newDataLanguage);
     settings.sync();
     if (settings.status() == QSettings::NoError) {
-        // Erfolg; the language of the app only changes with the next start
-        ui->statusBar->showMessage(appLanguageChanged
-                                       ? tr("Settings saved. The language changes after a restart.")
-                                       : tr("Settings saved."), 30000); // 30 s visible
+        // Success; the language of the app only changes with the next start
+        showColumnStatus(StatusColumn::Window, appLanguageChanged
+                                                   ? tr("Settings saved. The language changes after a restart.")
+                                                   : tr("Settings saved."),
+                         ToastM::Level::Info, appLanguageChanged ? 6000 : 0);
     } else {
         // Error (e.g. file is read-only)
-        ui->statusBar->showMessage(tr("Error: could not save the settings!"), 50000);
+        showColumnStatus(StatusColumn::Window, tr("Error: could not save the settings!"), ToastM::Level::Error);
     }
 
     // The new system applies at once: show the current movie again (its list may change)
