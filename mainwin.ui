@@ -540,11 +540,8 @@
                </item>
                <item row="4" column="1">
                 <widget class="QCheckBox" name="safeSaveCheckBox">
-                 <property name="toolTip">
-                  <string>Writes into a copy and replaces the file afterwards. Safer, but slow for big files and on network drives.</string>
-                 </property>
                  <property name="text">
-                  <string>Safe saving (copy the file first)</string>
+                  <string>Safe saving (read the info)</string>
                  </property>
                 </widget>
                </item>

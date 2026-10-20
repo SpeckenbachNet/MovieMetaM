@@ -21,6 +21,7 @@
 
 #include <QDialog>
 #include <QLabel>
+#include <QCheckBox>
 #include <QComboBox>
 #include <QVBoxLayout>
 #include <QDialogButtonBox>
@@ -37,6 +38,7 @@ public:
     QString selectedOptionFromAgeRating() const;
     QString selectedAppLanguage() const;    // "de" or "en"
     QString selectedDataLanguage() const;   // e.g. "de-DE"
+    bool selectedSafeSaving() const;        // write into a copy first
 
 private:
     QLabel *infoLabel;
@@ -46,5 +48,6 @@ private:
     QComboBox *ageRatingComboBox;
     QComboBox *languageComboBox;
     QComboBox *dataLanguageComboBox;
+    QCheckBox *safeSaveCheckBox;
     QDialogButtonBox *buttonBox;
 };

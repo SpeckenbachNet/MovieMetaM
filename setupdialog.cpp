@@ -18,6 +18,7 @@
 
 // setupdialog.cpp
 #include "setupdialog.h"
+#include "infoicon.h"
 #include "agerating.h"
 #include "languages.h"
 #include "themecolors.h"
@@ -76,6 +77,9 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     }
     dataLanguageComboBox->setCurrentIndex(qMax(0, dataLanguageComboBox->findData(Languages::dataLanguage())));
 
+    // Saving: the check box has the note about writing directly into the files as an info icon
+    safeSaveCheckBox = new QCheckBox(tr("Safe saving (read the info)"), this);
+
     // Rounded like the combo boxes of the main window
     applyComboStyle(ageRatingComboBox);
     applyComboStyle(languageComboBox);
@@ -108,6 +112,12 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     layout->addSpacing(10);
     layout->addWidget(ageRatingLabel);
     layout->addWidget(ageRatingComboBox);
+    layout->addSpacing(10);
+    auto *safeSaveRow = new QHBoxLayout();
+    safeSaveRow->addWidget(safeSaveCheckBox);
+    safeSaveRow->addWidget(new InfoIcon(InfoIcon::savingNote(), this));
+    safeSaveRow->addStretch();
+    layout->addLayout(safeSaveRow);
     layout->addStretch();
     layout->addWidget(buttonBox);
 
@@ -127,4 +137,9 @@ QString SetupDialog::selectedAppLanguage() const
 QString SetupDialog::selectedDataLanguage() const
 {
     return dataLanguageComboBox->currentData().toString();
+}
+
+bool SetupDialog::selectedSafeSaving() const
+{
+    return safeSaveCheckBox->isChecked();
 }
