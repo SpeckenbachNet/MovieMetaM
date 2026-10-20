@@ -59,7 +59,10 @@ void MainWin::initializeForm() {
     ui->genreComboBox->setInsertPolicy(QComboBox::NoInsert);
     applyComboStyle(ui->ratingComboBox);
     applyComboStyle(ui->advisoryComboBox);
-    ui->formatLabel->setEnabled(false);   // dimmed: only information
+    // Format of the video: chip in the look of the tags ("1080p") and the size beside it
+    ui->hdChipLabel->setStyleSheet(QStringLiteral(
+        "QLabel { font-size: 12px; padding: 2px 6px; border-radius: 5px;"
+        " background-color: palette(highlight); color: palette(highlighted-text); }"));
     applyComboStyle(ui->ratingSettingsComboBox);
     applyComboStyle(ui->languageSettingsComboBox);
     applyComboStyle(ui->dataLanguageSettingsComboBox);
@@ -117,6 +120,13 @@ void MainWin::initializeForm() {
     // The tag column on the right gets at most kTagColumnWidth (longer tags make no sense).
     ui->coverLabel->setFixedSize(kCoverSize);
     ui->middleLeftContainer->setAlignment(ui->coverLabel, Qt::AlignLeft);
+    // The format row is centered under the cover and keeps its room when hidden (no jumping)
+    ui->formatRow->setFixedWidth(kCoverSize.width());
+    ui->middleLeftContainer->setAlignment(ui->formatRow, Qt::AlignLeft);
+    QSizePolicy formatPolicy = ui->formatRow->sizePolicy();
+    formatPolicy.setRetainSizeWhenHidden(true);
+    ui->formatRow->setSizePolicy(formatPolicy);
+    ui->formatRow->hide();
     for (QWidget *field : {static_cast<QWidget *>(ui->titleEdit), ui->castContainer, ui->directorsContainer,
                            ui->screenwritersContainer, ui->producersContainer,
                            static_cast<QWidget *>(ui->studioEdit)}) {

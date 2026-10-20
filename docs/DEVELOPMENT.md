@@ -1,6 +1,6 @@
 # MovieMetaM – Entwickler-Dokumentation
 
-Stand: Version 0.6.0 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
+Stand: Version 0.6.3 (Oktober 2026). Diese Doku ist vorerst auf Deutsch. Code, Kommentare und
 die Quelltexte der Übersetzungen sind Englisch.
 
 ---
@@ -133,7 +133,8 @@ Hinweise:
   der Kindersicherung aus; andere Player (Jellyfin, Plex, VLC) meist nicht.
 - **Format:** `readVideoSize()` liest Breite und Höhe aus dem `tkhd` der ersten Videospur (16.16
   Festkomma, die letzten 8 Bytes der Box; die Spur erkennt es am `hdlr` „vide“). Das Formular zeigt
-  sie unter dem Cover („1280 × 720 · 720p“), nur zur Information. `hdvd` (Apples HD-Etikett:
+  sie mittig unter dem Cover, nur zur Information: ein Chip „720p“ im Look der Tags
+  (Akzentfarbe), daneben „1280 × 720“; ohne Größe bleibt die Zeile leer, behält aber ihren Platz. `hdvd` (Apples HD-Etikett:
   0 SD, 1 720p, 2 1080p, 3 4K) setzt `Mp4Writer` beim Speichern aus der Größe, nach der Breite
   (`MovieData::hdFlag()`; ein zugeschnittener Breitwandfilm mit 1920 × 800 ist 1080p).
 - Das Cover (`covr`) liest `extractCoverImageMp4()` über `findCoverBox()`.
