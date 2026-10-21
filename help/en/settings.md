@@ -31,3 +31,9 @@ Genres you want in the genre list of the movie info, for example "Series" or "Co
 ## Saving
 
 **Safe saving** writes the data into a copy, checks it, and only then replaces the file. This is safer, but needs room and more time. What exactly happens is explained under **Saving**.
+
+## TMDB
+
+MovieMetaM searches TMDB with a token built into the app. If you want to use your own TMDB account, enter your own token (the "API Read Access Token" from the API settings of your TMDB account, free). The field hides the token; the eye at its end shows it. Below the field you see which token is in use. Leave the field empty to use the built-in token again.
+
+> The token is stored in the settings file of MovieMetaM, not encrypted.

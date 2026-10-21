@@ -347,27 +347,27 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="228"/>
-        <location filename="../mainwin.cpp" line="932"/>
+        <location filename="../mainwin.cpp" line="933"/>
         <source>Description</source>
         <translation type="unfinished">あらすじ</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="238"/>
-        <location filename="../mainwin.cpp" line="922"/>
+        <location filename="../mainwin.cpp" line="923"/>
         <source>Release Date</source>
         <translation type="unfinished">公開日</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="248"/>
-        <location filename="../mainwin.cpp" line="924"/>
+        <location filename="../mainwin.cpp" line="925"/>
         <source>Genre</source>
         <translation type="unfinished">ジャンル</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="264"/>
         <location filename="../mainwin.ui" line="573"/>
-        <location filename="../initialize.cpp" line="276"/>
-        <location filename="../mainwin.cpp" line="930"/>
+        <location filename="../mainwin.cpp" line="931"/>
+        <location filename="../initialize.cpp" line="319"/>
         <source>Age Rating</source>
         <translation type="unfinished">年齢区分</translation>
     </message>
@@ -378,31 +378,31 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="303"/>
-        <location filename="../mainwin.cpp" line="936"/>
+        <location filename="../mainwin.cpp" line="937"/>
         <source>Producers</source>
         <translation type="unfinished">プロデューサー</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="322"/>
-        <location filename="../mainwin.cpp" line="934"/>
+        <location filename="../mainwin.cpp" line="935"/>
         <source>Directors</source>
         <translation type="unfinished">監督</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="341"/>
-        <location filename="../mainwin.cpp" line="923"/>
+        <location filename="../mainwin.cpp" line="924"/>
         <source>Studio</source>
         <translation type="unfinished">スタジオ</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="357"/>
-        <location filename="../mainwin.cpp" line="935"/>
+        <location filename="../mainwin.cpp" line="936"/>
         <source>Screenplay</source>
         <translation type="unfinished">脚本</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="370"/>
-        <location filename="../mainwin.cpp" line="933"/>
+        <location filename="../mainwin.cpp" line="934"/>
         <source>Actors</source>
         <translation type="unfinished">出演者</translation>
     </message>
@@ -438,13 +438,13 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="553"/>
-        <location filename="../initialize.cpp" line="272"/>
+        <location filename="../initialize.cpp" line="315"/>
         <source>Language</source>
         <translation type="unfinished">言語</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="563"/>
-        <location filename="../initialize.cpp" line="274"/>
+        <location filename="../initialize.cpp" line="317"/>
         <source>Movie data language</source>
         <translation type="unfinished">映画データの言語</translation>
     </message>
@@ -455,7 +455,7 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="611"/>
-        <location filename="../initialize.cpp" line="282"/>
+        <location filename="../initialize.cpp" line="325"/>
         <source>Saving</source>
         <translation type="unfinished">保存</translation>
     </message>
@@ -465,331 +465,372 @@
         <translation type="unfinished">安全な保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="153"/>
-        <location filename="../initialize.cpp" line="296"/>
+        <location filename="../initialize.cpp" line="156"/>
+        <location filename="../initialize.cpp" line="339"/>
         <source>Apply</source>
         <translation type="unfinished">適用</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="154"/>
+        <location filename="../initialize.cpp" line="157"/>
         <source>Take the data into the selected movie</source>
         <translation type="unfinished">選択した映画にデータを反映</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="180"/>
+        <location filename="../initialize.cpp" line="183"/>
         <source>None</source>
         <translation type="unfinished">なし</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="181"/>
+        <location filename="../initialize.cpp" line="184"/>
         <source>Clean</source>
         <translation type="unfinished">クリーン</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="182"/>
+        <location filename="../initialize.cpp" line="185"/>
         <source>Explicit</source>
         <translation type="unfinished">露骨</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="292"/>
+        <location filename="../initialize.cpp" line="219"/>
+        <source>Token of the built-in account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="234"/>
+        <location filename="../initialize.cpp" line="238"/>
+        <source>Show the token</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="238"/>
+        <source>Hide the token</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="251"/>
+        <source>Your own token is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="253"/>
+        <source>The token built into the app is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="255"/>
+        <source>No token: the movie search is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="335"/>
         <source>Own genres</source>
         <translation type="unfinished">独自のジャンル</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="201"/>
+        <location filename="../initialize.cpp" line="204"/>
         <source>Enter genres</source>
         <translation type="unfinished">ジャンルを入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="204"/>
+        <location filename="../initialize.cpp" line="207"/>
         <source>Show only own genres</source>
         <translation type="unfinished">独自のジャンルのみ表示</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="209"/>
+        <location filename="../initialize.cpp" line="212"/>
         <source>Only fill empty fields</source>
         <translation type="unfinished">空の項目だけ埋める</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="271"/>
+        <location filename="../initialize.cpp" line="314"/>
         <source>Languages</source>
         <translation type="unfinished">言語</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="307"/>
-        <location filename="../initialize.cpp" line="327"/>
+        <location filename="../initialize.cpp" line="342"/>
+        <source>TMDB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="343"/>
+        <source>With an own token (API Read Access Token) the search uses your TMDB account. You get it free in your &lt;a href=&quot;https://www.themoviedb.org/settings/api&quot;&gt;TMDB account&lt;/a&gt;. Leave the field empty to use the token built into the app.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="362"/>
+        <location filename="../initialize.cpp" line="382"/>
         <source>Save</source>
         <translation type="unfinished">保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="308"/>
+        <location filename="../initialize.cpp" line="363"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">メタデータを映画に保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="310"/>
-        <location filename="../mainwin.cpp" line="1805"/>
+        <location filename="../mainwin.cpp" line="1812"/>
+        <location filename="../initialize.cpp" line="365"/>
         <source>Save all</source>
         <translation type="unfinished">すべて保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="311"/>
+        <location filename="../initialize.cpp" line="366"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">変更したすべての映画のメタデータを保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="316"/>
+        <location filename="../initialize.cpp" line="371"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">コーヒーをおごる – PayPal で MovieMetaM を応援</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="319"/>
-        <location filename="../initialize.cpp" line="325"/>
+        <location filename="../initialize.cpp" line="374"/>
+        <location filename="../initialize.cpp" line="380"/>
         <source>Settings</source>
         <translation type="unfinished">設定</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="321"/>
+        <location filename="../initialize.cpp" line="376"/>
         <source>Help</source>
         <translation type="unfinished">ヘルプ</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="324"/>
+        <location filename="../initialize.cpp" line="379"/>
         <source>Back</source>
         <translation type="unfinished">戻る</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="328"/>
+        <location filename="../initialize.cpp" line="383"/>
         <source>Save settings</source>
         <translation type="unfinished">設定を保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="333"/>
+        <location filename="../initialize.cpp" line="388"/>
         <source>Add movies</source>
         <translation type="unfinished">映画を追加</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="336"/>
+        <location filename="../initialize.cpp" line="391"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">選択した映画をリストから外す</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="418"/>
+        <location filename="../initialize.cpp" line="473"/>
         <source>Enter actors</source>
         <translation type="unfinished">出演者を入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="433"/>
+        <location filename="../initialize.cpp" line="488"/>
         <source>Enter producers</source>
         <translation type="unfinished">プロデューサーを入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="448"/>
+        <location filename="../initialize.cpp" line="503"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">脚本家を入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="463"/>
+        <location filename="../initialize.cpp" line="518"/>
         <source>Enter directors</source>
         <translation type="unfinished">監督を入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="527"/>
-        <location filename="../mainwin.cpp" line="1091"/>
+        <location filename="../mainwin.cpp" line="1092"/>
+        <location filename="../initialize.cpp" line="582"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">画像を読み込めませんでした。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="384"/>
+        <location filename="../mainwin.cpp" line="385"/>
         <source>Changed, saving needed</source>
         <translation type="unfinished">変更あり、保存が必要</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="384"/>
-        <location filename="../mainwin.cpp" line="1261"/>
+        <location filename="../mainwin.cpp" line="385"/>
+        <location filename="../mainwin.cpp" line="1262"/>
         <source>Unchanged</source>
         <translation type="unfinished">変更なし</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="485"/>
-        <location filename="../mainwin.cpp" line="494"/>
+        <location filename="../mainwin.cpp" line="486"/>
+        <location filename="../mainwin.cpp" line="495"/>
         <source>Saving %1 of %2 ...</source>
         <translation type="unfinished">%2 件中 %1 件目を保存中…</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="486"/>
+        <location filename="../mainwin.cpp" line="487"/>
         <source>Saving ...</source>
         <translation type="unfinished">保存中…</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="521"/>
+        <location filename="../mainwin.cpp" line="522"/>
         <source>Could not save %1: %2</source>
         <translation type="unfinished">%1 を保存できませんでした：%2</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="522"/>
+        <location filename="../mainwin.cpp" line="523"/>
         <source>Could not save: %1</source>
         <translation type="unfinished">保存できませんでした：%1</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="556"/>
+        <location filename="../mainwin.cpp" line="557"/>
         <source>Saved</source>
         <translation type="unfinished">保存しました</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="558"/>
+        <location filename="../mainwin.cpp" line="559"/>
         <source>%n movie(s) saved.</source>
         <translation type="unfinished">
             <numerusform>%n 件の映画を保存しました。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="736"/>
-        <location filename="../mainwin.cpp" line="1193"/>
+        <location filename="../mainwin.cpp" line="737"/>
+        <location filename="../mainwin.cpp" line="1194"/>
         <source>No movies found</source>
         <translation type="unfinished">映画が見つかりません</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="744"/>
+        <location filename="../mainwin.cpp" line="745"/>
         <source>Showing %1 of %2 movies</source>
         <translation type="unfinished">%2 件中 %1 件を表示</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="745"/>
+        <location filename="../mainwin.cpp" line="746"/>
         <source>%n movie(s) found</source>
         <translation type="unfinished">
             <numerusform>%n 件の映画が見つかりました</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="908"/>
+        <location filename="../mainwin.cpp" line="909"/>
         <source>Double click a search result to see its data.</source>
         <translation type="unfinished">検索結果をダブルクリックするとデータを表示します。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1003"/>
+        <location filename="../mainwin.cpp" line="1004"/>
         <source>No text</source>
         <translation type="unfinished">テキストなし</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1043"/>
-        <location filename="../mainwin.cpp" line="1422"/>
+        <location filename="../mainwin.cpp" line="1044"/>
+        <location filename="../mainwin.cpp" line="1423"/>
         <source>Select a movie first</source>
         <translation type="unfinished">先に映画を選択してください</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1078"/>
+        <location filename="../mainwin.cpp" line="1079"/>
         <source>Data applied</source>
         <translation type="unfinished">データを適用しました</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1198"/>
+        <location filename="../mainwin.cpp" line="1199"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation type="unfinished">
             <numerusform>%n 件のファイルをスキップしました：MP4 のみ対応しています。</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1201"/>
+        <location filename="../mainwin.cpp" line="1202"/>
         <source>%n file(s) could not be read.</source>
         <translation type="unfinished">
             <numerusform>%n 件のファイルを読み込めませんでした。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1316"/>
+        <location filename="../mainwin.cpp" line="1317"/>
         <source>Other (%1)</source>
         <translation type="unfinished">その他（%1）</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1489"/>
+        <location filename="../mainwin.cpp" line="1490"/>
         <source>Choose movies</source>
         <translation type="unfinished">映画を選択</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1491"/>
+        <location filename="../mainwin.cpp" line="1492"/>
         <source>Movie files</source>
         <translation type="unfinished">映画ファイル</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1520"/>
-        <location filename="../mainwin.cpp" line="1528"/>
+        <location filename="../mainwin.cpp" line="1521"/>
+        <location filename="../mainwin.cpp" line="1529"/>
         <source>Remove</source>
         <translation type="unfinished">リストから外す</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1521"/>
+        <location filename="../mainwin.cpp" line="1522"/>
         <source>Really remove %n movie(s)?</source>
         <translation type="unfinished">
             <numerusform>%n 件の映画を本当にリストから外しますか？</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1524"/>
-        <location filename="../mainwin.cpp" line="1803"/>
+        <location filename="../mainwin.cpp" line="1525"/>
+        <location filename="../mainwin.cpp" line="1810"/>
         <source>%n movie(s) have unsaved changes.</source>
         <translation type="unfinished">
             <numerusform>%n 件の映画に未保存の変更があります。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1525"/>
+        <location filename="../mainwin.cpp" line="1526"/>
         <source>Save them before removing?</source>
         <translation type="unfinished">リストから外す前に保存しますか？</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1526"/>
+        <location filename="../mainwin.cpp" line="1527"/>
         <source>Save and remove</source>
         <translation type="unfinished">保存してリストから外す</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1530"/>
-        <location filename="../mainwin.cpp" line="1807"/>
+        <location filename="../mainwin.cpp" line="1531"/>
+        <location filename="../mainwin.cpp" line="1814"/>
         <source>Cancel</source>
         <translation type="unfinished">キャンセル</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1582"/>
+        <location filename="../mainwin.cpp" line="1583"/>
         <source>Please enter a search term</source>
         <translation type="unfinished">検索語を入力してください</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1676"/>
+        <location filename="../mainwin.cpp" line="1677"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation type="unfinished">TMDB トークンがありません：映画検索は利用できません。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1699"/>
+        <location filename="../mainwin.cpp" line="1700"/>
         <source>The movie data could not be loaded.</source>
         <translation type="unfinished">映画データを読み込めませんでした。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1762"/>
+        <location filename="../mainwin.cpp" line="1769"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation type="unfinished">設定を保存しました。言語の変更は再起動後に反映されます。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1763"/>
+        <location filename="../mainwin.cpp" line="1770"/>
         <source>Settings saved.</source>
         <translation type="unfinished">設定を保存しました。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1767"/>
+        <location filename="../mainwin.cpp" line="1774"/>
         <source>Error: could not save the settings!</source>
         <translation type="unfinished">エラー：設定を保存できませんでした！</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1802"/>
+        <location filename="../mainwin.cpp" line="1809"/>
         <source>Unsaved changes</source>
         <translation type="unfinished">未保存の変更</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1804"/>
+        <location filename="../mainwin.cpp" line="1811"/>
         <source>Save the changes before closing?</source>
         <translation type="unfinished">閉じる前に変更を保存しますか？</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1806"/>
+        <location filename="../mainwin.cpp" line="1813"/>
         <source>Discard</source>
         <translation type="unfinished">破棄</translation>
     </message>

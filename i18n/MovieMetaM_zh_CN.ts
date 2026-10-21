@@ -347,27 +347,27 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="228"/>
-        <location filename="../mainwin.cpp" line="932"/>
+        <location filename="../mainwin.cpp" line="933"/>
         <source>Description</source>
         <translation type="unfinished">简介</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="238"/>
-        <location filename="../mainwin.cpp" line="922"/>
+        <location filename="../mainwin.cpp" line="923"/>
         <source>Release Date</source>
         <translation type="unfinished">上映日期</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="248"/>
-        <location filename="../mainwin.cpp" line="924"/>
+        <location filename="../mainwin.cpp" line="925"/>
         <source>Genre</source>
         <translation type="unfinished">类型</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="264"/>
         <location filename="../mainwin.ui" line="573"/>
-        <location filename="../initialize.cpp" line="276"/>
-        <location filename="../mainwin.cpp" line="930"/>
+        <location filename="../mainwin.cpp" line="931"/>
+        <location filename="../initialize.cpp" line="319"/>
         <source>Age Rating</source>
         <translation type="unfinished">年龄分级</translation>
     </message>
@@ -378,31 +378,31 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="303"/>
-        <location filename="../mainwin.cpp" line="936"/>
+        <location filename="../mainwin.cpp" line="937"/>
         <source>Producers</source>
         <translation type="unfinished">制片人</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="322"/>
-        <location filename="../mainwin.cpp" line="934"/>
+        <location filename="../mainwin.cpp" line="935"/>
         <source>Directors</source>
         <translation type="unfinished">导演</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="341"/>
-        <location filename="../mainwin.cpp" line="923"/>
+        <location filename="../mainwin.cpp" line="924"/>
         <source>Studio</source>
         <translation type="unfinished">制作公司</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="357"/>
-        <location filename="../mainwin.cpp" line="935"/>
+        <location filename="../mainwin.cpp" line="936"/>
         <source>Screenplay</source>
         <translation type="unfinished">编剧</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="370"/>
-        <location filename="../mainwin.cpp" line="933"/>
+        <location filename="../mainwin.cpp" line="934"/>
         <source>Actors</source>
         <translation type="unfinished">演员</translation>
     </message>
@@ -438,13 +438,13 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="553"/>
-        <location filename="../initialize.cpp" line="272"/>
+        <location filename="../initialize.cpp" line="315"/>
         <source>Language</source>
         <translation type="unfinished">语言</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="563"/>
-        <location filename="../initialize.cpp" line="274"/>
+        <location filename="../initialize.cpp" line="317"/>
         <source>Movie data language</source>
         <translation type="unfinished">影片数据语言</translation>
     </message>
@@ -455,7 +455,7 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="611"/>
-        <location filename="../initialize.cpp" line="282"/>
+        <location filename="../initialize.cpp" line="325"/>
         <source>Saving</source>
         <translation type="unfinished">保存</translation>
     </message>
@@ -465,331 +465,372 @@
         <translation type="unfinished">安全保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="153"/>
-        <location filename="../initialize.cpp" line="296"/>
+        <location filename="../initialize.cpp" line="156"/>
+        <location filename="../initialize.cpp" line="339"/>
         <source>Apply</source>
         <translation type="unfinished">应用</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="154"/>
+        <location filename="../initialize.cpp" line="157"/>
         <source>Take the data into the selected movie</source>
         <translation type="unfinished">将数据应用到所选影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="180"/>
+        <location filename="../initialize.cpp" line="183"/>
         <source>None</source>
         <translation type="unfinished">无</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="181"/>
+        <location filename="../initialize.cpp" line="184"/>
         <source>Clean</source>
         <translation type="unfinished">无不良内容</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="182"/>
+        <location filename="../initialize.cpp" line="185"/>
         <source>Explicit</source>
         <translation type="unfinished">含不良内容</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="292"/>
+        <location filename="../initialize.cpp" line="219"/>
+        <source>Token of the built-in account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="234"/>
+        <location filename="../initialize.cpp" line="238"/>
+        <source>Show the token</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="238"/>
+        <source>Hide the token</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="251"/>
+        <source>Your own token is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="253"/>
+        <source>The token built into the app is used.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="255"/>
+        <source>No token: the movie search is not available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="335"/>
         <source>Own genres</source>
         <translation type="unfinished">自定义类型</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="201"/>
+        <location filename="../initialize.cpp" line="204"/>
         <source>Enter genres</source>
         <translation type="unfinished">输入类型</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="204"/>
+        <location filename="../initialize.cpp" line="207"/>
         <source>Show only own genres</source>
         <translation type="unfinished">仅显示自定义类型</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="209"/>
+        <location filename="../initialize.cpp" line="212"/>
         <source>Only fill empty fields</source>
         <translation type="unfinished">仅填充空白字段</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="271"/>
+        <location filename="../initialize.cpp" line="314"/>
         <source>Languages</source>
         <translation type="unfinished">语言</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="307"/>
-        <location filename="../initialize.cpp" line="327"/>
+        <location filename="../initialize.cpp" line="342"/>
+        <source>TMDB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="343"/>
+        <source>With an own token (API Read Access Token) the search uses your TMDB account. You get it free in your &lt;a href=&quot;https://www.themoviedb.org/settings/api&quot;&gt;TMDB account&lt;/a&gt;. Leave the field empty to use the token built into the app.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="362"/>
+        <location filename="../initialize.cpp" line="382"/>
         <source>Save</source>
         <translation type="unfinished">保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="308"/>
+        <location filename="../initialize.cpp" line="363"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">将元数据保存到影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="310"/>
-        <location filename="../mainwin.cpp" line="1805"/>
+        <location filename="../mainwin.cpp" line="1812"/>
+        <location filename="../initialize.cpp" line="365"/>
         <source>Save all</source>
         <translation type="unfinished">全部保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="311"/>
+        <location filename="../initialize.cpp" line="366"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">保存所有已更改影片的元数据</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="316"/>
+        <location filename="../initialize.cpp" line="371"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">请我喝杯咖啡——通过 PayPal 支持 MovieMetaM</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="319"/>
-        <location filename="../initialize.cpp" line="325"/>
+        <location filename="../initialize.cpp" line="374"/>
+        <location filename="../initialize.cpp" line="380"/>
         <source>Settings</source>
         <translation type="unfinished">设置</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="321"/>
+        <location filename="../initialize.cpp" line="376"/>
         <source>Help</source>
         <translation type="unfinished">帮助</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="324"/>
+        <location filename="../initialize.cpp" line="379"/>
         <source>Back</source>
         <translation type="unfinished">返回</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="328"/>
+        <location filename="../initialize.cpp" line="383"/>
         <source>Save settings</source>
         <translation type="unfinished">保存设置</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="333"/>
+        <location filename="../initialize.cpp" line="388"/>
         <source>Add movies</source>
         <translation type="unfinished">添加影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="336"/>
+        <location filename="../initialize.cpp" line="391"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">移除所选影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="418"/>
+        <location filename="../initialize.cpp" line="473"/>
         <source>Enter actors</source>
         <translation type="unfinished">输入演员</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="433"/>
+        <location filename="../initialize.cpp" line="488"/>
         <source>Enter producers</source>
         <translation type="unfinished">输入制片人</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="448"/>
+        <location filename="../initialize.cpp" line="503"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">输入编剧</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="463"/>
+        <location filename="../initialize.cpp" line="518"/>
         <source>Enter directors</source>
         <translation type="unfinished">输入导演</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="527"/>
-        <location filename="../mainwin.cpp" line="1091"/>
+        <location filename="../mainwin.cpp" line="1092"/>
+        <location filename="../initialize.cpp" line="582"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">无法加载图片。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="384"/>
+        <location filename="../mainwin.cpp" line="385"/>
         <source>Changed, saving needed</source>
         <translation type="unfinished">已更改，需要保存</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="384"/>
-        <location filename="../mainwin.cpp" line="1261"/>
+        <location filename="../mainwin.cpp" line="385"/>
+        <location filename="../mainwin.cpp" line="1262"/>
         <source>Unchanged</source>
         <translation type="unfinished">未更改</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="485"/>
-        <location filename="../mainwin.cpp" line="494"/>
+        <location filename="../mainwin.cpp" line="486"/>
+        <location filename="../mainwin.cpp" line="495"/>
         <source>Saving %1 of %2 ...</source>
         <translation type="unfinished">正在保存第 %1 部，共 %2 部…</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="486"/>
+        <location filename="../mainwin.cpp" line="487"/>
         <source>Saving ...</source>
         <translation type="unfinished">正在保存…</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="521"/>
+        <location filename="../mainwin.cpp" line="522"/>
         <source>Could not save %1: %2</source>
         <translation type="unfinished">无法保存 %1：%2</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="522"/>
+        <location filename="../mainwin.cpp" line="523"/>
         <source>Could not save: %1</source>
         <translation type="unfinished">无法保存：%1</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="556"/>
+        <location filename="../mainwin.cpp" line="557"/>
         <source>Saved</source>
         <translation type="unfinished">已保存</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="558"/>
+        <location filename="../mainwin.cpp" line="559"/>
         <source>%n movie(s) saved.</source>
         <translation type="unfinished">
             <numerusform>已保存 %n 部影片。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="736"/>
-        <location filename="../mainwin.cpp" line="1193"/>
+        <location filename="../mainwin.cpp" line="737"/>
+        <location filename="../mainwin.cpp" line="1194"/>
         <source>No movies found</source>
         <translation type="unfinished">未找到影片</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="744"/>
+        <location filename="../mainwin.cpp" line="745"/>
         <source>Showing %1 of %2 movies</source>
         <translation type="unfinished">显示 %2 部中的 %1 部</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="745"/>
+        <location filename="../mainwin.cpp" line="746"/>
         <source>%n movie(s) found</source>
         <translation type="unfinished">
             <numerusform>找到 %n 部影片</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="908"/>
+        <location filename="../mainwin.cpp" line="909"/>
         <source>Double click a search result to see its data.</source>
         <translation type="unfinished">双击搜索结果可查看其数据。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1003"/>
+        <location filename="../mainwin.cpp" line="1004"/>
         <source>No text</source>
         <translation type="unfinished">无文字</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1043"/>
-        <location filename="../mainwin.cpp" line="1422"/>
+        <location filename="../mainwin.cpp" line="1044"/>
+        <location filename="../mainwin.cpp" line="1423"/>
         <source>Select a movie first</source>
         <translation type="unfinished">请先选择一部影片</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1078"/>
+        <location filename="../mainwin.cpp" line="1079"/>
         <source>Data applied</source>
         <translation type="unfinished">数据已应用</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1198"/>
+        <location filename="../mainwin.cpp" line="1199"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation type="unfinished">
             <numerusform>已跳过 %n 个文件：仅支持 MP4。</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1201"/>
+        <location filename="../mainwin.cpp" line="1202"/>
         <source>%n file(s) could not be read.</source>
         <translation type="unfinished">
             <numerusform>无法读取 %n 个文件。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1316"/>
+        <location filename="../mainwin.cpp" line="1317"/>
         <source>Other (%1)</source>
         <translation type="unfinished">其他（%1）</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1489"/>
+        <location filename="../mainwin.cpp" line="1490"/>
         <source>Choose movies</source>
         <translation type="unfinished">选择影片</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1491"/>
+        <location filename="../mainwin.cpp" line="1492"/>
         <source>Movie files</source>
         <translation type="unfinished">影片文件</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1520"/>
-        <location filename="../mainwin.cpp" line="1528"/>
+        <location filename="../mainwin.cpp" line="1521"/>
+        <location filename="../mainwin.cpp" line="1529"/>
         <source>Remove</source>
         <translation type="unfinished">移除</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1521"/>
+        <location filename="../mainwin.cpp" line="1522"/>
         <source>Really remove %n movie(s)?</source>
         <translation type="unfinished">
             <numerusform>确定要移除 %n 部影片吗？</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1524"/>
-        <location filename="../mainwin.cpp" line="1803"/>
+        <location filename="../mainwin.cpp" line="1525"/>
+        <location filename="../mainwin.cpp" line="1810"/>
         <source>%n movie(s) have unsaved changes.</source>
         <translation type="unfinished">
             <numerusform>%n 部影片有未保存的更改。</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1525"/>
+        <location filename="../mainwin.cpp" line="1526"/>
         <source>Save them before removing?</source>
         <translation type="unfinished">移除前先保存吗？</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1526"/>
+        <location filename="../mainwin.cpp" line="1527"/>
         <source>Save and remove</source>
         <translation type="unfinished">保存并移除</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1530"/>
-        <location filename="../mainwin.cpp" line="1807"/>
+        <location filename="../mainwin.cpp" line="1531"/>
+        <location filename="../mainwin.cpp" line="1814"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1582"/>
+        <location filename="../mainwin.cpp" line="1583"/>
         <source>Please enter a search term</source>
         <translation type="unfinished">请输入搜索词</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1676"/>
+        <location filename="../mainwin.cpp" line="1677"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation type="unfinished">没有 TMDB 令牌：无法使用影片搜索。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1699"/>
+        <location filename="../mainwin.cpp" line="1700"/>
         <source>The movie data could not be loaded.</source>
         <translation type="unfinished">无法加载影片数据。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1762"/>
+        <location filename="../mainwin.cpp" line="1769"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation type="unfinished">设置已保存。语言将在重启后更改。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1763"/>
+        <location filename="../mainwin.cpp" line="1770"/>
         <source>Settings saved.</source>
         <translation type="unfinished">设置已保存。</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1767"/>
+        <location filename="../mainwin.cpp" line="1774"/>
         <source>Error: could not save the settings!</source>
         <translation type="unfinished">错误：无法保存设置！</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1802"/>
+        <location filename="../mainwin.cpp" line="1809"/>
         <source>Unsaved changes</source>
         <translation type="unfinished">未保存的更改</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1804"/>
+        <location filename="../mainwin.cpp" line="1811"/>
         <source>Save the changes before closing?</source>
         <translation type="unfinished">关闭前保存更改吗？</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1806"/>
+        <location filename="../mainwin.cpp" line="1813"/>
         <source>Discard</source>
         <translation type="unfinished">放弃</translation>
     </message>

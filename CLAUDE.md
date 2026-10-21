@@ -23,7 +23,8 @@ up to date with larger changes.
 
 - Qt 6 only (6.12 on Linux), modules Widgets, Network, Svg, LinguistTools.
 - **`tmdb_token.txt`** (project root, not in git, one line: TMDB API read access token) is read
-  by CMake into the define `TMDB_TOKEN`. Without it the app runs but the search does not.
+  by CMake into the define `TMDB_TOKEN`. Without it the app runs but the search does not
+  (unless the user enters an own token in the settings, `TMDB/Token`, which takes precedence).
   After creating the file the first time: re-run CMake.
 - Defines: `APP_NAME`, `APP_VERSION`, `COMPANY_NAME`. Settings: `QSettings()` with organization
   "SpeckenbachNet", INI format on every system.
@@ -111,11 +112,13 @@ Linux).
   cards by topic in two columns (`initializeSettingsPage()`, decided with the user after trying
   one long card and a topic list: everything at a glance), each setting a block: heading, control,
   what belongs to it below. Left: Languages (app with the info icon for the drafts, movie data),
-  Age Rating (combo, the badge preview right below), Saving (safe saving with info icon). Right: Own
-  genres (`TagWidget`, `General/CustomGenres`, below it the check box `General/OnlyCustomGenres`),
-  Apply (`General/FillEmptyOnly`). The widgets still come from the .ui file (the old card
-  `settingsGeneralCard` is only their holder and is deleted) or `initializeComboBoxes()`. Planned:
-  a card TMDB with an own token. The genre box of the movie info is built by `fillGenreList()`:
+  Age Rating (combo, the badge preview right below), Saving (safe saving with info icon), Apply
+  (`General/FillEmptyOnly`). Right: Own genres (`TagWidget`, `General/CustomGenres`, below it the
+  check box `General/OnlyCustomGenres`), TMDB (own token `TMDB/Token`, a password field with an eye
+  (`eye.svg` / `eye_off.svg`), below it which token is in use (`updateTmdbTokenStatus()`) and a
+  hint with the link to the TMDB API settings; empty = the built-in `TMDB_TOKEN`; stored in plain
+  text in the INI, no keychain). The widgets still come from the .ui file (the old card
+  `settingsGeneralCard` is only their holder and is deleted) or `initializeComboBoxes()`. The genre box of the movie info is built by `fillGenreList()`:
   own genres first, then TMDB's, or only the own ones; Apply still takes TMDB's genre.
   No status bar: messages are toasts (`showColumnStatus(StatusColumn, text, level, msec)` →
   `ToastM::show`), centered over the column they belong to (`StatusColumn::Window`: over the
