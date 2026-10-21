@@ -28,7 +28,8 @@ up to date with larger changes.
 - Defines: `APP_NAME`, `APP_VERSION`, `COMPANY_NAME`. Settings: `QSettings()` with organization
   "SpeckenbachNet", INI format on every system.
 - Windows: `app.rc.in` (icon `ressources/icons/app_icon.ico` + version info); macOS: bundle icon
-  `app_icon.icns`.
+  `app_icon.icns`; the bundle's `Info.plist` is `ressources/macos/Info.plist.in` (Qt's template plus
+  `CFBundleLocalizations` de/en: without it the native Open dialog stays English).
 - Only MP4/M4V are supported for now (`MediaInfoM::supportedSuffixes()`); other files are
   skipped with a message in the status bar.
 
@@ -184,7 +185,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.8; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.9; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

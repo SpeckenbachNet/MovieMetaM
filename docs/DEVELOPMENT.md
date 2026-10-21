@@ -73,7 +73,9 @@ Hinweise:
   konfiguriert sofort neu; fehlt eine Datei, ist sein Build-Ordner kaputt.
 - Defines aus `CMakeLists.txt`: `APP_NAME`, `APP_VERSION`, `COMPANY_NAME`, `TMDB_TOKEN`.
 - Windows: `app.rc.in` (Icon `ressources/icons/app_icon.ico` und Versionsinfo). macOS: das
-  Bundle-Icon `app_icon.icns`.
+  Bundle-Icon `app_icon.icns`. Die `Info.plist` des Bundles ist `ressources/macos/Info.plist.in` (Qts
+  Vorlage plus `CFBundleLocalizations` de/en); sonst bleibt der native Öffnen-Dialog des Mac auf
+  Englisch, er folgt der Systemsprache, nicht der App-Sprache.
 - Die Version steht in `CMakeLists.txt` (`PROJECT_VERSION`) und landet als `APP_VERSION` im
   Code.
 
