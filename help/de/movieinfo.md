@@ -5,7 +5,7 @@ In der Mitte stehen die Daten des Films, den du in der Filmliste ausgewählt has
 ## Felder
 
 - **Titel**, **Beschreibung**, **Erscheinungsdatum** und **Studio** gibst du direkt ein.
-- **Genre** wählst du aus der Liste oder schreibst es selbst hinein. Die Liste kommt von TMDB, in der Sprache der Filmdaten (siehe **Einstellungen**).
+- **Genre** wählst du aus der Liste oder schreibst es selbst hinein. In der Liste stehen zuerst deine eigenen Genres (siehe **Einstellungen**), danach die von TMDB, in der Sprache der Filmdaten.
 - **Schauspieler**, **Regie**, **Produktion** und **Drehbuch** bestehen aus einzelnen Namen, siehe unten.
 
 ## Namen

@@ -18,6 +18,12 @@ El país cuyo sistema de clasificación por edades usa MovieMetaM. La vista prev
 
 Esto solo se aplica a las películas cuyo archivo guardado aún no tiene clasificación. Si un archivo ya tiene una, la película conserva su sistema (consulta **Información de la película** y **Búsqueda de películas**). Un cambio tiene efecto de inmediato y se aplica enseguida a la película que se muestra.
 
+## Géneros propios
+
+Géneros que quieres tener en la lista de géneros de la información de la película, por ejemplo «Serie» o «Concierto». Escribe un género y pulsa Intro, igual que con los nombres en la información de la película (quitar, orden, las mismas teclas). Tus géneros propios aparecen primero, después los de TMDB. **Mostrar solo los géneros propios** deja fuera de la lista los géneros de TMDB. La lista cambia cuando guardas los ajustes.
+
+> Al aplicar datos de TMDB se sigue tomando el género que TMDB conoce para la película. Un género que escribes tú mismo en la información de la película no necesita ningún ajuste.
+
 ## Guardado
 
 **Guardado seguro** escribe los datos en una copia, la comprueba y solo después sustituye al archivo. Es más seguro, pero necesita espacio y más tiempo. Qué ocurre exactamente se explica en **Guardado**.

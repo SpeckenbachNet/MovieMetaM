@@ -33,6 +33,7 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QCheckBox>
 #include <QLabel>
 #include <QMap>
 #include <QMessageBox>
@@ -137,6 +138,11 @@ private:
     QStringList m_removeAfterSaving;   // "Save and remove": the movies to remove once saving went well
     bool m_closeAfterSaving = false;   // "Save all" in the close dialog: close when saving went well
     bool m_safeSave = false;   // setting "General/SafeSave": write into a copy first
+    QStringList m_customGenres;       // setting "General/CustomGenres": own genres, listed first
+    bool m_onlyCustomGenres = false;  // setting "General/OnlyCustomGenres": the TMDB genres are left out
+    QStringList m_tmdbGenres;         // the genres TMDB knows, in the language of the movie data
+    TagWidget *m_customGenresWidget = nullptr;   // settings page: the own genres
+    QCheckBox *m_onlyCustomGenresCheck = nullptr;
     QString dataLanguage;   // language of the movie data for TMDB, e.g. "de-DE"
     QMap<QString, MovieData> m_loadedMovies;
     QMap<QString, MovieData> m_originalMovies;
@@ -161,7 +167,8 @@ private:
     void displayMovie(const MovieData &movie);
     void fillSearchTableView(const QJsonDocument &jsonDoc);
     void requestGenres();   // genre list from TMDB in the language of the movie data
-    void fillGenreComboBox(const QJsonDocument &jsonDoc);
+    void fillGenreComboBox(const QJsonDocument &jsonDoc);   // the genres of TMDB, then fillGenreList()
+    void fillGenreList();   // own genres first, then the ones of TMDB (unless only the own ones are wanted)
     void fillDetailsTab(const QJsonDocument &jsonDoc);
     void fillPosters(const QJsonDocument &jsonDoc);
     void showTmdbPoster(int row);               // the large poster in the tab "Data"

@@ -109,7 +109,10 @@ Linux).
 - `mainwin.*`, `initialize.cpp` – main window: movie list (left), movie info (middle),
   TMDB search (right, tabs Results / Data); pages settings and help. Settings page:
   cards in a centered column, so far one card "General" (`settingsGeneralCard`, styled in
-  `initializeForm()`).
+  `initializeForm()`; rows: language, data language, age rating, preview, saving, own genres
+  (`TagWidget`, `General/CustomGenres`) and the check box `General/OnlyCustomGenres`; the genre
+  box of the movie info is built by `fillGenreList()`: own genres first, then TMDB's, or only the
+  own ones; Apply still takes TMDB's genre).
   No status bar: messages are toasts (`showColumnStatus(StatusColumn, text, level, msec)` →
   `ToastM::show`), centered over the column they belong to (`StatusColumn::Window`: over the
   whole window); Info by the length of the text
@@ -210,7 +213,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.20; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.21; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

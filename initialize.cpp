@@ -213,6 +213,21 @@ void MainWin::initializeComboBoxes() {
     safeSaveLayout->addWidget(new InfoIcon(InfoIcon::savingNote(), safeSaveRow));
     safeSaveLayout->addStretch();
     ui->settingsGeneralForm->setWidget(4, QFormLayout::FieldRole, safeSaveRow);
+
+    // Own genres (listed first in the genre box, e.g. "Series", "Concert") and the wish to see only those
+    m_customGenres = settings.value("General/CustomGenres").toStringList();
+    m_onlyCustomGenres = settings.value("General/OnlyCustomGenres", false).toBool();
+    auto *genresLabel = new QLabel(tr("Own genres"), ui->settingsGeneralCard);
+    genresLabel->setAlignment(Qt::AlignRight | Qt::AlignTop);
+    m_customGenresWidget = new TagWidget(tr("Enter genres"), ",", ui->settingsGeneralCard);
+    m_customGenresWidget->setMinimumHeight(150);
+    m_customGenresWidget->setTags(m_customGenres.join(QLatin1Char(',')));
+    m_onlyCustomGenresCheck = new QCheckBox(tr("Show only own genres"), ui->settingsGeneralCard);
+    m_onlyCustomGenresCheck->setChecked(m_onlyCustomGenres);
+    ui->settingsGeneralForm->setWidget(5, QFormLayout::LabelRole, genresLabel);
+    ui->settingsGeneralForm->setWidget(5, QFormLayout::FieldRole, m_customGenresWidget);
+    ui->settingsGeneralForm->setWidget(6, QFormLayout::FieldRole, m_onlyCustomGenresCheck);
+    fillGenreList();   // available at once, also without TMDB (the genres of TMDB follow)
 }
 
 void MainWin::initializeToolBars() {
@@ -469,6 +484,8 @@ void MainWin::initializeConnects() {
     connect(ui->languageSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
     connect(ui->dataLanguageSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &MainWin::onSettingsChanged);
     connect(ui->safeSaveCheckBox, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
+    connect(m_customGenresWidget, &TagWidget::tagsChanged, this, &MainWin::onSettingsChanged);
+    connect(m_onlyCustomGenresCheck, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
     // Preview of the chosen system at once, before saving
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this] {
         fillRatingPreview(ui->ratingSettingsComboBox->currentData().toString());
