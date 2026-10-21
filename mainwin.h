@@ -145,6 +145,7 @@ private:
     QCheckBox *m_fillEmptyOnlyCheck = nullptr;
     QString m_tmdbToken;              // setting "TMDB/Token": own token, empty = the one built into the app
     QLineEdit *m_tmdbTokenEdit = nullptr;
+    QAction *m_tmdbTokenEye = nullptr;     // shows the token; hidden again when the settings are left
     QLabel *m_tmdbTokenStatus = nullptr;   // which token is in use
     void updateTmdbTokenStatus();
     TagWidget *m_customGenresWidget = nullptr;   // settings page: the own genres
