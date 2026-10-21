@@ -26,6 +26,58 @@
 ImageLabelM::ImageLabelM(QWidget *parent) : QLabel(parent) {
     // Important, so that the label reacts to drops at all
     setAcceptDrops(true);
+    // Selected = focused (accent frame); a click focuses, Tab reaches it too
+    setFocusPolicy(Qt::StrongFocus);
+    setMouseTracking(true);   // the × shows on hover
+    // A click outside, also on an empty area that takes no focus, unselects (like the tags)
+    qApp->installEventFilter(this);
+}
+
+QRectF ImageLabelM::crossRect() const {
+    const qreal size = 22.0;
+    return QRectF(width() - size - 8.0, 8.0, size, size);
+}
+
+bool ImageLabelM::eventFilter(QObject *watched, QEvent *event) {
+    if (event->type() == QEvent::MouseButtonPress && hasFocus() && watched != this) {
+        auto *widget = qobject_cast<QWidget *>(watched);
+        if (widget && !isAncestorOf(widget)) clearFocus();
+    }
+    return QLabel::eventFilter(watched, event);
+}
+
+void ImageLabelM::keyPressEvent(QKeyEvent *event) {
+    if (!m_cover.isNull() && (event->key() == Qt::Key_Delete || event->key() == Qt::Key_Backspace)) {
+        emit coverRemoveRequested();
+    } else if (event->key() == Qt::Key_Escape) {
+        clearFocus();
+    } else {
+        QLabel::keyPressEvent(event);
+    }
+}
+
+void ImageLabelM::focusInEvent(QFocusEvent *event) {
+    QLabel::focusInEvent(event);
+    update();
+}
+
+void ImageLabelM::focusOutEvent(QFocusEvent *event) {
+    QLabel::focusOutEvent(event);
+    update();
+}
+
+void ImageLabelM::enterEvent(QEnterEvent *event) {
+    QLabel::enterEvent(event);
+    m_hover = true;
+    update();
+}
+
+void ImageLabelM::leaveEvent(QEvent *event) {
+    QLabel::leaveEvent(event);
+    m_hover = false;
+    m_overCross = false;
+    setToolTip(QString());
+    update();
 }
 
 void ImageLabelM::setCover(const QPixmap &cover) {
@@ -67,6 +119,26 @@ void ImageLabelM::paintEvent(QPaintEvent *event) {
         painter.setPen(dashed);
         painter.setBrush(Qt::NoBrush);
         painter.drawPath(rounded);
+    }
+
+    if (hasFocus() && !m_cover.isNull() && !m_dragActive) {
+        // Selected (Delete removes it): frame in the accent color
+        painter.setPen(QPen(palette().color(QPalette::Highlight), 2));
+        painter.setBrush(Qt::NoBrush);
+        painter.drawPath(rounded);
+    }
+
+    if (m_hover && !m_cover.isNull() && !m_dragActive) {
+        // Round button over the picture (any colors underneath): dark disc, white ×
+        const QRectF disc = crossRect();
+        painter.setPen(Qt::NoPen);
+        painter.setBrush(m_overCross ? palette().color(QPalette::Highlight) : QColor(0, 0, 0, 150));
+        painter.drawEllipse(disc);
+        painter.setPen(QPen(m_overCross ? palette().color(QPalette::HighlightedText) : QColor(Qt::white),
+                            1.5, Qt::SolidLine, Qt::RoundCap));
+        const QRectF cross = QRectF(0, 0, 7, 7).translated(disc.center() - QPointF(3.5, 3.5));
+        painter.drawLine(cross.topLeft(), cross.bottomRight());
+        painter.drawLine(cross.topRight(), cross.bottomLeft());
     }
 
     if (m_dragActive) {
@@ -163,13 +235,32 @@ void ImageLabelM::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
         m_dragStartPos = event->position().toPoint();
+        m_pressedOnCross = !m_cover.isNull() && crossRect().contains(event->position());
     }
     QLabel::mousePressEvent(event);
 }
 
+void ImageLabelM::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && m_pressedOnCross) {
+        m_pressedOnCross = false;
+        if (crossRect().contains(event->position())) emit coverRemoveRequested();
+        return;
+    }
+    QLabel::mouseReleaseEvent(event);
+}
+
 void ImageLabelM::mouseMoveEvent(QMouseEvent *event)
 {
-    if (!(event->buttons() & Qt::LeftButton)) return;
+    // Over the ×: highlight it and name it
+    const bool overCross = !m_cover.isNull() && crossRect().contains(event->position());
+    if (overCross != m_overCross) {
+        m_overCross = overCross;
+        setToolTip(overCross ? tr("Remove cover") : QString());
+        update();
+    }
+
+    if (!(event->buttons() & Qt::LeftButton) || m_pressedOnCross) return;
 
     // Only after the usual distance: a click with a slightly moving hand starts no drag
     if ((event->position().toPoint() - m_dragStartPos).manhattanLength() < QApplication::startDragDistance()) {

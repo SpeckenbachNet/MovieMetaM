@@ -89,7 +89,7 @@ Hinweise:
 | `mediainfom.*` | liest MP4-Boxen: Metadaten, `iTunMOVI`-XML, Cover |
 | `moviedata.*` | Daten eines Films, Hilfsfunktionen (`getItunExtc()`, Säubern von Texten) |
 | `tagwidget.*` | Tag-Eingabe (Besetzung, Regie, Drehbuch, Produktion); beim Überfahren zeigt ein Tag rechts ein ×, nur ein Klick darauf entfernt ihn (Entf-/Rücktaste: der gewählte Tag; danach – auch nach dem Verschieben – ist kein Tag gewählt; Esc, ein Klick außerhalb der Liste – auch auf eine leere Fläche – oder Tab heben die Auswahl auf), ein Klick auf den Text wählt aus oder zieht zum Umsortieren |
-| `imagelabelm.*` | Cover: zeichnet sich selbst, Drag and Drop hinein und hinaus |
+| `imagelabelm.*` | Cover: zeichnet sich selbst, Drag and Drop hinein und hinaus, entfernen mit × (Hover) oder Auswählen + Entf |
 | `tableviewm.*` | Filmliste (`QListView`) mit Dateiablage; Klicks auf leere Fläche ändern die Auswahl nicht |
 | `twolinedelegate.*` | Einträge von Filmliste und Suchergebnissen |
 | `posterpicker.*` | großes Poster im Tab „Data“ mit Abzeichen „n / m“; ein Klick öffnet eine Liste der Poster |

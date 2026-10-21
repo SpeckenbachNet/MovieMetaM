@@ -75,6 +75,14 @@
     </message>
 </context>
 <context>
+    <name>ImageLabelM</name>
+    <message>
+        <location filename="../imagelabelm.cpp" line="259"/>
+        <source>Remove cover</source>
+        <translation>Cover entfernen</translation>
+    </message>
+</context>
+<context>
     <name>InfoIcon</name>
     <message>
         <location filename="../infoicon.cpp" line="45"/>

@@ -26,9 +26,12 @@
 #include <QEvent>
 #include <QDrag>
 #include <QDir>
+#include <QKeyEvent>
+#include <QMouseEvent>
 
 // Cover of a movie: painted by itself (rounded like the input fields, sharp on scaled screens),
-// takes images by drag and drop and can be dragged out as a file.
+// takes images by drag and drop and can be dragged out as a file. Removing: a × in the corner on
+// hover, or click to select (accent frame) and Delete / Backspace (like the tags).
 class ImageLabelM : public QLabel
 {
     Q_OBJECT
@@ -49,6 +52,10 @@ private:
     void readDragData(const QMimeData *mime);
     void clearDragData();
     QPoint m_dragStartPos;         // drag out only after the start distance (no drag by a click)
+    bool m_hover = false;          // the mouse is over the label: shows the ×
+    bool m_overCross = false;      // ... and over the ×
+    bool m_pressedOnCross = false; // the click began on the ×: no drag, removes on release
+    QRectF crossRect() const;      // the round button in the top right corner
 
 protected:
     void paintEvent(QPaintEvent *event) override;
@@ -58,10 +65,18 @@ protected:
     void dropEvent(QDropEvent *event) override;
     void mousePressEvent(QMouseEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void enterEvent(QEnterEvent *event) override;
+    void leaveEvent(QEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
+    void focusInEvent(QFocusEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 signals:
     void coverDropped(const QPixmap &cover);   // image is here (local file or image data)
     void coverUrlDropped(const QUrl &url);     // web link: to be downloaded
     void coverDropFailed();                    // nothing usable in the drop
+    void coverRemoveRequested();               // × clicked, or Delete / Backspace on the selected cover
 };
 
