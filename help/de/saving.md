@@ -13,7 +13,9 @@ Nach dem Speichern liest MovieMetaM die Datei noch einmal und prüft Titel, Besc
 
 ## Direkt in die Datei
 
-MovieMetaM schreibt die Daten wie die meisten Tag-Editoren **direkt in die Filmdatei**. Das geht schnell, auch bei großen Dateien und auf Netzlaufwerken. Wird das Schreiben unterbrochen (Absturz, Stromausfall, Netzwerkverbindung weg), kann die Datei beschädigt werden. Bewahre von wichtigen Dateien eine Kopie auf.
+MovieMetaM schreibt die Daten wie die meisten Tag-Editoren **direkt in die Filmdatei**. Das geht schnell, auch bei großen Dateien und auf Netzlaufwerken.
+
+> Wird das Schreiben unterbrochen (Absturz, Stromausfall, Netzwerkverbindung weg), kann die Datei beschädigt werden. Bewahre von wichtigen Dateien eine Kopie auf.
 
 ## Sicheres Speichern
 

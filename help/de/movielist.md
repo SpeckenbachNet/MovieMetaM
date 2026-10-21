@@ -24,7 +24,9 @@ Wenn die Maus auf einem Eintrag ruht, zeigt sie den vollständigen Pfad der Date
 
 ## Entfernen
 
-**−** unter der Liste nimmt die ausgewählten Filme aus der Liste. Die Dateien selbst bleiben unverändert auf der Festplatte.
+**−** unter der Liste nimmt die ausgewählten Filme aus der Liste.
+
+> Die Dateien selbst bleiben unverändert auf der Festplatte.
 
 Hat einer der Filme ungespeicherte Änderungen, fragt MovieMetaM nach:
 
