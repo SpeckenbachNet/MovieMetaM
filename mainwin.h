@@ -200,6 +200,7 @@ private:
                             std::function<void()> onError = nullptr);
     void initializeToolBars();
     void initializeSettingsPage();   // cards by topic (called by initializeComboBoxes)
+    void loadSettingsPage();         // the saved state into the controls (when the page is shown)
     void initializeTagWidgets();
     void initializeDetailsTab();
     void initializeDragAndDrop();

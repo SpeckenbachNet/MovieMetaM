@@ -1736,10 +1736,27 @@ void MainWin::onApiRequestFinished(QNetworkReply *reply)
 // Every page brings its own toolbar, so switching the page is all there is to do
 void MainWin::showPage(QWidget *page)
 {
+    if (page == ui->settingsPage) {
+        loadSettingsPage();   // what was not saved is gone
+    }
     ui->stackedWidget->setCurrentWidget(page);
     if (page != ui->settingsPage && m_tmdbTokenEye) {
         m_tmdbTokenEye->setChecked(false);   // the token is hidden again
     }
+}
+
+// The controls of the settings page show the saved state
+void MainWin::loadSettingsPage()
+{
+    setComboEntryByString(ui->languageSettingsComboBox, Languages::appLanguage(), true);
+    setComboEntryByString(ui->dataLanguageSettingsComboBox, dataLanguage, true);
+    setComboEntryByString(ui->ratingSettingsComboBox, countryCode, true);   // the preview follows
+    ui->safeSaveCheckBox->setChecked(m_safeSave);
+    m_customGenresWidget->setTags(m_customGenres.join(QLatin1Char(',')));
+    m_onlyCustomGenresCheck->setChecked(m_onlyCustomGenres);
+    m_fillEmptyOnlyCheck->setChecked(m_fillEmptyOnly);
+    m_tmdbTokenEdit->setText(m_tmdbToken);
+    onSettingsChanged();   // nothing to save
 }
 
 void MainWin::handleSaveSettingsButton_Clicked() {
