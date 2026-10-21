@@ -26,6 +26,8 @@ Type a name and press Enter. Separate several names with a comma to enter them a
 
 Below the cover you see the size of the video, for example **1080p**, with the exact size in pixels beside it. Saving sets the file's HD flag from it.
 
+![Cover with the × to remove it at the top right, below it the video format and size](:/images/help/cover.png)
+
 ## Age Rating
 
 The system already in the file decides which steps the list shows – a movie with a German FSK rating shows the FSK steps, even if you chose another country in the settings. The system in the settings only applies to movies that have no age rating yet.

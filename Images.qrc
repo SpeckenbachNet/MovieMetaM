@@ -6,5 +6,6 @@
         <file alias="help/list.png">ressources/images/help/list.png</file>
         <file alias="help/actors.png">ressources/images/help/actors.png</file>
         <file alias="help/search.png">ressources/images/help/search.png</file>
+        <file alias="help/cover.png">ressources/images/help/cover.png</file>
     </qresource>
 </RCC>

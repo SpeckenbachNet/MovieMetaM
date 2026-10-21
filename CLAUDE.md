@@ -114,7 +114,7 @@ Linux).
   `QTextDocument`). The page is built again on a palette change (light / dark).
   Screenshots (PNG, `ressources/images/help/`, `Images.qrc`, English for both languages, Retina
   shots: `scaleImages()` shows them in half the pixels, `kScreenshotScale`): list state, names with ×,
-  poster list. Own pictures only, no film posters (rights); the covers in them are drawn/free.
+  poster list, cover with × and video size. Own pictures only, no film posters (rights); the covers in them are drawn/free.
 - `mediainfom.*` – reads MP4 boxes (metadata, iTunMOVI XML, cover); `moviedata.*` – data of a movie.
 - `tagwidget.*` – tag input (cast, directors, ...): a × on hover (`TagDelegate` inside
   `tagwidget.cpp`) removes a tag, also Delete/Backspace on the selected one
@@ -192,7 +192,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.13; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.14; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

@@ -26,6 +26,8 @@ Tippe einen Namen ein und drücke die Eingabetaste. Mehrere Namen auf einmal tre
 
 Unter dem Cover steht die Größe des Videos, zum Beispiel **1080p**, und daneben die genaue Größe in Pixeln. Danach richtet sich beim Speichern die HD-Kennung der Datei.
 
+![Cover mit dem × zum Entfernen oben rechts, darunter das Videoformat und die Größe](:/images/help/cover.png)
+
 ## Altersfreigabe
 
 Welche Stufen die Liste zeigt, bestimmt das System, das schon in der Datei steht – ein Film mit einer deutschen FSK-Freigabe zeigt die FSK-Stufen, auch wenn du in den Einstellungen ein anderes Land gewählt hast. Das System der Einstellungen gilt nur für Filme, die noch keine Altersfreigabe haben.
