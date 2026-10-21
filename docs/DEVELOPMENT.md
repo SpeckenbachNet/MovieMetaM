@@ -324,7 +324,7 @@ Es gibt **zwei** Sprachen (`languages.*`):
   sind normale Übersetzungstexte (Kontext `Country`, der englische Name ist der Schlüssel; die Liste
   steht in der erzeugten `countrynames.cpp`, nachgeschlagen wird in `agerating.cpp`). Qt hat keine
   übersetzten Ländernamen, deshalb stehen sie in den `.ts`-Dateien.
-  **Entwurfssprachen** (Französisch mit Hilfe, Spanisch, Italienisch, Portugiesisch (Brasilien),
+  **Entwurfssprachen** (Französisch und Spanisch mit Hilfe, Italienisch, Portugiesisch (Brasilien),
   Chinesisch (vereinfacht), Japanisch, Koreanisch nur die Oberfläche): von Claude übersetzt, von keinem Muttersprachler geprüft;
   die Einträge der `.ts` behalten `type="unfinished"` (kommen trotzdem in die `.qm`). Die
   Hilfetexte benutzen die Begriffe der Oberfläche in fetter Schrift, sie müssen zusammenpassen.
