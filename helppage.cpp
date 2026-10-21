@@ -218,7 +218,7 @@ void HelpPage::spaceOut()
 {
     QTextDocument *doc = m_text->document();
     const QPalette pal = palette();
-    const QColor headingColor = accentGrey(pal);
+    const QColor headingColor = accentGrey(pal, 0.6);   // more contrast than the default: better to read in the long text
     const FieldLook look;   // the text box has the color of the fields: the notes a shade away from it
     quotesToNotes(doc, mixColor(look.fill, look.text, 0.08), pal.color(QPalette::Highlight));
 
