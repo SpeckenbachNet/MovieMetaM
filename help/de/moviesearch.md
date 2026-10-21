@@ -18,6 +18,8 @@ Ein Doppelklick auf einen Treffer lädt seine Daten in den Reiter **Daten**: Tit
 
 Ein Klick auf das Poster öffnet eine Liste mit bis zu 30 Postern von TMDB. Zu jedem stehen die Sprache des Aufdrucks (oder „Ohne Text“), die Größe in Pixeln und die Bewertung. Klicke eines an, um es zu wählen. Oben rechts auf dem Poster steht, das wievielte es ist, zum Beispiel „2 / 14“.
 
+![Tab Daten mit dem Poster und der Liste der Poster](:/images/help/search.png)
+
 Die Altersfreigabe übernimmt MovieMetaM nach diesen Regeln:
 
 - Hat der Film schon eine Altersfreigabe, zum Beispiel „FSK 12“, nimmt MovieMetaM von TMDB die Freigabe desselben Landes (hier Deutschland). So bleibt ein Film bei seinem System.

@@ -20,6 +20,8 @@ The symbol in front of each movie shows its status:
 - **Green square** – unchanged, the data matches the file.
 - **Yellow dot** – changed, not saved yet.
 
+![Two movies in the list: the first unchanged (green square), the second changed (yellow dot)](:/images/help/list.png)
+
 Rest the mouse on an entry to see the full path of the file and its status. How to save is explained under **Saving**.
 
 ## Removing

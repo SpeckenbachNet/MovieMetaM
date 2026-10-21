@@ -12,6 +12,8 @@ In der Mitte stehen die Daten des Films, den du in der Filmliste ausgewählt has
 
 Tippe einen Namen ein und drücke die Eingabetaste. Mehrere Namen auf einmal trennst du mit einem Komma. Ein Name, der schon da ist, wird nicht doppelt aufgenommen.
 
+![Namen als Liste, beim Namen unter der Maus erscheint das ×](:/images/help/actors.png)
+
 - **Entfernen:** Wenn die Maus auf einem Namen ruht, erscheint ein **×**. Oder klicke den Namen an und drücke Entf bzw. die Rücktaste.
 - **Reihenfolge:** Ziehe einen Namen an seinen neuen Platz.
 - **Abwählen:** Escape, ein Klick daneben oder Tab.

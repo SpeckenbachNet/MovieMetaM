@@ -18,6 +18,8 @@ A double click on a hit loads its data into the tab **Data**: title, release dat
 
 A click on the poster opens a list of up to 30 posters from TMDB. Each shows the language of the printing (or "No text"), the size in pixels and the rating. Click one to choose it. At the top right of the poster you see which one it is, for example "2 / 14".
 
+![Tab Data with the poster and the list of posters](:/images/help/search.png)
+
 MovieMetaM takes the age rating by these rules:
 
 - If the movie already has an age rating, for example "FSK 12", MovieMetaM takes the rating of the same country from TMDB (here Germany). That way a movie stays with its system.

@@ -334,6 +334,9 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
   `{{qt}}`); die Sprache folgt dem Übersetzer. Überschriften stehen im `accentGrey()` (Anteil 0,6, mehr Kontrast als in der App), unter dem
   Titel steht eine Linie, ein Zitat (`> …`) wird zu einem Hinweiskasten (Tabelle mit Streifen in der
   Akzentfarbe, `quotesToNotes()`); bei Wechsel hell/dunkel wird der Text neu aufgebaut.
+  Screenshots (PNG in `ressources/images/help/`, `Images.qrc`) sind englisch für beide Sprachen und
+  Retina-Aufnahmen vom Mac; `scaleImages()` zeigt sie in halber Pixelgröße (`kScreenshotScale` in
+  `helppage.h`). Keine Filmposter (Rechte): die Cover darin sind frei oder selbst gemacht.
 - Meldungen im Log (`qDebug`, `qWarning`, `errorOccurred`) sind Englisch und werden nicht mit
   `tr()` übersetzt.
 - **Qts eigene Texte** (Standardknöpfe „Ja“ / „Nein“ / „Abbrechen“, Dateidialog) stehen im Katalog

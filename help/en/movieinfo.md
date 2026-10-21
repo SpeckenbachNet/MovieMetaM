@@ -12,6 +12,8 @@ The middle shows the data of the movie you selected in the movie list. You can c
 
 Type a name and press Enter. Separate several names with a comma to enter them at once. A name that is already there is not added twice.
 
+![Names as a list, the × appears on the name under the mouse](:/images/help/actors.png)
+
 - **Remove:** Rest the mouse on a name and an **×** appears. Or click the name and press Delete or Backspace.
 - **Order:** Drag a name to its new place.
 - **Unselect:** Escape, a click beside it, or Tab.

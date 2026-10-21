@@ -20,6 +20,8 @@ Das Zeichen vor jedem Film zeigt seinen Zustand:
 - **Grünes Quadrat** – unverändert, die Daten entsprechen der Datei.
 - **Gelber Punkt** – geändert, noch nicht gespeichert.
 
+![Zwei Filme in der Liste: der erste unverändert (grünes Quadrat), der zweite geändert (gelber Punkt)](:/images/help/list.png)
+
 Wenn die Maus auf einem Eintrag ruht, zeigt sie den vollständigen Pfad der Datei und den Zustand. Wie du speicherst, steht unter **Speichern**.
 
 ## Entfernen
