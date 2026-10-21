@@ -322,7 +322,8 @@ Es gibt **zwei** Sprachen (`languages.*`):
   `CMakeLists.txt` und in `kAppLanguages`, die Hilfetexte in `help/<Code>/` (`Help.qrc`;
   fehlt ein Thema, kommt der englische Text). Ländernamen der Altersfreigaben stehen bisher nur
   auf Deutsch und Englisch in den JSON-Dateien (Qt hat keine übersetzten Ländernamen).
-  **Entwurfssprachen** (bisher Französisch): von Claude übersetzt, von keinem Muttersprachler geprüft;
+  **Entwurfssprachen** (Französisch mit Hilfe, Spanisch, Italienisch, Portugiesisch (Brasilien),
+  Chinesisch (vereinfacht), Japanisch, Koreanisch nur die Oberfläche): von Claude übersetzt, von keinem Muttersprachler geprüft;
   die Einträge der `.ts` behalten `type="unfinished"` (kommen trotzdem in die `.qm`). Die
   Hilfetexte benutzen die Begriffe der Oberfläche in fetter Schrift, sie müssen zusammenpassen.
 - **Sprache der Filmdaten** für TMDB (Genreliste und Suche, z. B. `ja-JP`): Einstellung
