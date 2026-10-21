@@ -138,7 +138,11 @@ Linux).
   (rounded, sharp), drag and drop in (`coverDropped` / `coverUrlDropped`) and out; removing
   (`coverRemoveRequested`): a round × in the corner on hover, or click (selected = focused, accent
   frame) and Delete / Backspace; Escape, Tab or a click outside unselects;
-  `tableviewm.*` – movie list (`QListView`) with file drop; `setupdialog.*` – first start.
+  `tableviewm.*` – movie list (`QListView`) with file drop (a dropped folder is expanded in
+  `addFilesToModel`: MP4/M4V with subfolders, natural order, hidden files such as `._x.mp4` left out
+  – `QDirIterator` lets them through, so the names are checked by hand; the remembered folder
+  `General/LastFolder` is the dropped one); Delete / Backspace in the list remove the selected
+  movies (`removeRequested` → `onRemoveFilesButtonClicked`, like the button −; Ctrl/Cmd+A selects all); `setupdialog.*` – first start.
 - `languages.*` – two languages (decided with the user): the app (the languages with a compiled
   `:/i18n/MovieMetaM_<code>.qm`, English always; codes like `de`, `pt_BR`, `zh_CN`; setting
   `language`, takes effect after a restart; `resolveAppLanguage()`: the code itself, else the
@@ -213,7 +217,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.22; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.24; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

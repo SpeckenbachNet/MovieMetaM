@@ -520,6 +520,7 @@ void MainWin::initializeConnects() {
     connect(m_saveBtn, &QToolButton::clicked, this, &MainWin::saveMovieDetails);
     connect(m_saveAllBtn, &QToolButton::clicked, this, &MainWin::onSaveAllButtonClicked);
     connect(m_removeBtn, &QToolButton::clicked, this, &MainWin::onRemoveFilesButtonClicked);
+    connect(ui->fileListTableView, &TableViewM::removeRequested, this, &MainWin::onRemoveFilesButtonClicked);
 
     // "Remove" only while at least one movie is selected
     connect(ui->fileListTableView->selectionModel(), &QItemSelectionModel::selectionChanged, this, [this] {
