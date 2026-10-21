@@ -366,6 +366,7 @@
     <message>
         <location filename="../mainwin.ui" line="264"/>
         <location filename="../mainwin.ui" line="573"/>
+        <location filename="../initialize.cpp" line="276"/>
         <location filename="../mainwin.cpp" line="930"/>
         <source>Age Rating</source>
         <translation type="unfinished">年龄分级</translation>
@@ -437,11 +438,13 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="553"/>
+        <location filename="../initialize.cpp" line="272"/>
         <source>Language</source>
         <translation type="unfinished">语言</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="563"/>
+        <location filename="../initialize.cpp" line="274"/>
         <source>Movie data language</source>
         <translation type="unfinished">影片数据语言</translation>
     </message>
@@ -452,16 +455,18 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="611"/>
+        <location filename="../initialize.cpp" line="282"/>
         <source>Saving</source>
         <translation type="unfinished">保存</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="618"/>
-        <source>Safe saving (read the info)</source>
-        <translation type="unfinished">安全保存（请阅读说明）</translation>
+        <source>Safe saving</source>
+        <translation type="unfinished">安全保存</translation>
     </message>
     <message>
         <location filename="../initialize.cpp" line="153"/>
+        <location filename="../initialize.cpp" line="296"/>
         <source>Apply</source>
         <translation type="unfinished">应用</translation>
     </message>
@@ -486,105 +491,110 @@
         <translation type="unfinished">含不良内容</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="220"/>
+        <location filename="../initialize.cpp" line="292"/>
         <source>Own genres</source>
         <translation type="unfinished">自定义类型</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="222"/>
+        <location filename="../initialize.cpp" line="201"/>
         <source>Enter genres</source>
         <translation type="unfinished">输入类型</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="225"/>
+        <location filename="../initialize.cpp" line="204"/>
         <source>Show only own genres</source>
         <translation type="unfinished">仅显示自定义类型</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="233"/>
+        <location filename="../initialize.cpp" line="209"/>
         <source>Only fill empty fields</source>
         <translation type="unfinished">仅填充空白字段</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="241"/>
-        <location filename="../initialize.cpp" line="261"/>
+        <location filename="../initialize.cpp" line="271"/>
+        <source>Languages</source>
+        <translation type="unfinished">语言</translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="307"/>
+        <location filename="../initialize.cpp" line="327"/>
         <source>Save</source>
         <translation type="unfinished">保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="242"/>
+        <location filename="../initialize.cpp" line="308"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">将元数据保存到影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="244"/>
+        <location filename="../initialize.cpp" line="310"/>
         <location filename="../mainwin.cpp" line="1805"/>
         <source>Save all</source>
         <translation type="unfinished">全部保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="245"/>
+        <location filename="../initialize.cpp" line="311"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">保存所有已更改影片的元数据</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="250"/>
+        <location filename="../initialize.cpp" line="316"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">请我喝杯咖啡——通过 PayPal 支持 MovieMetaM</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="253"/>
-        <location filename="../initialize.cpp" line="259"/>
+        <location filename="../initialize.cpp" line="319"/>
+        <location filename="../initialize.cpp" line="325"/>
         <source>Settings</source>
         <translation type="unfinished">设置</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="255"/>
+        <location filename="../initialize.cpp" line="321"/>
         <source>Help</source>
         <translation type="unfinished">帮助</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="258"/>
+        <location filename="../initialize.cpp" line="324"/>
         <source>Back</source>
         <translation type="unfinished">返回</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="262"/>
+        <location filename="../initialize.cpp" line="328"/>
         <source>Save settings</source>
         <translation type="unfinished">保存设置</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="267"/>
+        <location filename="../initialize.cpp" line="333"/>
         <source>Add movies</source>
         <translation type="unfinished">添加影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="270"/>
+        <location filename="../initialize.cpp" line="336"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">移除所选影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="352"/>
+        <location filename="../initialize.cpp" line="418"/>
         <source>Enter actors</source>
         <translation type="unfinished">输入演员</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="367"/>
+        <location filename="../initialize.cpp" line="433"/>
         <source>Enter producers</source>
         <translation type="unfinished">输入制片人</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="382"/>
+        <location filename="../initialize.cpp" line="448"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">输入编剧</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="397"/>
+        <location filename="../initialize.cpp" line="463"/>
         <source>Enter directors</source>
         <translation type="unfinished">输入导演</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="461"/>
+        <location filename="../initialize.cpp" line="527"/>
         <location filename="../mainwin.cpp" line="1091"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">无法加载图片。</translation>
@@ -875,8 +885,8 @@
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="81"/>
-        <source>Safe saving (read the info)</source>
-        <translation type="unfinished">安全保存（请阅读说明）</translation>
+        <source>Safe saving</source>
+        <translation type="unfinished">安全保存</translation>
     </message>
     <message>
         <location filename="../setupdialog.cpp" line="89"/>

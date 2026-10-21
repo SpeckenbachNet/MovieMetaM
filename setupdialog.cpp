@@ -78,7 +78,7 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     dataLanguageComboBox->setCurrentIndex(qMax(0, dataLanguageComboBox->findData(Languages::dataLanguage())));
 
     // Saving: the check box has the note about writing directly into the files as an info icon
-    safeSaveCheckBox = new QCheckBox(tr("Safe saving (read the info)"), this);
+    safeSaveCheckBox = new QCheckBox(tr("Safe saving"), this);
 
     // Rounded like the combo boxes of the main window
     applyComboStyle(ageRatingComboBox);

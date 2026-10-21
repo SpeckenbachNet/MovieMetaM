@@ -615,7 +615,7 @@
                <item row="4" column="1">
                 <widget class="QCheckBox" name="safeSaveCheckBox">
                  <property name="text">
-                  <string>Safe saving (read the info)</string>
+                  <string>Safe saving</string>
                  </property>
                 </widget>
                </item>

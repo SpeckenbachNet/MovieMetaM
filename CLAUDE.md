@@ -108,11 +108,15 @@ Linux).
 - `main.cpp` – settings, translator, setup dialog on first start, main window.
 - `mainwin.*`, `initialize.cpp` – main window: movie list (left), movie info (middle),
   TMDB search (right, tabs Results / Data); pages settings and help. Settings page:
-  cards in a centered column, so far one card "General" (`settingsGeneralCard`, styled in
-  `initializeForm()`; rows: language, data language, age rating, preview, saving, own genres
-  (`TagWidget`, `General/CustomGenres`) and the check box `General/OnlyCustomGenres`; the genre
-  box of the movie info is built by `fillGenreList()`: own genres first, then TMDB's, or only the
-  own ones; Apply still takes TMDB's genre).
+  cards by topic in two columns (`initializeSettingsPage()`, decided with the user after trying
+  one long card and a topic list: everything at a glance), each setting a block: heading, control,
+  what belongs to it below. Left: Languages (app with the info icon for the drafts, movie data),
+  Age Rating (combo, the badge preview right below), Saving (safe saving with info icon). Right: Own
+  genres (`TagWidget`, `General/CustomGenres`, below it the check box `General/OnlyCustomGenres`),
+  Apply (`General/FillEmptyOnly`). The widgets still come from the .ui file (the old card
+  `settingsGeneralCard` is only their holder and is deleted) or `initializeComboBoxes()`. Planned:
+  a card TMDB with an own token. The genre box of the movie info is built by `fillGenreList()`:
+  own genres first, then TMDB's, or only the own ones; Apply still takes TMDB's genre.
   No status bar: messages are toasts (`showColumnStatus(StatusColumn, text, level, msec)` →
   `ToastM::show`), centered over the column they belong to (`StatusColumn::Window`: over the
   whole window); Info by the length of the text

@@ -186,16 +186,6 @@ void MainWin::initializeComboBoxes() {
         ui->languageSettingsComboBox->addItem(language.name, language.code);
     }
     setComboEntryByString(ui->languageSettingsComboBox, Languages::appLanguage(), true);
-    if (Languages::hasDraftLanguages()) {
-        // The combo box with the note about the drafts in the first row of the form
-        auto *languageRow = new QWidget(ui->settingsGeneralCard);
-        auto *languageLayout = new QHBoxLayout(languageRow);
-        languageLayout->setContentsMargins(0, 0, 0, 0);
-        ui->settingsGeneralForm->removeWidget(ui->languageSettingsComboBox);
-        languageLayout->addWidget(ui->languageSettingsComboBox, 1);
-        languageLayout->addWidget(new InfoIcon(InfoIcon::draftLanguagesNote(), languageRow));
-        ui->settingsGeneralForm->setWidget(0, QFormLayout::FieldRole, languageRow);
-    }
     for (const Languages::Language &language : Languages::dataLanguages()) {
         ui->dataLanguageSettingsComboBox->addItem(language.name, language.code);
     }
@@ -204,36 +194,112 @@ void MainWin::initializeComboBoxes() {
     // Settings: write into a copy first (slow, but safe)
     m_safeSave = settings.value("General/SafeSave", false).toBool();
     ui->safeSaveCheckBox->setChecked(m_safeSave);
-    // The check box with the info icon (the note is its tooltip) in one row of the form
-    auto *safeSaveRow = new QWidget(ui->settingsGeneralCard);
-    auto *safeSaveLayout = new QHBoxLayout(safeSaveRow);
-    safeSaveLayout->setContentsMargins(0, 0, 0, 0);
-    ui->settingsGeneralForm->removeWidget(ui->safeSaveCheckBox);
-    safeSaveLayout->addWidget(ui->safeSaveCheckBox);
-    safeSaveLayout->addWidget(new InfoIcon(InfoIcon::savingNote(), safeSaveRow));
-    safeSaveLayout->addStretch();
-    ui->settingsGeneralForm->setWidget(4, QFormLayout::FieldRole, safeSaveRow);
 
     // Own genres (listed first in the genre box, e.g. "Series", "Concert") and the wish to see only those
     m_customGenres = settings.value("General/CustomGenres").toStringList();
     m_onlyCustomGenres = settings.value("General/OnlyCustomGenres", false).toBool();
-    auto *genresLabel = new QLabel(tr("Own genres"), ui->settingsGeneralCard);
-    genresLabel->setAlignment(Qt::AlignRight | Qt::AlignTop);
-    m_customGenresWidget = new TagWidget(tr("Enter genres"), ",", ui->settingsGeneralCard);
-    m_customGenresWidget->setMinimumHeight(150);
+    m_customGenresWidget = new TagWidget(tr("Enter genres"), ",", this);
+    m_customGenresWidget->setMinimumHeight(130);
     m_customGenresWidget->setTags(m_customGenres.join(QLatin1Char(',')));
-    m_onlyCustomGenresCheck = new QCheckBox(tr("Show only own genres"), ui->settingsGeneralCard);
+    m_onlyCustomGenresCheck = new QCheckBox(tr("Show only own genres"), this);
     m_onlyCustomGenresCheck->setChecked(m_onlyCustomGenres);
-    ui->settingsGeneralForm->setWidget(5, QFormLayout::LabelRole, genresLabel);
-    ui->settingsGeneralForm->setWidget(5, QFormLayout::FieldRole, m_customGenresWidget);
-    ui->settingsGeneralForm->setWidget(6, QFormLayout::FieldRole, m_onlyCustomGenresCheck);
 
     // "Apply" of TMDB data: everything (as before) or only the fields that are still empty
     m_fillEmptyOnly = settings.value("General/FillEmptyOnly", false).toBool();
-    m_fillEmptyOnlyCheck = new QCheckBox(tr("Only fill empty fields"), ui->settingsGeneralCard);
+    m_fillEmptyOnlyCheck = new QCheckBox(tr("Only fill empty fields"), this);
     m_fillEmptyOnlyCheck->setChecked(m_fillEmptyOnly);
-    ui->settingsGeneralForm->setWidget(7, QFormLayout::FieldRole, m_fillEmptyOnlyCheck);
+
+    initializeSettingsPage();
     fillGenreList();   // available at once, also without TMDB (the genres of TMDB follow)
+}
+
+// The settings page: cards by topic in two columns, each setting a block (a heading, the control,
+// what belongs to it below). The widgets are made in the .ui file or in initializeComboBoxes(); they
+// move out of the old card "General", which is deleted afterwards.
+void MainWin::initializeSettingsPage()
+{
+    const FieldLook look;
+    const QString cardStyle = QStringLiteral(
+        "QFrame#settingsCard { background: %1; border: 1px solid %2; border-radius: %3px; }")
+        .arg(look.fill.name(), look.border.name()).arg(FieldLook::radius);
+    const QString headlineStyle = "QLabel { background-color: " + accentGrey(palette()).name() + "; "
+                                  "color: palette(window-text); font-weight: bold; padding: 6px; "
+                                  "border: none; border-radius: " + QString::number(FieldLook::radius) + "px; }";
+
+    auto *container = new QWidget(ui->settingsPage);
+    container->setMinimumWidth(820);
+    container->setMaximumWidth(1180);
+    auto *columns = new QHBoxLayout(container);
+    columns->setContentsMargins(0, 0, 0, 0);
+    columns->setSpacing(18);
+    auto *left = new QVBoxLayout;
+    auto *right = new QVBoxLayout;
+    left->setSpacing(18);
+    right->setSpacing(18);
+    columns->addLayout(left, 1);
+    columns->addLayout(right, 1);
+
+    // A card with its headline; returns the layout for the blocks
+    const auto addCard = [&](QVBoxLayout *column, const QString &title) {
+        auto *card = new QFrame(container);
+        card->setObjectName(QStringLiteral("settingsCard"));
+        card->setStyleSheet(cardStyle);
+        auto *layout = new QVBoxLayout(card);
+        layout->setContentsMargins(12, 12, 12, 16);
+        layout->setSpacing(8);
+        auto *headline = new QLabel(title, card);
+        headline->setStyleSheet(headlineStyle);
+        layout->addWidget(headline);
+        column->addWidget(card);
+        return layout;
+    };
+    // A heading above a control; a note (info icon) sits at the end of the heading line
+    const auto addBlock = [&](QVBoxLayout *card, const QString &heading, QWidget *control, QWidget *info = nullptr) {
+        auto *row = new QHBoxLayout;
+        row->setContentsMargins(0, 6, 0, 0);
+        row->addWidget(new QLabel(heading, card->parentWidget()));
+        if (info) {
+            row->addWidget(info);
+        }
+        row->addStretch();
+        card->addLayout(row);
+        ui->settingsGeneralForm->removeWidget(control);
+        card->addWidget(control);
+    };
+
+    // Left: language, age rating, saving
+    QVBoxLayout *languageCard = addCard(left, tr("Languages"));
+    addBlock(languageCard, tr("Language"), ui->languageSettingsComboBox,
+             Languages::hasDraftLanguages() ? new InfoIcon(InfoIcon::draftLanguagesNote(), this) : nullptr);
+    addBlock(languageCard, tr("Movie data language"), ui->dataLanguageSettingsComboBox);
+
+    QVBoxLayout *ratingCard = addCard(left, tr("Age Rating"));
+    ui->settingsGeneralForm->removeWidget(ui->ratingSettingsComboBox);
+    ratingCard->addWidget(ui->ratingSettingsComboBox);
+    ui->settingsGeneralForm->removeWidget(ui->ratingPreviewContainer);
+    ratingCard->addWidget(ui->ratingPreviewContainer);   // the badges of the system, right below the choice
+
+    QVBoxLayout *savingCard = addCard(left, tr("Saving"));
+    auto *savingRow = new QHBoxLayout;
+    ui->settingsGeneralForm->removeWidget(ui->safeSaveCheckBox);
+    savingRow->addWidget(ui->safeSaveCheckBox);
+    savingRow->addWidget(new InfoIcon(InfoIcon::savingNote(), this));
+    savingRow->addStretch();
+    savingCard->addLayout(savingRow);
+    left->addStretch();
+
+    // Right: own genres, apply
+    QVBoxLayout *genresCard = addCard(right, tr("Own genres"));
+    genresCard->addWidget(m_customGenresWidget);
+    genresCard->addWidget(m_onlyCustomGenresCheck);   // belongs to the genres: right below them
+
+    QVBoxLayout *applyCard = addCard(right, tr("Apply"));
+    applyCard->addWidget(m_fillEmptyOnlyCheck);
+    right->addStretch();
+
+    // The new cards take the place of the old one
+    delete ui->settingsCardsRow->replaceWidget(ui->settingsGeneralCard, container);
+    delete ui->settingsGeneralCard;   // with the labels of the old form
 }
 
 void MainWin::initializeToolBars() {
