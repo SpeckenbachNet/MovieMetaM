@@ -86,6 +86,16 @@ void TableViewM::dropEvent(QDropEvent *event)
     event->acceptProposedAction();
 }
 
+void TableViewM::keyPressEvent(QKeyEvent *event)
+{
+    // Like the button "−" below the list (it asks if a movie has unsaved changes)
+    if ((event->key() == Qt::Key_Delete || event->key() == Qt::Key_Backspace) && selectionModel()->hasSelection()) {
+        emit removeRequested();
+        return;
+    }
+    QListView::keyPressEvent(event);
+}
+
 void TableViewM::mousePressEvent(QMouseEvent *event)
 {
     // A click on the empty area would clear the selection while the form still shows a movie

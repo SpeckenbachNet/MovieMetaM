@@ -5,7 +5,7 @@ The list on the left holds the movies you are editing. Each entry shows the titl
 ## Adding movies
 
 - Click **+** below the list and choose one or more files, or
-- drag files from your file manager into the list.
+- drag files **or a folder** from your file manager into the list. From a folder, all MP4 and M4V files are added, including those in subfolders (hidden files are left out).
 
 For now **MP4 and M4V files** are supported. Other files are skipped; a short message tells you how many. A movie that is already in the list is not added again.
 
@@ -26,7 +26,7 @@ Rest the mouse on an entry to see the full path of the file and its status. How 
 
 ## Removing
 
-**−** below the list takes the selected movies out of the list.
+**−** below the list takes the selected movies out of the list. So does the Delete or Backspace key in the list. Ctrl+A (Mac: Cmd+A) selects all movies, so you can clear the whole list in one go.
 
 > The files themselves stay on the disk, untouched.
 

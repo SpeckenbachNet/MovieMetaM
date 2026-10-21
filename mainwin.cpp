@@ -23,7 +23,10 @@
 
 #include <QtConcurrent>
 #include <QDir>
+#include <QDirIterator>
+#include <QCollator>
 #include <QStandardPaths>
+#include <algorithm>
 
 #include <QtMath>
 
@@ -1095,7 +1098,49 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
     QString addedFolder;   // the folder of the last movie added: where the next dialog starts
     MediaInfoM reader;
 
+    // A dropped folder becomes the movie files in it, with the subfolders, in natural order (film 2
+    // before film 10). Hidden files stay out: a network drive or stick gets "._film.mp4" next to
+    // every film, which looks like an MP4 but is none. Other file types in a folder do not count as
+    // skipped (only files dropped directly do). A file keeps its path; "folder" is the dropped one.
+    struct Entry { QString path; QString folder; };
+    QList<Entry> entries;
+    bool emptyFolder = false;
+    QStringList filters;
+    for (const QString &suffix : MediaInfoM::supportedSuffixes()) {
+        filters << "*." + suffix;
+    }
+    QCollator collator;
+    collator.setNumericMode(true);
+    collator.setCaseSensitivity(Qt::CaseInsensitive);
     for (const QString &path : filePaths) {
+        if (QFileInfo(path).isDir()) {
+            QStringList found;
+            QDirIterator it(path, filters, QDir::Files | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+            const QDir base(path);
+            while (it.hasNext()) {
+                const QString file = it.next();
+                // QDirIterator lets hidden files through with a name filter: a file or a folder on
+                // the way whose name starts with a dot is skipped here
+                const QStringList parts = base.relativeFilePath(file).split(QLatin1Char('/'));
+                const bool hidden = std::any_of(parts.begin(), parts.end(), [](const QString &part) {
+                    return part.startsWith(QLatin1Char('.'));
+                });
+                if (!hidden) {
+                    found << file;
+                }
+            }
+            std::sort(found.begin(), found.end(), collator);
+            for (const QString &file : std::as_const(found)) {
+                entries.append({file, path});
+            }
+            emptyFolder = emptyFolder || found.isEmpty();
+        } else {
+            entries.append({path, QString()});
+        }
+    }
+
+    for (const Entry &entry : std::as_const(entries)) {
+        const QString &path = entry.path;
         // Only supported file types (MP4 for now)
         if (!MediaInfoM::isSupported(path)) {
             qDebug() << "Unsupported file type, skip:" << path;
@@ -1123,7 +1168,7 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
 
         // Add now to Model
         addFilePathToModel(path);
-        addedFolder = QFileInfo(path).absolutePath();
+        addedFolder = entry.folder.isEmpty() ? QFileInfo(path).absolutePath() : entry.folder;
 
         if (m_loadedMovies.contains(path)) {
             m_originalMovies[path] = m_loadedMovies[path];
@@ -1132,6 +1177,10 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
 
     if (!addedFolder.isEmpty()) {
         settings.setValue("General/LastFolder", addedFolder);   // dialog and drop alike
+    }
+
+    if (emptyFolder && skippedCount == 0 && unreadableCount == 0 && firstNewRowIndex == -1) {
+        showColumnStatus(StatusColumn::Movies, tr("No movies found"));   // the dropped folder has none
     }
 
     QStringList messages;

@@ -5,7 +5,7 @@ Die Liste links enthält die Filme, die du bearbeitest. Jeder Eintrag zeigt den 
 ## Filme hinzufügen
 
 - Klicke auf **+** unter der Liste und wähle eine oder mehrere Dateien aus, oder
-- ziehe Dateien aus dem Dateimanager in die Liste.
+- ziehe Dateien **oder einen Ordner** aus dem Dateimanager in die Liste. Aus einem Ordner kommen alle MP4- und M4V-Dateien hinein, auch die in Unterordnern (versteckte Dateien bleiben draußen).
 
 Unterstützt werden zurzeit **MP4- und M4V-Dateien**. Andere Dateien werden übersprungen, eine kurze Meldung nennt ihre Anzahl. Ein Film, der schon in der Liste steht, wird nicht noch einmal aufgenommen.
 
@@ -26,7 +26,7 @@ Wenn die Maus auf einem Eintrag ruht, zeigt sie den vollständigen Pfad der Date
 
 ## Entfernen
 
-**−** unter der Liste nimmt die ausgewählten Filme aus der Liste.
+**−** unter der Liste nimmt die ausgewählten Filme aus der Liste. Das tut auch die Entf- oder Rücktaste in der Liste. Strg+A (Mac: Cmd+A) wählt alle Filme aus, so leerst du die ganze Liste in einem Zug.
 
 > Die Dateien selbst bleiben unverändert auf der Festplatte.
 

@@ -5,7 +5,7 @@ La liste de gauche contient les films que vous modifiez. Chaque entrée affiche 
 ## Ajouter des films
 
 - Cliquez sur **+** sous la liste et choisissez un ou plusieurs fichiers, ou
-- faites glisser des fichiers de votre gestionnaire de fichiers dans la liste.
+- faites glisser des fichiers **ou un dossier** de votre gestionnaire de fichiers dans la liste. D’un dossier, tous les fichiers MP4 et M4V sont ajoutés, y compris ceux des sous-dossiers (les fichiers cachés sont ignorés).
 
 Pour l’instant, les **fichiers MP4 et M4V** sont pris en charge. Les autres fichiers sont ignorés ; un court message indique combien. Un film déjà présent dans la liste n’est pas ajouté une seconde fois.
 
@@ -26,7 +26,7 @@ Laissez la souris sur une entrée pour voir le chemin complet du fichier et son 
 
 ## Retirer
 
-**−** sous la liste retire les films sélectionnés de la liste.
+**−** sous la liste retire les films sélectionnés de la liste. La touche Suppr ou Retour arrière dans la liste fait de même. Ctrl+A (Mac : Cmd+A) sélectionne tous les films, vous videz ainsi toute la liste d’un coup.
 
 > Les fichiers eux-mêmes restent sur le disque, sans changement.
 

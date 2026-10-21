@@ -5,7 +5,7 @@ La lista de la izquierda contiene las películas que estás editando. Cada entra
 ## Añadir películas
 
 - Haz clic en **+** debajo de la lista y elige uno o varios archivos, o
-- arrastra archivos desde tu gestor de archivos a la lista.
+- arrastra archivos **o una carpeta** desde tu gestor de archivos a la lista. De una carpeta se añaden todos los archivos MP4 y M4V, también los de las subcarpetas (los archivos ocultos se omiten).
 
 Por ahora se admiten **archivos MP4 y M4V**. Los demás archivos se omiten; un breve mensaje indica cuántos. Una película que ya está en la lista no se añade otra vez.
 
@@ -26,7 +26,7 @@ Deja el ratón sobre una entrada para ver la ruta completa del archivo y su esta
 
 ## Quitar
 
-**−** debajo de la lista quita de la lista las películas seleccionadas.
+**−** debajo de la lista quita de la lista las películas seleccionadas. La tecla Supr o Retroceso en la lista hace lo mismo. Ctrl+A (Mac: Cmd+A) selecciona todas las películas, así vacías toda la lista de una vez.
 
 > Los archivos en sí se quedan en el disco, sin cambios.
 
