@@ -194,6 +194,7 @@ private:
     void startImageDownload(const QUrl &imageUrl, std::function<void(const QPixmap &pixmap)> callback,
                             std::function<void()> onError = nullptr);
     void initializeToolBars();
+    void initializeSettingsPage();   // cards by topic (called by initializeComboBoxes)
     void initializeTagWidgets();
     void initializeDetailsTab();
     void initializeDragAndDrop();
