@@ -18,6 +18,10 @@ El país cuyo sistema de clasificación por edades usa MovieMetaM. La vista prev
 
 Esto solo se aplica a las películas cuyo archivo guardado aún no tiene clasificación. Si un archivo ya tiene una, la película conserva su sistema (consulta **Información de la película** y **Búsqueda de películas**). Un cambio tiene efecto de inmediato y se aplica enseguida a la película que se muestra.
 
+## Aplicar datos
+
+**Rellenar solo los campos vacíos** hace que **Aplicar** (en la búsqueda de películas) deje como está todo lo que ya has escrito y rellene solo los huecos, también la carátula. Desactivado por defecto: **Aplicar** toma entonces todo lo que tiene TMDB.
+
 ## Géneros propios
 
 Géneros que quieres tener en la lista de géneros de la información de la película, por ejemplo «Serie» o «Concierto». Escribe un género y pulsa Intro, igual que con los nombres en la información de la película (quitar, orden, las mismas teclas). Tus géneros propios aparecen primero, después los de TMDB. **Mostrar solo los géneros propios** deja fuera de la lista los géneros de TMDB. La lista cambia cuando guardas los ajustes.

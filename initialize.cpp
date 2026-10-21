@@ -227,6 +227,12 @@ void MainWin::initializeComboBoxes() {
     ui->settingsGeneralForm->setWidget(5, QFormLayout::LabelRole, genresLabel);
     ui->settingsGeneralForm->setWidget(5, QFormLayout::FieldRole, m_customGenresWidget);
     ui->settingsGeneralForm->setWidget(6, QFormLayout::FieldRole, m_onlyCustomGenresCheck);
+
+    // "Apply" of TMDB data: everything (as before) or only the fields that are still empty
+    m_fillEmptyOnly = settings.value("General/FillEmptyOnly", false).toBool();
+    m_fillEmptyOnlyCheck = new QCheckBox(tr("Only fill empty fields"), ui->settingsGeneralCard);
+    m_fillEmptyOnlyCheck->setChecked(m_fillEmptyOnly);
+    ui->settingsGeneralForm->setWidget(7, QFormLayout::FieldRole, m_fillEmptyOnlyCheck);
     fillGenreList();   // available at once, also without TMDB (the genres of TMDB follow)
 }
 
@@ -487,6 +493,7 @@ void MainWin::initializeConnects() {
     connect(ui->safeSaveCheckBox, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
     connect(m_customGenresWidget, &TagWidget::tagsChanged, this, &MainWin::onSettingsChanged);
     connect(m_onlyCustomGenresCheck, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
+    connect(m_fillEmptyOnlyCheck, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
     // Preview of the chosen system at once, before saving
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this] {
         fillRatingPreview(ui->ratingSettingsComboBox->currentData().toString());

@@ -141,6 +141,8 @@ private:
     QStringList m_customGenres;       // setting "General/CustomGenres": own genres, listed first
     bool m_onlyCustomGenres = false;  // setting "General/OnlyCustomGenres": the TMDB genres are left out
     QStringList m_tmdbGenres;         // the genres TMDB knows, in the language of the movie data
+    bool m_fillEmptyOnly = false;     // setting "General/FillEmptyOnly": Apply fills only empty fields
+    QCheckBox *m_fillEmptyOnlyCheck = nullptr;
     TagWidget *m_customGenresWidget = nullptr;   // settings page: the own genres
     QCheckBox *m_onlyCustomGenresCheck = nullptr;
     QString dataLanguage;   // language of the movie data for TMDB, e.g. "de-DE"

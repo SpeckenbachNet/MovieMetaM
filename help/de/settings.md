@@ -18,6 +18,10 @@ Das Land, dessen Altersfreigabe-System MovieMetaM verwendet. Die Vorschau zeigt 
 
 Das gilt nur für Filme, deren gespeicherte Datei noch keine Altersfreigabe hat. Hat eine Datei schon eine, bleibt das System des Films (siehe **Filminfo** und **Filmsuche**). Eine Änderung gilt sofort und wird beim gerade gezeigten Film gleich angewendet.
 
+## Daten übernehmen
+
+**Nur leere Felder füllen** sorgt dafür, dass **Übernehmen** (in der Filmsuche) alles, was du schon eingetragen hast, so lässt und nur die Lücken füllt, auch beim Cover. Standardmäßig aus: **Übernehmen** nimmt dann alles, was TMDB hat.
+
 ## Eigene Genres
 
 Genres, die du in der Genre-Liste der Filminfo haben willst, zum Beispiel „Serie“ oder „Konzert“. Tippe ein Genre ein und drücke die Eingabetaste, genau wie bei den Namen in der Filminfo (entfernen, Reihenfolge, dieselben Tasten). Deine eigenen Genres stehen zuerst, danach die Genres von TMDB. **Nur eigene Genres zeigen** lässt die TMDB-Genres aus der Liste weg. Die Liste ändert sich, wenn du die Einstellungen speicherst.
