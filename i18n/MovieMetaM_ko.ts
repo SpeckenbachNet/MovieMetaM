@@ -2,6 +2,239 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ko_KR">
 <context>
+    <name>Country</name>
+    <message>
+        <location filename="../countrynames.cpp" line="7"/>
+        <source>Australia</source>
+        <translation type="unfinished">호주</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="8"/>
+        <source>Belgium</source>
+        <translation type="unfinished">벨기에</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="9"/>
+        <source>Brazil</source>
+        <translation type="unfinished">브라질</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="10"/>
+        <source>Canada</source>
+        <translation type="unfinished">캐나다</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="11"/>
+        <source>Czech Republic</source>
+        <translation type="unfinished">체코</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="12"/>
+        <source>Denmark</source>
+        <translation type="unfinished">덴마크</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="13"/>
+        <source>Finland</source>
+        <translation type="unfinished">핀란드</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="14"/>
+        <source>France</source>
+        <translation type="unfinished">프랑스</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="15"/>
+        <source>Germany</source>
+        <translation type="unfinished">독일</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="16"/>
+        <source>Ghana</source>
+        <translation type="unfinished">가나</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="17"/>
+        <source>Hong Kong</source>
+        <translation type="unfinished">홍콩</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="18"/>
+        <source>Hungary</source>
+        <translation type="unfinished">헝가리</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="19"/>
+        <source>Iceland</source>
+        <translation type="unfinished">아이슬란드</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="20"/>
+        <source>India</source>
+        <translation type="unfinished">인도</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="21"/>
+        <source>Indonesia</source>
+        <translation type="unfinished">인도네시아</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="22"/>
+        <source>Ireland</source>
+        <translation type="unfinished">아일랜드</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="23"/>
+        <source>Italy</source>
+        <translation type="unfinished">이탈리아</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="24"/>
+        <source>Japan</source>
+        <translation type="unfinished">일본</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="25"/>
+        <source>Kenya</source>
+        <translation type="unfinished">케냐</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="26"/>
+        <source>Kuwait</source>
+        <translation type="unfinished">쿠웨이트</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="27"/>
+        <source>Malaysia</source>
+        <translation type="unfinished">말레이시아</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="28"/>
+        <source>Maldives</source>
+        <translation type="unfinished">몰디브</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="29"/>
+        <source>Mexico</source>
+        <translation type="unfinished">멕시코</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="30"/>
+        <source>Netherlands</source>
+        <translation type="unfinished">네덜란드</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="31"/>
+        <source>New Zealand</source>
+        <translation type="unfinished">뉴질랜드</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="32"/>
+        <source>Nigeria</source>
+        <translation type="unfinished">나이지리아</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="33"/>
+        <source>Norway</source>
+        <translation type="unfinished">노르웨이</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="34"/>
+        <source>Papua New Guinea</source>
+        <translation type="unfinished">파푸아뉴기니</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="35"/>
+        <source>Paraguay</source>
+        <translation type="unfinished">파라과이</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="36"/>
+        <source>Philippines</source>
+        <translation type="unfinished">필리핀</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="37"/>
+        <source>Québec</source>
+        <translation type="unfinished">퀘벡</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="38"/>
+        <source>Russia</source>
+        <translation type="unfinished">러시아</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="39"/>
+        <source>Saudi Arabia</source>
+        <translation type="unfinished">사우디아라비아</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="40"/>
+        <source>Singapore</source>
+        <translation type="unfinished">싱가포르</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="41"/>
+        <source>Slovakia</source>
+        <translation type="unfinished">슬로바키아</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="42"/>
+        <source>South Africa</source>
+        <translation type="unfinished">남아프리카 공화국</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="43"/>
+        <source>South Korea</source>
+        <translation type="unfinished">대한민국</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="44"/>
+        <source>Spain</source>
+        <translation type="unfinished">스페인</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="45"/>
+        <source>Sweden</source>
+        <translation type="unfinished">스웨덴</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="46"/>
+        <source>Switzerland</source>
+        <translation type="unfinished">스위스</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="47"/>
+        <source>Taiwan</source>
+        <translation type="unfinished">대만</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="48"/>
+        <source>Thailand</source>
+        <translation type="unfinished">태국</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="49"/>
+        <source>Turkey</source>
+        <translation type="unfinished">튀르키예</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="50"/>
+        <source>United Arab Emirates</source>
+        <translation type="unfinished">아랍에미리트</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="51"/>
+        <source>United Kingdom</source>
+        <translation type="unfinished">영국</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="52"/>
+        <source>United States</source>
+        <translation type="unfinished">미국</translation>
+    </message>
+</context>
+<context>
     <name>HelpPage</name>
     <message>
         <location filename="../helppage.cpp" line="113"/>

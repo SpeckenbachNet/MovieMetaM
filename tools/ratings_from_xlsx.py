@@ -5,7 +5,8 @@
     python3 tools/ratings_from_xlsx.py ~/kDrive/Development/QT/age_ratings.xlsx
 
 Reads the sheet "Ratings" (one row per step) and writes one JSON file per country to
-ressources/ratings/<code>.json plus the file list in Ratings.qrc. Needs openpyxl
+ressources/ratings/<code>.json plus the file list in Ratings.qrc and countrynames.cpp (the country
+names for lupdate: one translatable text each, context "Country"). Needs openpyxl
 (pip install --user openpyxl). Run it again after every change of the table.
 """
 import json
@@ -18,6 +19,7 @@ from openpyxl import load_workbook
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_DIR = os.path.join(ROOT, "ressources", "ratings")
 QRC = os.path.join(ROOT, "Ratings.qrc")
+NAMES_CPP = os.path.join(ROOT, "countrynames.cpp")
 
 
 def text(value):
@@ -73,6 +75,23 @@ def main():
         for code in sorted(countries):
             f.write(f'        <file alias="{code}.json">ressources/ratings/{code}.json</file>\n')
         f.write("    </qresource>\n</RCC>\n")
+
+    # The names of the countries as texts for lupdate: translated in the .ts files (context
+    # "Country"), the English name is the key (see agerating.cpp)
+    names = []
+    for country in countries.values():
+        name = country["country"]["en"]
+        if name and name not in names:
+            names.append(name)
+    with open(NAMES_CPP, "w", encoding="utf-8") as f:
+        f.write("// Written by tools/ratings_from_xlsx.py – do not edit by hand.\n")
+        f.write("// The names of the countries of the age rating systems, only here for lupdate: they are\n")
+        f.write("// translated in the .ts files (context \"Country\") and looked up in agerating.cpp.\n")
+        f.write("#include <QtGlobal>\n\n")
+        f.write("[[maybe_unused]] static const char *const kCountryNames[] = {\n")
+        for name in names:
+            f.write(f'    QT_TRANSLATE_NOOP("Country", "{name}"),\n')
+        f.write("};\n")
 
     print(f"{len(countries)} countries, {sum(len(c['ratings']) for c in countries.values())} steps written")
 
