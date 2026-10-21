@@ -265,7 +265,10 @@ ruft ihre Funktionen auf wie die von Qt.
     Doppelklicks. Eine neue Suche schaltet auf den Tab „Results“ zurück.
 - **Apply** (`applyTmdbMovie()`) nimmt alles Gefundene in den ausgewählten Film (leere Werte ändern
   nichts), zeigt ihn neu und setzt den Status auf „geändert“. Das gewählte Poster lädt danach und
-  wird als Cover gesetzt, falls noch derselbe Film ausgewählt ist. Gespeichert wird nicht.
+  wird als Cover gesetzt, falls noch derselbe Film ausgewählt ist. Gespeichert wird nicht. Mit der
+  Einstellung `General/FillEmptyOnly` („Nur leere Felder füllen“, Standard aus) werden nur Felder
+  gefüllt, die noch leer sind, auch Cover und Altersfreigabe; ein nie gesetztes Datum steht im
+  Formular als 1972-01-01 und zählt als leer.
 - **Altersfreigabe von TMDB:** `findTmdbRating()` nimmt das Land aus `ratingCountry()`: das System der
   **gespeicherten** Datei, solange der Film es noch hat, sonst das Land der Einstellungen (auch bei
   einer übernommenen oder gewählten, noch nicht gespeicherten Freigabe; beim Speichern der
@@ -383,6 +386,7 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
 | `General/DataLanguage` | Sprache der Filmdaten für TMDB (z. B. `de-DE`) |
 | `General/SafeSave` | `true`: beim Speichern erst in eine Kopie schreiben (sicher, aber langsam); Standard `false` |
 | `General/LastFolder` | Ordner, aus dem zuletzt Filme hinzugefügt wurden (Öffnen-Dialog und Ablegen); der Dialog startet dort, sonst im Ordner „Filme“ des Benutzers |
+| `General/FillEmptyOnly` | `true`: „Übernehmen“ füllt nur leere Felder (auch Cover und Altersfreigabe); Standard `false` |
 | `General/CustomGenres` | eigene Genres (Liste), stehen in der Genre-Auswahl der Filminfo zuerst |
 | `General/OnlyCustomGenres` | `true`: in der Genre-Auswahl nur die eigenen Genres, ohne die von TMDB; Standard `false` |
 | `General/AgeRatingSystem` | Land des Altersfreigabe-Systems (für Filme ohne Freigabe) |

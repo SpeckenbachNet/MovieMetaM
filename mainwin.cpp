@@ -364,7 +364,8 @@ void MainWin::onSettingsChanged() {
         || dataLanguage != ui->dataLanguageSettingsComboBox->currentData().toString()
         || m_safeSave != ui->safeSaveCheckBox->isChecked()
         || m_customGenres != m_customGenresWidget->getTags()
-        || m_onlyCustomGenres != m_onlyCustomGenresCheck->isChecked()) {
+        || m_onlyCustomGenres != m_onlyCustomGenresCheck->isChecked()
+        || m_fillEmptyOnly != m_fillEmptyOnlyCheck->isChecked()) {
         settingsChanged = true;
         m_saveSettingsBtn->setEnabled(true);
     } else {
@@ -1044,19 +1045,26 @@ void MainWin::applyTmdbMovie()
     }
     MovieData movie = m_loadedMovies.value(key);
     const MovieData &tmdb = m_tmdbMovie;
-    if (!tmdb.title.isEmpty())         movie.title = tmdb.title;
-    if (!tmdb.description.isEmpty())   movie.description = tmdb.description;
-    if (tmdb.releaseDate.isValid())    movie.releaseDate = tmdb.releaseDate;
-    if (!tmdb.studio.isEmpty())        movie.studio = tmdb.studio;
-    if (!tmdb.genre.isEmpty())         movie.genre = tmdb.genre;
-    if (!tmdb.cast.isEmpty())          movie.cast = tmdb.cast;
-    if (!tmdb.directors.isEmpty())     movie.directors = tmdb.directors;
-    if (!tmdb.screenwriters.isEmpty()) movie.screenwriters = tmdb.screenwriters;
-    if (!tmdb.producers.isEmpty())     movie.producers = tmdb.producers;
+    // Setting "Only fill empty fields": what the movie already has stays as it is. A date that was
+    // never set is shown as 1972-01-01 in the form, so it counts as empty, too
+    const auto mayFill = [this](bool fieldIsEmpty) { return !m_fillEmptyOnly || fieldIsEmpty; };
+    const auto isEmpty = [](const QString &text) { return text.trimmed().isEmpty(); };
+    if (!tmdb.title.isEmpty()         && mayFill(isEmpty(movie.title)))          movie.title = tmdb.title;
+    if (!tmdb.description.isEmpty()   && mayFill(isEmpty(movie.description)))    movie.description = tmdb.description;
+    if (tmdb.releaseDate.isValid()    && mayFill(!movie.releaseDate.isValid() || movie.releaseDate == QDate(1972, 1, 1)))
+        movie.releaseDate = tmdb.releaseDate;
+    if (!tmdb.studio.isEmpty()        && mayFill(isEmpty(movie.studio)))         movie.studio = tmdb.studio;
+    if (!tmdb.genre.isEmpty()         && mayFill(isEmpty(movie.genre)))          movie.genre = tmdb.genre;
+    if (!tmdb.cast.isEmpty()          && mayFill(isEmpty(movie.cast)))           movie.cast = tmdb.cast;
+    if (!tmdb.directors.isEmpty()     && mayFill(isEmpty(movie.directors)))      movie.directors = tmdb.directors;
+    if (!tmdb.screenwriters.isEmpty() && mayFill(isEmpty(movie.screenwriters)))  movie.screenwriters = tmdb.screenwriters;
+    if (!tmdb.producers.isEmpty()     && mayFill(isEmpty(movie.producers)))      movie.producers = tmdb.producers;
+    const bool hadCover = !movie.cover.isNull();
 
     QString systemID;
     RatingEntry rating;
-    if (findTmdbRating(ratingCountry(movie), systemID, rating)) {
+    if (mayFill(isEmpty(movie.ratingText) && isEmpty(movie.ratingSystem))
+        && findTmdbRating(ratingCountry(movie), systemID, rating)) {
         movie.ratingSystem = systemID;
         movie.ratingText = rating.code;
         movie.ratingScore = rating.score;
@@ -1071,7 +1079,7 @@ void MainWin::applyTmdbMovie()
 
     // The chosen poster as cover: loaded in a bigger size, then taken into the same movie
     const int poster = m_posterPicker->current();
-    if (poster >= 0 && poster < m_posterPaths.size()) {
+    if (poster >= 0 && poster < m_posterPaths.size() && mayFill(!hadCover)) {
         startImageDownload(QUrl("https://image.tmdb.org/t/p/w780" + m_posterPaths.at(poster)),
                            [this, key](const QPixmap &cover) {
             if (ui->fileListTableView->movieKey() != key) return;   // another movie is shown now
@@ -1745,6 +1753,8 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     m_onlyCustomGenres = m_onlyCustomGenresCheck->isChecked();
     settings.setValue("General/CustomGenres", m_customGenres);
     settings.setValue("General/OnlyCustomGenres", m_onlyCustomGenres);
+    m_fillEmptyOnly = m_fillEmptyOnlyCheck->isChecked();
+    settings.setValue("General/FillEmptyOnly", m_fillEmptyOnly);
     settings.sync();
     if (settings.status() == QSettings::NoError) {
         // Success; the language of the app only changes with the next start

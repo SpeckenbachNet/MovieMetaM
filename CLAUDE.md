@@ -160,7 +160,9 @@ Linux).
 - TMDB data (double click on a result, tab "Data"): `onSearchTableViewDoubleClicked` loads
   `/movie/{id}` (`append_to_response=credits,release_dates`) and `/movie/{id}/images`;
   `fillDetailsTab`, `fillPosters`; "Apply" (`applyTmdbMovie`) takes everything found into the
-  selected movie (empty values change nothing). `posterpicker.*` – the large poster with a badge
+  selected movie (empty values change nothing; setting `General/FillEmptyOnly` "Only fill empty
+  fields", off by default: then only fields that are still empty are filled, cover and age rating
+  included – a never-set date is 1972-01-01 in the form, so it counts as empty). `posterpicker.*` – the large poster with a badge
   "n / m"; a click opens a list (`TwoLineDelegate`) of up to 30 posters (language, size,
   rating). Age rating: `findTmdbRating` takes the entry of the country from `ratingCountry()` – the
   system of the SAVED file as long as the movie still has it, else the country of the settings (also
@@ -224,7 +226,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.26; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.27; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**
