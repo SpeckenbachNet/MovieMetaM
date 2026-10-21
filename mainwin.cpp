@@ -365,7 +365,8 @@ void MainWin::onSettingsChanged() {
         || m_safeSave != ui->safeSaveCheckBox->isChecked()
         || m_customGenres != m_customGenresWidget->getTags()
         || m_onlyCustomGenres != m_onlyCustomGenresCheck->isChecked()
-        || m_fillEmptyOnly != m_fillEmptyOnlyCheck->isChecked()) {
+        || m_fillEmptyOnly != m_fillEmptyOnlyCheck->isChecked()
+        || m_tmdbToken != m_tmdbTokenEdit->text().trimmed()) {
         settingsChanged = true;
         m_saveSettingsBtn->setEnabled(true);
     } else {
@@ -1670,8 +1671,8 @@ void MainWin::startApiRequest(const QUrl &url)
     QNetworkRequest request(url);
 
     // Set Authentication-Token as header
-    // Token comes from tmdb_token.txt at build time (see CMakeLists.txt)
-    const QByteArray authToken = QByteArrayLiteral(TMDB_TOKEN);
+    // Own token from the settings, else the one from tmdb_token.txt at build time (see CMakeLists.txt)
+    const QByteArray authToken = m_tmdbToken.isEmpty() ? QByteArrayLiteral(TMDB_TOKEN) : m_tmdbToken.toUtf8();
     if (authToken.isEmpty()) {
         showColumnStatus(StatusColumn::Search, tr("No TMDB token: the movie search is not available."), ToastM::Level::Error);
         return;
@@ -1755,6 +1756,12 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     settings.setValue("General/OnlyCustomGenres", m_onlyCustomGenres);
     m_fillEmptyOnly = m_fillEmptyOnlyCheck->isChecked();
     settings.setValue("General/FillEmptyOnly", m_fillEmptyOnly);
+    m_tmdbToken = m_tmdbTokenEdit->text().trimmed();
+    if (m_tmdbToken.isEmpty()) {
+        settings.remove("TMDB/Token");
+    } else {
+        settings.setValue("TMDB/Token", m_tmdbToken);
+    }
     settings.sync();
     if (settings.status() == QSettings::NoError) {
         // Success; the language of the app only changes with the next start

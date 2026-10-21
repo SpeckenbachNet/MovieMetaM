@@ -246,7 +246,9 @@ ruft ihre Funktionen auf wie die von Qt.
 ## 5. TMDB
 
 - Der Token kommt zur Bauzeit aus `tmdb_token.txt`; `startApiRequest()` setzt ihn als
-  Authorization-Header. Fehlt er, zeigt die App „No TMDB token“ als Meldung.
+  Authorization-Header. Ein eigener Token aus den Einstellungen (`TMDB/Token`, Karte „TMDB“:
+  verdecktes Feld mit Auge, darunter welcher Token gilt) hat Vorrang. Fehlen beide, zeigt die
+  App „No TMDB token“ als Meldung.
 - Anfragen (alle mit `language=<Sprache der Filmdaten>`):
   - Suche: `https://api.themoviedb.org/3/search/movie` (mit `QUrlQuery` gebaut, damit `&`, `#`
     usw. im Titel richtig kodiert werden).
@@ -395,6 +397,7 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
 | `General/FillEmptyOnly` | `true`: „Übernehmen“ füllt nur leere Felder (auch Cover und Altersfreigabe); Standard `false` |
 | `General/CustomGenres` | eigene Genres (Liste), stehen in der Genre-Auswahl der Filminfo zuerst |
 | `General/OnlyCustomGenres` | `true`: in der Genre-Auswahl nur die eigenen Genres, ohne die von TMDB; Standard `false` |
+| `TMDB/Token` | eigener TMDB-Token („API Read Access Token“); leer bzw. fehlend: der eingebaute `TMDB_TOKEN`. Im Klartext in der INI |
 | `General/AgeRatingSystem` | Land des Altersfreigabe-Systems (für Filme ohne Freigabe) |
 | `Window/Geometry` | Größe und Lage des Fensters |
 | `Window/Splitter` | Breiten der drei Spalten |

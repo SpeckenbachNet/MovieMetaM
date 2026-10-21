@@ -31,3 +31,9 @@ Genres, die du in der Genre-Liste der Filminfo haben willst, zum Beispiel „Ser
 ## Speichern
 
 **Sicheres Speichern** schreibt die Daten in eine Kopie, prüft sie und ersetzt erst dann die Datei. Das ist sicherer, braucht aber Platz und mehr Zeit. Was genau passiert, steht unter **Speichern**.
+
+## TMDB
+
+MovieMetaM sucht bei TMDB mit einem Token, der in die App eingebaut ist. Wenn du dein eigenes TMDB-Konto benutzen willst, trag deinen eigenen Token ein (den „API Read Access Token“ aus den API-Einstellungen deines TMDB-Kontos, kostenlos). Das Feld verdeckt den Token; das Auge am Ende zeigt ihn. Unter dem Feld steht, welcher Token gerade benutzt wird. Lässt du das Feld leer, gilt wieder der eingebaute Token.
+
+> Der Token steht in der Einstellungsdatei von MovieMetaM, nicht verschlüsselt.

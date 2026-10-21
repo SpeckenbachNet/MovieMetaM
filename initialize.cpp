@@ -22,7 +22,10 @@
 #include "twolinedelegate.h"
 #include "posterpreview.h"
 
+#include <QAction>
 #include <QDesktopServices>
+#include <QLineEdit>
+#include <QPainter>
 #include <QSvgRenderer>
 #include <QUrl>
 
@@ -209,8 +212,48 @@ void MainWin::initializeComboBoxes() {
     m_fillEmptyOnlyCheck = new QCheckBox(tr("Only fill empty fields"), this);
     m_fillEmptyOnlyCheck->setChecked(m_fillEmptyOnly);
 
+    // Own TMDB token (password field with an eye): replaces the one built into the app
+    m_tmdbToken = settings.value("TMDB/Token").toString().trimmed();
+    m_tmdbTokenEdit = new QLineEdit(this);
+    m_tmdbTokenEdit->setEchoMode(QLineEdit::Password);
+    m_tmdbTokenEdit->setPlaceholderText(tr("Token of the built-in account"));
+    m_tmdbTokenEdit->setText(m_tmdbToken);
+    applyInputStyle(m_tmdbTokenEdit);
+    {
+        // The eye at the end of the field shows or hides the token
+        const QColor iconColor = palette().color(QPalette::Text);
+        const auto tinted = [&iconColor](const QString &path) {
+            QPixmap pm = QIcon(path).pixmap(32, 32);
+            QPainter p(&pm);
+            p.setCompositionMode(QPainter::CompositionMode_SourceIn);
+            p.fillRect(pm.rect(), iconColor);
+            return QIcon(pm);
+        };
+        QAction *eye = m_tmdbTokenEdit->addAction(tinted(QStringLiteral(":icons/eye")), QLineEdit::TrailingPosition);
+        eye->setCheckable(true);
+        eye->setToolTip(tr("Show the token"));
+        connect(eye, &QAction::toggled, this, [this, eye, tinted](bool shown) {
+            m_tmdbTokenEdit->setEchoMode(shown ? QLineEdit::Normal : QLineEdit::Password);
+            eye->setIcon(tinted(shown ? QStringLiteral(":icons/eye_off") : QStringLiteral(":icons/eye")));
+            eye->setToolTip(shown ? tr("Hide the token") : tr("Show the token"));
+        });
+    }
+
     initializeSettingsPage();
+    updateTmdbTokenStatus();
     fillGenreList();   // available at once, also without TMDB (the genres of TMDB follow)
+}
+
+// Says which TMDB token the next request uses
+void MainWin::updateTmdbTokenStatus()
+{
+    if (!m_tmdbTokenEdit->text().trimmed().isEmpty()) {
+        m_tmdbTokenStatus->setText(tr("Your own token is used."));
+    } else if (!QByteArrayLiteral(TMDB_TOKEN).isEmpty()) {
+        m_tmdbTokenStatus->setText(tr("The token built into the app is used."));
+    } else {
+        m_tmdbTokenStatus->setText(tr("No token: the movie search is not available."));
+    }
 }
 
 // The settings page: cards by topic in two columns, each setting a block (a heading, the control,
@@ -267,7 +310,7 @@ void MainWin::initializeSettingsPage()
         card->addWidget(control);
     };
 
-    // Left: language, age rating, saving
+    // Left: language, age rating, saving, apply
     QVBoxLayout *languageCard = addCard(left, tr("Languages"));
     addBlock(languageCard, tr("Language"), ui->languageSettingsComboBox,
              Languages::hasDraftLanguages() ? new InfoIcon(InfoIcon::draftLanguagesNote(), this) : nullptr);
@@ -286,15 +329,27 @@ void MainWin::initializeSettingsPage()
     savingRow->addWidget(new InfoIcon(InfoIcon::savingNote(), this));
     savingRow->addStretch();
     savingCard->addLayout(savingRow);
+
+    QVBoxLayout *applyCard = addCard(left, tr("Apply"));
+    applyCard->addWidget(m_fillEmptyOnlyCheck);
     left->addStretch();
 
-    // Right: own genres, apply
+    // Right: own genres, TMDB
     QVBoxLayout *genresCard = addCard(right, tr("Own genres"));
     genresCard->addWidget(m_customGenresWidget);
     genresCard->addWidget(m_onlyCustomGenresCheck);   // belongs to the genres: right below them
 
-    QVBoxLayout *applyCard = addCard(right, tr("Apply"));
-    applyCard->addWidget(m_fillEmptyOnlyCheck);
+    QVBoxLayout *tmdbCard = addCard(right, tr("TMDB"));
+    auto *tmdbHint = new QLabel(tr("With an own token (API Read Access Token) the search uses your TMDB account. "
+                                   "You get it free in your <a href=\"https://www.themoviedb.org/settings/api\">TMDB account</a>. "
+                                   "Leave the field empty to use the token built into the app."), this);
+    tmdbHint->setWordWrap(true);
+    tmdbHint->setOpenExternalLinks(true);
+    tmdbHint->setStyleSheet(QStringLiteral("QLabel { color: %1; }").arg(look.placeholder.name()));
+    m_tmdbTokenStatus = new QLabel(this);
+    tmdbCard->addWidget(m_tmdbTokenEdit);
+    tmdbCard->addWidget(m_tmdbTokenStatus);
+    tmdbCard->addWidget(tmdbHint);
     right->addStretch();
 
     // The new cards take the place of the old one
@@ -560,6 +615,8 @@ void MainWin::initializeConnects() {
     connect(m_customGenresWidget, &TagWidget::tagsChanged, this, &MainWin::onSettingsChanged);
     connect(m_onlyCustomGenresCheck, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
     connect(m_fillEmptyOnlyCheck, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
+    connect(m_tmdbTokenEdit, &QLineEdit::textChanged, this, &MainWin::onSettingsChanged);
+    connect(m_tmdbTokenEdit, &QLineEdit::textChanged, this, &MainWin::updateTmdbTokenStatus);
     // Preview of the chosen system at once, before saving
     connect(ui->ratingSettingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this] {
         fillRatingPreview(ui->ratingSettingsComboBox->currentData().toString());
