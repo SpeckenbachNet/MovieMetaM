@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.8.8")
+set(PROJECT_VERSION "0.8.9")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -158,6 +158,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
+    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/ressources/macos/Info.plist.in   # adds CFBundleLocalizations (de, en)
+    MACOSX_BUNDLE_BUNDLE_NAME ${PROJECT_NAME}
     MACOSX_BUNDLE_GUI_IDENTIFIER "${ORGANIZATION_DOMAIN}.${PROJECT_NAME}"
     MACOSX_BUNDLE_ICON_FILE app_icon.icns
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
