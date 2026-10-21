@@ -47,8 +47,8 @@ Other languages (fr, es, it, pt_BR, zh_CN, ja, ko): drafts by Claude, **not chec
 `type="unfinished"` (lrelease still puts them into the .qm), the help texts address the reader
 with "vous" etc. When a draft has been checked: remove the mark and note it here. Checked so far: none.
 After changing texts, new entries of the draft languages stay empty (English) until translated.
-The texts in `mainwin.ui` and the help name UI items in bold ("**Save**"): the French help uses the
-French UI terms, keep them in step. Country names of the age ratings: translated in the .ts files (context "Country", the English
+The texts in `mainwin.ui` and the help name UI items in bold ("**Save**"): the French and Spanish help use
+their UI terms, keep them in step. Country names of the age ratings: translated in the .ts files (context "Country", the English
 name is the key; list in the generated `countrynames.cpp`, looked up in `agerating.cpp`).
 
 ## Shared classes (`../libraries`)
@@ -136,7 +136,7 @@ Linux).
   `:/i18n/MovieMetaM_<code>.qm`, English always; codes like `de`, `pt_BR`, `zh_CN`; setting
   `language`, takes effect after a restart; `resolveAppLanguage()`: the code itself, else the
   same language family (`pt_PT` → `pt_BR`, `zh_TW` → `zh_CN`), else English; the one function is
-  used by the translator, the help and the age ratings). Languages: de, en; drafts (UI by Claude, not checked): fr (with help), es, it, pt_BR,
+  used by the translator, the help and the age ratings). Languages: de, en; drafts (by Claude, not checked): fr and es (UI and help), it, pt_BR,
   zh_CN, ja, ko (UI only, the help falls back to English) (table `kAppLanguages`, `APP_LANGUAGES` in `CMakeLists.txt`, help texts in `help/<code>/`,
   a help topic without a text in the language falls back to English) and the movie data for
   TMDB (genre list and search, e.g. `ja-JP`, setting `General/DataLanguage`, takes effect at once). Both follow the system
@@ -206,7 +206,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.18; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.19; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

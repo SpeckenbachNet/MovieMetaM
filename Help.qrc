@@ -19,5 +19,11 @@
         <file alias="fr/saving.md">help/fr/saving.md</file>
         <file alias="fr/settings.md">help/fr/settings.md</file>
         <file alias="fr/about.md">help/fr/about.md</file>
+        <file alias="es/movielist.md">help/es/movielist.md</file>
+        <file alias="es/movieinfo.md">help/es/movieinfo.md</file>
+        <file alias="es/moviesearch.md">help/es/moviesearch.md</file>
+        <file alias="es/saving.md">help/es/saving.md</file>
+        <file alias="es/settings.md">help/es/settings.md</file>
+        <file alias="es/about.md">help/es/about.md</file>
     </qresource>
 </RCC>
