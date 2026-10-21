@@ -473,6 +473,7 @@ void MainWin::initializeConnects() {
     // Changes from UI saved in Dataset.
     // LineEdits
     connect(ui->titleEdit, &QLineEdit::textEdited, this, &MainWin::onDataChanged);
+    connect(ui->titleEdit, &QLineEdit::textEdited, this, &MainWin::showTitleInSearch);   // after onDataChanged: the new title
     connect(ui->studioEdit, &QLineEdit::textEdited, this, &MainWin::onDataChanged);
     // TextEdit
     connect(ui->descriptionText, &QTextEdit::textChanged, this, &MainWin::onDataChanged);

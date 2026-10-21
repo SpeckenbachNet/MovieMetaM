@@ -4,7 +4,7 @@ A la derecha encuentras datos de películas en TMDB (The Movie Database) y los p
 
 ## Buscar
 
-Escribe un título en el campo de búsqueda y pulsa Intro. Los resultados aparecen en la pestaña **Resultados**, cada uno con póster, título y año. Un breve mensaje indica cuántas películas se han encontrado. Se muestran los primeros 20 resultados; si TMDB conoce más, dice por ejemplo «Se muestran 20 de 134 películas», y tú acotas la búsqueda.
+Al seleccionar una película, el campo de búsqueda ya contiene su título (o el nombre del archivo). Cámbialo si quieres y pulsa Intro. El campo sigue al título cuando lo cambias en la información de la película. O escribe tú un título y pulsa Intro. Los resultados aparecen en la pestaña **Resultados**, cada uno con póster, título y año. Un breve mensaje indica cuántas películas se han encontrado. Se muestran los primeros 20 resultados; si TMDB conoce más, dice por ejemplo «Se muestran 20 de 134 películas», y tú acotas la búsqueda.
 
 El idioma en el que TMDB busca y responde es el **Idioma de los datos de la película** de los ajustes.
 

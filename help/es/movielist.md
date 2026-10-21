@@ -1,6 +1,6 @@
 # Lista de películas
 
-La lista de la izquierda contiene las películas que estás editando. Cada entrada muestra el título y, debajo, el nombre del archivo. Si una película aún no tiene título, se muestra en su lugar el nombre del archivo sin extensión.
+La lista de la izquierda contiene las películas que estás editando. Cada entrada muestra el título y, debajo, el nombre del archivo. Si una película aún no tiene título, se muestra en su lugar el nombre del archivo sin extensión. La entrada sigue al título cuando lo cambias.
 
 ## Añadir películas
 

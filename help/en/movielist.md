@@ -1,6 +1,6 @@
 # Movie List
 
-The list on the left holds the movies you are editing. Each entry shows the title and the file name below it. If a movie has no title yet, the file name without its extension is shown instead.
+The list on the left holds the movies you are editing. Each entry shows the title and the file name below it. If a movie has no title yet, the file name without its extension is shown instead. The entry follows the title as you change it.
 
 ## Adding movies
 

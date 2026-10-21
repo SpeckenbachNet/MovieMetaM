@@ -1,6 +1,6 @@
 # Liste des films
 
-La liste de gauche contient les films que vous modifiez. Chaque entrée affiche le titre et, en dessous, le nom du fichier. Si un film n’a pas encore de titre, le nom du fichier sans son extension est affiché à la place.
+La liste de gauche contient les films que vous modifiez. Chaque entrée affiche le titre et, en dessous, le nom du fichier. Si un film n’a pas encore de titre, le nom du fichier sans son extension est affiché à la place. L’entrée suit le titre quand vous le modifiez.
 
 ## Ajouter des films
 

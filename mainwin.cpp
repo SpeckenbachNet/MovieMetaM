@@ -353,6 +353,7 @@ void MainWin::onDataChanged() {
         this->updateStatus(row, "unchanged");
         qDebug() << "Dataset unchanged!";
     }
+    updateListEntry(row);   // the title may have changed
     updateSaveButtons();
 }
 
@@ -1065,6 +1066,7 @@ void MainWin::applyTmdbMovie()
     m_loadedMovies[key] = movie;
     displayMovie(movie);
     onDataChanged();
+    showTitleInSearch();
     showColumnStatus(StatusColumn::Info, tr("Data applied"));
 
     // The chosen poster as cover: loaded in a bigger size, then taken into the same movie
@@ -1203,6 +1205,38 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
     }
 }
 
+// The title of the movie, else its file name before the first dot with "_" as space
+QString MainWin::listTitle(const MovieData &movie) const
+{
+    if (!movie.title.trimmed().isEmpty()) {
+        return movie.title;
+    }
+    QString name = QFileInfo(movie.filePath).fileName().split(".").first();
+    return name.replace("_", " ");
+}
+
+// The search field follows the title of the shown movie (selecting, typing the title, applying data)
+void MainWin::showTitleInSearch()
+{
+    const QString key = ui->fileListTableView->movieKey();
+    if (m_loadedMovies.contains(key)) {
+        ui->searchEdit->setText(listTitle(m_loadedMovies.value(key)));
+    }
+}
+
+// The first line of the entry follows the current title (typing, apply); the second one is the file name
+void MainWin::updateListEntry(int row)
+{
+    QStandardItem *item = m_FilelistModel->item(row, 0);
+    if (!item) return;
+    const QString key = item->data(Qt::UserRole).toString();
+    if (!m_loadedMovies.contains(key)) return;
+    const QString text = listTitle(m_loadedMovies.value(key)) + "\n" + QFileInfo(key).fileName();
+    if (item->text() != text) {
+        item->setText(text);
+    }
+}
+
 void MainWin::addFilePathToModel(const QString &filePath)
 {
     // Read data from file to model and save in map
@@ -1212,19 +1246,7 @@ void MainWin::addFilePathToModel(const QString &filePath)
     m_originalMovies.insert(filePath, movie); // put movie also to memory
 
     // One entry per movie: title + file name as text, status as icon, file path in UserRole
-    QString combinedText;
-    QString fileName = QFileInfo(filePath).fileName();
-
-    if (!movie.title.isEmpty()) {
-        combinedText = movie.title + "\n" + fileName;
-    }
-    else {
-        // Split Filename before . and replace "_" with " "
-        QStringList splitedTitle = fileName.split(".");
-        QString onlyTitle = splitedTitle.first();
-        QString noTitle = onlyTitle.replace("_"," ");
-        combinedText = noTitle + "\n" + fileName;
-    }
+    const QString combinedText = listTitle(movie) + "\n" + QFileInfo(filePath).fileName();
     QStandardItem *movieItem = new QStandardItem(combinedText);
     movieItem->setData(filePath, Qt::UserRole);
     movieItem->setData(m_statusGreen, Qt::DecorationRole);
@@ -1432,6 +1454,8 @@ void MainWin::onCurrentMovieChanged(const QModelIndex &index){
         // Display movie data
         displayMovie(movie);
     }
+    // The search field suggests the title of the movie, else its file name (what the list shows)
+    showTitleInSearch();
     updateSaveButtons();
 }
 

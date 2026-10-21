@@ -4,7 +4,7 @@ Rechts findest du Filmdaten bei TMDB (The Movie Database) und übernimmst sie in
 
 ## Suchen
 
-Tippe einen Titel in das Suchfeld und drücke die Eingabetaste. Die Treffer erscheinen im Reiter **Ergebnisse**, jeder mit Poster, Titel und Erscheinungsjahr. Eine kurze Meldung nennt, wie viele Filme gefunden wurden. Es werden die ersten 20 Treffer gezeigt; findet TMDB mehr, steht dort zum Beispiel „20 von 134 Filmen angezeigt“, und du schränkst die Suche ein.
+Wählst du einen Film aus, steht sein Titel (oder der Dateiname) schon im Suchfeld. Ändere ihn nach Belieben und drücke die Eingabetaste. Das Feld folgt dem Titel, wenn du ihn in der Filminfo änderst. Oder tippe selbst einen Titel und drücke die Eingabetaste. Die Treffer erscheinen im Reiter **Ergebnisse**, jeder mit Poster, Titel und Erscheinungsjahr. Eine kurze Meldung nennt, wie viele Filme gefunden wurden. Es werden die ersten 20 Treffer gezeigt; findet TMDB mehr, steht dort zum Beispiel „20 von 134 Filmen angezeigt“, und du schränkst die Suche ein.
 
 In welcher Sprache TMDB sucht und antwortet, bestimmt die **Sprache der Filmdaten** in den Einstellungen.
 
