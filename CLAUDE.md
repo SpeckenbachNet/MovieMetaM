@@ -130,7 +130,9 @@ Linux).
   shots: `scaleImages()` shows them in half the pixels, `kScreenshotScale`): list state, names with ×,
   poster list, cover with × and video size. Own pictures only, no film posters (rights); the covers in them are drawn/free.
 - `mediainfom.*` – reads MP4 boxes (metadata, iTunMOVI XML, cover); `moviedata.*` – data of a movie.
-- `tagwidget.*` – tag input (cast, directors, ...): a × on hover (`TagDelegate` inside
+- `tagwidget.*` – tag input (cast, directors, ...; a name longer than the list is elided with "…",
+  no horizontal scroll bar: `TagDelegate::sizeHint` has only a height, so the × stays in sight; the
+  tooltip of an elided tag has the full name, `TagModel`): a × on hover (`TagDelegate` inside
   `tagwidget.cpp`) removes a tag, also Delete/Backspace on the selected one
   (afterwards – also after dragging – no tag is selected; Escape, a click outside the list – also on an
   empty area, app-wide event filter – or leaving it with Tab unselects); a click on the text
@@ -222,7 +224,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.25; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.26; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

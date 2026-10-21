@@ -19,6 +19,8 @@
 #include "themecolors.h"
 
 #include <QApplication>
+#include <QFontMetrics>
+#include <QListView>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QShortcut>
@@ -61,6 +63,16 @@ public:
         painter->restore();
     }
 
+    // Only the height counts: the tag takes the width of the list. With its own width a long name
+    // would make the line wider than the list: a horizontal scroll bar, and the × (at the right end
+    // of the tag) out of sight. The text is elided instead (ElideRight of the view).
+    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override
+    {
+        QSize size = QStyledItemDelegate::sizeHint(option, index);
+        size.setWidth(1);
+        return size;
+    }
+
     bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option,
                      const QModelIndex &index) override
     {
@@ -78,6 +90,27 @@ public:
 
 signals:
     void removeRequested(const QModelIndex &index);
+};
+
+// The tags as a string list; a name that does not fit into the list (elided with "…") gets its full
+// text as the tooltip of the entry
+class TagModel : public QStringListModel
+{
+public:
+    using QStringListModel::QStringListModel;
+
+    QListView *view = nullptr;
+
+    QVariant data(const QModelIndex &index, int role) const override
+    {
+        if (role == Qt::ToolTipRole && view) {
+            const QString text = QStringListModel::data(index, Qt::DisplayRole).toString();
+            // Room for the padding of the tag (6 + 20 px) and the margins
+            const int room = view->viewport()->width() - 40;
+            return QFontMetrics(view->font()).horizontalAdvance(text) > room ? QVariant(text) : QVariant();
+        }
+        return QStringListModel::data(index, role);
+    }
 };
 
 } // namespace
@@ -122,8 +155,12 @@ void TagWidget::setupUi(const QString &placeholder)
     m_tagView = new QListView(this);
 
     // Create Model
-    m_tagModel = new QStringListModel(this);
+    auto *tagModel = new TagModel(this);
+    tagModel->view = m_tagView;
+    m_tagModel = tagModel;
     m_tagView->setModel(m_tagModel);
+    m_tagView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);   // long names are elided, not scrolled
+    m_tagView->setTextElideMode(Qt::ElideRight);
 
     // Lower part of the box; items in the accent color of the system, on hover mixed a bit
     // towards the text color (lighter in dark themes, darker in light ones); the selected tag
