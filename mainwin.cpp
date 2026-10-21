@@ -356,7 +356,9 @@ void MainWin::onSettingsChanged() {
     if (countryCode != ui->ratingSettingsComboBox->currentData(Qt::UserRole)
         || Languages::appLanguage() != ui->languageSettingsComboBox->currentData().toString()
         || dataLanguage != ui->dataLanguageSettingsComboBox->currentData().toString()
-        || m_safeSave != ui->safeSaveCheckBox->isChecked()) {
+        || m_safeSave != ui->safeSaveCheckBox->isChecked()
+        || m_customGenres != m_customGenresWidget->getTags()
+        || m_onlyCustomGenres != m_onlyCustomGenresCheck->isChecked()) {
         settingsChanged = true;
         m_saveSettingsBtn->setEnabled(true);
     } else {
@@ -808,13 +810,34 @@ void MainWin::fillGenreComboBox(const QJsonDocument &jsonDoc)
         }
     }
 
-    // Filled again after a change of the language: keep the genre of the current movie
-    // selected, without a "changed"
+    m_tmdbGenres = genreNames;
+    fillGenreList();
+}
+
+// Own genres first, then the ones of TMDB (without those that have the same name as an own one);
+// only the own ones if the setting says so. Filled again after a change of the language or of the
+// own genres: keep the genre of the current movie selected, without a "changed"
+void MainWin::fillGenreList()
+{
+    QStringList names;
+    for (const QString &genre : std::as_const(m_customGenres)) {
+        if (!genre.trimmed().isEmpty() && !names.contains(genre.trimmed(), Qt::CaseInsensitive)) {
+            names.append(genre.trimmed());
+        }
+    }
+    if (!m_onlyCustomGenres) {
+        for (const QString &genre : std::as_const(m_tmdbGenres)) {
+            if (!names.contains(genre, Qt::CaseInsensitive)) {
+                names.append(genre);
+            }
+        }
+    }
+
     const QSignalBlocker blocker(ui->genreComboBox);
     const QString currentGenre = ui->genreComboBox->currentText();
     ui->genreComboBox->clear();
     ui->genreComboBox->addItem("");
-    ui->genreComboBox->addItems(genreNames);
+    ui->genreComboBox->addItems(names);
     setComboEntryByString(ui->genreComboBox, currentGenre, false);
 }
 
@@ -1629,6 +1652,10 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     settings.setValue("General/DataLanguage", newDataLanguage);
     settings.setValue("General/SafeSave", ui->safeSaveCheckBox->isChecked());
     m_safeSave = ui->safeSaveCheckBox->isChecked();
+    m_customGenres = m_customGenresWidget->getTags();
+    m_onlyCustomGenres = m_onlyCustomGenresCheck->isChecked();
+    settings.setValue("General/CustomGenres", m_customGenres);
+    settings.setValue("General/OnlyCustomGenres", m_onlyCustomGenres);
     settings.sync();
     if (settings.status() == QSettings::NoError) {
         // Success; the language of the app only changes with the next start
@@ -1652,6 +1679,7 @@ void MainWin::handleSaveSettingsButton_Clicked() {
         fillRatingComboBox(countryCode);
     }
     showTmdbDetails();   // the age rating of the tab "Data" follows the new country
+    fillGenreList();     // own genres changed
 
     // Genres in the new language of the movie data
     if (newDataLanguage != dataLanguage) {

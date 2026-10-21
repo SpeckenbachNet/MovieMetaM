@@ -5,7 +5,7 @@ The middle shows the data of the movie you selected in the movie list. You can c
 ## Fields
 
 - Type **Title**, **Description**, **Release Date** and **Studio** directly.
-- Choose the **Genre** from the list or type your own. The list comes from TMDB, in the language of the movie data (see **Settings**).
+- Choose the **Genre** from the list or type your own. The list has your own genres first (see **Settings**), then the genres of TMDB, in the language of the movie data.
 - **Actors**, **Directors**, **Producers** and **Screenplay** consist of single names, see below.
 
 ## Names

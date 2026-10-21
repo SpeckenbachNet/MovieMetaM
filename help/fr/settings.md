@@ -18,6 +18,12 @@ Le pays dont MovieMetaM utilise le système de classification par âge. L’aper
 
 Cela ne s’applique qu’aux films dont le fichier enregistré n’a pas encore de classification. Si un fichier en a déjà une, le film garde son système (voir **Infos du film** et **Recherche de films**). Un changement prend effet immédiatement et s’applique aussitôt au film affiché.
 
+## Genres personnalisés
+
+Genres que vous voulez dans la liste des genres des infos du film, par exemple « Série » ou « Concert ». Saisissez un genre et appuyez sur Entrée, comme pour les noms dans les infos du film (retirer, ordre, mêmes touches). Vos genres personnalisés viennent en premier, puis ceux de TMDB. **Afficher uniquement les genres personnalisés** retire les genres de TMDB de la liste. La liste change quand vous enregistrez les réglages.
+
+> « Appliquer » des données de TMDB reprend toujours le genre que TMDB connaît pour le film. Un genre que vous saisissez vous-même dans les infos du film ne demande aucun réglage.
+
 ## Enregistrement
 
 **Enregistrement sécurisé** écrit les données dans une copie, la vérifie, et ne remplace le fichier qu’ensuite. C’est plus sûr, mais demande de la place et plus de temps. Ce qui se passe exactement est expliqué sous **Enregistrement**.

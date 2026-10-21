@@ -5,7 +5,7 @@ Le milieu affiche les données du film que vous avez sélectionné dans la liste
 ## Champs
 
 - Saisissez directement **Titre**, **Description**, **Date de sortie** et **Studio**.
-- Choisissez le **Genre** dans la liste ou saisissez le vôtre. La liste vient de TMDB, dans la langue des données du film (voir **Réglages**).
+- Choisissez le **Genre** dans la liste ou saisissez le vôtre. La liste contient d’abord vos genres personnalisés (voir **Réglages**), puis ceux de TMDB, dans la langue des données du film.
 - **Acteurs**, **Réalisateurs**, **Producteurs** et **Scénario** se composent de noms individuels, voir ci-dessous.
 
 ## Noms

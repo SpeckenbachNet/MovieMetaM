@@ -5,7 +5,7 @@ En el centro se muestran los datos de la película que has seleccionado en la li
 ## Campos
 
 - Escribe directamente **Título**, **Descripción**, **Fecha de estreno** y **Estudio**.
-- Elige el **Género** de la lista o escribe el tuyo. La lista viene de TMDB, en el idioma de los datos de la película (consulta **Ajustes**).
+- Elige el **Género** de la lista o escribe el tuyo. La lista tiene primero tus géneros propios (consulta **Ajustes**), después los de TMDB, en el idioma de los datos de la película.
 - **Actores**, **Directores**, **Productores** y **Guion** se componen de nombres individuales, véase más abajo.
 
 ## Nombres
