@@ -31,3 +31,9 @@ Genres que vous voulez dans la liste des genres des infos du film, par exemple �
 ## Enregistrement
 
 **Enregistrement sécurisé** écrit les données dans une copie, la vérifie, et ne remplace le fichier qu’ensuite. C’est plus sûr, mais demande de la place et plus de temps. Ce qui se passe exactement est expliqué sous **Enregistrement**.
+
+## TMDB
+
+MovieMetaM interroge TMDB avec un jeton intégré à l’application. Si vous voulez utiliser votre propre compte TMDB, saisissez votre propre jeton (le « API Read Access Token » des paramètres API de votre compte TMDB, gratuit). Le champ masque le jeton ; l’œil à son extrémité l’affiche. Sous le champ, vous voyez quel jeton est utilisé. Si vous laissez le champ vide, le jeton intégré est de nouveau utilisé.
+
+> Le jeton est enregistré dans le fichier de réglages de MovieMetaM, sans chiffrement.

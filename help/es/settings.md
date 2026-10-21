@@ -31,3 +31,9 @@ Géneros que quieres tener en la lista de géneros de la información de la pel�
 ## Guardado
 
 **Guardado seguro** escribe los datos en una copia, la comprueba y solo después sustituye al archivo. Es más seguro, pero necesita espacio y más tiempo. Qué ocurre exactamente se explica en **Guardado**.
+
+## TMDB
+
+MovieMetaM busca en TMDB con un token integrado en la aplicación. Si quieres usar tu propia cuenta de TMDB, introduce tu propio token (el «API Read Access Token» de los ajustes de API de tu cuenta de TMDB, gratuito). El campo oculta el token; el ojo al final lo muestra. Debajo del campo ves qué token se está usando. Si dejas el campo vacío, se vuelve a usar el token integrado.
+
+> El token se guarda en el archivo de ajustes de MovieMetaM, sin cifrar.
