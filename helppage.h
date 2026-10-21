@@ -50,11 +50,12 @@ private:
     static constexpr int kMaxLineWidth = 760;   // lines not too long to read
     static constexpr int kTopicsWidth = 240;
     static constexpr int kImageHeight = 20;     // pictures in the texts (TMDB logo)
+    static constexpr int kScreenshotScale = 2;  // screenshots (PNG) are Retina shots: shown in half the pixels
 
     void addTopic(const QString &icon, const QString &title, const QString &subtitle, const QString &file);
     void loadText(int row);
     void spaceOut();      // headings, line spacing, paragraphs
-    void scaleImages();   // pictures to kImageHeight, sharp on the screen
+    void scaleImages();   // SVGs to kImageHeight, screenshots in their size; sharp on the screen
     void restyle();
     static QString language();   // "de" or "en"
 

@@ -240,14 +240,20 @@ void HelpPage::spaceOut()
         } else {
             format.setBottomMargin(block.textList() ? 4 : 8);
         }
-        format.setLineHeight(130, QTextBlockFormat::ProportionalHeight);
+        // A picture in the line: no extra line height (130 % of a screenshot is a wide gap below it)
+        bool hasImage = false;
+        for (auto it = block.begin(); !it.atEnd(); ++it) {
+            hasImage = hasImage || it.fragment().charFormat().isImageFormat();
+        }
+        format.setLineHeight(hasImage ? 100 : 130, QTextBlockFormat::ProportionalHeight);
         cursor.setPosition(block.position());
         cursor.setBlockFormat(format);
     }
 }
 
 // SVG pictures (TMDB logo) drawn in the resolution of the screen and shown kImageHeight high;
-// the document would load them in their own size, too big and blurred
+// the document would load them in their own size, too big and blurred. Screenshots keep their
+// size (half the pixels).
 void HelpPage::scaleImages()
 {
     QTextDocument *doc = m_text->document();
@@ -265,6 +271,24 @@ void HelpPage::scaleImages()
 
     for (const QTextFragment &fragment : images) {
         QTextImageFormat format = fragment.charFormat().toImageFormat();
+
+        // Screenshots (PNG): Retina shots, shown in the size of half the pixels
+        if (!format.name().endsWith(QLatin1String(".svg"), Qt::CaseInsensitive)) {
+            QImage shot(format.name());
+            if (shot.isNull()) {
+                continue;
+            }
+            shot.setDevicePixelRatio(kScreenshotScale);
+            doc->addResource(QTextDocument::ImageResource, QUrl(format.name()), shot);
+            format.setWidth(shot.width() / qreal(kScreenshotScale));
+            format.setHeight(shot.height() / qreal(kScreenshotScale));
+            QTextCursor cursor(doc);
+            cursor.setPosition(fragment.position());
+            cursor.setPosition(fragment.position() + fragment.length(), QTextCursor::KeepAnchor);
+            cursor.setCharFormat(format);
+            continue;
+        }
+
         QSvgRenderer renderer(format.name());
         if (!renderer.isValid() || renderer.defaultSize().isEmpty()) {
             continue;
