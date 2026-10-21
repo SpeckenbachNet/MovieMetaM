@@ -322,6 +322,11 @@
         <source>The data is written directly into the movie file. If saving is interrupted (crash, power failure, lost network connection), the file can be damaged. &quot;Safe saving&quot; writes into a copy first, needs more space and is slow for big files and on network drives.</source>
         <translation type="unfinished">Los datos se escriben directamente en el archivo de la película. Si se interrumpe el guardado (fallo, corte de luz, conexión de red perdida), el archivo puede dañarse. El «guardado seguro» escribe primero en una copia, necesita más espacio y es lento con archivos grandes y en unidades de red.</translation>
     </message>
+    <message>
+        <location filename="../infoicon.cpp" line="52"/>
+        <source>Some languages are drafts: they were translated with the help of AI and have not been checked by native speakers yet. They are marked as drafts in the list. Mistakes are possible; corrections are welcome.</source>
+        <translation type="unfinished">Algunos idiomas son borradores: se han traducido con ayuda de una IA y todavía no los han revisado hablantes nativos. En la lista aparecen marcados como borrador. Puede haber errores; las correcciones son bienvenidas.</translation>
+    </message>
 </context>
 <context>
     <name>MainWin</name>
@@ -481,85 +486,85 @@
         <translation type="unfinished">Explícito</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="210"/>
-        <location filename="../initialize.cpp" line="230"/>
+        <location filename="../initialize.cpp" line="220"/>
+        <location filename="../initialize.cpp" line="240"/>
         <source>Save</source>
         <translation type="unfinished">Guardar</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="211"/>
+        <location filename="../initialize.cpp" line="221"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">Guardar los metadatos en la película</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="213"/>
+        <location filename="../initialize.cpp" line="223"/>
         <location filename="../mainwin.cpp" line="1678"/>
         <source>Save all</source>
         <translation type="unfinished">Guardar todo</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="214"/>
+        <location filename="../initialize.cpp" line="224"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">Guardar los metadatos de todas las películas modificadas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="219"/>
+        <location filename="../initialize.cpp" line="229"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">Invítame a un café: apoya MovieMetaM con PayPal</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="222"/>
-        <location filename="../initialize.cpp" line="228"/>
+        <location filename="../initialize.cpp" line="232"/>
+        <location filename="../initialize.cpp" line="238"/>
         <source>Settings</source>
         <translation type="unfinished">Ajustes</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="224"/>
+        <location filename="../initialize.cpp" line="234"/>
         <source>Help</source>
         <translation type="unfinished">Ayuda</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="227"/>
+        <location filename="../initialize.cpp" line="237"/>
         <source>Back</source>
         <translation type="unfinished">Atrás</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="231"/>
+        <location filename="../initialize.cpp" line="241"/>
         <source>Save settings</source>
         <translation type="unfinished">Guardar ajustes</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="236"/>
+        <location filename="../initialize.cpp" line="246"/>
         <source>Add movies</source>
         <translation type="unfinished">Añadir películas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="239"/>
+        <location filename="../initialize.cpp" line="249"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">Quitar las películas seleccionadas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="321"/>
+        <location filename="../initialize.cpp" line="331"/>
         <source>Enter actors</source>
         <translation type="unfinished">Introducir actores</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="336"/>
+        <location filename="../initialize.cpp" line="346"/>
         <source>Enter producers</source>
         <translation type="unfinished">Introducir productores</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="351"/>
+        <location filename="../initialize.cpp" line="361"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">Introducir guionistas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="366"/>
+        <location filename="../initialize.cpp" line="376"/>
         <source>Enter directors</source>
         <translation type="unfinished">Introducir directores</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="430"/>
+        <location filename="../initialize.cpp" line="440"/>
         <location filename="../mainwin.cpp" line="1053"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">No se pudo cargar la imagen.</translation>

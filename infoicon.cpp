@@ -47,6 +47,13 @@ QString InfoIcon::savingNote()
               "writes into a copy first, needs more space and is slow for big files and on network drives.");
 }
 
+QString InfoIcon::draftLanguagesNote()
+{
+    return tr("Some languages are drafts: they were translated with the help of AI and have not "
+              "been checked by native speakers yet. They are marked as drafts in the list. "
+              "Mistakes are possible; corrections are welcome.");
+}
+
 void InfoIcon::updatePixmap()
 {
     // Black drawing, in the resolution of the screen, tinted in the text color

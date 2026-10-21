@@ -37,20 +37,24 @@ const char *const kDataLanguageCodes[] = {
 
 // The languages the app can have (a translation is only used if its .qm is compiled in), with
 // their names in the language itself (Qt would say "American English" or "Español de España")
+// "draft": the word for it in the language itself, with its brackets, shown behind the name in the
+// list (translated by Claude, not yet checked by a native speaker); nullptr = checked.
+// Checked a language? Set its draft to nullptr (and note it in CLAUDE.md).
 struct AppLanguage {
     const char *code;
     const char *name;
+    const char *draft;
 };
 const AppLanguage kAppLanguages[] = {
-    {"de", "Deutsch"},
-    {"en", "English"},
-    {"fr", "Français"},
-    {"es", "Español"},
-    {"it", "Italiano"},
-    {"pt_BR", "Português (Brasil)"},
-    {"zh_CN", "简体中文"},
-    {"ja", "日本語"},
-    {"ko", "한국어"},
+    {"de", "Deutsch", nullptr},
+    {"en", "English", nullptr},
+    {"fr", "Français", " (ébauche)"},
+    {"es", "Español", " (borrador)"},
+    {"it", "Italiano", " (bozza)"},
+    {"pt_BR", "Português (Brasil)", " (rascunho)"},
+    {"zh_CN", "简体中文", "（草稿）"},
+    {"ja", "日本語", "（下書き）"},
+    {"ko", "한국어", " (초안)"},
 };
 
 bool hasTranslation(const QString &code)
@@ -96,10 +100,24 @@ QList<Languages::Language> Languages::appLanguages()
     for (const AppLanguage &language : kAppLanguages) {
         const QString code = QString::fromLatin1(language.code);
         if (hasTranslation(code)) {
-            languages.append({code, QString::fromUtf8(language.name)});
+            QString name = QString::fromUtf8(language.name);
+            if (language.draft) {
+                name += QString::fromUtf8(language.draft);
+            }
+            languages.append({code, name});
         }
     }
     return languages;
+}
+
+bool Languages::hasDraftLanguages()
+{
+    for (const AppLanguage &language : kAppLanguages) {
+        if (language.draft && hasTranslation(QString::fromLatin1(language.code))) {
+            return true;
+        }
+    }
+    return false;
 }
 
 QString Languages::resolveAppLanguage(const QString &wanted, const QStringList &available)

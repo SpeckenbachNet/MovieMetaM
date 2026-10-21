@@ -328,6 +328,9 @@ Es gibt **zwei** Sprachen (`languages.*`):
   Chinesisch (vereinfacht), Japanisch, Koreanisch nur die Oberfläche): von Claude übersetzt, von keinem Muttersprachler geprüft;
   die Einträge der `.ts` behalten `type="unfinished"` (kommen trotzdem in die `.qm`). Die
   Hilfetexte benutzen die Begriffe der Oberfläche in fetter Schrift, sie müssen zusammenpassen.
+  In der Sprachliste steht hinter einem Entwurf das Wort dafür in der eigenen Sprache (Feld `draft`
+  in `kAppLanguages`), daneben erklärt ein Info-Symbol, was das heißt (Start-Dialog und
+  Einstellungen). Ist eine Sprache geprüft: `unfinished` entfernen, `draft` auf `nullptr`.
 - **Sprache der Filmdaten** für TMDB (Genreliste und Suche, z. B. `ja-JP`): Einstellung
   `General/DataLanguage`, gilt sofort. Die Liste sind TMDBs primäre Übersetzungen, die Namen
   kommen aus `QLocale`.

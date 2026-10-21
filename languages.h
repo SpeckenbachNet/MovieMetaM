@@ -35,7 +35,10 @@ struct Language {
     QString name;   // in the language itself, e.g. "Deutsch (Schweiz)"
 };
 
-QList<Language> appLanguages();    // the languages of the app that are there, English included
+QList<Language> appLanguages();    // the languages of the app that are there, English included;
+                                   // a draft has the word for it behind its name
+bool hasDraftLanguages();          // is one of the languages of the app a draft (then a note is shown)
+
 QList<Language> dataLanguages();   // TMDB languages sorted by name, the system language included
 
 // The language to use for a wanted code ("de", "pt_PT", "zh_TW", empty = system): the code itself,

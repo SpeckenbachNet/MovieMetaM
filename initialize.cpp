@@ -186,6 +186,16 @@ void MainWin::initializeComboBoxes() {
         ui->languageSettingsComboBox->addItem(language.name, language.code);
     }
     setComboEntryByString(ui->languageSettingsComboBox, Languages::appLanguage(), true);
+    if (Languages::hasDraftLanguages()) {
+        // The combo box with the note about the drafts in the first row of the form
+        auto *languageRow = new QWidget(ui->settingsGeneralCard);
+        auto *languageLayout = new QHBoxLayout(languageRow);
+        languageLayout->setContentsMargins(0, 0, 0, 0);
+        ui->settingsGeneralForm->removeWidget(ui->languageSettingsComboBox);
+        languageLayout->addWidget(ui->languageSettingsComboBox, 1);
+        languageLayout->addWidget(new InfoIcon(InfoIcon::draftLanguagesNote(), languageRow));
+        ui->settingsGeneralForm->setWidget(0, QFormLayout::FieldRole, languageRow);
+    }
     for (const Languages::Language &language : Languages::dataLanguages()) {
         ui->dataLanguageSettingsComboBox->addItem(language.name, language.code);
     }

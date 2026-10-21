@@ -32,6 +32,8 @@ public:
 
     // The note about saving directly into the movie files (setup dialog and settings)
     static QString savingNote();
+    // The note that some languages of the app are drafts (setup dialog and settings)
+    static QString draftLanguagesNote();
 
 protected:
     void enterEvent(QEnterEvent *event) override;
