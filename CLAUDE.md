@@ -118,7 +118,9 @@ Linux).
   (`eye.svg` / `eye_off.svg`; hidden again when the page is left, `showPage()`), below it which token is in use (`updateTmdbTokenStatus()`) and a
   hint with the link to the TMDB API settings; empty = the built-in `TMDB_TOKEN`; stored in plain
   text in the INI, no keychain). The widgets still come from the .ui file (the old card
-  `settingsGeneralCard` is only their holder and is deleted) or `initializeComboBoxes()`. The genre box of the movie info is built by `fillGenreList()`:
+  `settingsGeneralCard` is only their holder and is deleted) or `initializeComboBoxes()`. Showing the
+  page loads the saved state into the controls (`loadSettingsPage()` from `showPage()`): what was
+  not saved is gone. The genre box of the movie info is built by `fillGenreList()`:
   own genres first, then TMDB's, or only the own ones; Apply still takes TMDB's genre.
   No status bar: messages are toasts (`showColumnStatus(StatusColumn, text, level, msec)` →
   `ToastM::show`), centered over the column they belong to (`StatusColumn::Window`: over the
