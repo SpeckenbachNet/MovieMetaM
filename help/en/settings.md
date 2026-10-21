@@ -4,7 +4,7 @@ Open the settings with the gear in the toolbar. **Save settings** applies your c
 
 ## Language
 
-The language of MovieMetaM, German or English. A change takes effect after a restart.
+The language of MovieMetaM. A change takes effect after a restart.
 
 ## Movie data language
 
@@ -16,7 +16,7 @@ If you choose nothing, both languages follow the system.
 
 The country whose age rating system MovieMetaM uses. The preview shows the steps as badges.
 
-This only applies to movies that have no age rating yet. If a movie already has one, it keeps its system (see **Movie Info** and **Movie Search**). A change takes effect at once and is applied to the movie shown right away.
+This only applies to movies that have no age rating in the saved file yet. If a file already has one, the movie keeps its system (see **Movie Info** and **Movie Search**). A change takes effect at once and is applied to the movie shown right away.
 
 ## Saving
 

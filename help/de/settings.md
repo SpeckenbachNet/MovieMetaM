@@ -4,7 +4,7 @@ Die Einstellungen öffnest du mit dem Zahnrad in der Werkzeugleiste. **Einstellu
 
 ## Sprache
 
-Die Sprache von MovieMetaM, Deutsch oder Englisch. Eine Änderung gilt erst nach einem Neustart.
+Die Sprache von MovieMetaM. Eine Änderung gilt erst nach einem Neustart.
 
 ## Sprache der Filmdaten
 
@@ -16,7 +16,7 @@ Wenn du nichts wählst, folgen beide Sprachen dem System.
 
 Das Land, dessen Altersfreigabe-System MovieMetaM verwendet. Die Vorschau zeigt die Stufen als Zeichen.
 
-Das gilt nur für Filme, die noch keine Altersfreigabe haben. Hat ein Film schon eine, bleibt sein System (siehe **Filminfo** und **Filmsuche**). Eine Änderung gilt sofort und wird beim gerade gezeigten Film gleich angewendet.
+Das gilt nur für Filme, deren gespeicherte Datei noch keine Altersfreigabe hat. Hat eine Datei schon eine, bleibt das System des Films (siehe **Filminfo** und **Filmsuche**). Eine Änderung gilt sofort und wird beim gerade gezeigten Film gleich angewendet.
 
 ## Speichern
 

@@ -907,11 +907,20 @@ void MainWin::showTmdbDetails()
     m_detailsView->setHtml(html);
 }
 
-// The country whose age rating system a movie follows: the one in the file, else the one of the settings
+// The country the age rating is taken from at TMDB: the one of the system in the saved file as long
+// as the movie still has that system; else the one of the settings (also for a rating applied or
+// chosen in the program but not saved yet, so a changed setting is used at once)
 QString MainWin::ratingCountry(const MovieData &movie) const
 {
-    const QString fileCountry = AgeRatings::countryOfSystem(movie.ratingSystem);
-    return fileCountry.isEmpty() ? countryCode : fileCountry;
+    const auto original = m_originalMovies.constFind(movie.filePath);
+    if (original != m_originalMovies.constEnd() && !original->ratingSystem.isEmpty()
+        && original->ratingSystem == movie.ratingSystem) {
+        const QString fileCountry = AgeRatings::countryOfSystem(movie.ratingSystem);
+        if (!fileCountry.isEmpty()) {
+            return fileCountry;
+        }
+    }
+    return countryCode;
 }
 
 // The age rating TMDB has for the country, as a step of our system. Home video before cinema
@@ -1642,6 +1651,7 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     } else {
         fillRatingComboBox(countryCode);
     }
+    showTmdbDetails();   // the age rating of the tab "Data" follows the new country
 
     // Genres in the new language of the movie data
     if (newDataLanguage != dataLanguage) {

@@ -22,8 +22,8 @@ A click on the poster opens a list of up to 30 posters from TMDB. Each shows the
 
 MovieMetaM takes the age rating by these rules:
 
-- If the movie already has an age rating, for example "FSK 12", MovieMetaM takes the rating of the same country from TMDB (here Germany). That way a movie stays with its system.
-- If it has none yet, the country from the settings is used.
+- If the saved file already has an age rating, for example "FSK 12", MovieMetaM takes the rating of the same country from TMDB (here Germany). That way a movie stays with its system.
+- If the file has none yet, or you have changed the rating in the program (for example by applying data), the country from the settings is used, also after you change it there.
 - If TMDB has nothing for that country, the movie's age rating stays as it is.
 
 ## Applying

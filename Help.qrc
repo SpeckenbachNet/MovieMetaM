@@ -1,5 +1,5 @@
 <RCC>
-    <!-- Help texts (Markdown), German and English: help/<language>/<topic>.md -->
+    <!-- Help texts (Markdown) per language of the app: help/<code>/<topic>.md (a topic without a text: English) -->
     <qresource prefix="/help">
         <file alias="de/movielist.md">help/de/movielist.md</file>
         <file alias="en/movielist.md">help/en/movielist.md</file>
@@ -13,5 +13,11 @@
         <file alias="en/settings.md">help/en/settings.md</file>
         <file alias="de/about.md">help/de/about.md</file>
         <file alias="en/about.md">help/en/about.md</file>
+        <file alias="fr/movielist.md">help/fr/movielist.md</file>
+        <file alias="fr/movieinfo.md">help/fr/movieinfo.md</file>
+        <file alias="fr/moviesearch.md">help/fr/moviesearch.md</file>
+        <file alias="fr/saving.md">help/fr/saving.md</file>
+        <file alias="fr/settings.md">help/fr/settings.md</file>
+        <file alias="fr/about.md">help/fr/about.md</file>
     </qresource>
 </RCC>

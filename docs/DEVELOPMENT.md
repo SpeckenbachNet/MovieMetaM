@@ -261,8 +261,10 @@ ruft ihre Funktionen auf wie die von Qt.
 - **Apply** (`applyTmdbMovie()`) nimmt alles Gefundene in den ausgewählten Film (leere Werte ändern
   nichts), zeigt ihn neu und setzt den Status auf „geändert“. Das gewählte Poster lädt danach und
   wird als Cover gesetzt, falls noch derselbe Film ausgewählt ist. Gespeichert wird nicht.
-- **Altersfreigabe von TMDB:** `findTmdbRating()` nimmt das Land des Systems, dem der Film folgt
-  (Datei, sonst Einstellungen; `UK` heißt bei TMDB `GB`) und dort den Eintrag nach „Heimvideo vor
+- **Altersfreigabe von TMDB:** `findTmdbRating()` nimmt das Land aus `ratingCountry()`: das System der
+  **gespeicherten** Datei, solange der Film es noch hat, sonst das Land der Einstellungen (auch bei
+  einer übernommenen oder gewählten, noch nicht gespeicherten Freigabe; beim Speichern der
+  Einstellungen wird der Reiter „Daten“ neu aufgebaut; `UK` heißt bei TMDB `GB`) und dort den Eintrag nach „Heimvideo vor
   Kino“ (Typ 5, 4, 3, 2, 6, 1). `AgeRatings::findEntry()` ordnet den Text einer Stufe zu (erst
   `key`, dann `code`, ohne Groß-/Kleinschreibung und Leerzeichen). Passt nichts, bleibt die
   Freigabe unverändert. Die Texte von TMDB passen nicht in jedem Land zu unseren `key`; bei
@@ -320,6 +322,9 @@ Es gibt **zwei** Sprachen (`languages.*`):
   `CMakeLists.txt` und in `kAppLanguages`, die Hilfetexte in `help/<Code>/` (`Help.qrc`;
   fehlt ein Thema, kommt der englische Text). Ländernamen der Altersfreigaben stehen bisher nur
   auf Deutsch und Englisch in den JSON-Dateien (Qt hat keine übersetzten Ländernamen).
+  **Entwurfssprachen** (bisher Französisch): von Claude übersetzt, von keinem Muttersprachler geprüft;
+  die Einträge der `.ts` behalten `type="unfinished"` (kommen trotzdem in die `.qm`). Die
+  Hilfetexte benutzen die Begriffe der Oberfläche in fetter Schrift, sie müssen zusammenpassen.
 - **Sprache der Filmdaten** für TMDB (Genreliste und Suche, z. B. `ja-JP`): Einstellung
   `General/DataLanguage`, gilt sofort. Die Liste sind TMDBs primäre Übersetzungen, die Namen
   kommen aus `QLocale`.

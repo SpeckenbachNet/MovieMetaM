@@ -43,6 +43,12 @@ files are built and embedded by `qt_add_translations` (`:/i18n`) and are not in 
 Qt's own texts (standard buttons, file dialog) come from `qtbase_<lang>.qm`, loaded in `main.cpp`
 from `QLibraryInfo::TranslationsPath` in the app language (to ship with a bundle/installer: open).
 Age rating labels like "ab 12 Jahren" are official texts written into the files: not translated.
+Other languages (fr, ...): drafts by Claude, **not checked by a native speaker** – their entries keep
+`type="unfinished"` (lrelease still puts them into the .qm), the help texts address the reader
+with "vous" etc. When a draft has been checked: remove the mark and note it here. Checked so far: none.
+After changing texts, new entries of the draft languages stay empty (English) until translated.
+The texts in `mainwin.ui` and the help name UI items in bold ("**Save**"): the French help uses the
+French UI terms, keep them in step. Country names of the age ratings: only de/en so far.
 
 ## Shared classes (`../libraries`)
 
@@ -129,8 +135,8 @@ Linux).
   `:/i18n/MovieMetaM_<code>.qm`, English always; codes like `de`, `pt_BR`, `zh_CN`; setting
   `language`, takes effect after a restart; `resolveAppLanguage()`: the code itself, else the
   same language family (`pt_PT` → `pt_BR`, `zh_TW` → `zh_CN`), else English; the one function is
-  used by the translator, the help and the age ratings). Planned: fr, es, it, pt_BR, zh_CN, ja, ko
-  (table `kAppLanguages`, `APP_LANGUAGES` in `CMakeLists.txt`, help texts in `help/<code>/`,
+  used by the translator, the help and the age ratings). Languages so far: de, en, fr (draft); planned: es, it, pt_BR,
+  zh_CN, ja, ko (table `kAppLanguages`, `APP_LANGUAGES` in `CMakeLists.txt`, help texts in `help/<code>/`,
   a help topic without a text in the language falls back to English) and the movie data for
   TMDB (genre list and search, e.g. `ja-JP`, setting `General/DataLanguage`, takes effect at once). Both follow the system
   until chosen in the setup dialog or the settings (a Japanese user gets the English app with
@@ -142,7 +148,9 @@ Linux).
   `fillDetailsTab`, `fillPosters`; "Apply" (`applyTmdbMovie`) takes everything found into the
   selected movie (empty values change nothing). `posterpicker.*` – the large poster with a badge
   "n / m"; a click opens a list (`TwoLineDelegate`) of up to 30 posters (language, size,
-  rating). Age rating: `findTmdbRating` takes the entry of the country of the movie's system
+  rating). Age rating: `findTmdbRating` takes the entry of the country from `ratingCountry()` – the
+  system of the SAVED file as long as the movie still has it, else the country of the settings (also
+  for a rating applied or chosen but not saved yet; saving the settings refreshes the tab "Data")
   (home video before cinema) and `AgeRatings::findEntry` matches it to a step (key, then code);
   TMDB's texts may not fit every country – extend when a country does not match.
 - Saving (`Mp4Writer`, TagLib 2.3.2 via FetchContent, static, LGPL 2.1; details in
@@ -197,7 +205,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.15; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.16; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**
