@@ -22,8 +22,8 @@ Ein Klick auf das Poster öffnet eine Liste mit bis zu 30 Postern von TMDB. Zu j
 
 Die Altersfreigabe übernimmt MovieMetaM nach diesen Regeln:
 
-- Hat der Film schon eine Altersfreigabe, zum Beispiel „FSK 12“, nimmt MovieMetaM von TMDB die Freigabe desselben Landes (hier Deutschland). So bleibt ein Film bei seinem System.
-- Hat der Film noch keine, gilt das Land aus den Einstellungen.
+- Hat die gespeicherte Datei schon eine Altersfreigabe, zum Beispiel „FSK 12“, nimmt MovieMetaM von TMDB die Freigabe desselben Landes (hier Deutschland). So bleibt ein Film bei seinem System.
+- Hat die Datei noch keine, oder hast du die Freigabe im Programm geändert (zum Beispiel durch Übernehmen von Daten), gilt das Land aus den Einstellungen, auch nachdem du es dort geändert hast.
 - Hat TMDB für dieses Land nichts, bleibt die Altersfreigabe des Films, wie sie ist.
 
 ## Übernehmen

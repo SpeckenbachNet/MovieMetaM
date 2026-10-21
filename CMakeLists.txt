@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.8.15")
+set(PROJECT_VERSION "0.8.16")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -52,7 +52,7 @@ endif()
 
 # Languages of the app: one .ts file each (i18n/<name>_<code>.ts). A new language: add its code
 # here, the table kAppLanguages in languages.cpp and the help texts in help/<code>/ (Help.qrc).
-set(APP_LANGUAGES en de)
+set(APP_LANGUAGES en de fr)
 set(TS_FILES)
 foreach(lang IN LISTS APP_LANGUAGES)
     list(APPEND TS_FILES i18n/${PROJECT_NAME}_${lang}.ts)
