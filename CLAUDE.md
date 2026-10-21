@@ -177,6 +177,11 @@ Linux).
   Cancel; "Save all" closes by itself once `savingFinished` had no error). "Remove" under the movie list asks the
   same when a selected movie has unsaved changes (Save and remove / Remove / Cancel, Cancel is the
   default); "Save and remove" saves the changed ones, `savingFinished` removes then (`m_removeAfterSaving`).
+- The first line of a list entry is `listTitle()`: the title of the movie, else the file name before
+  the first dot with "_" as space; `updateListEntry()` (from `onDataChanged`) keeps it in step with
+  the current title (typing, apply). Selecting a movie, typing in the title field and applying data fill the search field with the same
+  text (`showTitleInSearch()`; only this direction; no year, no clean-up of names like "1080p" – decided with the user as
+  the simple version; the search itself is started by Enter).
 - `bubble.*` – `Bubble`: rounded note window (colors of the fields, mouse events go through);
   `TooltipFilter` (installed in `main.cpp`) shows ALL tooltips of the app as a `Bubble` below the
   pointer instead of the system's square one (item views: `ToolTipRole` of the entry under the mouse).
@@ -217,7 +222,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.24; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.25; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

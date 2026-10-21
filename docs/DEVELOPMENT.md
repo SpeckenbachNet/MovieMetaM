@@ -111,7 +111,12 @@ Hinweise:
 - Die Filme liegen in `m_loadedMovies` (Arbeitsstand) und `m_originalMovies` (Zustand beim
   Laden). Der Schlüssel ist der Dateipfad (`Qt::UserRole` des Listeneintrags).
 - Der Film im Formular wechselt mit `QItemSelectionModel::currentChanged`
-  (`onCurrentMovieChanged`), also auch mit den Pfeiltasten.
+  (`onCurrentMovieChanged`), also auch mit den Pfeiltasten. Dort wird auch das Suchfeld mit
+  `listTitle()` gefüllt (`showTitleInSearch()`, auch beim Tippen im Titelfeld und nach „Übernehmen“,
+  nur in diese Richtung) (Titel des Films, sonst Dateiname bis zum ersten Punkt; kein Jahr, keine
+  Bereinigung von Namen wie „1080p“ – die einfache Fassung, mit dem Nutzer entschieden). Die erste
+  Zeile des Listeneintrags ist derselbe Text und folgt dem aktuellen Titel (`updateListEntry()` aus
+  `onDataChanged`, also beim Tippen und beim Übernehmen).
 - `displayMovie()` füllt das Formular (mit blockierten Signalen, damit kein „geändert“
   entsteht). Jede Eingabe löst `onDataChanged()` aus: `validateAndRefreshChanges()` vergleicht
   das Formular mit dem Original und setzt das Statussymbol.

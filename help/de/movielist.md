@@ -1,6 +1,6 @@
 # Filmliste
 
-Die Liste links enthält die Filme, die du bearbeitest. Jeder Eintrag zeigt den Titel und darunter den Dateinamen. Hat ein Film noch keinen Titel, steht dort der Dateiname ohne Endung.
+Die Liste links enthält die Filme, die du bearbeitest. Jeder Eintrag zeigt den Titel und darunter den Dateinamen. Hat ein Film noch keinen Titel, steht dort der Dateiname ohne Endung. Der Eintrag folgt dem Titel, wenn du ihn änderst.
 
 ## Filme hinzufügen
 

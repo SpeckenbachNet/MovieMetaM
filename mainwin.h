@@ -203,6 +203,9 @@ private:
     void onDataChanged();
     void onSettingsChanged();
     void updateStatus(int row, QString status);
+    QString listTitle(const MovieData &movie) const;   // title of the movie, else its file name (the first line of the entry)
+    void updateListEntry(int row);                     // the entry follows the current title of its movie
+    void showTitleInSearch();                          // the search field shows the title of the shown movie
     void formatTextByLength(int limit);
     void clearData();
     void selectRowInTable(int row);

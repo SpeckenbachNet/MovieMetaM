@@ -4,7 +4,7 @@ On the right you find movie data on TMDB (The Movie Database) and take it into t
 
 ## Searching
 
-Type a title into the search field and press Enter. The hits appear in the tab **Results**, each with poster, title and year. A short message tells you how many movies were found. The first 20 hits are shown; if TMDB knows more, it says for example "Showing 20 of 134 movies", and you narrow the search down.
+Select a movie and the search field already holds its title (or the file name). Change it if you like, then press Enter. The field follows the title when you change it in the movie info. Or type a title yourself and press Enter. The hits appear in the tab **Results**, each with poster, title and year. A short message tells you how many movies were found. The first 20 hits are shown; if TMDB knows more, it says for example "Showing 20 of 134 movies", and you narrow the search down.
 
 The language TMDB searches and answers in is the **movie data language** in the settings.
 

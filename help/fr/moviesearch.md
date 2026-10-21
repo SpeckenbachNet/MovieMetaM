@@ -4,7 +4,7 @@
 
 ## Rechercher
 
-Saisissez un titre dans le champ de recherche et appuyez sur Entrée. Les résultats apparaissent dans l’onglet **Résultats**, chacun avec affiche, titre et année. Un court message indique combien de films ont été trouvés. Les 20 premiers résultats sont affichés ; si TMDB en connaît davantage, il indique par exemple « 20 films affichés sur 134 », et vous affinez la recherche.
+Quand vous sélectionnez un film, le champ de recherche contient déjà son titre (ou le nom du fichier). Modifiez-le si vous voulez, puis appuyez sur Entrée. Le champ suit le titre quand vous le modifiez dans les infos du film. Ou saisissez vous-même un titre et appuyez sur Entrée. Les résultats apparaissent dans l’onglet **Résultats**, chacun avec affiche, titre et année. Un court message indique combien de films ont été trouvés. Les 20 premiers résultats sont affichés ; si TMDB en connaît davantage, il indique par exemple « 20 films affichés sur 134 », et vous affinez la recherche.
 
 La langue dans laquelle TMDB cherche et répond est la **langue des données du film** dans les réglages.
 
