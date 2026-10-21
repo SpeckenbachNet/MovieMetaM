@@ -3,6 +3,10 @@
         <file alias="app_icon">ressources/icons/app_icon.svg</file>
         <!-- Black drawings, tinted in the text color (ToolbarM, SearchField) -->
         <file alias="save">ressources/icons/save.svg</file>
+        <file alias="save_movie">ressources/icons/save_movie.svg</file>
+        <file alias="info_movie">ressources/icons/info_movie.svg</file>
+        <file alias="list_movie">ressources/icons/list_movie.svg</file>
+        <file alias="search_movie">ressources/icons/search_movie.svg</file>
         <file alias="save_all">ressources/icons/save_all.svg</file>
         <file alias="settings">ressources/icons/settings.svg</file>
         <file alias="help">ressources/icons/help.svg</file>
