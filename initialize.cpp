@@ -438,6 +438,8 @@ void MainWin::initializeConnects() {
         startImageDownload(url, applyCover, coverFailed);
     });
     connect(ui->coverLabel, &ImageLabelM::coverDropFailed, this, coverFailed);
+    // × or Delete: the cover is removed from the shown movie (the file changes when saving)
+    connect(ui->coverLabel, &ImageLabelM::coverRemoveRequested, this, [applyCover] { applyCover(QPixmap()); });
 
     // ----- Drag and drop Files
     connect(ui->fileListTableView, &TableViewM::filesDropped, this, &MainWin::addFilesToModel);

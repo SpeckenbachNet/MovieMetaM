@@ -20,6 +20,7 @@ Type a name and press Enter. Separate several names with a comma to enter them a
 
 - **New cover:** Drag an image from your file manager or your browser onto the cover.
 - **Drag the cover out:** Drag the cover into your file manager or another app; it arrives as a JPG image.
+- **Remove the cover:** Click the **×** at the top right of the cover (it appears when the mouse is over the cover). Or click the cover and press Delete or Backspace. Unselect: Escape, a click beside it, or Tab.
 
 Below the cover you see the size of the video, for example **1080p**, with the exact size in pixels beside it. Saving sets the file's HD flag from it.
 

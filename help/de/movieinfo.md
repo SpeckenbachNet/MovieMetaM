@@ -20,6 +20,7 @@ Tippe einen Namen ein und drücke die Eingabetaste. Mehrere Namen auf einmal tre
 
 - **Neues Cover:** Ziehe ein Bild aus dem Dateimanager oder aus dem Browser auf das Cover.
 - **Cover herausziehen:** Ziehe das Cover in den Dateimanager oder in ein anderes Programm, es kommt als JPG-Bild.
+- **Cover entfernen:** Klicke auf das **×** oben rechts im Cover (es erscheint, wenn die Maus auf dem Cover ist). Oder klicke das Cover an und drücke Entf bzw. die Rücktaste. Abwählen: Escape, ein Klick daneben oder Tab.
 
 Unter dem Cover steht die Größe des Videos, zum Beispiel **1080p**, und daneben die genaue Größe in Pixeln. Danach richtet sich beim Speichern die HD-Kennung der Datei.
 
