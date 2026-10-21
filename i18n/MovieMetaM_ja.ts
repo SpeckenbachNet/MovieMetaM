@@ -322,6 +322,11 @@
         <source>The data is written directly into the movie file. If saving is interrupted (crash, power failure, lost network connection), the file can be damaged. &quot;Safe saving&quot; writes into a copy first, needs more space and is slow for big files and on network drives.</source>
         <translation type="unfinished">データは映画ファイルに直接書き込まれます。保存が中断されると（クラッシュ、停電、ネットワーク接続の切断など）、ファイルが破損することがあります。「安全な保存」は先にコピーへ書き込むため、より多くの容量が必要で、大きなファイルやネットワークドライブでは時間がかかります。</translation>
     </message>
+    <message>
+        <location filename="../infoicon.cpp" line="52"/>
+        <source>Some languages are drafts: they were translated with the help of AI and have not been checked by native speakers yet. They are marked as drafts in the list. Mistakes are possible; corrections are welcome.</source>
+        <translation type="unfinished">一部の言語は下書きです。AI の助けを借りて翻訳されたもので、まだネイティブスピーカーによる確認を受けていません。リストでは下書きと表示されています。誤りがある可能性があります。ご指摘をお待ちしています。</translation>
+    </message>
 </context>
 <context>
     <name>MainWin</name>
@@ -481,85 +486,85 @@
         <translation type="unfinished">露骨</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="210"/>
-        <location filename="../initialize.cpp" line="230"/>
+        <location filename="../initialize.cpp" line="220"/>
+        <location filename="../initialize.cpp" line="240"/>
         <source>Save</source>
         <translation type="unfinished">保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="211"/>
+        <location filename="../initialize.cpp" line="221"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">メタデータを映画に保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="213"/>
+        <location filename="../initialize.cpp" line="223"/>
         <location filename="../mainwin.cpp" line="1678"/>
         <source>Save all</source>
         <translation type="unfinished">すべて保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="214"/>
+        <location filename="../initialize.cpp" line="224"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">変更したすべての映画のメタデータを保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="219"/>
+        <location filename="../initialize.cpp" line="229"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">コーヒーをおごる – PayPal で MovieMetaM を応援</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="222"/>
-        <location filename="../initialize.cpp" line="228"/>
+        <location filename="../initialize.cpp" line="232"/>
+        <location filename="../initialize.cpp" line="238"/>
         <source>Settings</source>
         <translation type="unfinished">設定</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="224"/>
+        <location filename="../initialize.cpp" line="234"/>
         <source>Help</source>
         <translation type="unfinished">ヘルプ</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="227"/>
+        <location filename="../initialize.cpp" line="237"/>
         <source>Back</source>
         <translation type="unfinished">戻る</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="231"/>
+        <location filename="../initialize.cpp" line="241"/>
         <source>Save settings</source>
         <translation type="unfinished">設定を保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="236"/>
+        <location filename="../initialize.cpp" line="246"/>
         <source>Add movies</source>
         <translation type="unfinished">映画を追加</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="239"/>
+        <location filename="../initialize.cpp" line="249"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">選択した映画をリストから外す</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="321"/>
+        <location filename="../initialize.cpp" line="331"/>
         <source>Enter actors</source>
         <translation type="unfinished">出演者を入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="336"/>
+        <location filename="../initialize.cpp" line="346"/>
         <source>Enter producers</source>
         <translation type="unfinished">プロデューサーを入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="351"/>
+        <location filename="../initialize.cpp" line="361"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">脚本家を入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="366"/>
+        <location filename="../initialize.cpp" line="376"/>
         <source>Enter directors</source>
         <translation type="unfinished">監督を入力</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="430"/>
+        <location filename="../initialize.cpp" line="440"/>
         <location filename="../mainwin.cpp" line="1053"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">画像を読み込めませんでした。</translation>

@@ -322,6 +322,11 @@
         <source>The data is written directly into the movie file. If saving is interrupted (crash, power failure, lost network connection), the file can be damaged. &quot;Safe saving&quot; writes into a copy first, needs more space and is slow for big files and on network drives.</source>
         <translation type="unfinished">데이터는 영화 파일에 직접 기록됩니다. 저장이 중단되면(충돌, 정전, 네트워크 연결 끊김) 파일이 손상될 수 있습니다. &quot;안전 저장&quot;은 먼저 복사본에 기록하므로 공간이 더 필요하고, 큰 파일이나 네트워크 드라이브에서는 느립니다.</translation>
     </message>
+    <message>
+        <location filename="../infoicon.cpp" line="52"/>
+        <source>Some languages are drafts: they were translated with the help of AI and have not been checked by native speakers yet. They are marked as drafts in the list. Mistakes are possible; corrections are welcome.</source>
+        <translation type="unfinished">일부 언어는 초안입니다. AI의 도움으로 번역되었으며 아직 원어민의 검토를 받지 않았습니다. 목록에서 초안으로 표시되어 있습니다. 오류가 있을 수 있으며 수정 제안을 환영합니다.</translation>
+    </message>
 </context>
 <context>
     <name>MainWin</name>
@@ -481,85 +486,85 @@
         <translation type="unfinished">선정적</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="210"/>
-        <location filename="../initialize.cpp" line="230"/>
+        <location filename="../initialize.cpp" line="220"/>
+        <location filename="../initialize.cpp" line="240"/>
         <source>Save</source>
         <translation type="unfinished">저장</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="211"/>
+        <location filename="../initialize.cpp" line="221"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">메타데이터를 영화에 저장</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="213"/>
+        <location filename="../initialize.cpp" line="223"/>
         <location filename="../mainwin.cpp" line="1678"/>
         <source>Save all</source>
         <translation type="unfinished">모두 저장</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="214"/>
+        <location filename="../initialize.cpp" line="224"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">변경된 모든 영화의 메타데이터 저장</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="219"/>
+        <location filename="../initialize.cpp" line="229"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">커피 한 잔 사주기 – PayPal로 MovieMetaM 후원</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="222"/>
-        <location filename="../initialize.cpp" line="228"/>
+        <location filename="../initialize.cpp" line="232"/>
+        <location filename="../initialize.cpp" line="238"/>
         <source>Settings</source>
         <translation type="unfinished">설정</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="224"/>
+        <location filename="../initialize.cpp" line="234"/>
         <source>Help</source>
         <translation type="unfinished">도움말</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="227"/>
+        <location filename="../initialize.cpp" line="237"/>
         <source>Back</source>
         <translation type="unfinished">뒤로</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="231"/>
+        <location filename="../initialize.cpp" line="241"/>
         <source>Save settings</source>
         <translation type="unfinished">설정 저장</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="236"/>
+        <location filename="../initialize.cpp" line="246"/>
         <source>Add movies</source>
         <translation type="unfinished">영화 추가</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="239"/>
+        <location filename="../initialize.cpp" line="249"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">선택한 영화 제거</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="321"/>
+        <location filename="../initialize.cpp" line="331"/>
         <source>Enter actors</source>
         <translation type="unfinished">배우 입력</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="336"/>
+        <location filename="../initialize.cpp" line="346"/>
         <source>Enter producers</source>
         <translation type="unfinished">제작자 입력</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="351"/>
+        <location filename="../initialize.cpp" line="361"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">각본가 입력</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="366"/>
+        <location filename="../initialize.cpp" line="376"/>
         <source>Enter directors</source>
         <translation type="unfinished">감독 입력</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="430"/>
+        <location filename="../initialize.cpp" line="440"/>
         <location filename="../mainwin.cpp" line="1053"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">이미지를 불러올 수 없습니다.</translation>

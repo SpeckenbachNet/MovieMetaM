@@ -322,6 +322,11 @@
         <source>The data is written directly into the movie file. If saving is interrupted (crash, power failure, lost network connection), the file can be damaged. &quot;Safe saving&quot; writes into a copy first, needs more space and is slow for big files and on network drives.</source>
         <translation type="unfinished">数据会直接写入影片文件。如果保存被中断（程序崩溃、断电、网络连接中断），文件可能会损坏。“安全保存”会先写入副本，需要更多空间，在处理大文件和网络驱动器时速度较慢。</translation>
     </message>
+    <message>
+        <location filename="../infoicon.cpp" line="52"/>
+        <source>Some languages are drafts: they were translated with the help of AI and have not been checked by native speakers yet. They are marked as drafts in the list. Mistakes are possible; corrections are welcome.</source>
+        <translation type="unfinished">部分语言为草稿：它们是借助 AI 翻译的，尚未经过母语者校对。在列表中已标注为草稿。可能存在错误，欢迎提出修改意见。</translation>
+    </message>
 </context>
 <context>
     <name>MainWin</name>
@@ -481,85 +486,85 @@
         <translation type="unfinished">含不良内容</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="210"/>
-        <location filename="../initialize.cpp" line="230"/>
+        <location filename="../initialize.cpp" line="220"/>
+        <location filename="../initialize.cpp" line="240"/>
         <source>Save</source>
         <translation type="unfinished">保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="211"/>
+        <location filename="../initialize.cpp" line="221"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">将元数据保存到影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="213"/>
+        <location filename="../initialize.cpp" line="223"/>
         <location filename="../mainwin.cpp" line="1678"/>
         <source>Save all</source>
         <translation type="unfinished">全部保存</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="214"/>
+        <location filename="../initialize.cpp" line="224"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">保存所有已更改影片的元数据</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="219"/>
+        <location filename="../initialize.cpp" line="229"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">请我喝杯咖啡——通过 PayPal 支持 MovieMetaM</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="222"/>
-        <location filename="../initialize.cpp" line="228"/>
+        <location filename="../initialize.cpp" line="232"/>
+        <location filename="../initialize.cpp" line="238"/>
         <source>Settings</source>
         <translation type="unfinished">设置</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="224"/>
+        <location filename="../initialize.cpp" line="234"/>
         <source>Help</source>
         <translation type="unfinished">帮助</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="227"/>
+        <location filename="../initialize.cpp" line="237"/>
         <source>Back</source>
         <translation type="unfinished">返回</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="231"/>
+        <location filename="../initialize.cpp" line="241"/>
         <source>Save settings</source>
         <translation type="unfinished">保存设置</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="236"/>
+        <location filename="../initialize.cpp" line="246"/>
         <source>Add movies</source>
         <translation type="unfinished">添加影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="239"/>
+        <location filename="../initialize.cpp" line="249"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">移除所选影片</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="321"/>
+        <location filename="../initialize.cpp" line="331"/>
         <source>Enter actors</source>
         <translation type="unfinished">输入演员</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="336"/>
+        <location filename="../initialize.cpp" line="346"/>
         <source>Enter producers</source>
         <translation type="unfinished">输入制片人</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="351"/>
+        <location filename="../initialize.cpp" line="361"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">输入编剧</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="366"/>
+        <location filename="../initialize.cpp" line="376"/>
         <source>Enter directors</source>
         <translation type="unfinished">输入导演</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="430"/>
+        <location filename="../initialize.cpp" line="440"/>
         <location filename="../mainwin.cpp" line="1053"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">无法加载图片。</translation>

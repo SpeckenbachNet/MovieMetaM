@@ -322,6 +322,11 @@
         <source>The data is written directly into the movie file. If saving is interrupted (crash, power failure, lost network connection), the file can be damaged. &quot;Safe saving&quot; writes into a copy first, needs more space and is slow for big files and on network drives.</source>
         <translation type="unfinished">Les données sont écrites directement dans le fichier du film. Si l’enregistrement est interrompu (plantage, coupure de courant, connexion réseau perdue), le fichier peut être endommagé. « Enregistrement sécurisé » écrit d’abord dans une copie, demande plus d’espace et est lent pour les gros fichiers et sur les disques réseau.</translation>
     </message>
+    <message>
+        <location filename="../infoicon.cpp" line="52"/>
+        <source>Some languages are drafts: they were translated with the help of AI and have not been checked by native speakers yet. They are marked as drafts in the list. Mistakes are possible; corrections are welcome.</source>
+        <translation type="unfinished">Certaines langues sont des ébauches&#xa0;: elles ont été traduites avec l’aide d’une IA et n’ont pas encore été relues par des locuteurs natifs. Elles sont signalées comme telles dans la liste. Des erreurs sont possibles, les corrections sont les bienvenues.</translation>
+    </message>
 </context>
 <context>
     <name>MainWin</name>
@@ -481,85 +486,85 @@
         <translation type="unfinished">Explicite</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="210"/>
-        <location filename="../initialize.cpp" line="230"/>
+        <location filename="../initialize.cpp" line="220"/>
+        <location filename="../initialize.cpp" line="240"/>
         <source>Save</source>
         <translation type="unfinished">Enregistrer</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="211"/>
+        <location filename="../initialize.cpp" line="221"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">Enregistrer les métadonnées dans le film</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="213"/>
+        <location filename="../initialize.cpp" line="223"/>
         <location filename="../mainwin.cpp" line="1678"/>
         <source>Save all</source>
         <translation type="unfinished">Tout enregistrer</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="214"/>
+        <location filename="../initialize.cpp" line="224"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">Enregistrer les métadonnées de tous les films modifiés</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="219"/>
+        <location filename="../initialize.cpp" line="229"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">Offrez-moi un café – soutenez MovieMetaM via PayPal</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="222"/>
-        <location filename="../initialize.cpp" line="228"/>
+        <location filename="../initialize.cpp" line="232"/>
+        <location filename="../initialize.cpp" line="238"/>
         <source>Settings</source>
         <translation type="unfinished">Réglages</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="224"/>
+        <location filename="../initialize.cpp" line="234"/>
         <source>Help</source>
         <translation type="unfinished">Aide</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="227"/>
+        <location filename="../initialize.cpp" line="237"/>
         <source>Back</source>
         <translation type="unfinished">Retour</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="231"/>
+        <location filename="../initialize.cpp" line="241"/>
         <source>Save settings</source>
         <translation type="unfinished">Enregistrer les réglages</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="236"/>
+        <location filename="../initialize.cpp" line="246"/>
         <source>Add movies</source>
         <translation type="unfinished">Ajouter des films</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="239"/>
+        <location filename="../initialize.cpp" line="249"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">Retirer les films sélectionnés</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="321"/>
+        <location filename="../initialize.cpp" line="331"/>
         <source>Enter actors</source>
         <translation type="unfinished">Saisir les acteurs</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="336"/>
+        <location filename="../initialize.cpp" line="346"/>
         <source>Enter producers</source>
         <translation type="unfinished">Saisir les producteurs</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="351"/>
+        <location filename="../initialize.cpp" line="361"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">Saisir les scénaristes</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="366"/>
+        <location filename="../initialize.cpp" line="376"/>
         <source>Enter directors</source>
         <translation type="unfinished">Saisir les réalisateurs</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="430"/>
+        <location filename="../initialize.cpp" line="440"/>
         <location filename="../mainwin.cpp" line="1053"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">L’image n’a pas pu être chargée.</translation>

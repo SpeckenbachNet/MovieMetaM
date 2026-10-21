@@ -45,7 +45,11 @@ from `QLibraryInfo::TranslationsPath` in the app language (to ship with a bundle
 Age rating labels like "ab 12 Jahren" are official texts written into the files: not translated.
 Other languages (fr, es, it, pt_BR, zh_CN, ja, ko): drafts by Claude, **not checked by a native speaker** – their entries keep
 `type="unfinished"` (lrelease still puts them into the .qm), the help texts address the reader
-with "vous" etc. When a draft has been checked: remove the mark and note it here. Checked so far: none.
+with "vous" etc. The drafts are marked in the language list with the word for "draft" in their own language
+(`draft` field in `kAppLanguages`), and an `InfoIcon` (`InfoIcon::draftLanguagesNote()`) beside the
+language combo box (setup dialog, settings) says what that means (later: link to the website). When a
+draft has been checked: remove the `unfinished` marks, set its `draft` to `nullptr` and note it here.
+Checked so far: none.
 After changing texts, new entries of the draft languages stay empty (English) until translated.
 The texts in `mainwin.ui` and the help name UI items in bold ("**Save**"): the French and Spanish help use
 their UI terms, keep them in step. Country names of the age ratings: translated in the .ts files (context "Country", the English
@@ -206,7 +210,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.19; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.20; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

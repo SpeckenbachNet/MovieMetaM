@@ -106,7 +106,15 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     layout->addWidget(infoLabel);
     layout->addSpacing(10);
     layout->addWidget(languageLabel);
-    layout->addWidget(languageComboBox);
+    if (Languages::hasDraftLanguages()) {
+        // The combo box with the note about the drafts
+        auto *languageRow = new QHBoxLayout();
+        languageRow->addWidget(languageComboBox, 1);
+        languageRow->addWidget(new InfoIcon(InfoIcon::draftLanguagesNote(), this));
+        layout->addLayout(languageRow);
+    } else {
+        layout->addWidget(languageComboBox);
+    }
     layout->addWidget(dataLanguageLabel);
     layout->addWidget(dataLanguageComboBox);
     layout->addSpacing(10);
