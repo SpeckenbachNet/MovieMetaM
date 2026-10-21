@@ -22,6 +22,8 @@
 #include "mp4writer.h"
 
 #include <QtConcurrent>
+#include <QDir>
+#include <QStandardPaths>
 
 #include <QtMath>
 
@@ -1090,6 +1092,7 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
     int firstNewRowIndex = -1;
     int skippedCount = 0;
     int unreadableCount = 0;
+    QString addedFolder;   // the folder of the last movie added: where the next dialog starts
     MediaInfoM reader;
 
     for (const QString &path : filePaths) {
@@ -1120,10 +1123,15 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
 
         // Add now to Model
         addFilePathToModel(path);
+        addedFolder = QFileInfo(path).absolutePath();
 
         if (m_loadedMovies.contains(path)) {
             m_originalMovies[path] = m_loadedMovies[path];
         }
+    }
+
+    if (!addedFolder.isEmpty()) {
+        settings.setValue("General/LastFolder", addedFolder);   // dialog and drop alike
     }
 
     QStringList messages;
@@ -1386,11 +1394,19 @@ void MainWin::onAddFilesButtonClicked()
         patterns << "*." + suffix;
     }
 
+    // Start in the folder movies were added from last time; the first time (or if it is gone, e.g.
+    // a network drive that is not connected) in the movies folder of the user. An empty folder
+    // would be the working directory: the build folder when started from Qt Creator
+    QString folder = settings.value("General/LastFolder").toString();
+    if (folder.isEmpty() || !QDir(folder).exists()) {
+        folder = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);
+    }
+
     // Open filedialog
     QStringList files = QFileDialog::getOpenFileNames(
         this,                              // Parent-Widget
         tr("Choose movies"),                // Title of dialog
-        QString(),                         // Start-Directory (empty = Standard)
+        folder,                            // Start-Directory
         tr("Movie files") + " (" + patterns.join(' ') + ")" // Filter
     );
 
