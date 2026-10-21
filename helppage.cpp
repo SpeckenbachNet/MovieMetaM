@@ -15,6 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 #include "helppage.h"
+#include "languages.h"
 #include "themecolors.h"
 #include "toolbarm.h"
 #include "twolinedelegate.h"
@@ -24,10 +25,8 @@
 #include <QHBoxLayout>
 #include <QImage>
 #include <QListView>
-#include <QLocale>
 #include <QPainter>
 #include <QScrollBar>
-#include <QSettings>
 #include <QStandardItemModel>
 #include <QSvgRenderer>
 #include <QTextBlock>
@@ -179,15 +178,10 @@ void HelpPage::showTopic(Topic topic)
     loadText(topic);   // also if it was the current one: from the top again
 }
 
-// Same choice as the translator (main.cpp): the language of the settings, else the one of the
-// system; German or English (fallback)
+// Same choice as the translator (main.cpp): the language of the app
 QString HelpPage::language()
 {
-    QString code = QSettings().value("language").toString();
-    if (code.isEmpty()) {
-        code = QLocale::system().name().left(2);
-    }
-    return code == QLatin1String("de") ? QStringLiteral("de") : QStringLiteral("en");
+    return Languages::appLanguage();
 }
 
 void HelpPage::loadText(int row)
@@ -195,7 +189,12 @@ void HelpPage::loadText(int row)
     if (row < 0 || row >= m_files.size()) {
         return;
     }
-    QFile file(QStringLiteral(":/help/%1/%2.md").arg(language(), m_files.at(row)));
+    // Without a text in the language of the app: the English one
+    QString path = QStringLiteral(":/help/%1/%2.md").arg(language(), m_files.at(row));
+    if (!QFile::exists(path)) {
+        path = QStringLiteral(":/help/en/%1.md").arg(m_files.at(row));
+    }
+    QFile file(path);
     QString text = file.open(QIODevice::ReadOnly) ? QString::fromUtf8(file.readAll()) : QString();
     // Placeholders of the info about the app
     text.replace(QLatin1String("{{version}}"), QStringLiteral(APP_VERSION));

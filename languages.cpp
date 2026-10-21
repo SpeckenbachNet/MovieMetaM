@@ -16,6 +16,7 @@
  */
 #include "languages.h"
 
+#include <QFile>
 #include <QLocale>
 #include <QSettings>
 
@@ -33,6 +34,42 @@ const char *const kDataLanguageCodes[] = {
     "sq-AL", "sr-RS", "sv-SE", "ta-IN", "te-IN", "th-TH", "tl-PH", "tr-TR", "uk-UA", "vi-VN",
     "zh-CN", "zh-HK", "zh-SG", "zh-TW",
 };
+
+// The languages the app can have (a translation is only used if its .qm is compiled in), with
+// their names in the language itself (Qt would say "American English" or "Español de España")
+struct AppLanguage {
+    const char *code;
+    const char *name;
+};
+const AppLanguage kAppLanguages[] = {
+    {"de", "Deutsch"},
+    {"en", "English"},
+    {"fr", "Français"},
+    {"es", "Español"},
+    {"it", "Italiano"},
+    {"pt_BR", "Português (Brasil)"},
+    {"zh_CN", "简体中文"},
+    {"ja", "日本語"},
+    {"ko", "한국어"},
+};
+
+bool hasTranslation(const QString &code)
+{
+    return code == QLatin1String("en")
+           || QFile::exists(QStringLiteral(":/i18n/%1_%2.qm").arg(QStringLiteral(APP_NAME), code));
+}
+
+QStringList availableAppLanguageCodes()
+{
+    QStringList codes;
+    for (const AppLanguage &language : kAppLanguages) {
+        const QString code = QString::fromLatin1(language.code);
+        if (hasTranslation(code)) {
+            codes.append(code);
+        }
+    }
+    return codes;
+}
 
 // "Deutsch (Schweiz)": names in the language itself, so nothing to translate
 QString nativeName(const QString &code)
@@ -55,8 +92,33 @@ QString systemDataLanguage()
 
 QList<Languages::Language> Languages::appLanguages()
 {
-    return {{QStringLiteral("de"), QStringLiteral("Deutsch")},
-            {QStringLiteral("en"), QStringLiteral("English")}};
+    QList<Language> languages;
+    for (const AppLanguage &language : kAppLanguages) {
+        const QString code = QString::fromLatin1(language.code);
+        if (hasTranslation(code)) {
+            languages.append({code, QString::fromUtf8(language.name)});
+        }
+    }
+    return languages;
+}
+
+QString Languages::resolveAppLanguage(const QString &wanted, const QStringList &available)
+{
+    const QString code = QString(wanted).replace(QLatin1Char('-'), QLatin1Char('_'));
+    if (code.isEmpty()) {
+        return QStringLiteral("en");
+    }
+    if (available.contains(code)) {
+        return code;
+    }
+    // The same language in another country or script: "pt_PT" -> "pt_BR"
+    const QString family = code.section(QLatin1Char('_'), 0, 0);
+    for (const QString &candidate : available) {
+        if (candidate.section(QLatin1Char('_'), 0, 0) == family) {
+            return candidate;
+        }
+    }
+    return QStringLiteral("en");
 }
 
 QList<Languages::Language> Languages::dataLanguages()
@@ -85,9 +147,9 @@ QString Languages::appLanguage()
 {
     QString code = QSettings().value("language").toString();
     if (code.isEmpty()) {
-        code = QLocale::system().name().left(2);
+        code = QLocale::system().name();   // "de_DE"
     }
-    return code == QLatin1String("de") ? QStringLiteral("de") : QStringLiteral("en");
+    return resolveAppLanguage(code, availableAppLanguageCodes());
 }
 
 QString Languages::dataLanguage()

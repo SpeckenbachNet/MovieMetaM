@@ -57,7 +57,7 @@ private:
     void spaceOut();      // headings, line spacing, paragraphs
     void scaleImages();   // SVGs to kImageHeight, screenshots in their size; sharp on the screen
     void restyle();
-    static QString language();   // "de" or "en"
+    static QString language();   // the language of the app ("de", "en", "pt_BR" ...)
 
     ToolbarM           *m_toolbar = nullptr;
     QListView          *m_topics = nullptr;

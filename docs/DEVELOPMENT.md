@@ -311,7 +311,15 @@ ruft ihre Funktionen auf wie die von Qt.
 
 Es gibt **zwei** Sprachen (`languages.*`):
 
-- **Sprache der App** (Deutsch / Englisch): Einstellung `language`, gilt nach einem Neustart.
+- **Sprache der App**: Einstellung `language` (Code wie `de`, `pt_BR`, `zh_CN`), gilt nach einem
+  Neustart. Es gibt die Sprachen mit einer eingebauten `:/i18n/MovieMetaM_<Code>.qm` (Englisch
+  immer, die Tabelle `kAppLanguages` in `languages.cpp` nennt die möglichen). Welche Sprache
+  gilt, entscheidet `Languages::resolveAppLanguage()`: der Code selbst, sonst dieselbe
+  Sprachfamilie (`pt_PT` → `pt_BR`, `zh_TW` → `zh_CN`), sonst Englisch. Dieselbe Funktion nutzen
+  Übersetzer, Hilfe und Altersfreigaben. Eine **neue Sprache**: der Code in `APP_LANGUAGES` in
+  `CMakeLists.txt` und in `kAppLanguages`, die Hilfetexte in `help/<Code>/` (`Help.qrc`;
+  fehlt ein Thema, kommt der englische Text). Ländernamen der Altersfreigaben stehen bisher nur
+  auf Deutsch und Englisch in den JSON-Dateien (Qt hat keine übersetzten Ländernamen).
 - **Sprache der Filmdaten** für TMDB (Genreliste und Suche, z. B. `ja-JP`): Einstellung
   `General/DataLanguage`, gilt sofort. Die Liste sind TMDBs primäre Übersetzungen, die Namen
   kommen aus `QLocale`.

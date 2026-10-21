@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.8.14")
+set(PROJECT_VERSION "0.8.15")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -50,10 +50,13 @@ else()
     message(WARNING "tmdb_token.txt not found: the movie search will not work")
 endif()
 
-set(TS_FILES
-    i18n/${PROJECT_NAME}_en.ts
-    i18n/${PROJECT_NAME}_de.ts
-)
+# Languages of the app: one .ts file each (i18n/<name>_<code>.ts). A new language: add its code
+# here, the table kAppLanguages in languages.cpp and the help texts in help/<code>/ (Help.qrc).
+set(APP_LANGUAGES en de)
+set(TS_FILES)
+foreach(lang IN LISTS APP_LANGUAGES)
+    list(APPEND TS_FILES i18n/${PROJECT_NAME}_${lang}.ts)
+endforeach()
 
 set(PROJECT_SOURCES
         main.cpp

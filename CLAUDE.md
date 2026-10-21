@@ -125,9 +125,14 @@ Linux).
   (`coverRemoveRequested`): a round × in the corner on hover, or click (selected = focused, accent
   frame) and Delete / Backspace; Escape, Tab or a click outside unselects;
   `tableviewm.*` – movie list (`QListView`) with file drop; `setupdialog.*` – first start.
-- `languages.*` – two languages (decided with the user): the app (German / English, setting
-  `language`, takes effect after a restart) and the movie data for TMDB (genre list and search,
-  e.g. `ja-JP`, setting `General/DataLanguage`, takes effect at once). Both follow the system
+- `languages.*` – two languages (decided with the user): the app (the languages with a compiled
+  `:/i18n/MovieMetaM_<code>.qm`, English always; codes like `de`, `pt_BR`, `zh_CN`; setting
+  `language`, takes effect after a restart; `resolveAppLanguage()`: the code itself, else the
+  same language family (`pt_PT` → `pt_BR`, `zh_TW` → `zh_CN`), else English; the one function is
+  used by the translator, the help and the age ratings). Planned: fr, es, it, pt_BR, zh_CN, ja, ko
+  (table `kAppLanguages`, `APP_LANGUAGES` in `CMakeLists.txt`, help texts in `help/<code>/`,
+  a help topic without a text in the language falls back to English) and the movie data for
+  TMDB (genre list and search, e.g. `ja-JP`, setting `General/DataLanguage`, takes effect at once). Both follow the system
   until chosen in the setup dialog or the settings (a Japanese user gets the English app with
   Japanese data). The data languages are TMDB's primary translations, names from `QLocale`.
 - `twolinedelegate.*` – entries of movie list and search results; `posterpreview.*` – enlarged
@@ -192,7 +197,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.14; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.15; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**
