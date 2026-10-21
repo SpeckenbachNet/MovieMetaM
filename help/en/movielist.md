@@ -24,7 +24,9 @@ Rest the mouse on an entry to see the full path of the file and its status. How 
 
 ## Removing
 
-**−** below the list takes the selected movies out of the list. The files themselves stay on the disk, untouched.
+**−** below the list takes the selected movies out of the list.
+
+> The files themselves stay on the disk, untouched.
 
 If one of the movies has unsaved changes, MovieMetaM asks:
 

@@ -13,7 +13,9 @@ After saving, MovieMetaM reads the file again and checks title, description, age
 
 ## Directly into the file
 
-MovieMetaM writes the data **directly into the movie file**, as most tag editors do. This is fast, also for big files and on network drives. If the writing is interrupted (crash, power failure, lost network connection), the file can be damaged. Keep a copy of files that are important to you.
+MovieMetaM writes the data **directly into the movie file**, as most tag editors do. This is fast, also for big files and on network drives.
+
+> If the writing is interrupted (crash, power failure, lost network connection), the file can be damaged. Keep a copy of files that are important to you.
 
 ## Safe saving
 

@@ -26,6 +26,8 @@ Die Altersfreigabe übernimmt MovieMetaM nach diesen Regeln:
 
 ## Übernehmen
 
-**Übernehmen** schreibt die Daten in den ausgewählten Film und nimmt das gewählte Poster als Cover. Was TMDB nicht kennt, bleibt, wie es ist – leere Werte ändern nichts. Danach hat der Film in der Liste einen gelben Punkt; gespeichert ist noch nichts. Wie du speicherst, steht unter **Speichern**.
+**Übernehmen** schreibt die Daten in den ausgewählten Film und nimmt das gewählte Poster als Cover. Was TMDB nicht kennt, bleibt, wie es ist – leere Werte ändern nichts.
+
+> Danach hat der Film in der Liste einen gelben Punkt. Gespeichert ist noch nichts, wie du speicherst, steht unter **Speichern**.
 
 Ist kein Film ausgewählt, sagt dir eine kurze Meldung das.

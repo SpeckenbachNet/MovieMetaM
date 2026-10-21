@@ -33,7 +33,9 @@
 #include <QTextBlock>
 #include <QTextBrowser>
 #include <QTextCursor>
+#include <QTextDocumentFragment>
 #include <QTextList>
+#include <QTextTable>
 #include <QToolButton>
 #include <QVBoxLayout>
 
@@ -54,6 +56,51 @@ QPixmap tintedPixmap(const QString &path, const QColor &color, qreal dpr)
     p.end();
     pm.setDevicePixelRatio(dpr);
     return pm;
+}
+
+// Quotes ("> ...") of the Markdown become notes: a box with room inside and a stripe in the accent
+// color on the left (QTextDocument draws a quote as a bare background that touches the text, so each
+// one becomes a table of two cells). From the end, the positions before stay valid.
+void quotesToNotes(QTextDocument *doc, const QColor &fill, const QColor &stripe)
+{
+    QList<int> starts;
+    for (QTextBlock block = doc->begin(); block.isValid(); block = block.next()) {
+        if (block.blockFormat().hasProperty(QTextFormat::BlockQuoteLevel)) {
+            starts.append(block.position());
+        }
+    }
+    for (int i = starts.size() - 1; i >= 0; --i) {
+        QTextCursor cursor(doc);
+        cursor.setPosition(starts.at(i));
+        cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
+        const QTextDocumentFragment text = cursor.selection();
+        cursor.removeSelectedText();
+
+        QTextBlockFormat empty;   // the block left behind: no quote any more, no room
+        empty.setTopMargin(0);
+        empty.setBottomMargin(0);
+        cursor.setBlockFormat(empty);
+
+        QTextTableFormat table;
+        table.setBorder(0);
+        table.setCellPadding(0);
+        table.setCellSpacing(0);
+        table.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+        table.setColumnWidthConstraints({QTextLength(QTextLength::FixedLength, 4),
+                                         QTextLength(QTextLength::VariableLength, 0)});
+        table.setTopMargin(6);
+        table.setBottomMargin(6);
+        QTextTable *note = cursor.insertTable(1, 2, table);
+
+        QTextTableCellFormat stripeCell;
+        stripeCell.setBackground(stripe);
+        note->cellAt(0, 0).setFormat(stripeCell);
+        QTextTableCellFormat textCell;
+        textCell.setBackground(fill);
+        textCell.setPadding(10);
+        note->cellAt(0, 1).setFormat(textCell);
+        note->cellAt(0, 1).firstCursorPosition().insertFragment(text);
+    }
 }
 
 } // namespace
@@ -153,24 +200,43 @@ void HelpPage::loadText(int row)
     // Placeholders of the info about the app
     text.replace(QLatin1String("{{version}}"), QStringLiteral(APP_VERSION));
     text.replace(QLatin1String("{{qt}}"), QString::fromLatin1(qVersion()));
+    // A line under the title (Markdown: a rule)
+    if (text.startsWith(QLatin1String("# "))) {
+        const int end = text.indexOf(QLatin1Char('\n'));
+        if (end > 0) text.insert(end, QStringLiteral("\n\n---"));
+    }
     m_text->setMarkdown(text);
     spaceOut();
     scaleImages();
     m_text->verticalScrollBar()->setValue(0);
 }
 
-// More air than Markdown gives by default: room above the headings, a bit more line spacing,
-// a small gap between paragraphs and list items
+// More air than Markdown gives by default: room above the headings (in the grey of the headings
+// of the app), a bit more line spacing, a small gap between paragraphs and list items; notes
+// from the quotes
 void HelpPage::spaceOut()
 {
     QTextDocument *doc = m_text->document();
+    const QPalette pal = palette();
+    const QColor headingColor = accentGrey(pal);
+    const FieldLook look;   // the text box has the color of the fields: the notes a shade away from it
+    quotesToNotes(doc, mixColor(look.fill, look.text, 0.08), pal.color(QPalette::Highlight));
+
     QTextCursor cursor(doc);
     for (QTextBlock block = doc->begin(); block.isValid(); block = block.next()) {
         QTextBlockFormat format = block.blockFormat();
         const bool first = block == doc->begin();
+        cursor.setPosition(block.position());
         if (format.headingLevel() > 0) {
             format.setTopMargin(first ? 0 : 22);
             format.setBottomMargin(6);
+            QTextCharFormat color;
+            color.setForeground(headingColor);
+            cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
+            cursor.mergeCharFormat(color);
+        } else if (cursor.currentTable()) {
+            format.setTopMargin(0);   // the room of a note is its cell padding
+            format.setBottomMargin(0);
         } else {
             format.setBottomMargin(block.textList() ? 4 : 8);
         }
@@ -246,6 +312,9 @@ void HelpPage::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::PaletteChange) {
         restyle();   // light / dark mode switched
+        if (m_text && !m_files.isEmpty()) {
+            loadText(m_topics->currentIndex().row());   // colors of headings and notes
+        }
     }
     QWidget::changeEvent(event);
 }

@@ -331,7 +331,9 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
 - Die `.qm`-Dateien baut `qt_add_translations` und bettet sie ein (`:/i18n`); sie liegen nicht
   in Git.
 - Die Hilfetexte liegen als Markdown in `help/<de|en>/<Thema>.md` (Platzhalter `{{version}}`,
-  `{{qt}}`); die Sprache folgt dem Übersetzer.
+  `{{qt}}`); die Sprache folgt dem Übersetzer. Überschriften stehen im `accentGrey()`, unter dem
+  Titel steht eine Linie, ein Zitat (`> …`) wird zu einem Hinweiskasten (Tabelle mit Streifen in der
+  Akzentfarbe, `quotesToNotes()`); bei Wechsel hell/dunkel wird der Text neu aufgebaut.
 - Meldungen im Log (`qDebug`, `qWarning`, `errorOccurred`) sind Englisch und werden nicht mit
   `tr()` übersetzt.
 - **Qts eigene Texte** (Standardknöpfe „Ja“ / „Nein“ / „Abbrechen“, Dateidialog) stehen im Katalog

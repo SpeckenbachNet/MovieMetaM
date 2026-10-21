@@ -26,6 +26,8 @@ MovieMetaM takes the age rating by these rules:
 
 ## Applying
 
-**Apply** writes the data into the selected movie and takes the chosen poster as its cover. What TMDB doesn't know stays as it is – empty values change nothing. Afterwards the movie has a yellow dot in the list; nothing is saved yet. How to save is explained under **Saving**.
+**Apply** writes the data into the selected movie and takes the chosen poster as its cover. What TMDB doesn't know stays as it is – empty values change nothing.
+
+> Afterwards the movie has a yellow dot in the list. Nothing is saved yet, how to save is explained under **Saving**.
 
 If no movie is selected, a short message tells you so.
