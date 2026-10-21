@@ -41,7 +41,7 @@
 
 namespace {
 
-constexpr int kIconSize = 22;
+constexpr int kIconSize = 24;   // the size the icons are drawn in: a stroke of 2 stays 2 px
 
 // Black drawing in the given color, in the resolution of the screen
 QPixmap tintedPixmap(const QString &path, const QColor &color, qreal dpr)
@@ -148,10 +148,10 @@ HelpPage::HelpPage(QWidget *parent)
     layout->addLayout(content, 1);
 
     // Order as in enum Topic
-    addTopic(":icons/add", tr("Movie List"), tr("Add, select, remove"), "movielist");
-    addTopic(":icons/app_icon", tr("Movie Info"), tr("Edit, cover, age rating"), "movieinfo");
-    addTopic(":icons/search", tr("Movie Search"), tr("Find and apply TMDB data"), "moviesearch");
-    addTopic(":icons/save", tr("Saving"), tr("Save, safe saving"), "saving");
+    addTopic(":icons/list_movie", tr("Movie List"), tr("Add, select, remove"), "movielist");
+    addTopic(":icons/info_movie", tr("Movie Info"), tr("Edit, cover, age rating"), "movieinfo");
+    addTopic(":icons/search_movie", tr("Movie Search"), tr("Find and apply TMDB data"), "moviesearch");
+    addTopic(":icons/save_movie", tr("Saving"), tr("Save, safe saving"), "saving");
     addTopic(":icons/settings", tr("Settings"), tr("Languages, age rating, saving"), "settings");
     addTopic(":icons/info", tr("About %1").arg(QStringLiteral(APP_NAME)),
              tr("Version, license, credits"), "about");

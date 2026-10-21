@@ -27,9 +27,9 @@
 
 class QLabel;
 
-// ToolbarM 1.5.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there).
+// ToolbarM 1.6.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there).
 // Projects keep a copy of toolbarm.h/.cpp: change the master copy first, then copy it over.
-inline constexpr const char *ToolbarMVersion = "1.5.0";
+inline constexpr const char *ToolbarMVersion = "1.6.0";
 
 // Toolbar with rounded buttons, painted with QPainter in the colors of the palette
 // (light and dark themes); icons are black drawings tinted in the text color.
@@ -114,7 +114,7 @@ private:
 
     // Geometry
     int   buttonHeight      = 32;
-    QSize iconSize{22, 22};
+    QSize iconSize{24, 24};   // the size the icons are drawn in: a stroke of 2 stays 2 px
     int   iconSpacing       = 6;   // gap between icon and text
     int   separatorSpace    = 14;  // room for the separator line
     int   horizontalPadding = 14;  // left/right padding inside a button
