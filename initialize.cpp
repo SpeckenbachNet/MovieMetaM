@@ -222,14 +222,24 @@ void MainWin::initializeComboBoxes() {
     {
         // The eye at the end of the field shows or hides the token
         const QColor iconColor = palette().color(QPalette::Text);
-        const auto tinted = [&iconColor](const QString &path) {
-            QPixmap pm = QIcon(path).pixmap(32, 32);
+        // QLineEdit shows it at 16 px: only the area of the eye is drawn (without the empty
+        // margins of the 24 grid), in the resolution of the screen
+        const qreal dpr = devicePixelRatioF();
+        const auto tinted = [iconColor, dpr](const QString &path) {
+            constexpr int size = 16;
+            QPixmap pm(QSize(size, size) * dpr);
+            pm.fill(Qt::transparent);
+            pm.setDevicePixelRatio(dpr);
+            QSvgRenderer renderer(path);
+            renderer.setViewBox(QRectF(2.5, 2.5, 19, 19));
             QPainter p(&pm);
+            renderer.render(&p, QRectF(0, 0, size, size));
             p.setCompositionMode(QPainter::CompositionMode_SourceIn);
             p.fillRect(pm.rect(), iconColor);
             return QIcon(pm);
         };
-        QAction *eye = m_tmdbTokenEdit->addAction(tinted(QStringLiteral(":icons/eye")), QLineEdit::TrailingPosition);
+        m_tmdbTokenEye = m_tmdbTokenEdit->addAction(tinted(QStringLiteral(":icons/eye")), QLineEdit::TrailingPosition);
+        QAction *eye = m_tmdbTokenEye;
         eye->setCheckable(true);
         eye->setToolTip(tr("Show the token"));
         connect(eye, &QAction::toggled, this, [this, eye, tinted](bool shown) {

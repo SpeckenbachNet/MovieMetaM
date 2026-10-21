@@ -1737,6 +1737,9 @@ void MainWin::onApiRequestFinished(QNetworkReply *reply)
 void MainWin::showPage(QWidget *page)
 {
     ui->stackedWidget->setCurrentWidget(page);
+    if (page != ui->settingsPage && m_tmdbTokenEye) {
+        m_tmdbTokenEye->setChecked(false);   // the token is hidden again
+    }
 }
 
 void MainWin::handleSaveSettingsButton_Clicked() {

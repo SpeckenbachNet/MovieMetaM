@@ -115,7 +115,7 @@ Linux).
   Age Rating (combo, the badge preview right below), Saving (safe saving with info icon), Apply
   (`General/FillEmptyOnly`). Right: Own genres (`TagWidget`, `General/CustomGenres`, below it the
   check box `General/OnlyCustomGenres`), TMDB (own token `TMDB/Token`, a password field with an eye
-  (`eye.svg` / `eye_off.svg`), below it which token is in use (`updateTmdbTokenStatus()`) and a
+  (`eye.svg` / `eye_off.svg`; hidden again when the page is left, `showPage()`), below it which token is in use (`updateTmdbTokenStatus()`) and a
   hint with the link to the TMDB API settings; empty = the built-in `TMDB_TOKEN`; stored in plain
   text in the INI, no keychain). The widgets still come from the .ui file (the old card
   `settingsGeneralCard` is only their holder and is deleted) or `initializeComboBoxes()`. The genre box of the movie info is built by `fillGenreList()`:
