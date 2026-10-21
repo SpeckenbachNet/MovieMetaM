@@ -15,6 +15,7 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 #include "agerating.h"
+#include "languages.h"
 
 #include <QDebug>
 #include <QDir>
@@ -28,21 +29,10 @@
 
 namespace {
 
-// Same choice as the translator (main.cpp) and the help: the language of the settings, else
-// the one of the system; German or English (fallback)
-QString language()
-{
-    QString code = QSettings().value("language").toString();
-    if (code.isEmpty()) {
-        code = QLocale::system().name().left(2);
-    }
-    return code == QLatin1String("de") ? QStringLiteral("de") : QStringLiteral("en");
-}
-
 QMap<QString, CountryRatingSystem> load()
 {
     QMap<QString, CountryRatingSystem> systems;
-    const QString lang = language();
+    const QString lang = Languages::appLanguage();
 
     const QDir dir(QStringLiteral(":/ratings"));
     const QStringList files = dir.entryList({QStringLiteral("*.json")}, QDir::Files);
@@ -60,6 +50,7 @@ QMap<QString, CountryRatingSystem> load()
 
         CountryRatingSystem system;
         const QJsonObject names = root.value("country").toObject();
+        // The name in the language of the app if the file has one (de, en), else English
         system.countryName = names.value(lang).toString(names.value("en").toString());
         system.technicalID = root.value("id").toString();
         system.systemName  = root.value("system").toString();
