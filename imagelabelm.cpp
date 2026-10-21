@@ -238,6 +238,9 @@ void ImageLabelM::mousePressEvent(QMouseEvent *event)
         m_pressedOnCross = !m_cover.isNull() && crossRect().contains(event->position());
     }
     QLabel::mousePressEvent(event);
+    // QLabel ignores the click, so it would go on to the parent – the app-wide filter would take
+    // it for a click outside and unselect the cover again at once
+    event->accept();
 }
 
 void ImageLabelM::mouseReleaseEvent(QMouseEvent *event)
