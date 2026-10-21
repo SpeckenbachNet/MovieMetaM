@@ -320,8 +320,10 @@ Es gibt **zwei** Sprachen (`languages.*`):
   Sprachfamilie (`pt_PT` → `pt_BR`, `zh_TW` → `zh_CN`), sonst Englisch. Dieselbe Funktion nutzen
   Übersetzer, Hilfe und Altersfreigaben. Eine **neue Sprache**: der Code in `APP_LANGUAGES` in
   `CMakeLists.txt` und in `kAppLanguages`, die Hilfetexte in `help/<Code>/` (`Help.qrc`;
-  fehlt ein Thema, kommt der englische Text). Ländernamen der Altersfreigaben stehen bisher nur
-  auf Deutsch und Englisch in den JSON-Dateien (Qt hat keine übersetzten Ländernamen).
+  fehlt ein Thema, kommt der englische Text). Die Ländernamen der Altersfreigaben
+  sind normale Übersetzungstexte (Kontext `Country`, der englische Name ist der Schlüssel; die Liste
+  steht in der erzeugten `countrynames.cpp`, nachgeschlagen wird in `agerating.cpp`). Qt hat keine
+  übersetzten Ländernamen, deshalb stehen sie in den `.ts`-Dateien.
   **Entwurfssprachen** (Französisch mit Hilfe, Spanisch, Italienisch, Portugiesisch (Brasilien),
   Chinesisch (vereinfacht), Japanisch, Koreanisch nur die Oberfläche): von Claude übersetzt, von keinem Muttersprachler geprüft;
   die Einträge der `.ts` behalten `type="unfinished"` (kommen trotzdem in die `.qm`). Die
@@ -439,5 +441,5 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
 
 | Werkzeug | Zweck |
 |---|---|
-| `tools/ratings_from_xlsx.py` | erzeugt die JSON-Dateien und `Ratings.qrc` aus der Tabelle (Abschnitt 6) |
+| `tools/ratings_from_xlsx.py` | erzeugt die JSON-Dateien, `Ratings.qrc` und `countrynames.cpp` aus der Tabelle (Abschnitt 6) |
 | `_dev/` (nicht im Repository) | Arbeitsmaterial zu den Altersfreigaben, Bildschirmfotos |

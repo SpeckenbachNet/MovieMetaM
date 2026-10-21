@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.8.17")
+set(PROJECT_VERSION "0.8.18")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -108,6 +108,7 @@ qt_add_executable(${PROJECT_NAME}
     helppage.cpp
     agerating.h
     agerating.cpp
+    countrynames.cpp   # country names for lupdate (written by tools/ratings_from_xlsx.py)
     languages.h
     languages.cpp
 )

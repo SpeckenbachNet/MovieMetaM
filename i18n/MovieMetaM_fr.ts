@@ -2,6 +2,239 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_FR">
 <context>
+    <name>Country</name>
+    <message>
+        <location filename="../countrynames.cpp" line="7"/>
+        <source>Australia</source>
+        <translation type="unfinished">Australie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="8"/>
+        <source>Belgium</source>
+        <translation type="unfinished">Belgique</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="9"/>
+        <source>Brazil</source>
+        <translation type="unfinished">Brésil</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="10"/>
+        <source>Canada</source>
+        <translation type="unfinished">Canada</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="11"/>
+        <source>Czech Republic</source>
+        <translation type="unfinished">Tchéquie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="12"/>
+        <source>Denmark</source>
+        <translation type="unfinished">Danemark</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="13"/>
+        <source>Finland</source>
+        <translation type="unfinished">Finlande</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="14"/>
+        <source>France</source>
+        <translation type="unfinished">France</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="15"/>
+        <source>Germany</source>
+        <translation type="unfinished">Allemagne</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="16"/>
+        <source>Ghana</source>
+        <translation type="unfinished">Ghana</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="17"/>
+        <source>Hong Kong</source>
+        <translation type="unfinished">Hong Kong</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="18"/>
+        <source>Hungary</source>
+        <translation type="unfinished">Hongrie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="19"/>
+        <source>Iceland</source>
+        <translation type="unfinished">Islande</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="20"/>
+        <source>India</source>
+        <translation type="unfinished">Inde</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="21"/>
+        <source>Indonesia</source>
+        <translation type="unfinished">Indonésie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="22"/>
+        <source>Ireland</source>
+        <translation type="unfinished">Irlande</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="23"/>
+        <source>Italy</source>
+        <translation type="unfinished">Italie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="24"/>
+        <source>Japan</source>
+        <translation type="unfinished">Japon</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="25"/>
+        <source>Kenya</source>
+        <translation type="unfinished">Kenya</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="26"/>
+        <source>Kuwait</source>
+        <translation type="unfinished">Koweït</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="27"/>
+        <source>Malaysia</source>
+        <translation type="unfinished">Malaisie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="28"/>
+        <source>Maldives</source>
+        <translation type="unfinished">Maldives</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="29"/>
+        <source>Mexico</source>
+        <translation type="unfinished">Mexique</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="30"/>
+        <source>Netherlands</source>
+        <translation type="unfinished">Pays-Bas</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="31"/>
+        <source>New Zealand</source>
+        <translation type="unfinished">Nouvelle-Zélande</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="32"/>
+        <source>Nigeria</source>
+        <translation type="unfinished">Nigeria</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="33"/>
+        <source>Norway</source>
+        <translation type="unfinished">Norvège</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="34"/>
+        <source>Papua New Guinea</source>
+        <translation type="unfinished">Papouasie-Nouvelle-Guinée</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="35"/>
+        <source>Paraguay</source>
+        <translation type="unfinished">Paraguay</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="36"/>
+        <source>Philippines</source>
+        <translation type="unfinished">Philippines</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="37"/>
+        <source>Québec</source>
+        <translation type="unfinished">Québec</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="38"/>
+        <source>Russia</source>
+        <translation type="unfinished">Russie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="39"/>
+        <source>Saudi Arabia</source>
+        <translation type="unfinished">Arabie saoudite</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="40"/>
+        <source>Singapore</source>
+        <translation type="unfinished">Singapour</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="41"/>
+        <source>Slovakia</source>
+        <translation type="unfinished">Slovaquie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="42"/>
+        <source>South Africa</source>
+        <translation type="unfinished">Afrique du Sud</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="43"/>
+        <source>South Korea</source>
+        <translation type="unfinished">Corée du Sud</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="44"/>
+        <source>Spain</source>
+        <translation type="unfinished">Espagne</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="45"/>
+        <source>Sweden</source>
+        <translation type="unfinished">Suède</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="46"/>
+        <source>Switzerland</source>
+        <translation type="unfinished">Suisse</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="47"/>
+        <source>Taiwan</source>
+        <translation type="unfinished">Taïwan</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="48"/>
+        <source>Thailand</source>
+        <translation type="unfinished">Thaïlande</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="49"/>
+        <source>Turkey</source>
+        <translation type="unfinished">Turquie</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="50"/>
+        <source>United Arab Emirates</source>
+        <translation type="unfinished">Émirats arabes unis</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="51"/>
+        <source>United Kingdom</source>
+        <translation type="unfinished">Royaume-Uni</translation>
+    </message>
+    <message>
+        <location filename="../countrynames.cpp" line="52"/>
+        <source>United States</source>
+        <translation type="unfinished">États-Unis</translation>
+    </message>
+</context>
+<context>
     <name>HelpPage</name>
     <message>
         <location filename="../helppage.cpp" line="113"/>
@@ -260,7 +493,7 @@
     </message>
     <message>
         <location filename="../initialize.cpp" line="213"/>
-        <location filename="../mainwin.cpp" line="1668"/>
+        <location filename="../mainwin.cpp" line="1678"/>
         <source>Save all</source>
         <translation type="unfinished">Tout enregistrer</translation>
     </message>
@@ -327,7 +560,7 @@
     </message>
     <message>
         <location filename="../initialize.cpp" line="430"/>
-        <location filename="../mainwin.cpp" line="1044"/>
+        <location filename="../mainwin.cpp" line="1053"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">L’image n’a pas pu être chargée.</translation>
     </message>
@@ -338,7 +571,7 @@
     </message>
     <message>
         <location filename="../mainwin.cpp" line="375"/>
-        <location filename="../mainwin.cpp" line="1142"/>
+        <location filename="../mainwin.cpp" line="1151"/>
         <source>Unchanged</source>
         <translation type="unfinished">Inchangé</translation>
     </message>
@@ -400,23 +633,23 @@
         <translation type="unfinished">Double-cliquez sur un résultat pour afficher ses données.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="964"/>
+        <location filename="../mainwin.cpp" line="973"/>
         <source>No text</source>
         <translation type="unfinished">Sans texte</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1004"/>
-        <location filename="../mainwin.cpp" line="1303"/>
+        <location filename="../mainwin.cpp" line="1013"/>
+        <location filename="../mainwin.cpp" line="1312"/>
         <source>Select a movie first</source>
         <translation type="unfinished">Sélectionnez d’abord un film</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1031"/>
+        <location filename="../mainwin.cpp" line="1040"/>
         <source>Data applied</source>
         <translation type="unfinished">Données appliquées</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1099"/>
+        <location filename="../mainwin.cpp" line="1108"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation type="unfinished">
             <numerusform>%n fichier ignoré&#xa0;: seul le MP4 est pris en charge.</numerusform>
@@ -424,7 +657,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1102"/>
+        <location filename="../mainwin.cpp" line="1111"/>
         <source>%n file(s) could not be read.</source>
         <translation type="unfinished">
             <numerusform>%n fichier n’a pas pu être lu.</numerusform>
@@ -432,28 +665,28 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1197"/>
+        <location filename="../mainwin.cpp" line="1206"/>
         <source>Other (%1)</source>
         <translation type="unfinished">Autre (%1)</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1360"/>
+        <location filename="../mainwin.cpp" line="1369"/>
         <source>Choose movies</source>
         <translation type="unfinished">Choisir des films</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1362"/>
+        <location filename="../mainwin.cpp" line="1371"/>
         <source>Movie files</source>
         <translation type="unfinished">Fichiers de films</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1391"/>
-        <location filename="../mainwin.cpp" line="1399"/>
+        <location filename="../mainwin.cpp" line="1400"/>
+        <location filename="../mainwin.cpp" line="1408"/>
         <source>Remove</source>
         <translation type="unfinished">Retirer</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1392"/>
+        <location filename="../mainwin.cpp" line="1401"/>
         <source>Really remove %n movie(s)?</source>
         <translation type="unfinished">
             <numerusform>Retirer vraiment %n film&#xa0;?</numerusform>
@@ -461,8 +694,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1395"/>
-        <location filename="../mainwin.cpp" line="1666"/>
+        <location filename="../mainwin.cpp" line="1404"/>
+        <location filename="../mainwin.cpp" line="1676"/>
         <source>%n movie(s) have unsaved changes.</source>
         <translation type="unfinished">
             <numerusform>%n film a des modifications non enregistrées.</numerusform>
@@ -470,63 +703,63 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1396"/>
+        <location filename="../mainwin.cpp" line="1405"/>
         <source>Save them before removing?</source>
         <translation type="unfinished">Les enregistrer avant de les retirer&#xa0;?</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1397"/>
+        <location filename="../mainwin.cpp" line="1406"/>
         <source>Save and remove</source>
         <translation type="unfinished">Enregistrer et retirer</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1401"/>
-        <location filename="../mainwin.cpp" line="1670"/>
+        <location filename="../mainwin.cpp" line="1410"/>
+        <location filename="../mainwin.cpp" line="1680"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1453"/>
+        <location filename="../mainwin.cpp" line="1462"/>
         <source>Please enter a search term</source>
         <translation type="unfinished">Veuillez saisir un terme de recherche</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1547"/>
+        <location filename="../mainwin.cpp" line="1556"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation type="unfinished">Pas de jeton TMDB&#xa0;: la recherche de films n’est pas disponible.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1570"/>
+        <location filename="../mainwin.cpp" line="1579"/>
         <source>The movie data could not be loaded.</source>
         <translation type="unfinished">Les données du film n’ont pas pu être chargées.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1627"/>
+        <location filename="../mainwin.cpp" line="1636"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation type="unfinished">Réglages enregistrés. La langue changera après un redémarrage.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1628"/>
+        <location filename="../mainwin.cpp" line="1637"/>
         <source>Settings saved.</source>
         <translation type="unfinished">Réglages enregistrés.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1632"/>
+        <location filename="../mainwin.cpp" line="1641"/>
         <source>Error: could not save the settings!</source>
         <translation type="unfinished">Erreur&#xa0;: les réglages n’ont pas pu être enregistrés&#xa0;!</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1665"/>
+        <location filename="../mainwin.cpp" line="1675"/>
         <source>Unsaved changes</source>
         <translation type="unfinished">Modifications non enregistrées</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1667"/>
+        <location filename="../mainwin.cpp" line="1677"/>
         <source>Save the changes before closing?</source>
         <translation type="unfinished">Enregistrer les modifications avant de fermer&#xa0;?</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1669"/>
+        <location filename="../mainwin.cpp" line="1679"/>
         <source>Discard</source>
         <translation type="unfinished">Ignorer</translation>
     </message>

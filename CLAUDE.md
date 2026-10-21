@@ -48,7 +48,8 @@ Other languages (fr, es, it, pt_BR, zh_CN, ja, ko): drafts by Claude, **not chec
 with "vous" etc. When a draft has been checked: remove the mark and note it here. Checked so far: none.
 After changing texts, new entries of the draft languages stay empty (English) until translated.
 The texts in `mainwin.ui` and the help name UI items in bold ("**Save**"): the French help uses the
-French UI terms, keep them in step. Country names of the age ratings: only de/en so far.
+French UI terms, keep them in step. Country names of the age ratings: translated in the .ts files (context "Country", the English
+name is the key; list in the generated `countrynames.cpp`, looked up in `agerating.cpp`).
 
 ## Shared classes (`../libraries`)
 
@@ -181,7 +182,7 @@ Linux).
   widget, level Info / Error. May move to `../libraries` once it has proved itself.
 - `themecolors.h` – shared colors and shapes (`FieldLook`, `apply…Style`).
 - `agerating.*` – age rating systems as data: one JSON file per country
-  (`ressources/ratings/<code>.json`, `Ratings.qrc`; country name en/de, system, id, steps with
+  (`ressources/ratings/<code>.json`, `Ratings.qrc`; country name en/de (the English one is the key for the translation of the name), system, id, steps with
   key = badge text, code = written into the file, score, label = combo text, description =
   tooltip, color, shape, style). `AgeRatings::systems()` feeds the settings (with a preview of
   the badges), the setup dialog and the rating combo box. Badges: `createAgeRatingIcon()` –
@@ -189,7 +190,7 @@ Linux).
   (white, border and code in the color: JP, SK, TR), light (white, black border, code in the
   color: US, IS), dark (#313030, code in the color: FI); the font shrinks until the
   code fits. **The JSON files and `Ratings.qrc` are generated, not edited by hand:** change
-  the table, then `python3 tools/ratings_from_xlsx.py ~/kDrive/Development/QT/age_ratings.xlsx`
+  the table, then `python3 tools/ratings_from_xlsx.py ~/kDrive/Development/QT/age_ratings.xlsx` (also writes `countrynames.cpp`: run lupdate afterwards for new countries)
   (needs openpyxl). 46 countries, 266 steps (as of 0.4.0).
   Principle (decided with the user): all players read the one entry `iTunEXTC`
   (`prefix|code|score|reason|`). Code = the form media servers know (Jellyfin lists
@@ -205,7 +206,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.17; numbers kept, 1 to 10 are done)
+## Open points (as of 0.8.18; numbers kept, 1 to 10 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**

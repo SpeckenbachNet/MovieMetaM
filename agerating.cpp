@@ -17,6 +17,7 @@
 #include "agerating.h"
 #include "languages.h"
 
+#include <QCoreApplication>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -50,8 +51,13 @@ QMap<QString, CountryRatingSystem> load()
 
         CountryRatingSystem system;
         const QJsonObject names = root.value("country").toObject();
-        // The name in the language of the app if the file has one (de, en), else English
-        system.countryName = names.value(lang).toString(names.value("en").toString());
+        // The name in the language of the app: the English name is translated (context "Country",
+        // texts in countrynames.cpp); without a translation the German name of the file, else English
+        const QString english = names.value("en").toString();
+        system.countryName = QCoreApplication::translate("Country", english.toUtf8().constData());
+        if (system.countryName == english && names.contains(lang)) {
+            system.countryName = names.value(lang).toString(english);
+        }
         system.technicalID = root.value("id").toString();
         system.systemName  = root.value("system").toString();
         const QJsonArray ratings = root.value("ratings").toArray();
