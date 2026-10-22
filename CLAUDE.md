@@ -302,4 +302,4 @@ Linux).
     2026-09-28, so Weblate from January 2027 on (then a note in the README and the link in the
     help). Until then: a section "Why version 0.9?" in the help (de, en, fr, es) asking for help
     by mail; helpers check the `.ts` file in Qt Linguist. The user thinks about an own small
-    review tool on his server instead.
+    review tool on an own server instead.
