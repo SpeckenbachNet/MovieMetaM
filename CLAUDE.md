@@ -304,3 +304,11 @@ Linux).
     help). Until then: a section "Why version 0.9?" in the help (de, en, fr, es) asking for help
     by mail; helpers check the `.ts` file in Qt Linguist. The user thinks about an own small
     review tool on an own server instead.
+15. Linux package (planned, after 12): the user has an Arch machine. A build on Arch is too new
+    for an AppImage (needs the same new glibc, does not run on older systems such as Ubuntu LTS /
+    Debian). Plan: `tools/build-linux.sh` builds the AppImage in a container (podman / docker with
+    Ubuntu 22.04, Qt 6.12, `linuxdeploy` + Qt plugin), fixed name
+    `MovieMetaM-linux-x86_64.AppImage` for the release. Later: Flatpak (`flatpak-builder` builds
+    in its own runtime, independent of the host; Flathub needs a review, a single `.flatpak` can
+    also hang at the release). A PKGBUILD for the AUR only helps Arch users. .deb / .rpm per
+    distribution: not planned. Qt's own texts are already embedded (`:/i18n/qtbase_*.qm`).
