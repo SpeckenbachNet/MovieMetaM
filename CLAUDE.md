@@ -259,7 +259,7 @@ Linux).
   Saving the settings applies the new system at once (current movie shown again).
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.8.27; numbers kept, 1 to 10 are done)
+## Open points (as of 0.9.0; numbers kept, 1 to 11 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**
@@ -285,3 +285,21 @@ Linux).
     nothing to edit or save in it). `MediaInfoM::isReadableMp4()` walks the top-level boxes and
     wants an intact `moov` (a readable file without tags is fine); `addFilesToModel` counts the
     others and shows "n file(s) could not be read." (Error toast) – **done (0.8.6)**
+12. Release on GitHub (planned): packages not in the repository but attached to a GitHub release
+    (tag `vX.Y.Z`, free, every version stays available). Fixed package names without the version
+    (e.g. `MovieMetaM-mac.dmg`, later Windows / Linux), so the website can link
+    `github.com/SpeckenbachNet/MovieMetaM/releases/latest/download/MovieMetaM-mac.dmg` forever
+    (`tools/build-mac.sh` to adapt). Still open: the first release `v0.9.0` with a text and the
+    note about allowing the app on the first start (no Developer ID).
+13. Update notice in the app (planned, needs 12): at most once a day ask
+    `api.github.com/repos/SpeckenbachNet/MovieMetaM/releases/latest`, compare the tag with
+    `APP_VERSION`; newer: a notice with a button that opens the download in the browser (no
+    self-install). Setting "Check for updates" and a sentence in the help (privacy: a request
+    to GitHub).
+14. Check of the translations, the way to 1.0 (planned): the version is 0.9 because fr, es, it,
+    pt_BR, zh_CN, ja, ko are not checked by native speakers. Weblate (Libre plan, free) and
+    Crowdin both want a project at least three months old; the repository exists since
+    2026-09-28, so Weblate from January 2027 on (then a note in the README and the link in the
+    help). Until then: a section "Why version 0.9?" in the help (de, en, fr, es) asking for help
+    by mail; helpers check the `.ts` file in Qt Linguist. The user thinks about an own small
+    review tool on his server instead.
