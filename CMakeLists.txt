@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.8.37")
+set(PROJECT_VERSION "0.9.0")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -157,6 +157,22 @@ target_compile_definitions(${PROJECT_NAME}
 qt_add_translations(${PROJECT_NAME}
     TS_FILES ${TS_FILES}
     RESOURCE_PREFIX "/i18n"
+)
+
+# Qt's own texts (standard buttons, file dialog) in the languages of the app: qtbase_<code>.qm
+# from Qt's translations folder, embedded as :/i18n/qtbase_<code>.qm. So every package has them
+# (Mac bundle, later Windows / Linux), no path inside the bundle has to fit. English needs none.
+set(QTBASE_QM_FILES)
+foreach(lang IN LISTS APP_LANGUAGES)
+    set(qm "${QT6_INSTALL_PREFIX}/${QT6_INSTALL_TRANSLATIONS}/qtbase_${lang}.qm")
+    if(NOT lang STREQUAL "en" AND EXISTS "${qm}")
+        set_source_files_properties("${qm}" PROPERTIES QT_RESOURCE_ALIAS "qtbase_${lang}.qm")
+        list(APPEND QTBASE_QM_FILES "${qm}")
+    endif()
+endforeach()
+qt_add_resources(${PROJECT_NAME} "qtbase_translations"
+    PREFIX "/i18n"
+    FILES ${QTBASE_QM_FILES}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE

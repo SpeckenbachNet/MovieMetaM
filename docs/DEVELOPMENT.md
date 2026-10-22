@@ -379,10 +379,10 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
 - Meldungen im Log (`qDebug`, `qWarning`, `errorOccurred`) sind Englisch und werden nicht mit
   `tr()` übersetzt.
 - **Qts eigene Texte** (Standardknöpfe „Ja“ / „Nein“ / „Abbrechen“, Dateidialog) stehen im Katalog
-  `qtbase_<Sprache>.qm`. `main.cpp` lädt ihn zusätzlich zum eigenen Katalog, in der Sprache der
-  App, aus `QLibraryInfo::TranslationsPath` (Linux: `/usr/share/qt6/translations`, Mac: das Qt aus
-  dem Installer). Fehlt die Datei, bleiben die Texte Englisch. **Beim Verpacken** (Windows, Mac-
-  Bundle) müssen die `qtbase_*.qm` mitgeliefert werden; noch nicht gelöst.
+  `qtbase_<Sprache>.qm`. `CMakeLists.txt` bettet die Kataloge der App-Sprachen aus dem
+  Übersetzungsordner von Qt als `:/i18n/qtbase_<Sprache>.qm` in die App ein; `main.cpp` lädt
+  ihn von dort, sonst aus `QLibraryInfo::TranslationsPath`. So hat jedes Paket (Mac-Bundle,
+  später Windows / Linux) die Texte, ohne dass ein Pfad im Bundle stimmen muss.
 
 ---
 
@@ -462,7 +462,13 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
 
 - Die **Version setzt der Entwickler** in `CMakeLists.txt` (`PROJECT_VERSION`).
 - Commit-Nachricht: `0.x.y Kurzer Titel` und darunter eine Liste der Änderungen.
-- Einen Installer gibt es noch nicht.
+- **Mac-Version:** `tools/build-mac.sh` baut Release (universal: arm64 + x86_64) in
+  `build/release`, packt Qt mit `macdeployqt` ins Bundle, signiert ad hoc und erstellt
+  `build/MovieMetaM-<Version>.dmg` (App + Link auf „Programme“). Ohne Developer ID (bewusst, das
+  Programm kostet Geld): Beim ersten Start gibt der Benutzer die App per Rechtsklick → „Öffnen“
+  bzw. unter Systemeinstellungen → Datenschutz & Sicherheit frei. Anderes Qt:
+  `QT_DIR=/pfad/zu/Qt/6.x/macos tools/build-mac.sh`.
+- Windows- und Linux-Pakete gibt es noch nicht.
 
 ### Werkzeuge
 
