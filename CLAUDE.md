@@ -146,7 +146,9 @@ Linux).
   (afterwards – also after dragging – no tag is selected; Escape, a click outside the list – also on an
   empty area, app-wide event filter – or leaving it with Tab unselects); a click on the text
   selects or drags to reorder; `imagelabelm.*` – cover: paints itself
-  (rounded, sharp), drag and drop in (`coverDropped` / `coverUrlDropped`) and out; removing
+  (rounded, sharp; empty: the own drawing `no_cover.svg`, 40 % of the width, at most 96 px, in
+  the text color of the fields (`FieldLook` text), the dashed border in `FieldLook` border; disabled (no movie): both at 15 %
+  between field and text color; `palette(Mid)` is almost black in the Mac's dark theme), drag and drop in (`coverDropped` / `coverUrlDropped`) and out; removing
   (`coverRemoveRequested`): a round × in the corner on hover, or click (selected = focused, accent
   frame) and Delete / Backspace; Escape, Tab or a click outside unselects;
   `tableviewm.*` – movie list (`QListView`) with file drop (a dropped folder is expanded in

@@ -108,14 +108,25 @@ void ImageLabelM::paintEvent(QPaintEvent *event) {
         painter.drawPixmap(target, m_cover, QRectF(m_cover.rect()));
         painter.restore();
     } else {
-        // Placeholder, rendered in the resolution of the screen, fitted into the area
-        const QSize placeholder = QSize(area.width(), area.height()) - QSize(16, 16);
-        const QPixmap pix = QIcon(QStringLiteral(":/images/noimage.svg")).pixmap(placeholder, devicePixelRatioF());
-        const QSizeF shown = QSizeF(pix.size()) / pix.devicePixelRatio();
+        // Colors of the input fields; without a movie (disabled) both step back
+        const FieldLook look;
+        const QColor iconColor = isEnabled() ? look.text : mixColor(look.fill, look.text, 0.15);
+        const QColor borderColor = isEnabled() ? look.border : mixColor(look.fill, look.text, 0.15);
+
+        // Placeholder: the drawing "no cover" (an arrow into a tray), in the
+        // resolution of the screen
+        const int side = qMin(96, qRound(area.width() * 0.4));
+        QPixmap pix = QIcon(QStringLiteral(":icons/no_cover")).pixmap(QSize(side, side), devicePixelRatioF());
+        {
+            QPainter tint(&pix);
+            tint.setCompositionMode(QPainter::CompositionMode_SourceIn);
+            tint.fillRect(QRect(QPoint(0, 0), pix.deviceIndependentSize().toSize()), iconColor);
+        }
+        const QSizeF shown = pix.deviceIndependentSize();
         painter.drawPixmap(QPointF(area.center().x() - shown.width() / 2, area.center().y() - shown.height() / 2), pix);
 
         // Dashed border: here an image can be dropped
-        QPen dashed(palette().color(QPalette::Mid), 2, Qt::DashLine);
+        QPen dashed(borderColor, 2, Qt::DashLine);
         painter.setPen(dashed);
         painter.setBrush(Qt::NoBrush);
         painter.drawPath(rounded);

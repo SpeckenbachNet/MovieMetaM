@@ -18,6 +18,7 @@
         <file alias="coffee">ressources/icons/coffee.svg</file>
         <file alias="eye">ressources/icons/eye.svg</file>
         <file alias="eye_off">ressources/icons/eye_off.svg</file>
+        <file alias="no_cover">ressources/icons/no_cover.svg</file>
         <!-- Grey drawing, used as it is (combo box arrow) -->
         <file alias="chevron_down">ressources/icons/chevron_down.svg</file>
     </qresource>
