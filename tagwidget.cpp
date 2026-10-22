@@ -258,7 +258,6 @@ void TagWidget::onRowsMoved() {
 
         // 2. Send the list (the type now matches the signal)
         emit tagsChanged(list);
-        qDebug() << "Order after moving (onRowsMoved)";
     });
 }
 
@@ -314,7 +313,6 @@ void TagWidget::removeTag(const QModelIndex &index)
 
     // Update the internal list and the signal
     m_tagList = m_tagModel->stringList();
-    qDebug() << "The tagsChanged signal will be sent shortly";
     emit tagsChanged(m_tagList);
 }
 
@@ -322,13 +320,11 @@ void TagWidget::clearTags()
 {
     //
     if (m_lineEdit) {
-        //qDebug() << "Delete entries from lineEdit";
         m_lineEdit->clear();
     }
 
     // Delete entries from ListView
     if (m_tagModel) {
-        //qDebug() << "Delete entries from Model (ListView)";
         int rowCount = m_tagModel->rowCount();
 
         if (rowCount > 0) {

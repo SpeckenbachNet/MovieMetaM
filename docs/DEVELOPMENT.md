@@ -78,6 +78,9 @@ Hinweise:
 - **Neue Quelldateien zuerst anlegen, dann in `CMakeLists.txt` eintragen.** Qt Creator
   konfiguriert sofort neu; fehlt eine Datei, ist sein Build-Ordner kaputt.
 - Defines aus `CMakeLists.txt`: `APP_NAME`, `APP_VERSION`, `COMPANY_NAME`, `TMDB_TOKEN`.
+- Ausgaben: kein `qDebug` im Code, `qWarning` nur für echte Fehler. Alle Builds außer Debug
+  setzen `QT_NO_DEBUG_OUTPUT` und `QT_NO_WARNING_OUTPUT`: Im Systemlog des Benutzers landet
+  nichts von uns; was er wissen muss, zeigt die App (Meldungen).
 - Windows: `app.rc.in` (Icon `ressources/icons/app_icon.ico` und Versionsinfo). macOS: das
   Bundle-Icon `app_icon.icns`. Die `Info.plist` des Bundles ist `ressources/macos/Info.plist.in` (Qts
   Vorlage plus `CFBundleLocalizations` de/en); sonst bleibt der native Öffnen-Dialog des Mac auf

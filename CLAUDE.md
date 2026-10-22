@@ -26,6 +26,9 @@ up to date with larger changes.
   by CMake into the define `TMDB_TOKEN`. Without it the app runs but the search does not
   (unless the user enters an own token in the settings, `TMDB/Token`, which takes precedence).
   After creating the file the first time: re-run CMake.
+- No `qDebug` in the code (removed in 0.8.37, decided with the user); `qWarning` only for real
+  errors. Builds other than Debug define `QT_NO_DEBUG_OUTPUT` and `QT_NO_WARNING_OUTPUT`: nothing
+  of ours in the system log; what the user must know is shown in the app (toasts).
 - Defines: `APP_NAME`, `APP_VERSION`, `COMPANY_NAME`. Settings: `QSettings()` with organization
   "SpeckenbachNet", INI format on every system.
 - Windows: `app.rc.in` (icon `ressources/icons/app_icon.ico` + version info); macOS: bundle icon
@@ -111,6 +114,10 @@ Linux).
   `journalctl _PID=<pid>`.
 - Close test instances like the window's close button (`niri msg --json windows` for the id,
   then `niri msg action close-window --id <id>`), not with `kill`; never kill by name.
+- Light / dark under niri + Noctalia: GTK apps and Brave follow the switch, Qt apps (MovieMetaM
+  too) do not – no platform theme that Noctalia drives. Under Plasma the switch works. Not a bug
+  of the app; a fix would be on the system side (e.g. qt6ct driven by Noctalia) or an own setting
+  "Appearance" in the app.
 
 ## Structure
 

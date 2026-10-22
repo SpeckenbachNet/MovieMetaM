@@ -289,7 +289,6 @@ void ImageLabelM::mouseMoveEvent(QMouseEvent *event)
     // The cover in full resolution as a file
     QString tempPath = QDir::tempPath() + "/exported_cover.jpg";
     if (!m_cover.save(tempPath, "JPG", 95)) {  // JPG quality 95%
-        qDebug() << "Could not save file to " << tempPath;
         return;
     }
 
