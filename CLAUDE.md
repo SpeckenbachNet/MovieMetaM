@@ -17,6 +17,10 @@ up to date with larger changes.
 - The **user sets the version** in `CMakeLists.txt` (`PROJECT_VERSION`); check it before
   committing. Commit message: `0.x.y Short German title` + bullet list, no Co-Authored-By
   line (decided with the user, from 0.8.35 on). Commit only the files of the topic.
+- Versions (decided with the user): one version for the app on all platforms. A change of the
+  app's code raises it; a change of build / packaging scripts only does not (commit title
+  without a number). A release is a git tag `vX.Y.Z` with the packages of all platforms that
+  exist at that time (Windows / Linux may follow with a later version).
 - Report faithfully what was tested (build only / app not looked at).
 
 ## Building
