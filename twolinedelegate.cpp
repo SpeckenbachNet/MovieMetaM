@@ -60,14 +60,24 @@ void TwoLineDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     const QRect entry = opt.rect.adjusted(kMarginH, kMarginV, -kMarginH, -kMarginV);
     QColor titleColor = opt.palette.color(QPalette::Text);
     if (selected) {
+        // Background and text of the selection from the same color group; if they still do not
+        // contrast (seen on macOS with "Graphite": light grey with white text), black or white
+        const QPalette::ColorGroup group = (opt.state & QStyle::State_Active) ? QPalette::Active
+                                                                                : QPalette::Inactive;
+        const QColor background = opt.palette.color(group, QPalette::Highlight);
+        titleColor = opt.palette.color(group, QPalette::HighlightedText);
+        if (contrastRatio(background, titleColor) < 3.0) {
+            titleColor = contrastRatio(background, Qt::black) >= contrastRatio(background, Qt::white)
+                             ? QColor(Qt::black) : QColor(Qt::white);
+        }
         painter->setPen(Qt::NoPen);
-        painter->setBrush(opt.palette.color(QPalette::Highlight));
+        painter->setBrush(background);
         painter->drawRoundedRect(entry, FieldLook::radius, FieldLook::radius);
-        titleColor = opt.palette.color(QPalette::HighlightedText);
     }
-    // Second line dimmed: half transparent, so it fits on any background
+    // Second line dimmed: half transparent, so it fits on any background (the same when selected,
+    // else it looks like the title on a light selection)
     QColor secondColor = titleColor;
-    secondColor.setAlphaF(selected ? 0.8 : 0.6);
+    secondColor.setAlphaF(0.6);
 
     // Icon on the left, centered; its room is kept even without icon (texts stay in line)
     const QSize iconSize = opt.decorationSize;
