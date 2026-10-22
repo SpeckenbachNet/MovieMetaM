@@ -26,7 +26,6 @@
 #include <QLocale>
 #include <QTranslator>
 #include <QStringLiteral>
-#include <QDebug>
 #include "bubble.h"
 
 int main(int argc, char *argv[])
@@ -65,7 +64,6 @@ int main(int argc, char *argv[])
     // === Set up the application as needed. ===
     // Check if the initial setup has already been completed.
     bool hasRequiredSettings = settings.contains("General/AgeRatingSystem");
-    qDebug() << hasRequiredSettings;
 
     if (!hasRequiredSettings)
     {

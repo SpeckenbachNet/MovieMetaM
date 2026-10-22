@@ -41,7 +41,6 @@ MainWin::MainWin(QWidget *parent)
 
     // Get countryCode from INI-File for AgeRating System
     countryCode = settings.value("General/AgeRatingSystem").toString();
-    qDebug() << "Country Code at beginning: " << countryCode;
     dataLanguage = Languages::dataLanguage();
 
     // Initialize
@@ -71,7 +70,6 @@ void MainWin::fillRatingComboBox(QString countryCode)
     const auto &systems = AgeRatings::systems();
     auto it = systems.constFind(countryCode);
     if (it == systems.constEnd()) {
-        qDebug() << "Country does not exist";
         return;
     }
 
@@ -354,13 +352,10 @@ void MainWin::onDataChanged() {
     int row = ui->fileListTableView->selectedRow();
     // Save Dataset and change Status.
     if (this->validateAndRefreshChanges()) {
-        qDebug() << "Dataset Changed";
         this->updateStatus(row, "modified");
     }
     else {
-
         this->updateStatus(row, "unchanged");
-        qDebug() << "Dataset unchanged!";
     }
     updateListEntry(row);   // the title may have changed
     updateSaveButtons();
@@ -575,7 +570,6 @@ void MainWin::removeMovie(const QString &moviePath) {
     if (m_originalMovies.contains(moviePath)) {
         m_originalMovies.remove(moviePath);
     }
-    qDebug() << "Movie completely removed from all storage:" << moviePath;
 }
 
 bool MainWin::validateAndRefreshChanges() {
@@ -591,21 +585,16 @@ bool MainWin::validateAndRefreshChanges() {
 
     // Text/Editfields
     if (ui->titleEdit->text() != original.title) {
-        qDebug() << "Title has changed.";
-        qDebug() << "UI Text: " << ui-> titleEdit->text();
-        qDebug() << "OR Text: " << original.title;
         hasChanged = true;
     }
     work.title = ui->titleEdit->text();
 
     if (ui->studioEdit->text() != original.studio) {
-        qDebug() << "Studio has changed";
         hasChanged = true;
     }
     work.studio = ui->studioEdit->text();
 
     if (ui->descriptionText->toPlainText() != original.description) {
-        qDebug() << "Description has changed";
         hasChanged = true;
     }
     work.description = ui->descriptionText->toPlainText();
@@ -615,14 +604,12 @@ bool MainWin::validateAndRefreshChanges() {
     const bool noDateUnchanged = !original.releaseDate.isValid()
                                  && ui->releaseDateEdit->date() == QDate(1972, 1, 1);
     if (!noDateUnchanged && ui->releaseDateEdit->date() != original.releaseDate) {
-        qDebug() << "Release Date has changed.";
         hasChanged = true;
     }
     work.releaseDate = ui->releaseDateEdit->date();
 
     // Comboboxes
     if (ui->genreComboBox->currentText() != original.genre) {
-        qDebug() << "Genre has changed.";
         hasChanged = true;
     }
     work.genre = ui->genreComboBox->currentText();
@@ -631,7 +618,6 @@ bool MainWin::validateAndRefreshChanges() {
     int currentScore = ui->ratingComboBox->currentData(Qt::UserRole).toInt();
     QString currentSystem = ui->ratingComboBox->currentData(kRatingSystemRole).toString();
     if (currentScore != original.ratingScore || currentSystem != original.ratingSystem) {
-        qDebug() << "AgeRating has changed.";
         hasChanged = true;
     }
     work.ratingScore = currentScore;
@@ -642,7 +628,6 @@ bool MainWin::validateAndRefreshChanges() {
     const int currentAdvisory = ui->advisoryComboBox->currentData().toInt();
     const int originalAdvisory = (original.advisory == 4) ? 1 : original.advisory;
     if (currentAdvisory != originalAdvisory) {
-        qDebug() << "Content advisory has changed.";
         hasChanged = true;
     }
     work.advisory = (currentAdvisory == originalAdvisory) ? original.advisory : currentAdvisory;
@@ -665,9 +650,7 @@ bool MainWin::validateAndRefreshChanges() {
             coverActuallyChanged = true;
         }
     }
-    qDebug() << "Current Size:" << currentCover.size() << "Original Size:" << original.cover.size() << "Work Cover:" << work.cover.size();
     if (coverActuallyChanged) {
-        qDebug() << "Cover has changed.";
         hasChanged = true;
     }
 
@@ -678,14 +661,7 @@ bool MainWin::validateAndRefreshChanges() {
     QString currentCastList = m_castWidget->getTagsCommaSeperated(); // get Tags from Widget
     // Compare current Cast with original map
     if (currentCastList != original.cast) {
-        qDebug() << "Cast has changed.";
-        qDebug() << "Current: " << currentCastList;
-        qDebug() << "Original " << original.cast;
         hasChanged = true; // Only if a name is actually missing or spelled differently
-    }else {
-        qDebug() << "Current: " << currentCastList;
-        qDebug() << "Original " << original.cast;
-        qDebug() << "The dataset is the same again!";
     }
     // Set current Cast to working map
 
@@ -693,28 +669,24 @@ bool MainWin::validateAndRefreshChanges() {
 
     QString currentDirectorList = m_directorsWidget->getTagsCommaSeperated();
     if (currentDirectorList != original.directors) {
-        qDebug() << "Directors have changed.";
         hasChanged = true;
     }
     work.directors = currentDirectorList;
 
     QString currentScreenwriterList = m_screenwritersWidget->getTagsCommaSeperated();
     if (currentScreenwriterList != original.screenwriters) {
-        qDebug() << "Screenwriters have changed.";
         hasChanged = true;
     }
     work.screenwriters = currentScreenwriterList;
 
     QString currentProducerList = m_producersWidget->getTagsCommaSeperated();
     if (currentProducerList != original.producers) {
-        qDebug() << "Producers have changed.";
         hasChanged = true;
     }
     work.producers = currentProducerList;
 
     // Only change the status of movie if something has actually changed.
     work.status = hasChanged ? "modified" : "unchanged";
-    qDebug() << "hasChanged: " << hasChanged;
     return hasChanged;
 }
 
@@ -1160,14 +1132,12 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
         const QString &path = entry.path;
         // Only supported file types (MP4 for now)
         if (!MediaInfoM::isSupported(path)) {
-            qDebug() << "Unsupported file type, skip:" << path;
             ++skippedCount;
             continue;
         }
 
         // Check if path is already in map
         if (m_loadedMovies.contains(path)) {
-            qDebug() << "File already exists, skip:" << path;
             continue; // Skip to the next file in the list
         }
 
@@ -1215,8 +1185,6 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
     // Only select if we have actually added something NEW.
     if (firstNewRowIndex != -1) {
         selectRowInTable(firstNewRowIndex);
-    } else {
-        qDebug() << "No new files found to add.";
     }
 }
 
@@ -1256,7 +1224,6 @@ void MainWin::addFilePathToModel(const QString &filePath)
 {
     // Read data from file to model and save in map
     MovieData movie = MovieData::fromFile(filePath);
-    //qDebug() << "Cast readed: " << movie.cast;
     m_loadedMovies.insert(filePath, movie);  // put movie to model
     m_originalMovies.insert(filePath, movie); // put movie also to memory
 
@@ -1290,7 +1257,6 @@ void MainWin::displayMovie(const MovieData &movie) {
 
     // Clear Data
     clearData();
-    //qDebug() << "Alles cleared";
 
     // Add TagWidgets
     m_castWidget->setTags(movie.cast);                  // Cast
@@ -1338,8 +1304,6 @@ void MainWin::displayMovie(const MovieData &movie) {
     // Set Entry in genre combobox
     if (!movie.genre.isEmpty()) {
         setComboEntryByString(ui->genreComboBox,movie.genre,false);
-    } else {
-        qDebug() << "No User-Content found";
     }
     setSignalsBlocked(false);
     formatTextByLength(256);
@@ -1353,7 +1317,6 @@ void MainWin::setComboEntryByString(QComboBox *combo, QString findString, bool u
     if (useData) {
         index = combo->findData(findString, Qt::UserRole, Qt::MatchExactly);
     } else {
-        qDebug() << "NotUseData: " << findString;
         index = combo->findText(findString, Qt::MatchExactly);
     }
     if (index == -1 && combo->isEditable() && !findString.isEmpty()) {
@@ -1420,7 +1383,6 @@ void MainWin::onSearchTableViewDoubleClicked(const QModelIndex &index){
     QVariant idData = idIndex.data(Qt::UserRole);
 
     if (!idData.isValid()) {
-        qDebug() << "No ID found!";
         return;
     }
 
@@ -1502,8 +1464,6 @@ void MainWin::onAddFilesButtonClicked()
     if (!files.isEmpty()) {
         // Put filelist to Model
         addFilesToModel(files);
-
-        qDebug() << files.size() << "Files over dialog added.";
     }
 }
 
@@ -1582,9 +1542,7 @@ void MainWin::removeMovies(const QStringList &keys)
 void MainWin::onSearchButtonClicked()
 {
     // Logic for "Search":
-    qDebug() << "Action SEARCH triggered...";
     const QString searchText = ui->searchEdit->text().trimmed();
-    qDebug() << "Search Text: " << searchText;
     if (searchText.isEmpty()) {
         showColumnStatus(StatusColumn::Search, tr("Please enter a search term"));
     }
@@ -1604,7 +1562,6 @@ void MainWin::onSearchButtonClicked()
 void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const QPixmap &pixmap)> callback,
                                  std::function<void()> onError)
 {
-    qDebug() << "Enter Download function:" << imageUrl;
     QNetworkRequest request(imageUrl);
     QNetworkReply *reply = m_ImageNetworkManager->get(request);
 
@@ -1644,7 +1601,6 @@ void MainWin::startImageDownload(const QUrl &imageUrl, std::function<void(const 
 
 void MainWin::onImageDownloadFinished(QNetworkReply *reply)
 {
-    qDebug() << "Download finsh function";
     // Get URL from Mapping
     QUrl originalUrl = reply->property("OriginalUrl").toUrl();
 
@@ -1663,7 +1619,6 @@ void MainWin::onImageDownloadFinished(QNetworkReply *reply)
 
     if (pixmap.loadFromData(imageData)) {
         // SUCCESS: Send QPixmap aund URL over signal
-        qDebug() << "Download Finished";
         emit imageDownloadFinished(pixmap, originalUrl, reply);
     } else {
         // Error parsing Image data
@@ -1687,8 +1642,6 @@ void MainWin::startApiRequest(const QUrl &url)
 
     // Send Get-Request
     m_ApiNetworkManager->get(request);
-
-    // qDebug() << "API-Request startet. Saved in:" << m_tempFile->fileName();
 }
 
 void MainWin::onApiRequestFinished(QNetworkReply *reply)
@@ -1766,7 +1719,6 @@ void MainWin::loadSettingsPage()
 }
 
 void MainWin::handleSaveSettingsButton_Clicked() {
-    qDebug() << "Action Save Setting triggered.";
     const QString newAppLanguage = ui->languageSettingsComboBox->currentData().toString();
     const bool appLanguageChanged = newAppLanguage != Languages::appLanguage();
     const QString newDataLanguage = ui->dataLanguageSettingsComboBox->currentData().toString();

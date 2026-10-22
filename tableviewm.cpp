@@ -39,8 +39,6 @@ QString TableViewM::movieKey(int column) const
 
 void TableViewM::dragEnterEvent(QDragEnterEvent *event)
 {
-    //qDebug() << "DRAG ENTER TABLE VIEW";
-
     if (event->mimeData()->hasUrls())
         event->acceptProposedAction();
     else
@@ -58,8 +56,6 @@ void TableViewM::dragMoveEvent(QDragMoveEvent *event)
 
 void TableViewM::dropEvent(QDropEvent *event)
 {
-    //qDebug() << "DROP EVENT TABLE VIEW";
-
     if (!event->mimeData()->hasUrls()) {
         event->ignore();
         return;
@@ -73,7 +69,6 @@ void TableViewM::dropEvent(QDropEvent *event)
     for (const QUrl &url : urls) {
         const QString filePath = url.toLocalFile();
         if (!filePath.isEmpty()) {
-            qDebug() << "Collected:" << filePath;
             droppedFiles.append(filePath); // Add path to list
         }
     }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.8.36")
+set(PROJECT_VERSION "0.8.37")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -143,6 +143,13 @@ target_compile_definitions(${PROJECT_NAME}
         APP_NAME="${PROJECT_NAME}"
         COMPANY_NAME="${ORGANIZATION_NAME}"
         TMDB_TOKEN="${TMDB_TOKEN}"
+)
+# Our qDebug / qWarning only while developing (Debug build): nothing in the system log of a
+# user (journal on Linux, Console on macOS). Errors the user must know are shown in the app.
+target_compile_definitions(${PROJECT_NAME}
+    PRIVATE
+        $<$<NOT:$<CONFIG:Debug>>:QT_NO_DEBUG_OUTPUT>
+        $<$<NOT:$<CONFIG:Debug>>:QT_NO_WARNING_OUTPUT>
 )
 
 # The .qm files are compiled and embedded into the app as :/i18n/<name>.qm

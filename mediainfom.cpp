@@ -143,16 +143,11 @@ bool MediaInfoM::readBoxHeader(QFile &file, Mp4Box &box)
 
     box.size = size;
     box.dataPos = file.pos();
-    //qDebug() << "===============================";
-    //qDebug() << "Box type:" << QString::fromUtf8(box.type) << "Size:" << size << "HeaderSize:" << box.headerSize << "DataPos:" << box.dataPos;
-
     return true;
 }
 
 void MediaInfoM::parseBoxes(QFile &file, qint64 endPos, const std::function<void(const Mp4Box &, QFile &)> &visitor)
 {
-    //qDebug() << "--- Entering parseBoxes. StartPos:" << file.pos() << "EndPos:" << endPos;
-
     while (file.pos() < endPos) {
         Mp4Box box;
         qint64 startPos = file.pos();
@@ -181,18 +176,14 @@ void MediaInfoM::parseBoxes(QFile &file, qint64 endPos, const std::function<void
         // --- SICHERHEITS-FALLBACK ---
         // Makes sure the file position ends up at the end of the box.
         if (file.pos() < boxEnd) {
-            qDebug() << "WARNING: Visitor did not consume box " << QString::fromUtf8(box.type)
-            << ". Forcing seek from" << file.pos() << "to" << boxEnd;
             if (!file.seek(boxEnd)) {
                 emit errorOccurred("Failed to seek to box end after visit.");
                 break;
             }
         } else if (file.pos() > boxEnd) {
-            qDebug() << "ERROR: Visitor exceeded box end. Expected" << boxEnd << ", actual" << file.pos();
             break;
         }
     }
-    //qDebug() << "--- Exiting parseBoxes. FinalPos:" << file.pos();
 }
 
 // extract funtions for several movie types
@@ -445,9 +436,6 @@ void MediaInfoM::readStringDataBox(QFile &file, QString key, QMap<QString, QStri
             // Write back result
             if (date.isValid()) {
                 result = date.toString("yyyy-MM-dd");
-            } else {
-                // If nothing works: debug output to find the format
-                qDebug() << "Unknown date format:" << result;
             }
         }
         // else if (key == "ageRating") {
@@ -479,7 +467,6 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
     const qint64 uuidSize = 16;
 
     if (currentPos + uuidSize > boxDataEnd) {
-        qDebug() << "readXmpData: Box size too small to contain UUID.";
         file.seek(boxDataEnd); // correction if the pointer is too far
         return;
     }
@@ -492,8 +479,6 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
     QByteArray xmpUuid = QByteArray::fromHex("89744C6888494002A819B7D8D85F8E56");
 
     if (uuid == xmpUuid) {
-        qDebug() << "XMP: Found standard XMP UUID. Read XML data...";
-
         // 2. Restliche Daten lesen (XML-Struktur)
         qint64 xmlDataSize = boxDataEnd - file.pos();
 
@@ -501,26 +486,16 @@ void MediaInfoM::readXmpData(QFile &file, qint64 boxDataEnd, QMap<QString, QStri
             QByteArray xmlData = file.read(xmlDataSize);
             QString xmlString = QString::fromUtf8(xmlData);
 
-            qDebug() << "XML Data: " << xmlString;
             // OPTION 1: XML-Daten als Roh-String speichern (empfohlen als erster Schritt)
             //metadata.insert("XMP_RAW_XML", xmlString);
 
-            qDebug() << "XMP: XML data successfully read (" << xmlDataSize << " Bytes).";
-
             // NOTE: parsing the XML structure (QXmlStreamReader) could follow here.
-
-        } else {
-            qDebug() << "XMP: UUID found, but no XML data present.";
         }
-    } else {
-        qDebug() << "XMP: UUID box found, but no standard XMP UUID (" << uuid.toHex() << "). Skip.";
     }
 
     // 3. Unbedingte Zeigerkorrektur
     if (file.pos() != boxDataEnd) {
-        if (!file.seek(boxDataEnd)) {
-            qDebug() << "XMP: FATAL: Failed to seek to box end" << boxDataEnd << ". Parser might fail.";
-        }
+        file.seek(boxDataEnd);
     }
 }
 
@@ -573,12 +548,10 @@ QStringList MediaInfoM::parseNameArray(QXmlStreamReader &xml) {
         xml.readNext();
 
         if (xml.isStartElement() && xml.name() == "dict") {
-            //qDebug() << "Enter element dict";
             QString name;
             while (!(xml.isEndElement() && xml.name() == "dict")) {
                 xml.readNext();
                 if (xml.isStartElement() && xml.name() == "key") {
-                    //qDebug() << "Enter element key";
                     QString key = xml.readElementText();
                     if (key == "name") {
                         xml.readNext();
@@ -610,14 +583,12 @@ void MediaInfoM::parseXmlString(const QString &xmlData, QMap<QString, QString> &
             if (xml.name() == "key") {
                 // Element key: remeber key
                 currentKey = xml.readElementText();
-                //qDebug() << "Tag key - Current Key: " << currentKey;
                 expectingValue = true;
             } else if (expectingValue && xml.name() == "string") {
                 metadata[currentKey] = xml.readElementText();
                 expectingValue = false;
             } else if (expectingValue && xml.name() == "array") {
                 // Elemnet array: fetch all names
-                //qDebug() << "Current Key: " << currentKey;
                 QStringList names = parseNameArray(xml);
                 metadata[currentKey] = names.join(", ");
                 expectingValue = false;
@@ -626,7 +597,7 @@ void MediaInfoM::parseXmlString(const QString &xmlData, QMap<QString, QString> &
     }
 
     if (xml.hasError()) {
-        qWarning() << "XML Fehler:" << xml.errorString();
+        qWarning() << "XML error:" << xml.errorString();
     }
 }
 
