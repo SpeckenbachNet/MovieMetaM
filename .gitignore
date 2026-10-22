@@ -29,6 +29,7 @@ ui_*.h
 *.jsc
 Makefile*
 *build-*
+!tools/build-mac.sh
 build/
 build/*
 .qtcreator/

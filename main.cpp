@@ -53,8 +53,10 @@ int main(int argc, char *argv[])
             a.installTranslator(&translator);
         }
         a.removeTranslator(&qtTranslator);
-        if (qtTranslator.load(QLocale(langCode), QStringLiteral("qtbase"), QStringLiteral("_"),
-                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+        // Embedded in the app (see CMakeLists.txt), else from the Qt installation
+        if (qtTranslator.load(QStringLiteral(":/i18n/qtbase_") + langCode)
+            || qtTranslator.load(QLocale(langCode), QStringLiteral("qtbase"), QStringLiteral("_"),
+                                 QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
             a.installTranslator(&qtTranslator);
         }
     };

@@ -34,6 +34,8 @@ up to date with larger changes.
 - Windows: `app.rc.in` (icon `ressources/icons/app_icon.ico` + version info); macOS: bundle icon
   `app_icon.icns`; the bundle's `Info.plist` is `ressources/macos/Info.plist.in` (Qt's template plus
   `CFBundleLocalizations` de/en: without it the native Open dialog stays English).
+- Mac version: `tools/build-mac.sh` (release universal arm64 + x86_64, `macdeployqt`, ad hoc
+  signature – no Developer ID, decided with the user –, `build/MovieMetaM-<version>.dmg`).
 - Only MP4/M4V are supported for now (`MediaInfoM::supportedSuffixes()`); other files are
   skipped with a message in the status bar.
 
@@ -44,8 +46,9 @@ complete (0 unfinished); `MovieMetaM_en.ts` only fills `<numerusform>` for `%n` 
 Non-translatable ui strings get `notr="true"`. After changing texts: lupdate with
 `-no-obsolete` (or target `update_translations`), fill every unfinished German entry. The .qm
 files are built and embedded by `qt_add_translations` (`:/i18n`) and are not in git.
-Qt's own texts (standard buttons, file dialog) come from `qtbase_<lang>.qm`, loaded in `main.cpp`
-from `QLibraryInfo::TranslationsPath` in the app language (to ship with a bundle/installer: open).
+Qt's own texts (standard buttons, file dialog) come from `qtbase_<lang>.qm`: `CMakeLists.txt`
+embeds those of the app languages from Qt's translations folder as `:/i18n/qtbase_<lang>.qm`,
+`main.cpp` loads them from there (else `QLibraryInfo::TranslationsPath`).
 Age rating labels like "ab 12 Jahren" are official texts written into the files: not translated.
 Other languages (fr, es, it, pt_BR, zh_CN, ja, ko): drafts by Claude, **not checked by a native speaker** – their entries keep
 `type="unfinished"` (lrelease still puts them into the .qm), the help texts address the reader
