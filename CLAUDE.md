@@ -20,7 +20,8 @@ up to date with larger changes.
 - Versions (decided with the user): one version for the app on all platforms. A change of the
   app's code raises it; a change of build / packaging scripts only does not (commit title
   without a number). A release is a git tag `vX.Y.Z` with the packages of all platforms that
-  exist at that time (Windows / Linux may follow with a later version).
+  exist at that time (Windows / Linux may follow with a later version). `CHANGELOG.md` (English,
+  for users, newest first, one entry per released version) gets a new entry with each release.
 - Report faithfully what was tested (build only / app not looked at).
 
 ## Building
