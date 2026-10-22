@@ -103,6 +103,10 @@ struct FieldLook {
     QColor placeholder;
     QColor border;
     QColor focus;
+    // Disabled (e.g. the movie info without a movie): everything steps back, the fill stays
+    QColor disabledText;
+    QColor disabledPlaceholder;
+    QColor disabledBorder;
 
     FieldLook()
     {
@@ -112,6 +116,9 @@ struct FieldLook {
         placeholder = mixColor(fill, text, 0.50);
         border      = mixColor(fill, text, 0.30);
         focus       = pal.color(QPalette::Highlight);
+        disabledText        = mixColor(fill, text, 0.35);
+        disabledPlaceholder = mixColor(fill, text, 0.25);
+        disabledBorder      = mixColor(fill, text, 0.15);
     }
 
     // Style sheet rules for the corners (Top: no bottom radius, Bottom: no top border)
@@ -141,9 +148,11 @@ inline void applyInputStyle(QLineEdit *edit, FieldCorners corners = FieldCorners
     edit->setStyleSheet(QStringLiteral(
         "QLineEdit { background: %1; color: %2; placeholder-text-color: %3; border: 1px solid %4;"
         "%5 padding: 0 6px; selection-background-color: %6; }"
-        "QLineEdit:focus { border: 1px solid %6; }")
+        "QLineEdit:focus { border: 1px solid %6; }"
+        "QLineEdit:disabled { color: %7; placeholder-text-color: %8; border-color: %9; }")
         .arg(look.fill.name(), look.text.name(), look.placeholder.name(), look.border.name(),
-             FieldLook::cornerRules(corners), look.focus.name()));
+             FieldLook::cornerRules(corners), look.focus.name(), look.disabledText.name(),
+             look.disabledPlaceholder.name(), look.disabledBorder.name()));
 }
 
 // Rounded spin box (e.g. date) like the input fields. Without visible arrow buttons: with a
@@ -161,9 +170,11 @@ inline void applySpinStyle(QAbstractSpinBox *spin)
         "QAbstractSpinBox { background: %1; color: %2; border: 1px solid %3;%4"
         " selection-background-color: %5; }"
         "QAbstractSpinBox:focus { border: 1px solid %5; }"
+        "QAbstractSpinBox:disabled { color: %6; border-color: %7; }"
         "QAbstractSpinBox::up-button, QAbstractSpinBox::down-button { width: 0px; border: none; }")
         .arg(look.fill.name(), look.text.name(), look.border.name(),
-             FieldLook::cornerRules(FieldCorners::All), look.focus.name()));
+             FieldLook::cornerRules(FieldCorners::All), look.focus.name(),
+             look.disabledText.name(), look.disabledBorder.name()));
 
     // Distance of the text to the border, like in the input fields
     // (a padding in the style sheet is ignored here)
@@ -194,6 +205,7 @@ inline void applyComboStyle(QComboBox *combo)
         "QComboBox { background: %1; color: %2; border: 1px solid %3;%4 padding: 0 24px 0 6px; }"
         "QComboBox:hover { background: %6; }"
         "QComboBox:focus { border: 1px solid %5; }"
+        "QComboBox:disabled { color: %8; border-color: %9; }"
         "QComboBox::drop-down { border: none; width: 22px; }"
         "QComboBox::down-arrow { image: url(:/icons/chevron_down); width: 14px; height: 14px; }"
         "QComboBox QAbstractItemView { background: %1; color: %2; border: 1px solid %3; padding: 2px; outline: 0; }"
@@ -202,7 +214,8 @@ inline void applyComboStyle(QComboBox *combo)
         " { background: palette(highlight); color: palette(highlighted-text); border: none; }")
         .arg(look.fill.name(), look.text.name(), look.border.name(),
              FieldLook::cornerRules(FieldCorners::All), look.focus.name(), hover.name())
-        .arg(FieldLook::radius));
+        .arg(FieldLook::radius)
+        .arg(look.disabledText.name(), look.disabledBorder.name()));
 }
 
 // Rounded tab widget: the area in the field color like the other boxes (square only top left,
@@ -247,6 +260,8 @@ inline void applyBoxStyle(QAbstractScrollArea *area, bool showFocus,
              FieldLook::cornerRules(corners), look.focus.name());
     if (showFocus)
         style += QStringLiteral("QAbstractScrollArea:focus { border: 1px solid %1; }").arg(look.focus.name());
+    style += QStringLiteral("QAbstractScrollArea:disabled { color: %1; border-color: %2; }")
+                 .arg(look.disabledText.name(), look.disabledBorder.name());
 
     area->setAttribute(Qt::WA_MacShowFocusRect, false);
     area->setStyleSheet(style + extraStyle);

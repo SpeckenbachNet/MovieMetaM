@@ -110,8 +110,8 @@ void ImageLabelM::paintEvent(QPaintEvent *event) {
     } else {
         // Colors of the input fields; without a movie (disabled) both step back
         const FieldLook look;
-        const QColor iconColor = isEnabled() ? look.text : mixColor(look.fill, look.text, 0.15);
-        const QColor borderColor = isEnabled() ? look.border : mixColor(look.fill, look.text, 0.15);
+        const QColor iconColor = isEnabled() ? look.text : look.disabledBorder;
+        const QColor borderColor = isEnabled() ? look.border : look.disabledBorder;
 
         // Placeholder: the drawing "no cover" (an arrow into a tray), in the
         // resolution of the screen
