@@ -38,6 +38,7 @@ public:
 
     void showTopic(Topic topic);
     ToolbarM *toolbar() const { return m_toolbar; }   // the main window gives it the app's shape
+    void refreshTheme();   // light / dark mode switched
 
 signals:
     void backRequested();

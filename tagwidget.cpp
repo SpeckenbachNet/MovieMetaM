@@ -115,6 +115,25 @@ public:
 
 } // namespace
 
+// The input field (upper part of the box) and the list (lower part); items in the accent color of
+// the system, on hover mixed a bit towards the text color (lighter in dark themes, darker in light
+// ones); the selected tag (target of the Delete key) the same. Room on the right for the ×
+// (TagDelegate).
+void TagWidget::restyle()
+{
+    const QPalette pal = QApplication::palette();
+    const QColor accent = pal.color(QPalette::Highlight);
+    const QString tagColor = accent.name();
+    const QString textColor = pal.color(QPalette::HighlightedText).name();
+    const QString hoverColor = mixColor(accent, pal.color(QPalette::WindowText), 0.20).name();
+    applyBoxStyle(m_tagView, false, FieldCorners::Bottom,
+        "QListView {font-size: 12px; outline: 0;}"
+        "QListView::item { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 20px 2px 6px; background-color: " + tagColor + "; color: " + textColor + "; border-radius: 5px;}"
+        "QListView::item:hover, QListView::item:selected { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 20px 2px 6px; background-color: " + hoverColor + "; color: " + textColor + "; border-radius: 5px;}"
+    );
+    applyInputStyle(m_lineEdit, FieldCorners::Top);
+}
+
 TagWidget::TagWidget(
     const QString &placeholder, const QString &separator,
     QWidget *parent
@@ -162,17 +181,6 @@ void TagWidget::setupUi(const QString &placeholder)
     m_tagView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);   // long names are elided, not scrolled
     m_tagView->setTextElideMode(Qt::ElideRight);
 
-    // Lower part of the box; items in the accent color of the system, on hover mixed a bit
-    // towards the text color (lighter in dark themes, darker in light ones); the selected tag
-    // (target of the Delete key) the same. Room on the right for the × (TagDelegate).
-    const QColor accent = palette().color(QPalette::Highlight);
-    const QString tagColor = accent.name();
-    const QString hoverColor = mixColor(accent, palette().color(QPalette::WindowText), 0.20).name();
-    applyBoxStyle(m_tagView, false, FieldCorners::Bottom,
-        "QListView {font-size: 12px; outline: 0;}"
-        "QListView::item { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 20px 2px 6px; background-color: " + tagColor + "; color: palette(highlighted-text); border-radius: 5px;}"
-        "QListView::item:hover, QListView::item:selected { margin-top: 4px; margin-left: 2px; margin-right: 2px; padding: 2px 20px 2px 6px; background-color: " + hoverColor + "; color: palette(highlighted-text); border-radius: 5px;}"
-    );
     auto *delegate = new TagDelegate(m_tagView);
     m_tagView->setItemDelegate(delegate);
     m_tagView->setMouseTracking(true);   // × follows the mouse
@@ -180,7 +188,7 @@ void TagWidget::setupUi(const QString &placeholder)
     // Create lineedit
     m_lineEdit = new QLineEdit(this);
     m_lineEdit->setPlaceholderText(placeholder);
-    applyInputStyle(m_lineEdit, FieldCorners::Top);   // upper part of the box
+    restyle();
 
     // add elements to Widget
     mainVLayout->addWidget(m_lineEdit);

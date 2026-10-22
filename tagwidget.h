@@ -35,6 +35,7 @@ public:
               QWidget *parent = nullptr);
 
     // Schnittstelle
+    void restyle();   // colors of the theme (at the start; on light / dark from MainWin)
     void setTags(const QString &tags);
     void clearTags();
     QStringList getTags() const;

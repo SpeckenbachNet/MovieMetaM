@@ -21,6 +21,9 @@
 #include "themecolors.h"
 #include "twolinedelegate.h"
 #include "posterpreview.h"
+#include "posterpicker.h"
+#include "helppage.h"
+#include "tagwidget.h"
 
 #include <QAction>
 #include <QDesktopServices>
@@ -32,44 +35,11 @@
 // ***** INITIALIZE *****
 void MainWin::initializeForm() {
 
-    // Style headers: a light grey band, the bold text carries the heading
-    QString cssHeadline = "QLabel { background-color: " + accentGrey(palette(), 0.18).name() + "; "
-                          "color: palette(window-text); "
-                          "font-weight: bold; "
-                          "padding: 6px; "
-                          "border: none; "   // middleLabel has a StyledPanel frame in the .ui
-                          "border-radius: " + QString::number(FieldLook::radius) + "px; }";
-    ui->leftLabel->setStyleSheet(cssHeadline);
-    ui->middleLabel->setStyleSheet(cssHeadline);
-    ui->rightLabel->setStyleSheet(cssHeadline);
-
-    // Settings as cards: rounded box in the field colors, heading like the column headers
-    const FieldLook look;
-    ui->settingsGeneralCard->setStyleSheet(QStringLiteral(
-        "QFrame#settingsGeneralCard { background: %1; border: 1px solid %2; border-radius: %3px; }")
-        .arg(look.fill.name(), look.border.name()).arg(FieldLook::radius));
-    ui->settingsGeneralLabel->setStyleSheet(cssHeadline);
+    // Colors and shapes of headers, fields and boxes: applyThemeStyles() (at the end of the start)
     ui->ratingSettingsComboBox->setMinimumWidth(240);
-
-    // Rounded input fields (the ones in the tag widgets style themselves)
-    applyInputStyle(ui->titleEdit);
-    applyInputStyle(ui->studioEdit);
-    applyBoxStyle(ui->descriptionText, true);
-    applySpinStyle(ui->releaseDateEdit);
-    applyComboStyle(ui->genreComboBox);
     // The genre may also be typed: the list only suggests the TMDB genres
     ui->genreComboBox->setEditable(true);
     ui->genreComboBox->setInsertPolicy(QComboBox::NoInsert);
-    applyComboStyle(ui->ratingComboBox);
-    applyComboStyle(ui->advisoryComboBox);
-    // Format of the video: chip in the look of the tags ("1080p") and the size beside it
-    ui->hdChipLabel->setStyleSheet(QStringLiteral(
-        "QLabel { font-size: 12px; padding: 2px 6px; border-radius: 5px;"
-        " background-color: palette(highlight); color: palette(highlighted-text); }"));
-    applyComboStyle(ui->ratingSettingsComboBox);
-    applyComboStyle(ui->languageSettingsComboBox);
-    applyComboStyle(ui->dataLanguageSettingsComboBox);
-    applyTabStyle(ui->tabWidget);
     initializeDetailsTab();
 
     // Columns: on the first start the middle (movie info) gets the extra width, the lists keep
@@ -218,40 +188,110 @@ void MainWin::initializeComboBoxes() {
     m_tmdbTokenEdit->setEchoMode(QLineEdit::Password);
     m_tmdbTokenEdit->setPlaceholderText(tr("Token of the built-in account"));
     m_tmdbTokenEdit->setText(m_tmdbToken);
-    applyInputStyle(m_tmdbTokenEdit);
-    {
-        // The eye at the end of the field shows or hides the token
-        const QColor iconColor = palette().color(QPalette::Text);
-        // QLineEdit shows it at 16 px: only the area of the eye is drawn (without the empty
-        // margins of the 24 grid), in the resolution of the screen
-        const qreal dpr = devicePixelRatioF();
-        const auto tinted = [iconColor, dpr](const QString &path) {
-            constexpr int size = 16;
-            QPixmap pm(QSize(size, size) * dpr);
-            pm.fill(Qt::transparent);
-            pm.setDevicePixelRatio(dpr);
-            QSvgRenderer renderer(path);
-            renderer.setViewBox(QRectF(2.5, 2.5, 19, 19));
-            QPainter p(&pm);
-            renderer.render(&p, QRectF(0, 0, size, size));
-            p.setCompositionMode(QPainter::CompositionMode_SourceIn);
-            p.fillRect(pm.rect(), iconColor);
-            return QIcon(pm);
-        };
-        m_tmdbTokenEye = m_tmdbTokenEdit->addAction(tinted(QStringLiteral(":icons/eye")), QLineEdit::TrailingPosition);
-        QAction *eye = m_tmdbTokenEye;
-        eye->setCheckable(true);
-        eye->setToolTip(tr("Show the token"));
-        connect(eye, &QAction::toggled, this, [this, eye, tinted](bool shown) {
-            m_tmdbTokenEdit->setEchoMode(shown ? QLineEdit::Normal : QLineEdit::Password);
-            eye->setIcon(tinted(shown ? QStringLiteral(":icons/eye_off") : QStringLiteral(":icons/eye")));
-            eye->setToolTip(shown ? tr("Hide the token") : tr("Show the token"));
-        });
-    }
+    // The eye at the end of the field shows or hides the token
+    m_tmdbTokenEye = m_tmdbTokenEdit->addAction(eyeIcon(false), QLineEdit::TrailingPosition);
+    m_tmdbTokenEye->setCheckable(true);
+    m_tmdbTokenEye->setToolTip(tr("Show the token"));
+    connect(m_tmdbTokenEye, &QAction::toggled, this, [this](bool shown) {
+        m_tmdbTokenEdit->setEchoMode(shown ? QLineEdit::Normal : QLineEdit::Password);
+        m_tmdbTokenEye->setIcon(eyeIcon(shown));
+        m_tmdbTokenEye->setToolTip(shown ? tr("Hide the token") : tr("Show the token"));
+    });
 
     initializeSettingsPage();
     updateTmdbTokenStatus();
     fillGenreList();   // available at once, also without TMDB (the genres of TMDB follow)
+}
+
+// The eye of the token field (open: show, crossed out: hide), tinted in the text color. QLineEdit
+// shows it at 16 px: only the area of the eye is drawn (without the empty margins of the 24 grid),
+// in the resolution of the screen
+QIcon MainWin::eyeIcon(bool shown) const
+{
+    constexpr int size = 16;
+    const qreal dpr = devicePixelRatioF();
+    QPixmap pm(QSize(size, size) * dpr);
+    pm.fill(Qt::transparent);
+    pm.setDevicePixelRatio(dpr);
+    QSvgRenderer renderer(shown ? QStringLiteral(":icons/eye_off") : QStringLiteral(":icons/eye"));
+    renderer.setViewBox(QRectF(2.5, 2.5, 19, 19));
+    QPainter p(&pm);
+    renderer.render(&p, QRectF(0, 0, size, size));
+    p.setCompositionMode(QPainter::CompositionMode_SourceIn);
+    p.fillRect(pm.rect(), QApplication::palette().color(QPalette::Text));
+    return QIcon(pm);
+}
+
+// Style sheets with the colors of the theme. They hold fixed colors, so they are set again when
+// light / dark mode switches (onColorSchemeChanged). Here are all of the main window; the tag
+// widgets, the poster list and the help page do it themselves.
+void MainWin::applyThemeStyles()
+{
+    const FieldLook look;
+
+    // Headers of the columns and of the settings cards: a light grey band, the bold text
+    // carries the heading
+    const QString headlineStyle = "QLabel { background-color: " + accentGrey(QApplication::palette(), 0.18).name() + "; "
+                                  "color: palette(window-text); font-weight: bold; padding: 6px; "
+                                  "border: none; "   // middleLabel has a StyledPanel frame in the .ui
+                                  "border-radius: " + QString::number(FieldLook::radius) + "px; }";
+    ui->leftLabel->setStyleSheet(headlineStyle);
+    ui->middleLabel->setStyleSheet(headlineStyle);
+    ui->rightLabel->setStyleSheet(headlineStyle);
+    for (QLabel *headline : findChildren<QLabel *>(QStringLiteral("settingsHeadline"))) {
+        headline->setStyleSheet(headlineStyle);
+    }
+    // Settings as cards: rounded box in the field colors
+    const QString cardStyle = QStringLiteral(
+        "QFrame#settingsCard { background: %1; border: 1px solid %2; border-radius: %3px; }")
+        .arg(look.fill.name(), look.border.name()).arg(FieldLook::radius);
+    for (QFrame *card : findChildren<QFrame *>(QStringLiteral("settingsCard"))) {
+        card->setStyleSheet(cardStyle);
+    }
+    if (QLabel *tmdbHint = findChild<QLabel *>(QStringLiteral("tmdbHint"))) {
+        tmdbHint->setStyleSheet(QStringLiteral("QLabel { color: %1; }").arg(look.placeholder.name()));
+    }
+
+    // Rounded input fields (the ones in the tag widgets style themselves)
+    applyInputStyle(ui->titleEdit);
+    applyInputStyle(ui->studioEdit);
+    applyInputStyle(m_tmdbTokenEdit);
+    applyBoxStyle(ui->descriptionText, true);
+    applySpinStyle(ui->releaseDateEdit);
+    applyComboStyle(ui->genreComboBox);
+    applyComboStyle(ui->ratingComboBox);
+    applyComboStyle(ui->advisoryComboBox);
+    applyComboStyle(ui->ratingSettingsComboBox);
+    applyComboStyle(ui->languageSettingsComboBox);
+    applyComboStyle(ui->dataLanguageSettingsComboBox);
+    applyTabStyle(ui->tabWidget);
+    // Movie list: rounded box like the other fields; the entries (title + file name, rounded
+    // selection in the accent color) are drawn by TwoLineDelegate (outline: 0 – no focus frame)
+    applyBoxStyle(ui->fileListTableView, false, FieldCorners::All, "QListView { outline: 0; }");
+    // Format of the video: chip in the look of the tags ("1080p") and the size beside it
+    ui->hdChipLabel->setStyleSheet(QStringLiteral(
+        "QLabel { font-size: 12px; padding: 2px 6px; border-radius: 5px;"
+        " background-color: %1; color: %2; }")
+        .arg(QApplication::palette().color(QPalette::Highlight).name(),
+             QApplication::palette().color(QPalette::HighlightedText).name()));
+    if (m_tmdbTokenEye) {
+        m_tmdbTokenEye->setIcon(eyeIcon(m_tmdbTokenEye->isChecked()));
+    }
+}
+
+// Light / dark mode switched: everything in a fixed order, the selection colors first (the tags
+// use them)
+void MainWin::onColorSchemeChanged()
+{
+    fixHighlightContrast();   // the selection colors of the new mode (Graphite on macOS)
+    applyThemeStyles();
+    for (TagWidget *tags : findChildren<TagWidget *>()) {
+        tags->restyle();
+    }
+    m_posterPicker->restyle();
+    ui->helpPage->refreshTheme();
+    ui->searchEdit->setCornerRadius(FieldLook::radius);   // also sets its colors again
+    ui->coverLabel->update();
 }
 
 // Says which TMDB token the next request uses
@@ -271,14 +311,7 @@ void MainWin::updateTmdbTokenStatus()
 // move out of the old card "General", which is deleted afterwards.
 void MainWin::initializeSettingsPage()
 {
-    const FieldLook look;
-    const QString cardStyle = QStringLiteral(
-        "QFrame#settingsCard { background: %1; border: 1px solid %2; border-radius: %3px; }")
-        .arg(look.fill.name(), look.border.name()).arg(FieldLook::radius);
-    const QString headlineStyle = "QLabel { background-color: " + accentGrey(palette(), 0.18).name() + "; "
-                                  "color: palette(window-text); font-weight: bold; padding: 6px; "
-                                  "border: none; border-radius: " + QString::number(FieldLook::radius) + "px; }";
-
+    // Colors of cards and headlines: applyThemeStyles() (by the object names)
     auto *container = new QWidget(ui->settingsPage);
     container->setMinimumWidth(820);
     container->setMaximumWidth(1180);
@@ -296,12 +329,11 @@ void MainWin::initializeSettingsPage()
     const auto addCard = [&](QVBoxLayout *column, const QString &title) {
         auto *card = new QFrame(container);
         card->setObjectName(QStringLiteral("settingsCard"));
-        card->setStyleSheet(cardStyle);
         auto *layout = new QVBoxLayout(card);
         layout->setContentsMargins(12, 12, 12, 16);
         layout->setSpacing(8);
         auto *headline = new QLabel(title, card);
-        headline->setStyleSheet(headlineStyle);
+        headline->setObjectName(QStringLiteral("settingsHeadline"));
         layout->addWidget(headline);
         column->addWidget(card);
         return layout;
@@ -355,7 +387,7 @@ void MainWin::initializeSettingsPage()
                                    "Leave the field empty to use the token built into the app."), this);
     tmdbHint->setWordWrap(true);
     tmdbHint->setOpenExternalLinks(true);
-    tmdbHint->setStyleSheet(QStringLiteral("QLabel { color: %1; }").arg(look.placeholder.name()));
+    tmdbHint->setObjectName(QStringLiteral("tmdbHint"));
     m_tmdbTokenStatus = new QLabel(this);
     tmdbCard->addWidget(m_tmdbTokenEdit);
     tmdbCard->addWidget(m_tmdbTokenStatus);
@@ -555,9 +587,7 @@ void MainWin::initializeDragAndDrop() {
     ui->fileListTableView->setWordWrap(false);
     // Other Settings
     ui->fileListTableView->setIconSize(QSize(32, 32));   // status dot (drawn on a 32 px canvas)
-    // Rounded box like the other fields; the entries (title + file name, rounded selection in
-    // the accent color) are drawn by TwoLineDelegate (outline: 0 – no focus frame)
-    applyBoxStyle(ui->fileListTableView, false, FieldCorners::All, "QListView { outline: 0; }");
+    // The rounded box: applyThemeStyles()
     ui->fileListTableView->setItemDelegate(new TwoLineDelegate(ui->fileListTableView));
     // The separator lines depend on the neighbour's selection: repaint the whole list
     connect(ui->fileListTableView->selectionModel(), &QItemSelectionModel::selectionChanged,

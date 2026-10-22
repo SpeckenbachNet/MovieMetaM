@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
-// ToolbarM 1.6.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there)
+// ToolbarM 1.6.1 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there)
 #include "toolbarm.h"
 
+#include <QApplication>
 #include <QEvent>
 #include <QLabel>
 #include <QPainter>
@@ -196,7 +197,10 @@ QColor ToolbarM::mix(const QColor &a, const QColor &b, qreal t)
 
 void ToolbarM::updateColors()
 {
-    const QPalette pal = palette();
+    // Application palette, not the widget's: on macOS (Qt 6.12) the widget palette keeps the
+    // black ButtonText when the system switches from light to dark mode (icons and texts of the
+    // buttons black on dark grey), the application palette has the right colors
+    const QPalette pal = QApplication::palette();
 
     windowColor       = pal.color(QPalette::Window);
     textColor         = pal.color(QPalette::WindowText);

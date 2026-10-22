@@ -43,6 +43,7 @@ public:
     int current() const { return m_current; }
     int count() const { return m_model.rowCount(); }
     void clear();
+    void restyle();   // colors of the theme (light / dark switched)
 
 signals:
     void posterChosen(int row);

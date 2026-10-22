@@ -56,9 +56,12 @@ inline qreal contrastRatio(const QColor &a, const QColor &b)
 // Qt (6.12, macOS) gives white as selection color AND white as its text: selected entries and
 // tags get unreadable. Then the accent color is used for the selection (and black or white
 // for its text). Only the corrected roles are set, the rest still follows the system theme.
+// Called again when light / dark mode switches: the correction of the old mode is removed first.
 inline void fixHighlightContrast()
 {
     constexpr qreal minContrast = 3.0;
+    if (QCoreApplication::testAttribute(Qt::AA_SetPalette))
+        QApplication::setPalette(QPalette());   // empty palette: the system theme alone
     const QPalette pal = QApplication::palette();
     QPalette fixed;   // empty resolve mask: only the roles set below override the system
     bool changed = false;
@@ -181,8 +184,12 @@ inline void applyComboStyle(QComboBox *combo)
     combo->setFixedHeight(height);
     combo->setAttribute(Qt::WA_MacShowFocusRect, false);   // the border shows the focus
     // Plain delegate for the open list: the default (menu like) delegate is drawn by the
-    // style itself and ignores the item rules of the style sheet
-    combo->setItemDelegate(new QStyledItemDelegate(combo));
+    // style itself and ignores the item rules of the style sheet (only once: also called
+    // again when light / dark mode switches)
+    if (!combo->property("plainDelegate").toBool()) {
+        combo->setItemDelegate(new QStyledItemDelegate(combo));
+        combo->setProperty("plainDelegate", true);
+    }
     combo->setStyleSheet(QStringLiteral(
         "QComboBox { background: %1; color: %2; border: 1px solid %3;%4 padding: 0 24px 0 6px; }"
         "QComboBox:hover { background: %6; }"

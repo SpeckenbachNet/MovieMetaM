@@ -27,9 +27,9 @@
 
 class QLabel;
 
-// ToolbarM 1.6.0 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there).
+// ToolbarM 1.6.1 – master copy: ~/Development/QT/libraries/toolbarm (see CHANGELOG.md there).
 // Projects keep a copy of toolbarm.h/.cpp: change the master copy first, then copy it over.
-inline constexpr const char *ToolbarMVersion = "1.6.0";
+inline constexpr const char *ToolbarMVersion = "1.6.1";
 
 // Toolbar with rounded buttons, painted with QPainter in the colors of the palette
 // (light and dark themes); icons are black drawings tinted in the text color.

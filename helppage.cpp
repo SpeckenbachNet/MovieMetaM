@@ -123,12 +123,10 @@ HelpPage::HelpPage(QWidget *parent)
     m_topics->setIconSize(QSize(kIconSize, kIconSize));
     m_topics->setItemDelegate(new TwoLineDelegate(m_topics));
     m_topics->setFixedWidth(kTopicsWidth);
-    applyBoxStyle(m_topics, false, FieldCorners::All, "QListView { outline: 0; }");
 
     // --- Text on the right in a box like the description
     m_text = new QTextBrowser(this);
     m_text->setOpenExternalLinks(true);
-    applyBoxStyle(m_text, false);
     m_text->document()->setDocumentMargin(14);
     // Lines not too long to read (narrower windows: see eventFilter, otherwise the text runs
     // out on the right)
@@ -163,6 +161,15 @@ HelpPage::HelpPage(QWidget *parent)
 
     restyle();
     showTopic(MovieList);
+}
+
+// Light / dark mode switched (called by MainWin): boxes, icons and the text in the new colors
+void HelpPage::refreshTheme()
+{
+    restyle();
+    if (!m_files.isEmpty()) {
+        loadText(m_topics->currentIndex().row());   // colors of headings and notes
+    }
 }
 
 void HelpPage::addTopic(const QString &icon, const QString &title, const QString &subtitle, const QString &file)
@@ -313,6 +320,9 @@ void HelpPage::scaleImages()
 // Icons in the color of the text; selected entries in the color of the selected text
 void HelpPage::restyle()
 {
+    // The boxes in the colors of the fields
+    applyBoxStyle(m_topics, false, FieldCorners::All, "QListView { outline: 0; }");
+    applyBoxStyle(m_text, false);
     const qreal dpr = devicePixelRatioF();
     for (int row = 0; row < m_model->rowCount(); ++row) {
         QIcon icon;
