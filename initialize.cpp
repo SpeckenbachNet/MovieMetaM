@@ -32,8 +32,8 @@
 // ***** INITIALIZE *****
 void MainWin::initializeForm() {
 
-    // Style headers (same grey as the tags)
-    QString cssHeadline = "QLabel { background-color: " + accentGrey(palette()).name() + "; "
+    // Style headers: a light grey band, the bold text carries the heading
+    QString cssHeadline = "QLabel { background-color: " + accentGrey(palette(), 0.18).name() + "; "
                           "color: palette(window-text); "
                           "font-weight: bold; "
                           "padding: 6px; "
@@ -275,7 +275,7 @@ void MainWin::initializeSettingsPage()
     const QString cardStyle = QStringLiteral(
         "QFrame#settingsCard { background: %1; border: 1px solid %2; border-radius: %3px; }")
         .arg(look.fill.name(), look.border.name()).arg(FieldLook::radius);
-    const QString headlineStyle = "QLabel { background-color: " + accentGrey(palette()).name() + "; "
+    const QString headlineStyle = "QLabel { background-color: " + accentGrey(palette(), 0.18).name() + "; "
                                   "color: palette(window-text); font-weight: bold; padding: 6px; "
                                   "border: none; border-radius: " + QString::number(FieldLook::radius) + "px; }";
 
