@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/images">
         <file alias="tmdb.svg">ressources/images/tmdb.svg</file>
-        <file alias="noimage.svg">ressources/images/noimage.svg</file>
         <!-- Screenshots of the help (Retina shots of the app, see HelpPage::kScreenshotScale) -->
         <file alias="help/list.png">ressources/images/help/list.png</file>
         <file alias="help/actors.png">ressources/images/help/actors.png</file>
