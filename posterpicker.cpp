@@ -29,6 +29,13 @@
 #include <QPainterPath>
 #include <QVBoxLayout>
 
+// The list in the colors of the fields (light / dark switched: called by MainWin)
+void PosterPicker::restyle()
+{
+    applyBoxStyle(m_list, false, FieldCorners::All, "QListView { outline: 0; }");
+    update();
+}
+
 PosterPicker::PosterPicker(QWidget *parent)
     : QWidget(parent)
 {

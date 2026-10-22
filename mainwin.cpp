@@ -22,6 +22,9 @@
 #include "mp4writer.h"
 
 #include <QtConcurrent>
+#include <QGuiApplication>
+#include <QStyleHints>
+#include <QTimer>
 #include <QDir>
 #include <QDirIterator>
 #include <QCollator>
@@ -50,6 +53,12 @@ MainWin::MainWin(QWidget *parent)
     initializeComboBoxes();
     initializeConnects();
     initializeStatusIcons();
+    applyThemeStyles();
+    // Light / dark mode switched: the style sheets have fixed colors, set them again (after the
+    // event, when the palette of the new mode is in place)
+    connect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged, this, [this] {
+        QTimer::singleShot(0, this, &MainWin::onColorSchemeChanged);
+    });
 
     ui->fileListTableView->setAcceptDrops(true);
     ui->middleGroupBox->setEnabled(false);
@@ -404,12 +413,9 @@ void MainWin::formatTextByLength(int limit)
     // Create a working cursor for the formatting
     QTextCursor editCursor(ui->descriptionText->document());
 
-    // Gets the default text color of the current system theme
-    QColor defaultColor = ui->descriptionText->palette().color(QPalette::Text);
-
     // --- Format-Definitionen ---
+    // Normal text without an own color: it follows the theme (also when light / dark switches)
     QTextCharFormat defaultFormat;
-    defaultFormat.setForeground(QBrush(defaultColor));
 
     QTextCharFormat warningFormat;
     warningFormat.setForeground(QBrush(Qt::red));

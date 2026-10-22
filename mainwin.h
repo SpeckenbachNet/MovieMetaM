@@ -201,6 +201,9 @@ private:
     void initializeToolBars();
     void initializeSettingsPage();   // cards by topic (called by initializeComboBoxes)
     void loadSettingsPage();         // the saved state into the controls (when the page is shown)
+    void applyThemeStyles();         // style sheets with the colors of the theme (at the start and on light / dark)
+    void onColorSchemeChanged();     // light / dark mode switched while the app runs
+    QIcon eyeIcon(bool shown) const; // eye of the token field, tinted in the text color
     void initializeTagWidgets();
     void initializeDetailsTab();
     void initializeDragAndDrop();

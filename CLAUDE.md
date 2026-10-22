@@ -15,8 +15,8 @@ up to date with larger changes.
   propose the concrete change (files, what, why) and wait. Agreement ("ja", "passt") is not GO.
   Reading, searching and building for analysis are fine. Go step by step, one topic at a time.
 - The **user sets the version** in `CMakeLists.txt` (`PROJECT_VERSION`); check it before
-  committing. Commit message: `0.x.y Short German title` + bullet list, then the
-  Co-Authored-By line. Commit only the files of the topic.
+  committing. Commit message: `0.x.y Short German title` + bullet list, no Co-Authored-By
+  line (decided with the user, from 0.8.35 on). Commit only the files of the topic.
 - Report faithfully what was tested (build only / app not looked at).
 
 ## Building
@@ -59,7 +59,7 @@ name is the key; list in the generated `countrynames.cpp`, looked up in `agerati
 ## Shared classes (`../libraries`)
 
 `~/Development/QT/libraries/` holds versioned master copies (not in git): `toolbarm/` (ToolbarM
-1.6.0) and `searchfield/` (SearchField 1.2.0), each with CHANGELOG.md and README.md. Projects
+1.6.1) and `searchfield/` (SearchField 1.2.0), each with CHANGELOG.md and README.md. Projects
 keep a copy: change the master copy first, raise the version (CHANGELOG, `...Version` constant,
 header comment), then copy. Other projects (churchWorshipM, PhotoBoothM, template,
 PDFDocumentScannerM) are updated later by the user – don't touch them unasked.
@@ -69,6 +69,14 @@ Linux).
 ## Style of the UI
 
 - Colors from the palette (light and dark themes), no fixed colors where they meet theme colors.
+- Light / dark switched while the app runs: `MainWin::onColorSchemeChanged()`
+  (`QStyleHints::colorSchemeChanged`, deferred: the palette of the new mode comes after the
+  signal) does everything in a fixed order: `fixHighlightContrast()` (removes the old correction
+  first), `applyThemeStyles()` (all style sheets of the main window in one place, also at the
+  start), `restyle()` of the tag widgets, poster list and help page, search field, cover. Style
+  sheets hold fixed colors, so a new one needs its place there. Text in the description has no
+  own color (only the part over the limit is red). ToolbarM takes the application palette: on
+  macOS the widget palette keeps the black ButtonText from light to dark.
 - Accent color of the system (`palette(highlight)` + `highlighted-text`) for selected entries
   (movie list, search results, open combo list) and for tags; headings in `accentGrey()`.
 - Everything rounded, radius 6 (`FieldLook::radius`): helpers in `themecolors.h` –
