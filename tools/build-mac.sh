@@ -37,6 +37,26 @@ cmake --build "$BUILD_DIR"
 echo "== 2. Qt frameworks and plugins into the bundle"
 "$QT_DIR/bin/macdeployqt" "$APP_BUNDLE" -always-overwrite
 
+# macdeployqt also takes the plugin of the virtual (touch) keyboard, which pulls in QtQuick, QtQml
+# and more (about 27 MB). MovieMetaM is a Widgets app and needs none of them.
+echo "== 2b. Remove what the app does not need"
+UNNEEDED_FRAMEWORKS="QtOpenGL QtQml QtQmlMeta QtQmlModels QtQmlWorkerScript QtQuick QtVirtualKeyboard QtVirtualKeyboardQml"
+rm -rf "$APP_BUNDLE/Contents/PlugIns/platforminputcontexts"
+for fw in $UNNEEDED_FRAMEWORKS; do
+    rm -rf "$APP_BUNDLE/Contents/Frameworks/$fw.framework"
+done
+# Nothing left in the bundle may link to them, else the app would not start
+while IFS= read -r -d '' binary; do
+    if file "$binary" | grep -q "Mach-O"; then
+        for fw in $UNNEEDED_FRAMEWORKS; do
+            if otool -L "$binary" | grep -q "/$fw.framework/"; then
+                echo "Error: $binary still links to $fw – not removed safely." >&2
+                exit 1
+            fi
+        done
+    fi
+done < <(find "$APP_BUNDLE/Contents" -type f -print0)
+
 echo "== 3. Ad hoc signature"
 codesign --force --deep --sign - "$APP_BUNDLE"
 codesign --verify --deep --strict "$APP_BUNDLE"
