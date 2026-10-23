@@ -60,12 +60,14 @@ void TwoLineDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     const QRect entry = opt.rect.adjusted(kMarginH, kMarginV, -kMarginH, -kMarginV);
     QColor titleColor = opt.palette.color(QPalette::Text);
     if (selected) {
-        // Background and text of the selection from the same color group; if they still do not
+        // Background from the group of the view (Qt drops State_Active when the list loses the
+        // focus), the text always from the active group: Windows has black as inactive
+        // HighlightedText, black on the accent color of the style sheet. If they still do not
         // contrast (seen on macOS with "Graphite": light grey with white text), black or white
         const QPalette::ColorGroup group = (opt.state & QStyle::State_Active) ? QPalette::Active
                                                                                 : QPalette::Inactive;
         const QColor background = opt.palette.color(group, QPalette::Highlight);
-        titleColor = opt.palette.color(group, QPalette::HighlightedText);
+        titleColor = opt.palette.color(QPalette::Active, QPalette::HighlightedText);
         if (contrastRatio(background, titleColor) < 3.0) {
             titleColor = contrastRatio(background, Qt::black) >= contrastRatio(background, Qt::white)
                              ? QColor(Qt::black) : QColor(Qt::white);
