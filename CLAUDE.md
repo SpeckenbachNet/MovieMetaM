@@ -331,21 +331,18 @@ Linux).
     in its own runtime, independent of the host; Flathub needs a review, a single `.flatpak` can
     also hang at the release). A PKGBUILD for the AUR only helps Arch users. .deb / .rpm per
     distribution: not planned. Qt's own texts are already embedded (`:/i18n/qtbase_*.qm`).
-16. Windows (observations of the user on a Surface, tablet with touch, 2026-10-23, version 0.9.2;
-    there is no Windows package or installer yet, nothing of ours was run on Windows by Claude).
+16. Windows (observations of the user on a Surface, tablet with touch, 2026-10-23, version 0.9.2).
     Ask the user for the details before changing code.
     - "Open with" and dropping on the .exe "do not work properly", details missing (does the app not
-      start / start without the movie / start several times?). Guess: without an installer there
-      is no registry entry (`HKCU\Software\Classes\Applications\MovieMetaM.exe`), so the app is
-      not in the "Open with" list; dropping on the .exe should work by the argument. The installer
-      for the Windows package has to write it (also `MultiSelectModel`, else Explorer starts one
-      process per selected file; `FileOpener` collects them).
-    - Help, list of topics: after scrolling with the scroll bar the text of the selected entry turns
-      **black**, white again after choosing another entry by hand. Guess: `TwoLineDelegate::paint`
-      takes `HighlightedText` from the Inactive color group when `State_Active` is missing (Windows
-      has black there), the background comes from the style sheet (`selection-background-color`
-      in `applyBoxStyle`, no `selection-color`); black on the accent blue has about 4.6:1, so the
-      3:1 correction does not act. Possible fix: take the text of the selection always from the
-      Active group and only check the contrast to the real background. Questions: does the
-      background stay blue, does it happen with the mouse, is the title bar grey then, does it also
-      happen in the movie list? Not clear whether the tablet has to do with it.
+      start / start without the movie / start several times?). Without an installer there was no
+      registry entry, so the app was not in the "Open with" list; dropping on the .exe should work
+      by the argument. Since then the installer (`tools/MovieMetaM.iss`) writes the entries (HKLM:
+      ProgID `MovieMetaM.Movie`, `Applications\MovieMetaM.exe` with `SupportedTypes`); Explorer
+      starts one process per selected file, `FileOpener` collects them. To test with the installer.
+    - Help, list of topics: after scrolling in the help text the text of the selected entry turned
+      **black**, white again after choosing another entry. Cause: Qt drops `State_Active` when a
+      list loses the focus (`QAbstractItemView::initViewItemOption`), `TwoLineDelegate::paint` took
+      `HighlightedText` from the Inactive group, and Windows has the normal text color (black)
+      there; the background is the accent color of the style sheet in every group. Mac and Linux
+      have white there. Fix (0.9.3): the text of the selection always from the Active group, the
+      contrast check against the real background. **Done** (to test on Windows).
