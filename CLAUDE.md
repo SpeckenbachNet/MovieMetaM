@@ -41,6 +41,10 @@ up to date with larger changes.
   `CFBundleLocalizations` de/en: without it the native Open dialog stays English).
 - Mac version: `tools/build-mac.sh` (release universal arm64 + x86_64, `macdeployqt`, ad hoc
   signature – no Developer ID, decided with the user –, `build/MovieMetaM-<version>.dmg`).
+- Windows version: `tools/build-windows.cmd` (double click, runs `build-windows.ps1`; after PhotoBoothM: release MSVC build, `windeployqt`,
+  Inno Setup script `tools/MovieMetaM.iss` → `build/MovieMetaM-<version>-Setup.exe`; admin install,
+  VC runtime only if missing, "Open with" for .mp4 / .m4v without becoming the default; not signed,
+  SmartScreen warns; aborts without `tmdb_token.txt`).
 - Only MP4/M4V are supported for now (`MediaInfoM::supportedSuffixes()`); other files are
   skipped with a message in the status bar.
 
