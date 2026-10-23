@@ -111,6 +111,7 @@ Hinweise:
 | `agerating.*` | Altersfreigaben als Daten (JSON je Land) |
 | `bubble.*` | `Bubble`: abgerundete Sprechblase (eigenes Fenster, Farben der Felder); `TooltipFilter` zeigt **alle** Tooltips der App als Blase (statt der eckigen des Systems), installiert in `main.cpp` |
 | `infoicon.*` | kleines Info-Symbol, das einen längeren Text in einer `Bubble` über dem Symbol zeigt (beim Überfahren und per Klick); `InfoIcon::savingNote()` ist der Hinweis zum direkten Schreiben |
+| `fileopener.*` | Filme von außen: Kommandozeile, zweite Instanz, `QFileOpenEvent` (siehe „Dateien von außen“) |
 | `toastm.*` | kurze Meldung über dem Inhalt |
 | `themecolors.h` | gemeinsame Farben und Formen |
 | `toolbarm.*`, `searchfield.*` | Kopien aus `../libraries` (Master dort) |
@@ -132,6 +133,36 @@ Hinweise:
 - Ein Film ohne Datum zeigt im Feld den Standard 1972-01-01; das gilt nicht als Änderung. Das
   Genre ist ein bearbeitbares Auswahlfeld: ein Genre, das nicht in der TMDB-Liste steht,
   bleibt als Text erhalten.
+
+### Dateien von außen (`fileopener.*`)
+
+Filme kommen auch von außerhalb in die Liste: „Öffnen mit“, auf das Programmsymbol gezogen oder
+als Argument der Kommandozeile. Auf jedem System kommen sie anders an, alle Wege enden in
+`MainWin::openFiles()` und damit in `addFilesToModel` (Ordner werden aufgelöst, der erste neue
+Film wird gewählt).
+
+| System | Weg | Voraussetzung |
+|---|---|---|
+| Linux | Argumente (`%F` in der .desktop-Datei) | `ressources/linux/net.speckenbach.MovieMetaM.desktop`, Icon, `setDesktopFileName` |
+| Windows | Argumente (Ziehen auf die .exe oder eine Verknüpfung) | für einen Eintrag in „Öffnen mit“ ein Registry-Eintrag, den ein Installer schreibt (noch keiner vorhanden) |
+| macOS | `QFileOpenEvent`, eines je Datei | `CFBundleDocumentTypes` in `Info.plist.in` (MP4, M4V, Ordner) |
+
+- **Eine Instanz:** Unter Linux und Windows startet das System sonst eine zweite Instanz. Sie
+  verbindet sich mit dem `QLocalServer` der ersten (Name `MovieMetaM-<Benutzer>`, das Socket liegt
+  unter Linux im gemeinsamen Temp-Ordner), schickt die Pfade (`QDataStream`) und beendet sich. Ein
+  Socket, das ein Absturz hinterlassen hat, wird vor dem Starten des Servers entfernt. Die Prüfung
+  steht ganz am Anfang von `main()`, noch vor dem Einrichtungsdialog. macOS startet die App nur
+  einmal, dort gibt es keinen Server.
+- **Sammeln:** Dateien, die kurz nacheinander ankommen, werden 100 ms gesammelt und als eine
+  Liste geliefert (`FileOpener::deliver()`). Der Mac schickt ein Ereignis je Datei, Windows startet
+  bei „Öffnen mit“ oft einen Prozess je Datei; ohne das stünde die Auswahl am Ende auf dem letzten
+  Film und die Meldungen erschienen mehrfach.
+- **Vor dem Fenster:** Was vor dem Hauptfenster ankommt (Start per Doppelklick auf dem Mac), wartet
+  bis `FileOpener::start()`. Beim Speichern ist das Fenster gesperrt, `openFiles()` wartet dann auf
+  das Ende (`finished` des Watchers).
+- **Getestet:** Linux (Kommandozeile, „Öffnen mit“ unter niri, Starter unter Plasma, drei Instanzen
+  gleichzeitig) und macOS (Dock-Symbol, mehrere Filme). Nicht getestet: GNOME, Windows, das Warten
+  beim Speichern. Auf Windows ist ein Fehler gemeldet, siehe Punkt 16 in `CLAUDE.md`.
 
 ---
 
