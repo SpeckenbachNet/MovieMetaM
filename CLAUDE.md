@@ -258,9 +258,24 @@ Linux).
   score (older Apple texts). An unknown system or step stays as it is: an extra entry
   "prefix: code" below the empty one, selected, no "changed". "Changed" = system or score differ.
   Saving the settings applies the new system at once (current movie shown again).
+- `fileopener.*` – movie files from outside (0.9.1, 0.9.2): the command line (Linux, Windows: "Open
+  with", dropped on the program icon or a launcher), a second instance hands its files to the
+  running one (`QLocalServer`, one server per user; macOS starts the app only once and sends a
+  `QFileOpenEvent` per file instead). Files that come in quick succession are collected for 100 ms
+  and delivered as one list (`deliver()`), else the selection ends on the last one (a Mac sends one
+  event per file, Windows often starts one process per file). `MainWin::openFiles()` brings the
+  window forward and calls `addFilesToModel` (folders too); while saving the files wait for the end.
+  Before the main window exists they wait for `FileOpener::start()`. Tested: Linux (command line,
+  "Open with" under niri, launcher under Plasma) and Mac; not GNOME, Windows, the wait while saving.
+- `ressources/linux/` – `net.speckenbach.MovieMetaM.desktop` (`Exec=MovieMetaM %F`, `MimeType`
+  mp4 / m4v) and the icon (PNG 256 px, made from `app_icon.svg` with `rsvg-convert`), installed by
+  `install()` in `CMakeLists.txt` (Linux only); `main.cpp` sets `setDesktopFileName` to the same
+  name (Wayland app id: the window gets its icon). `Info.plist.in` lists MP4 / M4V and folders as
+  `CFBundleDocumentTypes` (rank Alternate: no default player, but "Open with" and the Dock icon).
+  Locally tested with a copy of the .desktop file with the full path in `Exec=`.
 - `toolbarm.*`, `searchfield.*` – copies from `../libraries`.
 
-## Open points (as of 0.9.0; numbers kept, 1 to 11 are done)
+## Open points (as of 0.9.2; numbers kept, 1 to 11 are done)
 
 9. Mac: check the age rating icon in the closed combo box with the new combo style (before:
    about 2 px too high with the native style; the transparent-stripe fix was reverted). **Done.**
@@ -312,3 +327,21 @@ Linux).
     in its own runtime, independent of the host; Flathub needs a review, a single `.flatpak` can
     also hang at the release). A PKGBUILD for the AUR only helps Arch users. .deb / .rpm per
     distribution: not planned. Qt's own texts are already embedded (`:/i18n/qtbase_*.qm`).
+16. Windows (observations of the user on a Surface, tablet with touch, 2026-10-23, version 0.9.2;
+    there is no Windows package or installer yet, nothing of ours was run on Windows by Claude).
+    Ask the user for the details before changing code.
+    - "Open with" and dropping on the .exe "do not work properly", details missing (does the app not
+      start / start without the movie / start several times?). Guess: without an installer there
+      is no registry entry (`HKCU\Software\Classes\Applications\MovieMetaM.exe`), so the app is
+      not in the "Open with" list; dropping on the .exe should work by the argument. The installer
+      for the Windows package has to write it (also `MultiSelectModel`, else Explorer starts one
+      process per selected file; `FileOpener` collects them).
+    - Help, list of topics: after scrolling with the scroll bar the text of the selected entry turns
+      **black**, white again after choosing another entry by hand. Guess: `TwoLineDelegate::paint`
+      takes `HighlightedText` from the Inactive color group when `State_Active` is missing (Windows
+      has black there), the background comes from the style sheet (`selection-background-color`
+      in `applyBoxStyle`, no `selection-color`); black on the accent blue has about 4.6:1, so the
+      3:1 correction does not act. Possible fix: take the text of the selection always from the
+      Active group and only check the contrast to the real background. Questions: does the
+      background stay blue, does it happen with the mouse, is the title bar grey then, does it also
+      happen in the movie list? Not clear whether the tablet has to do with it.
