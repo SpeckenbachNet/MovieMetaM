@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.9.0")
+set(PROJECT_VERSION "0.9.1")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
 
@@ -85,6 +85,8 @@ qt_add_executable(${PROJECT_NAME}
     posterpicker.cpp
     toastm.h
     toastm.cpp
+    fileopener.h
+    fileopener.cpp
     moviedata.h
     moviedata.cpp
     mediainfom.h
@@ -201,5 +203,12 @@ install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+# Linux: start menu entry and icon (the AppImage takes them from the installed tree)
+if(UNIX AND NOT APPLE)
+    install(FILES ressources/linux/net.speckenbach.MovieMetaM.desktop
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+    install(FILES ressources/linux/net.speckenbach.MovieMetaM.png
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/256x256/apps)
+endif()
 
 qt_finalize_executable(${PROJECT_NAME})
