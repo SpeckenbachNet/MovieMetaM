@@ -494,40 +494,124 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
 
 - Die **Version setzt der Entwickler** in `CMakeLists.txt` (`PROJECT_VERSION`).
 - Commit-Nachricht: `0.x.y Kurzer Titel` und darunter eine Liste der Änderungen.
-- **Mac-Version:** `tools/build-mac.sh` baut Release (universal: arm64 + x86_64) in
-  `build/release`, packt Qt mit `macdeployqt` ins Bundle, signiert ad hoc und erstellt
-  `build/MovieMetaM-<Version>.dmg` (App + Link auf „Programme“). Ohne Developer ID (bewusst, das
-  Programm kostet Geld): Beim ersten Start gibt der Benutzer die App per Rechtsklick → „Öffnen“
-  bzw. unter Systemeinstellungen → Datenschutz & Sicherheit frei. Anderes Qt:
-  `QT_DIR=/pfad/zu/Qt/6.x/macos tools/build-mac.sh`.
-- **Windows-Version:** ein Befehl baut alles (Vorbild: PhotoBoothM): Doppelklick auf
-  `tools\build-windows.cmd` (oder `tools\build-windows` in der Konsole). Die .cmd startet das
-  PowerShell-Skript `tools\build-windows.ps1` mit `-ExecutionPolicy Bypass`, weil Windows
-  unsignierte Skripte sonst nicht ausführt. Das Fenster bleibt am Ende offen.
-  1. Release-Build mit MSVC und Ninja nach `build\windows-release` (bricht ab, wenn
-     `tmdb_token.txt` fehlt: sonst ginge die Suche im Installer nicht).
-  2. `windeployqt` sammelt Qt-DLLs und Plugins (TLS über Schannel für TMDB, SVG, Bildformate)
-     nach `build\windows-deploy`; ohne Qt-Übersetzungen, die sind in die exe eingebaut. Der
-     Ordner läuft auch ohne Installation.
-  3. **Inno Setup 6** (kostenlos, `winget install JRSoftware.InnoSetup`) macht daraus
-     `build\MovieMetaM-<Version>-Setup.exe` (Skript `tools\MovieMetaM.iss`).
+- Eine Version gilt für die App auf allen Systemen. Eine Änderung am Code der App erhöht sie, eine
+  Änderung nur an Bau- oder Paketskripten nicht (Commit-Titel dann ohne Nummer).
+- **Veröffentlichung (geplant, noch nicht gemacht):** ein Tag `vX.Y.Z` auf GitHub mit den
+  Paketen aller Systeme, die es dann gibt. Die Pakete hätten feste Namen ohne Version, damit die
+  Website auf `.../releases/latest/download/<Name>` verlinken kann.
 
-  Der Installer: Sprache des Systems (en, de, fr, es, it, pt_BR, ja, ko; sonst Englisch),
-  installiert nach `C:\Program Files\MovieMetaM` (braucht Administrator), Startmenü-Eintrag,
-  Desktop-Symbol auf Wunsch, die Visual-C++-Laufzeit nur, wenn sie fehlt, Lizenz (GPL v3) als
-  eigene Seite, `LICENSE.txt` und `LGPL-3.0.txt` neben der exe. Er trägt MovieMetaM für `.mp4` /
-  `.m4v` unter „Öffnen mit“ ein (ProgID `MovieMetaM.Movie`, `Applications\MovieMetaM.exe`), macht
-  es aber nicht zum Standardprogramm; beim Deinstallieren verschwinden die Einträge, die
-  Einstellungen (INI in `%APPDATA%`) bleiben. Die feste `AppId` sorgt dafür, dass eine neue
-  Version die alte ersetzt; eine laufende App wird dafür geschlossen (sie fragt nach
-  ungespeicherten Änderungen). Anderes Qt: `-QtDir C:\Qt\6.x\msvc2022_64`.
-  Nicht signiert: Windows SmartScreen warnt beim ersten Start („Weitere Informationen“ →
-  „Trotzdem ausführen“).
-- Ein Linux-Paket gibt es noch nicht.
+### Gemeinsam für alle Pakete
+
+- **Version:** beide Skripte lesen sie aus `CMakeLists.txt`.
+- **Token:** `tmdb_token.txt` (Abschnitt 2) wird beim Konfigurieren in `TMDB_TOKEN` eingebaut und
+  steckt in der Binary; er liegt nicht im Repository. Fehlt er, läuft die App, aber die Suche
+  nicht. Das Mac-Skript warnt nur, das Windows-Skript bricht ab.
+- **Fest eingebaut** (kein Pfad im Paket muss stimmen): TagLib (statisch; wird beim ersten
+  Konfigurieren per FetchContent geladen, braucht also einmal Netz), die Übersetzungen, Qts eigene
+  Texte (`:/i18n/qtbase_<Sprache>.qm`), die Hilfe, Icons und Altersfreigaben als Ressourcen.
+  Daneben liegen im Paket nur Qt-Bibliotheken und Plugins.
+- **Einstellungen** (QSettings, Format INI auf jedem System) liegen außerhalb des Pakets und
+  bleiben bei einem Update oder einer Deinstallation erhalten.
+- Keines der Pakete ist bisher per Download geprüft (siehe die Hinweise unten).
+
+### Mac
+
+**Bauen:** `tools/build-mac.sh` (von überall aufrufbar), Ergebnis `build/MovieMetaM-<Version>.dmg`.
+Voraussetzungen: Qt 6.12 in `~/Qt/6.12.0/macos` (anderes Qt:
+`QT_DIR=/pfad/zu/Qt/6.x/macos tools/build-mac.sh`), CMake und Ninja aus der Qt-Installation
+(`~/Qt/Tools`), `tmdb_token.txt`.
+
+**Ablauf:**
+
+1. Release-Build nach `build/release`, universal (arm64 + x86_64).
+2. `macdeployqt` packt Qt-Frameworks und Plugins ins Bundle. Es nimmt auch das Plugin der
+   virtuellen (Touch-)Tastatur mit, das QtQuick, QtQml und mehr nachzieht (etwa 27 MB). Schritt 2b
+   entfernt, was eine Widgets-App nicht braucht (`QtOpenGL`, `QtQml*`, `QtQuick`,
+   `QtVirtualKeyboard*`, `platforminputcontexts`) und bricht ab, wenn noch etwas im Bundle darauf
+   zeigt (sonst startete die App nicht).
+3. Ad-hoc-Signatur (`codesign --sign -`), danach die Prüfung `codesign --verify`.
+4. DMG mit der App und einem Link auf „Programme“.
+
+**Signatur:** ad hoc, ohne Developer ID und ohne Notarisierung (bewusst, das Programm kostet Geld).
+
+**Hinweis für Benutzer, erster Start:**
+- *Beobachtet:* Installation und Start ohne Probleme, mit dem selbst gebauten oder per Sync
+  kopierten DMG (nicht heruntergeladen).
+- *Ungeprüft:* ein aus dem Internet geladenes DMG (GitHub-Release). Dafür wird die Warnung von
+  macOS erwartet; dann Rechtsklick auf die App → „Öffnen“ oder Systemeinstellungen → Datenschutz &
+  Sicherheit. Beim ersten Release prüfen und diesen Absatz auf den echten Stand bringen.
+
+### Windows
+
+**Bauen:** Doppelklick auf `tools\build-windows.cmd` (oder `tools\build-windows` in der Konsole),
+Ergebnis `build\MovieMetaM-<Version>-Setup.exe`. Die .cmd startet das PowerShell-Skript
+`tools\build-windows.ps1` mit `-ExecutionPolicy Bypass`, weil Windows unsignierte Skripte sonst nicht
+ausführt; das Fenster bleibt am Ende offen. Vorbild ist PhotoBoothM.
+Voraussetzungen: Visual Studio 2022 Build Tools (MSVC, das Skript findet sie mit `vswhere`), Qt 6.12
+für MSVC in `C:\Qt\6.12.0\msvc2022_64`, Qt Tools (CMake, Ninja) in `C:\Qt\Tools`, **Inno Setup 6**
+(kostenlos, `winget install JRSoftware.InnoSetup`), `tmdb_token.txt`. Anderes Qt: `-QtDir
+C:\Qt\6.x\msvc2022_64`, andere Tools: `-QtTools`.
+
+**Ablauf:**
+
+1. Release-Build mit MSVC und Ninja nach `build\windows-release` (bricht ab, wenn `tmdb_token.txt`
+   fehlt oder leer ist: sonst ginge die Suche im Installer nicht).
+2. `windeployqt` (`--release --no-compiler-runtime --no-system-d3d-compiler --no-opengl-sw
+   --no-translations`) sammelt Qt-DLLs und Plugins (TLS über Schannel für TMDB, SVG, Bildformate)
+   nach `build\windows-deploy`. Qts Übersetzungen sind in die exe eingebaut, die VC-Laufzeit
+   bringt der Installer. Der Ordner läuft auch ohne Installation.
+3. Inno Setup macht daraus den Installer (`tools\MovieMetaM.iss`; das Skript übergibt
+   `AppVersion`, `SourceDir` und, wenn gefunden, `Redist`).
+
+**Was der Installer tut:**
+
+- Sprache des Systems (en, de, fr, es, it, pt_BR, ja, ko); passt keine, erscheint ein Auswahldialog
+  (Englisch steht an erster Stelle).
+- Nur 64 Bit, ab Windows 10; installiert nach `C:\Program Files\MovieMetaM` (braucht
+  Administrator), Startmenü-Eintrag, Desktop-Symbol auf Wunsch.
+- Die Visual-C++-Laufzeit (`vc_redist.x64.exe` aus der Visual-Studio-Installation) steckt im
+  Installer und wird still nur installiert, wenn die vorhandene fehlt oder älter als 14.40 ist.
+- Lizenz (GPL v3) als eigene Seite; `LICENSE.txt` und `LGPL-3.0.txt` liegen neben der exe.
+- Die feste `AppId` sorgt dafür, dass eine neue Version die alte ersetzt; eine laufende App wird
+  dafür geschlossen (sie fragt selbst nach ungespeicherten Änderungen).
+- Deinstallieren entfernt die Programmdateien und die Registry-Einträge (unten); die Einstellungen
+  (INI in `%APPDATA%`) bleiben.
+
+**Registry („Öffnen mit“ für `.mp4` / `.m4v`):** Der Installer macht MovieMetaM nicht zum
+Standardprogramm, der Videoplayer bleibt es. Die Einträge stehen unter `Software\Classes` (`HKA`,
+bei dieser Administrator-Installation also für alle Benutzer):
+
+| Schlüssel | Zweck |
+|---|---|
+| `MovieMetaM.Movie` (`DefaultIcon`, `shell\open\command`) | die ProgID: Name „MP4 Video“, Icon, Befehl `MovieMetaM.exe "%1"` |
+| `.mp4\OpenWithProgids`, `.m4v\OpenWithProgids` | nehmen die ProgID in die „Öffnen mit“-Liste dieser Typen auf |
+| `Applications\MovieMetaM.exe` (`shell\open\command`, `SupportedTypes`) | die App selbst: Anzeigename, Befehl, unterstützte Endungen |
+
+**Signatur:** nicht signiert.
+
+**Hinweis für Benutzer, erster Start:**
+- *Beobachtet:* Installation und Start ohne Probleme, mit dem selbst gebauten Installer (nicht
+  heruntergeladen).
+- *Ungeprüft:* ein aus dem Internet geladener Installer (GitHub-Release). Dafür wird die Warnung
+  von Windows SmartScreen erwartet; dann „Weitere Informationen“ → „Trotzdem ausführen“. Beim
+  ersten Release prüfen und diesen Absatz auf den echten Stand bringen.
+
+### Linux
+
+Ein Paket gibt es noch nicht. Vorhanden sind die `install()`-Regeln in `CMakeLists.txt`, die
+.desktop-Datei und das Icon (`ressources/linux/`, Abschnitt 3). Geplant ist ein **AppImage**
+(`tools/build-linux.sh`), gebaut in einem Container mit Ubuntu 22.04: Ein Build auf einem neuen
+System (z. B. Arch) braucht dessen neue glibc und läuft nicht auf älteren Systemen wie Ubuntu LTS
+oder Debian; gegen eine ältere glibc gebaut läuft es auch auf neueren. Danach vielleicht Flatpak.
+Ein PKGBUILD für das AUR hilft nur Arch-Benutzern, .deb / .rpm sind nicht geplant (siehe Punkt 15
+in `CLAUDE.md`).
 
 ### Werkzeuge
 
 | Werkzeug | Zweck |
 |---|---|
+| `tools/build-mac.sh` | baut das Mac-Paket (DMG), siehe „Mac“ |
+| `tools/build-windows.cmd`, `tools/build-windows.ps1` | baut den Windows-Installer, siehe „Windows“ |
+| `tools/MovieMetaM.iss` | Skript von Inno Setup für den Windows-Installer |
 | `tools/ratings_from_xlsx.py` | erzeugt die JSON-Dateien, `Ratings.qrc` und `countrynames.cpp` aus der Tabelle (Abschnitt 6) |
 | `_dev/` (nicht im Repository) | Arbeitsmaterial zu den Altersfreigaben, Bildschirmfotos |
