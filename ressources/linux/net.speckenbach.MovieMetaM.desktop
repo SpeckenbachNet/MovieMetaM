@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=MovieMetaM
+GenericName=Movie Metadata Editor
+GenericName[de]=Film-Metadaten-Editor
+Comment=Edit the metadata of movie files, find movie data on TMDB
+Comment[de]=Metadaten von Filmdateien bearbeiten, Filmdaten bei TMDB finden
+Exec=MovieMetaM %F
+Icon=net.speckenbach.MovieMetaM
+Terminal=false
+Categories=AudioVideo;Video;Qt;
+MimeType=video/mp4;video/x-m4v;
+Keywords=movie;metadata;tags;mp4;tmdb;cover;
+StartupWMClass=MovieMetaM

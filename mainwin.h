@@ -102,6 +102,10 @@ public:
     void showColumnStatus(StatusColumn column, const QString &text,
                           ToastM::Level level = ToastM::Level::Info, int msec = 0);
 
+    // Files from outside (Open with, program icon, second instance): into the list; the window
+    // comes forward. An empty list only brings the window forward.
+    void openFiles(const QStringList &paths);
+
 protected:
     void closeEvent(QCloseEvent *event) override;
 

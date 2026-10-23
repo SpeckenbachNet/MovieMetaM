@@ -27,6 +27,7 @@
 #include <QTranslator>
 #include <QStringLiteral>
 #include "bubble.h"
+#include "fileopener.h"
 
 int main(int argc, char *argv[])
 {
@@ -35,6 +36,19 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(QLatin1String(APP_VERSION));
     a.setOrganizationName(QStringLiteral(COMPANY_NAME));
     a.setWindowIcon(QIcon(QStringLiteral(":/icons/app_icon")));   // title bar, task bar, dialogs
+    // Linux: Wayland app id, ties the window to net.speckenbach.MovieMetaM.desktop (icon in the task bar)
+    a.setDesktopFileName(QStringLiteral("net.speckenbach.MovieMetaM"));
+
+    // Movie files from outside (Open with, dropped on the program icon, command line): a second
+    // instance hands them to the running one and quits; macOS delivers them as an event
+    FileOpener opener;
+    const QStringList startFiles = FileOpener::pathsFromArguments(a.arguments());
+    if (opener.handOverToRunningInstance(startFiles)) {
+        return 0;
+    }
+    opener.listen();
+    a.installEventFilter(&opener);
+
     TooltipFilter::install();   // tooltips as rounded bubbles, like the rest of the app
     fixHighlightContrast();   // readable selection also with the accent color "Graphite" (macOS)
 
@@ -98,6 +112,11 @@ int main(int argc, char *argv[])
         " " +
         QStringLiteral(APP_VERSION)
     );
+    QObject::connect(&opener, &FileOpener::filesReceived, &w, &MainWin::openFiles);
     w.show();
+    if (!startFiles.isEmpty()) {
+        w.openFiles(startFiles);
+    }
+    opener.start();   // files that came meanwhile (macOS: the event after the start)
     return a.exec();
 }

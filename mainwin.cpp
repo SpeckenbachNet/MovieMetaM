@@ -1188,6 +1188,25 @@ void MainWin::addFilesToModel(const QStringList &filePaths)
     }
 }
 
+void MainWin::openFiles(const QStringList &paths)
+{
+    if (isMinimized()) {
+        showNormal();
+    }
+    raise();
+    activateWindow();   // Wayland may only mark the window as wanting attention
+
+    if (paths.isEmpty()) return;
+    if (m_saving) {
+        // The window is locked while saving: the files follow when it is done
+        connect(m_saveWatcher, &QFutureWatcherBase::finished, this, [this, paths] {
+            QTimer::singleShot(0, this, [this, paths] { addFilesToModel(paths); });
+        }, Qt::SingleShotConnection);
+        return;
+    }
+    addFilesToModel(paths);
+}
+
 // The title of the movie, else its file name before the first dot with "_" as space
 QString MainWin::listTitle(const MovieData &movie) const
 {
