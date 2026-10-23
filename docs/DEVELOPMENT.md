@@ -144,7 +144,7 @@ Film wird gewählt).
 | System | Weg | Voraussetzung |
 |---|---|---|
 | Linux | Argumente (`%F` in der .desktop-Datei) | `ressources/linux/net.speckenbach.MovieMetaM.desktop`, Icon, `setDesktopFileName` |
-| Windows | Argumente (Ziehen auf die .exe oder eine Verknüpfung) | für einen Eintrag in „Öffnen mit“ ein Registry-Eintrag, den ein Installer schreibt (noch keiner vorhanden) |
+| Windows | Argumente (Ziehen auf die .exe oder eine Verknüpfung) | für einen Eintrag in „Öffnen mit“ Registry-Einträge, die der Installer schreibt (`tools/MovieMetaM.iss`, Abschnitt 11) |
 | macOS | `QFileOpenEvent`, eines je Datei | `CFBundleDocumentTypes` in `Info.plist.in` (MP4, M4V, Ordner) |
 
 - **Eine Instanz:** Unter Linux und Windows startet das System sonst eine zweite Instanz. Sie
@@ -162,7 +162,8 @@ Film wird gewählt).
   das Ende (`finished` des Watchers).
 - **Getestet:** Linux (Kommandozeile, „Öffnen mit“ unter niri, Starter unter Plasma, drei Instanzen
   gleichzeitig) und macOS (Dock-Symbol, mehrere Filme). Nicht getestet: GNOME, Windows, das Warten
-  beim Speichern. Auf Windows ist ein Fehler gemeldet, siehe Punkt 16 in `CLAUDE.md`.
+  beim Speichern. Auf Windows ist ein Fehler gemeldet (vor dem Installer), siehe Punkt 16 in
+  `CLAUDE.md`.
 
 ---
 
@@ -499,7 +500,30 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
   Programm kostet Geld): Beim ersten Start gibt der Benutzer die App per Rechtsklick → „Öffnen“
   bzw. unter Systemeinstellungen → Datenschutz & Sicherheit frei. Anderes Qt:
   `QT_DIR=/pfad/zu/Qt/6.x/macos tools/build-mac.sh`.
-- Windows- und Linux-Pakete gibt es noch nicht.
+- **Windows-Version:** ein Befehl baut alles (Vorbild: PhotoBoothM): Doppelklick auf
+  `tools\build-windows.cmd` (oder `tools\build-windows` in der Konsole). Die .cmd startet das
+  PowerShell-Skript `tools\build-windows.ps1` mit `-ExecutionPolicy Bypass`, weil Windows
+  unsignierte Skripte sonst nicht ausführt. Das Fenster bleibt am Ende offen.
+  1. Release-Build mit MSVC und Ninja nach `build\windows-release` (bricht ab, wenn
+     `tmdb_token.txt` fehlt: sonst ginge die Suche im Installer nicht).
+  2. `windeployqt` sammelt Qt-DLLs und Plugins (TLS über Schannel für TMDB, SVG, Bildformate)
+     nach `build\windows-deploy`; ohne Qt-Übersetzungen, die sind in die exe eingebaut. Der
+     Ordner läuft auch ohne Installation.
+  3. **Inno Setup 6** (kostenlos, `winget install JRSoftware.InnoSetup`) macht daraus
+     `build\MovieMetaM-<Version>-Setup.exe` (Skript `tools\MovieMetaM.iss`).
+
+  Der Installer: Sprache des Systems (en, de, fr, es, it, pt_BR, ja, ko; sonst Englisch),
+  installiert nach `C:\Program Files\MovieMetaM` (braucht Administrator), Startmenü-Eintrag,
+  Desktop-Symbol auf Wunsch, die Visual-C++-Laufzeit nur, wenn sie fehlt, Lizenz (GPL v3) als
+  eigene Seite, `LICENSE.txt` und `LGPL-3.0.txt` neben der exe. Er trägt MovieMetaM für `.mp4` /
+  `.m4v` unter „Öffnen mit“ ein (ProgID `MovieMetaM.Movie`, `Applications\MovieMetaM.exe`), macht
+  es aber nicht zum Standardprogramm; beim Deinstallieren verschwinden die Einträge, die
+  Einstellungen (INI in `%APPDATA%`) bleiben. Die feste `AppId` sorgt dafür, dass eine neue
+  Version die alte ersetzt; eine laufende App wird dafür geschlossen (sie fragt nach
+  ungespeicherten Änderungen). Anderes Qt: `-QtDir C:\Qt\6.x\msvc2022_64`.
+  Nicht signiert: Windows SmartScreen warnt beim ersten Start („Weitere Informationen“ →
+  „Trotzdem ausführen“).
+- Ein Linux-Paket gibt es noch nicht.
 
 ### Werkzeuge
 
