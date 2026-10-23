@@ -28,6 +28,14 @@
 FileOpener::FileOpener(QObject *parent)
     : QObject(parent)
 {
+    m_batchTimer.setSingleShot(true);
+    m_batchTimer.setInterval(100);
+    connect(&m_batchTimer, &QTimer::timeout, this, [this] {
+        const QStringList paths = m_pending;
+        m_pending.clear();
+        m_hasPending = false;
+        emit filesReceived(paths);
+    });
 }
 
 QStringList FileOpener::pathsFromArguments(const QStringList &arguments)
@@ -105,20 +113,16 @@ void FileOpener::start()
 {
     m_started = true;
     if (m_hasPending) {
-        const QStringList paths = m_pending;
-        m_pending.clear();
-        m_hasPending = false;
-        emit filesReceived(paths);
+        m_batchTimer.start();   // what came before the window: with what follows at once
     }
 }
 
 void FileOpener::deliver(const QStringList &paths)
 {
-    if (m_started) {
-        emit filesReceived(paths);
-    } else {
-        m_pending << paths;
-        m_hasPending = true;
+    m_pending << paths;
+    m_hasPending = true;
+    if (m_started && !m_batchTimer.isActive()) {
+        m_batchTimer.start();
     }
 }
 

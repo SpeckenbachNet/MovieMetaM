@@ -19,6 +19,7 @@
 
 #include <QObject>
 #include <QStringList>
+#include <QTimer>
 
 class QLocalServer;
 
@@ -27,7 +28,9 @@ class QLocalServer;
 //  - Linux, Windows: the system starts the program with the files as arguments. A second instance
 //    hands them over to the running one (QLocalServer) and quits.
 //  - macOS: the running (or just started) app gets a QFileOpenEvent; there is only one instance.
-// Files that come before the main window exists wait until start() is called.
+// Files that come before the main window exists wait until start() is called. Files that come one
+// after the other (macOS: one event per file; Windows: "Open with" starts one process per file)
+// are collected for a moment and delivered as one list, so the list shows them as one drop.
 class FileOpener : public QObject
 {
     Q_OBJECT
@@ -56,6 +59,7 @@ private:
     static QString serverName();
 
     QLocalServer *m_server = nullptr;
+    QTimer m_batchTimer;   // collects what comes in quick succession
     bool m_started = false;
     bool m_hasPending = false;
     QStringList m_pending;
