@@ -30,6 +30,7 @@ ui_*.h
 Makefile*
 *build-*
 !tools/build-mac.sh
+!tools/build-linux.sh
 !tools/build-windows.ps1
 !tools/build-windows.cmd
 build/
