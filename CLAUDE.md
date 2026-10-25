@@ -45,6 +45,11 @@ up to date with larger changes.
   Inno Setup script `tools/MovieMetaM.iss` → `build/MovieMetaM-<version>-Setup.exe`; admin install,
   VC runtime only if missing, "Open with" for .mp4 / .m4v without becoming the default; not signed,
   SmartScreen warns; aborts without `tmdb_token.txt`).
+- Linux version: `tools/build-linux.sh` (AppImage built in a Podman container with Ubuntu 22.04: glibc
+  2.35, so it runs on Ubuntu LTS / Debian too; Qt 6.12 by aqtinstall, CMake from pip, linuxdeploy;
+  cache `build/linux-cache` ~1.8 GB; result `build/MovieMetaM-linux-x86_64.AppImage`). Details in
+  `docs/DEVELOPMENT.md` (Linux). Started on Plasma and in Debian 12 (Xvfb); not tested: file dialog,
+  search, drag and drop from the AppImage, GNOME.
 - Only MP4/M4V are supported for now (`MediaInfoM::supportedSuffixes()`); other files are
   skipped with a message in the status bar.
 
@@ -323,13 +328,14 @@ Linux).
     help). Until then: a section "Why version 0.9?" in the help (de, en, fr, es) asking for help
     by mail; helpers check the `.ts` file in Qt Linguist. The user thinks about an own small
     review tool on an own server instead.
-15. Linux package (planned, after 12): the user has an Arch machine. A build on Arch is too new
-    for an AppImage (needs the same new glibc, does not run on older systems such as Ubuntu LTS /
-    Debian). Plan: `tools/build-linux.sh` builds the AppImage in a container (podman / docker with
-    Ubuntu 22.04, Qt 6.12, `linuxdeploy` + Qt plugin), fixed name
-    `MovieMetaM-linux-x86_64.AppImage` for the release. Later: Flatpak (`flatpak-builder` builds
-    in its own runtime, independent of the host; Flathub needs a review, a single `.flatpak` can
-    also hang at the release). A PKGBUILD for the AUR only helps Arch users. .deb / .rpm per
+15. Linux package: `tools/build-linux.sh` exists and builds a working AppImage (see Building and
+    `docs/DEVELOPMENT.md`). The user has an Arch machine; a build there is too new for an AppImage
+    (needs the same new glibc, does not run on older systems such as Ubuntu LTS / Debian), hence the
+    container. Still open: test on a real older desktop (the user has a Debian 12 VM in
+    virt-manager), file dialog / search / drag and drop from the AppImage, GNOME; the release
+    (point 12, fixed name `MovieMetaM-linux-x86_64.AppImage`). Later: Flatpak (`flatpak-builder`
+    builds in its own runtime, independent of the host; Flathub needs a review, a single `.flatpak`
+    can also hang at the release). A PKGBUILD for the AUR only helps Arch users. .deb / .rpm per
     distribution: not planned. Qt's own texts are already embedded (`:/i18n/qtbase_*.qm`).
 16. Windows (observations of the user on a Surface, tablet with touch, 2026-10-23, version 0.9.2).
     Ask the user for the details before changing code.

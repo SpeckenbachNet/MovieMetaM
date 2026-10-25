@@ -598,13 +598,48 @@ bei dieser Administrator-Installation also für alle Benutzer):
 
 ### Linux
 
-Ein Paket gibt es noch nicht. Vorhanden sind die `install()`-Regeln in `CMakeLists.txt`, die
-.desktop-Datei und das Icon (`ressources/linux/`, Abschnitt 3). Geplant ist ein **AppImage**
-(`tools/build-linux.sh`), gebaut in einem Container mit Ubuntu 22.04: Ein Build auf einem neuen
-System (z. B. Arch) braucht dessen neue glibc und läuft nicht auf älteren Systemen wie Ubuntu LTS
-oder Debian; gegen eine ältere glibc gebaut läuft es auch auf neueren. Danach vielleicht Flatpak.
-Ein PKGBUILD für das AUR hilft nur Arch-Benutzern, .deb / .rpm sind nicht geplant (siehe Punkt 15
-in `CLAUDE.md`).
+**Bauen:** `tools/build-linux.sh` (von überall aufrufbar), Ergebnis
+`build/MovieMetaM-linux-x86_64.AppImage` (etwa 34 MB, fester Name ohne Version). Voraussetzungen:
+nur **Podman** (ohne root) und beim ersten Lauf Netz. Qt und die Werkzeuge liegen danach in
+`build/linux-cache` (etwa 1,8 GB, löschen = neu laden).
+
+**Warum im Container:** Ein Programm läuft nur auf Systemen mit der gleichen oder einer neueren
+glibc. Ein Build auf einem neuen System (Arch) startete auf Ubuntu LTS oder Debian nicht. Darum baut
+das Skript in einem Container mit **Ubuntu 22.04** (glibc 2.35); das Paket verlangt höchstens
+glibc 2.34.
+
+**Ablauf** (im Container, das Skript startet sich dafür selbst mit `--inside`):
+
+1. Compiler, Ninja und die Systembibliotheken, gegen die Qts Plugins linken, per `apt`.
+2. **Qt 6.12** mit `aqtinstall` (Ubuntu 22.04 hat kein Qt 6.12), in den Cache. **CMake aus `pip`**,
+   weil Qt 6.12 CMake ab 3.25 verlangt und Ubuntu 22.04 nur 3.22 hat.
+3. linuxdeploy samt Qt- und AppImage-Plugin (von GitHub, `continuous`, in den Cache).
+4. Release-Build nach `build/linux-release`.
+5. `cmake --install` in `build/linux-appdir`. Was TagLibs Installationsregeln danebenlegen
+   (Header, `taglib-config`), wird gelöscht; TagLib ist statisch eingebunden.
+6. linuxdeploy kopiert Qt hinein (`--plugin qt`), mit den Wayland-Plugins (`libqwayland.so`; in Qt
+   6.12 ein Plugin, vorher `-generic` und `-egl`). Dazu von Hand: das Plattform-Theme
+   `libqxdgdesktopportal.so` (der Dateidialog des Desktops; `DEPLOY_PLATFORM_THEMES` nähme auch das
+   GTK-Theme und damit ganz GTK) und `libOpenGL.so.0` (GLVND; linuxdeploy lässt sie weg, auf einem
+   schlanken System ohne das Paket `libopengl0` startete die App nicht). Danach der AppImage-Schritt.
+
+**Nicht im Paket** (kommt vom System): glibc, libstdc++, die Treiber (libGL, libEGL), X11 und
+Wayland, fontconfig, freetype, D-Bus, `libssl.so.3` (Qt lädt es zur Laufzeit für HTTPS zu TMDB;
+vorhanden ab Ubuntu 22.04 und Debian 12).
+
+**Getestet:** gebaut (0.9.3); auf dem Entwicklungsrechner (Arch, Plasma, Wayland) gestartet, volle
+Oberfläche mit Icons und Schrift, richtiger Desktop-Name. In einem Debian-12-Container (glibc 2.36,
+`xcb` an Xvfb, ohne `libopengl0`) startet die App und läuft ohne Fehlermeldung. **Nicht getestet:**
+Dateidialog, TMDB-Suche und Drag & Drop aus dem AppImage, niri, GNOME und ein echter älterer
+Desktop (eine Debian-12-VM wäre dafür da).
+
+**Hinweis für Benutzer:** Datei ausführbar machen (`chmod +x`) und starten. AppImages brauchen
+FUSE 2 (Paket `libfuse2`, auf neueren Ubuntu-Versionen `libfuse2t64`); fehlt es, geht
+`./MovieMetaM-linux-x86_64.AppImage --appimage-extract-and-run`. (Allgemein bei AppImages, mit
+unserer Datei nicht geprüft.) Das AppImage trägt sich nicht selbst ins Startmenü ein.
+
+Weiter geplant: Flatpak. Ein PKGBUILD für das AUR hilft nur Arch-Benutzern, .deb / .rpm sind nicht
+geplant (Punkt 15 in `CLAUDE.md`).
 
 ### Werkzeuge
 
@@ -612,6 +647,7 @@ in `CLAUDE.md`).
 |---|---|
 | `tools/build-mac.sh` | baut das Mac-Paket (DMG), siehe „Mac“ |
 | `tools/build-windows.cmd`, `tools/build-windows.ps1` | baut den Windows-Installer, siehe „Windows“ |
+| `tools/build-linux.sh` | baut das Linux-AppImage im Podman-Container, siehe „Linux“ |
 | `tools/MovieMetaM.iss` | Skript von Inno Setup für den Windows-Installer |
 | `tools/ratings_from_xlsx.py` | erzeugt die JSON-Dateien, `Ratings.qrc` und `countrynames.cpp` aus der Tabelle (Abschnitt 6) |
 | `_dev/` (nicht im Repository) | Arbeitsmaterial zu den Altersfreigaben, Bildschirmfotos |
