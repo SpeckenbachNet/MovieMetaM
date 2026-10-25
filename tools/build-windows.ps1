@@ -1,6 +1,6 @@
 # Builds the Windows installer of MovieMetaM in one go:
 #   1. Release build (build\windows-release)   2. windeployqt (build\windows-deploy)
-#   3. Inno Setup  ->  build\MovieMetaM-<version>-Setup.exe
+#   3. Inno Setup  ->  build\MovieMetaM-windows-Setup.exe
 # Run: tools\build-windows.cmd (double click) or powershell -ExecutionPolicy Bypass -File tools\build-windows.ps1
 # Needs: Visual Studio 2022 Build Tools (MSVC), Qt 6 for MSVC, Inno Setup 6, tmdb_token.txt.
 param(
@@ -58,4 +58,4 @@ $defines = @("/DAppVersion=$version", "/DSourceDir=$deployDir")
 if ($redist) { $defines += "/DRedist=$redist" } else { Write-Warning 'vc_redist.x64.exe not found: installer without VC runtime' }
 & $iscc @defines (Join-Path $PSScriptRoot 'MovieMetaM.iss')
 if ($LASTEXITCODE -ne 0) { throw 'Inno Setup failed' }
-Write-Host "Done: build\MovieMetaM-$version-Setup.exe" -ForegroundColor Green
+Write-Host "Done: build\MovieMetaM-windows-Setup.exe ($version)" -ForegroundColor Green

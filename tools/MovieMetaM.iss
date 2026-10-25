@@ -1,6 +1,6 @@
 ; Installer for MovieMetaM (Inno Setup 6). Built by build-windows.ps1, which passes
 ;   /DAppVersion=<version>  /DSourceDir=<windeployqt folder>  /DRedist=<vc_redist.x64.exe>
-; Result: build\MovieMetaM-<version>-Setup.exe
+; Result: build\MovieMetaM-windows-Setup.exe (fixed name for the release)
 
 #ifndef AppVersion
   #define AppVersion "0.0.0"
@@ -34,7 +34,7 @@ SetupIconFile=..\ressources\icons\app_icon.ico
 LicenseFile=..\LICENSE
 UninstallDisplayIcon={app}\{#AppExe}
 OutputDir=..\build
-OutputBaseFilename={#AppName}-{#AppVersion}-Setup
+OutputBaseFilename={#AppName}-windows-Setup
 Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern

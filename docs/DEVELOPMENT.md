@@ -516,7 +516,7 @@ Beim ersten Start fragt der Setupdialog (`setupdialog.*`) das System und beide S
 
 ### Mac
 
-**Bauen:** `tools/build-mac.sh` (von überall aufrufbar), Ergebnis `build/MovieMetaM-<Version>.dmg`.
+**Bauen:** `tools/build-mac.sh` (von überall aufrufbar), Ergebnis `build/MovieMetaM-mac.dmg` (fester Name ohne Version).
 Voraussetzungen: Qt 6.12 in `~/Qt/6.12.0/macos` (anderes Qt:
 `QT_DIR=/pfad/zu/Qt/6.x/macos tools/build-mac.sh`), CMake und Ninja aus der Qt-Installation
 (`~/Qt/Tools`), `tmdb_token.txt`.
@@ -544,7 +544,7 @@ Voraussetzungen: Qt 6.12 in `~/Qt/6.12.0/macos` (anderes Qt:
 ### Windows
 
 **Bauen:** Doppelklick auf `tools\build-windows.cmd` (oder `tools\build-windows` in der Konsole),
-Ergebnis `build\MovieMetaM-<Version>-Setup.exe`. Die .cmd startet das PowerShell-Skript
+Ergebnis `build\MovieMetaM-windows-Setup.exe` (fester Name ohne Version). Die .cmd startet das PowerShell-Skript
 `tools\build-windows.ps1` mit `-ExecutionPolicy Bypass`, weil Windows unsignierte Skripte sonst nicht
 ausführt; das Fenster bleibt am Ende offen. Vorbild ist PhotoBoothM.
 Voraussetzungen: Visual Studio 2022 Build Tools (MSVC, das Skript findet sie mit `vswhere`), Qt 6.12
@@ -599,7 +599,7 @@ bei dieser Administrator-Installation also für alle Benutzer):
 ### Linux
 
 **Bauen:** `tools/build-linux.sh` (von überall aufrufbar), Ergebnis
-`build/MovieMetaM-linux-x86_64.AppImage` (etwa 34 MB, fester Name ohne Version). Voraussetzungen:
+`build/MovieMetaM-linux.AppImage` (etwa 34 MB, fester Name ohne Version). Voraussetzungen:
 nur **Podman** (ohne root) und beim ersten Lauf Netz. Qt und die Werkzeuge liegen danach in
 `build/linux-cache` (etwa 1,8 GB, löschen = neu laden).
 
@@ -635,7 +635,7 @@ Desktop (eine Debian-12-VM wäre dafür da).
 
 **Hinweis für Benutzer:** Datei ausführbar machen (`chmod +x`) und starten. AppImages brauchen
 FUSE 2 (Paket `libfuse2`, auf neueren Ubuntu-Versionen `libfuse2t64`); fehlt es, geht
-`./MovieMetaM-linux-x86_64.AppImage --appimage-extract-and-run`. (Allgemein bei AppImages, mit
+`./MovieMetaM-linux.AppImage --appimage-extract-and-run`. (Allgemein bei AppImages, mit
 unserer Datei nicht geprüft.) Das AppImage trägt sich nicht selbst ins Startmenü ein.
 
 Weiter geplant: Flatpak. Ein PKGBUILD für das AUR hilft nur Arch-Benutzern, .deb / .rpm sind nicht

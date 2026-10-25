@@ -40,14 +40,14 @@ up to date with larger changes.
   `app_icon.icns`; the bundle's `Info.plist` is `ressources/macos/Info.plist.in` (Qt's template plus
   `CFBundleLocalizations` de/en: without it the native Open dialog stays English).
 - Mac version: `tools/build-mac.sh` (release universal arm64 + x86_64, `macdeployqt`, ad hoc
-  signature – no Developer ID, decided with the user –, `build/MovieMetaM-<version>.dmg`).
+  signature – no Developer ID, decided with the user –, `build/MovieMetaM-mac.dmg`).
 - Windows version: `tools/build-windows.cmd` (double click, runs `build-windows.ps1`; after PhotoBoothM: release MSVC build, `windeployqt`,
-  Inno Setup script `tools/MovieMetaM.iss` → `build/MovieMetaM-<version>-Setup.exe`; admin install,
+  Inno Setup script `tools/MovieMetaM.iss` → `build/MovieMetaM-windows-Setup.exe`; admin install,
   VC runtime only if missing, "Open with" for .mp4 / .m4v without becoming the default; not signed,
   SmartScreen warns; aborts without `tmdb_token.txt`).
 - Linux version: `tools/build-linux.sh` (AppImage built in a Podman container with Ubuntu 22.04: glibc
   2.35, so it runs on Ubuntu LTS / Debian too; Qt 6.12 by aqtinstall, CMake from pip, linuxdeploy;
-  cache `build/linux-cache` ~1.8 GB; result `build/MovieMetaM-linux-x86_64.AppImage`). Details in
+  cache `build/linux-cache` ~1.8 GB; result `build/MovieMetaM-linux.AppImage`). Details in
   `docs/DEVELOPMENT.md` (Linux). Started on Plasma and in Debian 12 (Xvfb); not tested: file dialog,
   search, drag and drop from the AppImage, GNOME.
 - Only MP4/M4V are supported for now (`MediaInfoM::supportedSuffixes()`); other files are
@@ -311,11 +311,12 @@ Linux).
     wants an intact `moov` (a readable file without tags is fine); `addFilesToModel` counts the
     others and shows "n file(s) could not be read." (Error toast) – **done (0.8.6)**
 12. Release on GitHub (planned): packages not in the repository but attached to a GitHub release
-    (tag `vX.Y.Z`, free, every version stays available). Fixed package names without the version
-    (e.g. `MovieMetaM-mac.dmg`, later Windows / Linux), so the website can link
-    `github.com/SpeckenbachNet/MovieMetaM/releases/latest/download/MovieMetaM-mac.dmg` forever
-    (`tools/build-mac.sh` to adapt). Still open: the first release `v0.9.0` with a text and the
-    note about allowing the app on the first start (no Developer ID).
+    (tag `vX.Y.Z`, free, every version stays available). Fixed package names without version and
+    architecture (desktop Linux / Windows are x86_64, the Mac build is universal): `MovieMetaM-mac.dmg`,
+    `MovieMetaM-windows-Setup.exe`, `MovieMetaM-linux.AppImage` – **done** (build scripts), so the
+    website can link `github.com/SpeckenbachNet/MovieMetaM/releases/latest/download/<name>` forever.
+    Still open: the first release with a text and the note about allowing the app on the first
+    start (no Developer ID).
 13. Update notice in the app (planned, needs 12): at most once a day ask
     `api.github.com/repos/SpeckenbachNet/MovieMetaM/releases/latest`, compare the tag with
     `APP_VERSION`; newer: a notice with a button that opens the download in the browser (no
@@ -333,7 +334,7 @@ Linux).
     (needs the same new glibc, does not run on older systems such as Ubuntu LTS / Debian), hence the
     container. Still open: test on a real older desktop (the user has a Debian 12 VM in
     virt-manager), file dialog / search / drag and drop from the AppImage, GNOME; the release
-    (point 12, fixed name `MovieMetaM-linux-x86_64.AppImage`). Later: Flatpak (`flatpak-builder`
+    (point 12, fixed name `MovieMetaM-linux.AppImage`). Later: Flatpak (`flatpak-builder`
     builds in its own runtime, independent of the host; Flathub needs a review, a single `.flatpak`
     can also hang at the release). A PKGBUILD for the AUR only helps Arch users. .deb / .rpm per
     distribution: not planned. Qt's own texts are already embedded (`:/i18n/qtbase_*.qm`).

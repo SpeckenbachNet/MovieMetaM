@@ -6,7 +6,7 @@
 #
 # Call from anywhere:  tools/build-mac.sh
 # Qt elsewhere:        QT_DIR=/path/to/Qt/6.x/macos tools/build-mac.sh
-# Result:              build/MovieMetaM-<version>.dmg
+# Result:              build/MovieMetaM-mac.dmg (fixed name for the release, the version is in the volume name)
 
 set -euo pipefail
 
@@ -21,7 +21,7 @@ export PATH="$HOME/Qt/Tools/CMake/CMake.app/Contents/bin:$HOME/Qt/Tools/Ninja:$P
 
 VERSION="$(sed -n 's/^set(PROJECT_VERSION "\(.*\)")/\1/p' "$SOURCE_DIR/CMakeLists.txt")"
 APP_BUNDLE="$BUILD_DIR/$APP_NAME.app"
-DMG_FILE="$SOURCE_DIR/build/$APP_NAME-$VERSION.dmg"
+DMG_FILE="$SOURCE_DIR/build/$APP_NAME-mac.dmg"
 
 if [ ! -f "$SOURCE_DIR/tmdb_token.txt" ]; then
     echo "Warning: tmdb_token.txt is missing – the movie search of this build will not work." >&2
