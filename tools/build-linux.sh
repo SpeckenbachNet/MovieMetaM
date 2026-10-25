@@ -7,7 +7,7 @@
 #
 # Call from anywhere:  tools/build-linux.sh
 # Needs:               podman, network (first run: Ubuntu image, Qt, linuxdeploy; later cached)
-# Result:              build/MovieMetaM-linux-x86_64.AppImage
+# Result:              build/MovieMetaM-linux.AppImage
 # Cache:               build/linux-cache (Qt and linuxdeploy; delete it to download them again)
 
 set -euo pipefail
@@ -16,7 +16,7 @@ APP_NAME="MovieMetaM"
 SOURCE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 QT_VERSION="6.12.0"
 IMAGE="ubuntu:22.04"
-RESULT="$APP_NAME-linux-x86_64.AppImage"
+RESULT="$APP_NAME-linux.AppImage"
 
 if [ "${1:-}" != "--inside" ]; then
     # ---- On the host: start this script again inside the container
