@@ -1,5 +1,20 @@
 # MovieMetaM – Changelog
 
+## 1.0.0 – First release for all platforms (November 2026)
+
+- Packages for macOS, Windows (installer) and Linux (AppImage)
+- Notifies you when a new version is out: the button "Update" downloads it (setting "Check for updates")
+- English and German; other languages can be added by the community ("Your language is missing?")
+- Runs on macOS 14.4 or later (0.9.3 needed the newest macOS)
+- The Mac DMG contains a ReadMe for the first start
+
+## 0.9.3 – Opening movies from outside (October 25, 2026)
+
+- Open movies with "Open with", by dropping them on the program icon or from the command line
+- Several movies opened at once arrive together
+- First Windows version (installer)
+- Windows: selected entries stay readable when the list loses the focus
+
 ## 0.9 – Mac version (October 22, 2026)
 
 - First finished Mac version as a DMG, runs on Apple silicon and Intel Macs
