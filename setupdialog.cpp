@@ -86,6 +86,7 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     applyComboStyle(dataLanguageComboBox);
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    //: Button that closes the first-start dialog and keeps the choices
     buttonBox->button(QDialogButtonBox::Ok)->setText(tr("Done"));
     buttonBox->button(QDialogButtonBox::Cancel)->setText(tr("Cancel"));
 
@@ -115,6 +116,10 @@ SetupDialog::SetupDialog(QWidget *parent) : QDialog(parent) {
     } else {
         layout->addWidget(languageComboBox);
     }
+    auto *translationHint = new QLabel(Languages::translationHint(), this);
+    translationHint->setWordWrap(true);
+    translationHint->setOpenExternalLinks(true);
+    layout->addWidget(translationHint);
     layout->addWidget(dataLanguageLabel);
     layout->addWidget(dataLanguageComboBox);
     layout->addSpacing(10);

@@ -13,17 +13,7 @@
         <file alias="en/settings.md">help/en/settings.md</file>
         <file alias="de/about.md">help/de/about.md</file>
         <file alias="en/about.md">help/en/about.md</file>
-        <file alias="fr/movielist.md">help/fr/movielist.md</file>
-        <file alias="fr/movieinfo.md">help/fr/movieinfo.md</file>
-        <file alias="fr/moviesearch.md">help/fr/moviesearch.md</file>
-        <file alias="fr/saving.md">help/fr/saving.md</file>
-        <file alias="fr/settings.md">help/fr/settings.md</file>
-        <file alias="fr/about.md">help/fr/about.md</file>
-        <file alias="es/movielist.md">help/es/movielist.md</file>
-        <file alias="es/movieinfo.md">help/es/movieinfo.md</file>
-        <file alias="es/moviesearch.md">help/es/moviesearch.md</file>
-        <file alias="es/saving.md">help/es/saving.md</file>
-        <file alias="es/settings.md">help/es/settings.md</file>
-        <file alias="es/about.md">help/es/about.md</file>
     </qresource>
+    <!-- The drafts in help/fr/ and help/es/ are not in the package (see APP_LANGUAGES in CMakeLists.txt) -->
+
 </RCC>

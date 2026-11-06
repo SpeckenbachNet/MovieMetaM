@@ -20,6 +20,7 @@ DMG_STAGING="$SOURCE_DIR/build/dmg"
 export PATH="$HOME/Qt/Tools/CMake/CMake.app/Contents/bin:$HOME/Qt/Tools/Ninja:$PATH"
 
 VERSION="$(sed -n 's/^set(PROJECT_VERSION "\(.*\)")/\1/p' "$SOURCE_DIR/CMakeLists.txt")"
+MACOS_MIN="$(sed -n 's/^set(CMAKE_OSX_DEPLOYMENT_TARGET "\(.*\)")/\1/p' "$SOURCE_DIR/CMakeLists.txt")"
 APP_BUNDLE="$BUILD_DIR/$APP_NAME.app"
 DMG_FILE="$SOURCE_DIR/build/$APP_NAME-mac.dmg"
 
@@ -66,6 +67,8 @@ rm -rf "$DMG_STAGING" "$DMG_FILE"
 mkdir -p "$DMG_STAGING"
 cp -R "$APP_BUNDLE" "$DMG_STAGING/"
 ln -s /Applications "$DMG_STAGING/Applications"
+# Note for the user (install, allowing the app on the first start), version and minimum macOS filled in
+sed -e "s/{{version}}/$VERSION/" -e "s/{{macos}}/$MACOS_MIN/" "$SOURCE_DIR/ressources/macos/ReadMe.txt" > "$DMG_STAGING/ReadMe.txt"
 hdiutil create -volname "$APP_NAME $VERSION" -srcfolder "$DMG_STAGING" -ov -format UDZO "$DMG_FILE"
 rm -rf "$DMG_STAGING"
 

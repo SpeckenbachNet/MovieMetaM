@@ -38,6 +38,8 @@ struct Language {
 QList<Language> appLanguages();    // the languages of the app that are there, English included;
                                    // a draft has the word for it behind its name
 bool hasDraftLanguages();          // is one of the languages of the app a draft (then a note is shown)
+QString translationHint();         // "Your language is missing? Help translate ..." with the link to
+                                   // the page of the website (German or English, like the app)
 
 QList<Language> dataLanguages();   // TMDB languages sorted by name, the system language included
 

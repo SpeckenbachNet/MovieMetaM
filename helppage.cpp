@@ -110,6 +110,7 @@ HelpPage::HelpPage(QWidget *parent)
     // --- Own toolbar on top, like every page
     m_toolbar = new ToolbarM(this);
     m_toolbar->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+    //: Toolbar button: back from the settings / help page to the main window
     QToolButton *backBtn = m_toolbar->addButton("helpBackBtn", tr("Back"), ":icons/back", true);
     m_toolbar->setTitle(tr("Help"));
     connect(backBtn, &QToolButton::clicked, this, &HelpPage::backRequested);
@@ -148,6 +149,7 @@ HelpPage::HelpPage(QWidget *parent)
     addTopic(":icons/list_movie", tr("Movie List"), tr("Add, select, remove"), "movielist");
     addTopic(":icons/info_movie", tr("Movie Info"), tr("Edit, cover, age rating"), "movieinfo");
     addTopic(":icons/search_movie", tr("Movie Search"), tr("Find and apply TMDB data"), "moviesearch");
+    //: Noun: help topic about saving the files, not a progress message
     addTopic(":icons/save_movie", tr("Saving"), tr("Save, safe saving"), "saving");
     addTopic(":icons/settings", tr("Settings"), tr("Languages, age rating, saving"), "settings");
     addTopic(":icons/info", tr("About %1").arg(QStringLiteral(APP_NAME)),

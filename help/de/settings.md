@@ -22,6 +22,12 @@ Das gilt nur für Filme, deren gespeicherte Datei noch keine Altersfreigabe hat.
 
 **Nur leere Felder füllen** sorgt dafür, dass **Übernehmen** (in der Filmsuche) alles, was du schon eingetragen hast, so lässt und nur die Lücken füllt, auch beim Cover. Standardmäßig aus: **Übernehmen** nimmt dann alles, was TMDB hat.
 
+## Updates
+
+Mit **Nach Updates suchen** (standardmäßig an) fragt MovieMetaM einmal am Tag bei GitHub, ob es eine neue Version gibt. Wenn ja, erscheint in der Werkzeugleiste der Knopf **Update**; ein Klick lädt die neue Version in deinem Browser herunter. Installiere sie wie beim ersten Mal, deine Einstellungen bleiben erhalten.
+
+> Für diese Prüfung wird nur deine IP-Adresse an GitHub übertragen, nichts über dich oder deine Filme. Ausgeschaltet fragt MovieMetaM gar nicht.
+
 ## Eigene Genres
 
 Genres, die du in der Genre-Liste der Filminfo haben willst, zum Beispiel „Serie“ oder „Konzert“. Tippe ein Genre ein und drücke die Eingabetaste, genau wie bei den Namen in der Filminfo (entfernen, Reihenfolge, dieselben Tasten). Deine eigenen Genres stehen zuerst, danach die Genres von TMDB. **Nur eigene Genres zeigen** lässt die TMDB-Genres aus der Liste weg. Die Liste ändert sich, wenn du die Einstellungen speicherst.

@@ -62,6 +62,7 @@
 #include "posterpicker.h"
 #include "tagwidget.h"
 #include "toastm.h"
+#include "updatechecker.h"
 
 // One movie to save: a copy of the data for the thread (without the pixmap: QPixmap belongs to
 // the GUI thread, the covers go as QImage)
@@ -147,6 +148,9 @@ private:
     QStringList m_tmdbGenres;         // the genres TMDB knows, in the language of the movie data
     bool m_fillEmptyOnly = false;     // setting "General/FillEmptyOnly": Apply fills only empty fields
     QCheckBox *m_fillEmptyOnlyCheck = nullptr;
+    QCheckBox *m_checkUpdatesCheck = nullptr;   // setting "General/CheckUpdates" (UpdateChecker)
+    UpdateChecker *m_updateChecker = nullptr;
+    void styleUpdateButton();                   // accent color, also after light / dark
     QString m_tmdbToken;              // setting "TMDB/Token": own token, empty = the one built into the app
     QLineEdit *m_tmdbTokenEdit = nullptr;
     QAction *m_tmdbTokenEye = nullptr;     // shows the token; hidden again when the settings are left
@@ -166,6 +170,7 @@ private:
     QToolButton *m_saveBtn = nullptr;
     QToolButton *m_saveAllBtn = nullptr;
     QToolButton *m_coffeeBtn = nullptr;    // donation (PayPal)
+    QToolButton *m_updateBtn = nullptr;    // only there when a newer version is out (UpdateChecker)
     QToolButton *m_settingsBtn = nullptr;
     QToolButton *m_helpBtn = nullptr;
     QToolButton *m_settingsBackBtn = nullptr;

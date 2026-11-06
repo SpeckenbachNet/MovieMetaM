@@ -66,3 +66,6 @@ _backup/
 
 # TMDB API token (read by CMake, never commit)
 tmdb_token.txt
+
+# Notes for Claude (kept locally, not in the repository)
+CLAUDE.md

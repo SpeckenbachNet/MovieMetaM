@@ -8,12 +8,16 @@ Editor for the metadata of movie files: title, cast, directors, description, gen
 
 Michael Speckenbach · SpeckenbachNet
 
-Website: [software.speckenbach.net/moviemetam](https://software.speckenbach.net/moviemetam)  
+Website: [software.speckenbach.net/en/moviemetam](https://software.speckenbach.net/en/moviemetam)  
 Contact: [moviemetam@speckenbach.net](mailto:moviemetam@speckenbach.net)
 
 ## Support
 
 Like MovieMetaM? Buy me a coffee: [paypal.me/michaelspeckenbach](https://paypal.me/michaelspeckenbach)
+
+## Translations
+
+MovieMetaM is available in English and German. Would you like to use it in your language? Help translate it: [software.speckenbach.net/en/moviemetam/translation](https://software.speckenbach.net/en/moviemetam/translation)
 
 ## License
 

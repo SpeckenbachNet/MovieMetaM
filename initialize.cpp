@@ -123,6 +123,7 @@ void MainWin::initializeDetailsTab()
     m_detailsView->setOpenLinks(false);
     m_detailsView->setStyleSheet("QTextBrowser { background: transparent; border: none; }");
 
+    //: Button and heading: take the TMDB data into the selected movie
     m_applyBtn = new QPushButton(tr("Apply"), ui->tab_2);
     m_applyBtn->setToolTip(tr("Take the data into the selected movie"));
     m_applyBtn->setEnabled(false);   // until the details of a result are loaded
@@ -150,8 +151,11 @@ void MainWin::initializeComboBoxes() {
     fillRatingSettingsComboBox();
 
     // Content advisory (Apple's "rtng"): none, clean, explicit
+    //: Content advisory of the movie: no advisory set
     ui->advisoryComboBox->addItem(tr("None"), 0);
+    //: Content advisory of the movie (iTunes rating "rtng"): the clean version, without explicit content
     ui->advisoryComboBox->addItem(tr("Clean"), 2);
+    //: Content advisory of the movie: contains explicit content
     ui->advisoryComboBox->addItem(tr("Explicit"), 1);
 
     // Settings: language of the app and of the movie data
@@ -181,6 +185,10 @@ void MainWin::initializeComboBoxes() {
     m_fillEmptyOnly = settings.value("General/FillEmptyOnly", false).toBool();
     m_fillEmptyOnlyCheck = new QCheckBox(tr("Only fill empty fields"), this);
     m_fillEmptyOnlyCheck->setChecked(m_fillEmptyOnly);
+
+    // Updates: ask GitHub once a day for a newer version (on by default)
+    m_checkUpdatesCheck = new QCheckBox(tr("Check for updates"), this);
+    m_checkUpdatesCheck->setChecked(UpdateChecker::isEnabled());
 
     // Own TMDB token (password field with an eye): replaces the one built into the app
     m_tmdbToken = settings.value("TMDB/Token").toString().trimmed();
@@ -248,8 +256,12 @@ void MainWin::applyThemeStyles()
     for (QFrame *card : findChildren<QFrame *>(QStringLiteral("settingsCard"))) {
         card->setStyleSheet(cardStyle);
     }
-    if (QLabel *tmdbHint = findChild<QLabel *>(QStringLiteral("tmdbHint"))) {
-        tmdbHint->setStyleSheet(QStringLiteral("QLabel { color: %1; }").arg(look.placeholder.name()));
+    // Hints below a setting, dimmed
+    for (const QString &name : {QStringLiteral("tmdbHint"), QStringLiteral("translationHint"),
+                                QStringLiteral("updatesHint")}) {
+        if (QLabel *hint = findChild<QLabel *>(name)) {
+            hint->setStyleSheet(QStringLiteral("QLabel { color: %1; }").arg(look.placeholder.name()));
+        }
     }
 
     // Rounded input fields (the ones in the tag widgets style themselves)
@@ -292,6 +304,14 @@ void MainWin::onColorSchemeChanged()
     ui->helpPage->refreshTheme();
     ui->searchEdit->setCornerRadius(FieldLook::radius);   // also sets its colors again
     ui->coverLabel->update();
+    styleUpdateButton();
+}
+
+// The update button in the accent color of the system (not orange like the coffee cup)
+void MainWin::styleUpdateButton()
+{
+    const QPalette pal = palette();
+    ui->mainToolbar->setButtonColor(m_updateBtn, pal.color(QPalette::Highlight), pal.color(QPalette::HighlightedText));
 }
 
 // Says which TMDB token the next request uses
@@ -356,6 +376,11 @@ void MainWin::initializeSettingsPage()
     QVBoxLayout *languageCard = addCard(left, tr("Languages"));
     addBlock(languageCard, tr("Language"), ui->languageSettingsComboBox,
              Languages::hasDraftLanguages() ? new InfoIcon(InfoIcon::draftLanguagesNote(), this) : nullptr);
+    auto *translationHint = new QLabel(Languages::translationHint(), this);
+    translationHint->setWordWrap(true);
+    translationHint->setOpenExternalLinks(true);
+    translationHint->setObjectName(QStringLiteral("translationHint"));
+    languageCard->addWidget(translationHint);
     addBlock(languageCard, tr("Movie data language"), ui->dataLanguageSettingsComboBox);
 
     QVBoxLayout *ratingCard = addCard(left, tr("Age Rating"));
@@ -374,6 +399,14 @@ void MainWin::initializeSettingsPage()
 
     QVBoxLayout *applyCard = addCard(left, tr("Apply"));
     applyCard->addWidget(m_fillEmptyOnlyCheck);
+
+    QVBoxLayout *updatesCard = addCard(left, tr("Updates"));
+    updatesCard->addWidget(m_checkUpdatesCheck);
+    auto *updatesHint = new QLabel(tr("Asks GitHub once a day for a new version. Only your IP address is "
+                                      "transmitted."), this);
+    updatesHint->setWordWrap(true);
+    updatesHint->setObjectName(QStringLiteral("updatesHint"));
+    updatesCard->addWidget(updatesHint);
     left->addStretch();
 
     // Right: own genres, TMDB
@@ -381,6 +414,7 @@ void MainWin::initializeSettingsPage()
     genresCard->addWidget(m_customGenresWidget);
     genresCard->addWidget(m_onlyCustomGenresCheck);   // belongs to the genres: right below them
 
+    //: Name of the movie database (themoviedb.org), normally not translated
     QVBoxLayout *tmdbCard = addCard(right, tr("TMDB"));
     auto *tmdbHint = new QLabel(tr("With an own token (API Read Access Token) the search uses your TMDB account. "
                                    "You get it free in your <a href=\"https://www.themoviedb.org/settings/api\">TMDB account</a>. "
@@ -401,6 +435,7 @@ void MainWin::initializeSettingsPage()
 
 void MainWin::initializeToolBars() {
     // --- Main toolbar: saving left, settings and help right
+    //: Toolbar button: saves the selected movie, or the settings on the settings page
     m_saveBtn = ui->mainToolbar->addButton("saveBtn", tr("Save"), ":icons/save", true);
     m_saveBtn->setToolTip(tr("Save metadata to the movie"));
     m_saveBtn->setEnabled(false);
@@ -412,12 +447,17 @@ void MainWin::initializeToolBars() {
     m_coffeeBtn = ui->mainToolbar->addButton("coffeeBtn", "", ":icons/coffee");
     m_coffeeBtn->setToolTip(tr("Buy me a coffee – support MovieMetaM via PayPal"));
     ui->mainToolbar->setButtonColor(m_coffeeBtn, QColor(), QColor("#F5A623"));
+    // Update: only shown when a newer version is out (UpdateChecker), in the accent color
+    m_updateBtn = ui->mainToolbar->addButton("updateBtn", tr("Update"), ":icons/update");
+    m_updateBtn->hide();
+    styleUpdateButton();
     m_settingsBtn = ui->mainToolbar->addButton("settingsBtn", "", ":icons/settings");
     m_settingsBtn->setToolTip(tr("Settings"));
     m_helpBtn = ui->mainToolbar->addButton("helpBtn", "", ":icons/help");
     m_helpBtn->setToolTip(tr("Help"));
 
     // --- Settings toolbar
+    //: Toolbar button: back from the settings / help page to the main window
     m_settingsBackBtn = ui->settingsToolbar->addButton("settingsBackBtn", tr("Back"), ":icons/back", true);
     ui->settingsToolbar->setTitle(tr("Settings"));
     ui->settingsToolbar->addSpacer();
@@ -655,6 +695,7 @@ void MainWin::initializeConnects() {
     connect(m_customGenresWidget, &TagWidget::tagsChanged, this, &MainWin::onSettingsChanged);
     connect(m_onlyCustomGenresCheck, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
     connect(m_fillEmptyOnlyCheck, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
+    connect(m_checkUpdatesCheck, &QCheckBox::toggled, this, &MainWin::onSettingsChanged);
     connect(m_tmdbTokenEdit, &QLineEdit::textChanged, this, &MainWin::onSettingsChanged);
     connect(m_tmdbTokenEdit, &QLineEdit::textChanged, this, &MainWin::updateTmdbTokenStatus);
     // Preview of the chosen system at once, before saving
@@ -676,6 +717,7 @@ void MainWin::initializeConnects() {
     connect(m_coffeeBtn, &QToolButton::clicked, this, [] {
         QDesktopServices::openUrl(QUrl(QStringLiteral("https://paypal.me/michaelspeckenbach")));
     });
+    connect(m_updateBtn, &QToolButton::clicked, this, [] { QDesktopServices::openUrl(UpdateChecker::downloadUrl()); });
     connect(m_settingsBackBtn, &QToolButton::clicked, this, [this] { showPage(ui->mainPage); });
     connect(ui->helpPage, &HelpPage::backRequested, this, [this] { showPage(ui->mainPage); });
     connect(m_saveSettingsBtn, &QToolButton::clicked, this, &MainWin::handleSaveSettingsButton_Clicked);

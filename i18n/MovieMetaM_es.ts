@@ -237,48 +237,50 @@
 <context>
     <name>HelpPage</name>
     <message>
-        <location filename="../helppage.cpp" line="113"/>
+        <location filename="../helppage.cpp" line="114"/>
         <source>Back</source>
+        <extracomment>Toolbar button: back from the settings / help page to the main window</extracomment>
         <translation type="unfinished">Atrás</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="114"/>
+        <location filename="../helppage.cpp" line="115"/>
         <source>Help</source>
         <translation type="unfinished">Ayuda</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="150"/>
+        <location filename="../helppage.cpp" line="149"/>
         <source>Movie List</source>
         <translation type="unfinished">Lista de películas</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="150"/>
+        <location filename="../helppage.cpp" line="149"/>
         <source>Add, select, remove</source>
         <translation type="unfinished">Añadir, seleccionar, quitar</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="151"/>
+        <location filename="../helppage.cpp" line="150"/>
         <source>Movie Info</source>
         <translation type="unfinished">Información de la película</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="151"/>
+        <location filename="../helppage.cpp" line="150"/>
         <source>Edit, cover, age rating</source>
         <translation type="unfinished">Editar, carátula, clasificación</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="152"/>
+        <location filename="../helppage.cpp" line="151"/>
         <source>Movie Search</source>
         <translation type="unfinished">Búsqueda de películas</translation>
     </message>
     <message>
-        <location filename="../helppage.cpp" line="152"/>
+        <location filename="../helppage.cpp" line="151"/>
         <source>Find and apply TMDB data</source>
         <translation type="unfinished">Buscar y aplicar datos de TMDB</translation>
     </message>
     <message>
         <location filename="../helppage.cpp" line="153"/>
         <source>Saving</source>
+        <extracomment>Noun: help topic about saving the files, not a progress message</extracomment>
         <translation type="unfinished">Guardado</translation>
     </message>
     <message>
@@ -310,7 +312,7 @@
 <context>
     <name>ImageLabelM</name>
     <message>
-        <location filename="../imagelabelm.cpp" line="262"/>
+        <location filename="../imagelabelm.cpp" line="273"/>
         <source>Remove cover</source>
         <translation type="unfinished">Quitar carátula</translation>
     </message>
@@ -326,6 +328,15 @@
         <location filename="../infoicon.cpp" line="52"/>
         <source>Some languages are drafts: they were translated with the help of AI and have not been checked by native speakers yet. They are marked as drafts in the list. Mistakes are possible; corrections are welcome.</source>
         <translation type="unfinished">Algunos idiomas son borradores: se han traducido con ayuda de una IA y todavía no los han revisado hablantes nativos. En la lista aparecen marcados como borrador. Puede haber errores; las correcciones son bienvenidas.</translation>
+    </message>
+</context>
+<context>
+    <name>Languages</name>
+    <message>
+        <location filename="../languages.cpp" line="132"/>
+        <source>Your language is missing? &lt;a href=&quot;%1&quot;&gt;Help translate MovieMetaM&lt;/a&gt;.</source>
+        <extracomment>Below the choice of the app language; the link opens the page about translating on the website</extracomment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -347,78 +358,89 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="228"/>
-        <location filename="../mainwin.cpp" line="933"/>
+        <location filename="../mainwin.cpp" line="924"/>
         <source>Description</source>
+        <extracomment>Field label: plot summary of the movie</extracomment>
         <translation type="unfinished">Descripción</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="238"/>
-        <location filename="../mainwin.cpp" line="923"/>
+        <location filename="../mainwin.cpp" line="914"/>
         <source>Release Date</source>
+        <extracomment>Field label: release date of the movie</extracomment>
         <translation type="unfinished">Fecha de estreno</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="248"/>
-        <location filename="../mainwin.cpp" line="925"/>
+        <location filename="../mainwin.cpp" line="916"/>
         <source>Genre</source>
         <translation type="unfinished">Género</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="264"/>
         <location filename="../mainwin.ui" line="573"/>
-        <location filename="../mainwin.cpp" line="931"/>
-        <location filename="../initialize.cpp" line="319"/>
+        <location filename="../initialize.cpp" line="386"/>
+        <location filename="../mainwin.cpp" line="922"/>
         <source>Age Rating</source>
         <translation type="unfinished">Clasificación por edades</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="277"/>
         <source>Content Advisory</source>
+        <extracomment>Field label: advisory for explicit content (iTunes rating), not the age rating</extracomment>
         <translation type="unfinished">Aviso de contenido</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="303"/>
-        <location filename="../mainwin.cpp" line="937"/>
+        <location filename="../mainwin.cpp" line="928"/>
         <source>Producers</source>
+        <extracomment>Label of a list of names. The name of the role (&quot;Direction&quot;, &quot;Production&quot;) may be used instead of the plural of the persons (&quot;Directors&quot;, &quot;Producers&quot;), if that is more common in the language.</extracomment>
         <translation type="unfinished">Productores</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="322"/>
-        <location filename="../mainwin.cpp" line="935"/>
+        <location filename="../mainwin.cpp" line="926"/>
         <source>Directors</source>
+        <extracomment>Label of a list of names. The name of the role (&quot;Direction&quot;, &quot;Production&quot;) may be used instead of the plural of the persons (&quot;Directors&quot;, &quot;Producers&quot;), if that is more common in the language.</extracomment>
         <translation type="unfinished">Directores</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="341"/>
-        <location filename="../mainwin.cpp" line="924"/>
+        <location filename="../mainwin.cpp" line="915"/>
         <source>Studio</source>
+        <extracomment>Field label: production company of the movie</extracomment>
         <translation type="unfinished">Estudio</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="357"/>
-        <location filename="../mainwin.cpp" line="936"/>
+        <location filename="../mainwin.cpp" line="927"/>
         <source>Screenplay</source>
+        <extracomment>Label of a list of names. The name of the role (&quot;Direction&quot;, &quot;Production&quot;) may be used instead of the plural of the persons (&quot;Directors&quot;, &quot;Producers&quot;), if that is more common in the language.</extracomment>
         <translation type="unfinished">Guion</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="370"/>
-        <location filename="../mainwin.cpp" line="934"/>
+        <location filename="../mainwin.cpp" line="925"/>
         <source>Actors</source>
+        <extracomment>Label of a list of names. The name of the role (&quot;Direction&quot;, &quot;Production&quot;) may be used instead of the plural of the persons (&quot;Directors&quot;, &quot;Producers&quot;), if that is more common in the language.</extracomment>
         <translation type="unfinished">Actores</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="383"/>
         <source>Title</source>
+        <extracomment>Field label: title of the movie</extracomment>
         <translation type="unfinished">Título</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="430"/>
         <source>Results</source>
+        <extracomment>Tab with the search results from TMDB</extracomment>
         <translation type="unfinished">Resultados</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="444"/>
         <source>Data</source>
+        <extracomment>Tab with the movie data loaded from TMDB for one search result</extracomment>
         <translation type="unfinished">Datos</translation>
     </message>
     <message>
@@ -429,6 +451,7 @@
     <message>
         <location filename="../mainwin.ui" line="462"/>
         <source>Powered by</source>
+        <extracomment>Followed by the TMDB logo under the search</extracomment>
         <translation type="unfinished">Proporcionado por</translation>
     </message>
     <message>
@@ -438,25 +461,27 @@
     </message>
     <message>
         <location filename="../mainwin.ui" line="553"/>
-        <location filename="../initialize.cpp" line="315"/>
+        <location filename="../initialize.cpp" line="377"/>
         <source>Language</source>
         <translation type="unfinished">Idioma</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="563"/>
-        <location filename="../initialize.cpp" line="317"/>
+        <location filename="../initialize.cpp" line="384"/>
         <source>Movie data language</source>
         <translation type="unfinished">Idioma de los datos de la película</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="583"/>
         <source>Preview</source>
+        <extracomment>Heading above the preview of the age rating badges in the settings</extracomment>
         <translation type="unfinished">Vista previa</translation>
     </message>
     <message>
         <location filename="../mainwin.ui" line="611"/>
-        <location filename="../initialize.cpp" line="325"/>
+        <location filename="../initialize.cpp" line="392"/>
         <source>Saving</source>
+        <extracomment>Noun: heading about saving the files, not a progress message</extracomment>
         <translation type="unfinished">Guardado</translation>
     </message>
     <message>
@@ -465,220 +490,257 @@
         <translation type="unfinished">Guardado seguro</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="156"/>
-        <location filename="../initialize.cpp" line="339"/>
+        <location filename="../initialize.cpp" line="127"/>
+        <location filename="../initialize.cpp" line="400"/>
         <source>Apply</source>
+        <extracomment>Button and heading: take the TMDB data into the selected movie</extracomment>
         <translation type="unfinished">Aplicar</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="157"/>
+        <location filename="../initialize.cpp" line="128"/>
         <source>Take the data into the selected movie</source>
         <translation type="unfinished">Pasar los datos a la película seleccionada</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="183"/>
+        <location filename="../initialize.cpp" line="155"/>
         <source>None</source>
+        <extracomment>Content advisory of the movie: no advisory set</extracomment>
         <translation type="unfinished">Ninguno</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="184"/>
+        <location filename="../initialize.cpp" line="157"/>
         <source>Clean</source>
+        <extracomment>Content advisory of the movie (iTunes rating &quot;rtng&quot;): the clean version, without explicit content</extracomment>
         <translation type="unfinished">Limpio</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="185"/>
+        <location filename="../initialize.cpp" line="159"/>
         <source>Explicit</source>
+        <extracomment>Content advisory of the movie: contains explicit content</extracomment>
         <translation type="unfinished">Explícito</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="219"/>
+        <location filename="../initialize.cpp" line="197"/>
         <source>Token of the built-in account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="234"/>
-        <location filename="../initialize.cpp" line="238"/>
+        <location filename="../initialize.cpp" line="202"/>
+        <location filename="../initialize.cpp" line="206"/>
         <source>Show the token</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="238"/>
+        <location filename="../initialize.cpp" line="206"/>
         <source>Hide the token</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="251"/>
+        <location filename="../initialize.cpp" line="321"/>
         <source>Your own token is used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="253"/>
+        <location filename="../initialize.cpp" line="323"/>
         <source>The token built into the app is used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="255"/>
+        <location filename="../initialize.cpp" line="325"/>
         <source>No token: the movie search is not available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="335"/>
+        <location filename="../initialize.cpp" line="413"/>
         <source>Own genres</source>
         <translation type="unfinished">Géneros propios</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="204"/>
+        <location filename="../initialize.cpp" line="178"/>
         <source>Enter genres</source>
         <translation type="unfinished">Introducir géneros</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="207"/>
+        <location filename="../initialize.cpp" line="181"/>
         <source>Show only own genres</source>
         <translation type="unfinished">Mostrar solo los géneros propios</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="212"/>
+        <location filename="../initialize.cpp" line="186"/>
         <source>Only fill empty fields</source>
         <translation type="unfinished">Rellenar solo los campos vacíos</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="314"/>
+        <location filename="../initialize.cpp" line="190"/>
+        <source>Check for updates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="376"/>
         <source>Languages</source>
         <translation type="unfinished">Idiomas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="342"/>
-        <source>TMDB</source>
+        <location filename="../initialize.cpp" line="403"/>
+        <source>Updates</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="343"/>
+        <location filename="../initialize.cpp" line="405"/>
+        <source>Asks GitHub once a day for a new version. Only your IP address is transmitted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="418"/>
+        <source>TMDB</source>
+        <extracomment>Name of the movie database (themoviedb.org), normally not translated</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="419"/>
         <source>With an own token (API Read Access Token) the search uses your TMDB account. You get it free in your &lt;a href=&quot;https://www.themoviedb.org/settings/api&quot;&gt;TMDB account&lt;/a&gt;. Leave the field empty to use the token built into the app.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="362"/>
-        <location filename="../initialize.cpp" line="382"/>
+        <location filename="../initialize.cpp" line="439"/>
+        <location filename="../initialize.cpp" line="464"/>
         <source>Save</source>
+        <extracomment>Toolbar button: saves the selected movie, or the settings on the settings page</extracomment>
         <translation type="unfinished">Guardar</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="363"/>
+        <location filename="../initialize.cpp" line="440"/>
         <source>Save metadata to the movie</source>
         <translation type="unfinished">Guardar los metadatos en la película</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1812"/>
-        <location filename="../initialize.cpp" line="365"/>
+        <location filename="../initialize.cpp" line="442"/>
+        <location filename="../mainwin.cpp" line="1833"/>
         <source>Save all</source>
         <translation type="unfinished">Guardar todo</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="366"/>
+        <location filename="../initialize.cpp" line="443"/>
         <source>Save the metadata of all changed movies</source>
         <translation type="unfinished">Guardar los metadatos de todas las películas modificadas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="371"/>
+        <location filename="../initialize.cpp" line="448"/>
         <source>Buy me a coffee – support MovieMetaM via PayPal</source>
         <translation type="unfinished">Invítame a un café: apoya MovieMetaM con PayPal</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="374"/>
-        <location filename="../initialize.cpp" line="380"/>
+        <location filename="../initialize.cpp" line="451"/>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../initialize.cpp" line="455"/>
+        <location filename="../initialize.cpp" line="462"/>
         <source>Settings</source>
         <translation type="unfinished">Ajustes</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="376"/>
+        <location filename="../initialize.cpp" line="457"/>
         <source>Help</source>
         <translation type="unfinished">Ayuda</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="379"/>
+        <location filename="../initialize.cpp" line="461"/>
         <source>Back</source>
+        <extracomment>Toolbar button: back from the settings / help page to the main window</extracomment>
         <translation type="unfinished">Atrás</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="383"/>
+        <location filename="../initialize.cpp" line="465"/>
         <source>Save settings</source>
         <translation type="unfinished">Guardar ajustes</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="388"/>
+        <location filename="../initialize.cpp" line="470"/>
         <source>Add movies</source>
         <translation type="unfinished">Añadir películas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="391"/>
+        <location filename="../initialize.cpp" line="473"/>
         <source>Remove the selected movies</source>
         <translation type="unfinished">Quitar las películas seleccionadas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="473"/>
+        <location filename="../initialize.cpp" line="555"/>
         <source>Enter actors</source>
         <translation type="unfinished">Introducir actores</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="488"/>
+        <location filename="../initialize.cpp" line="570"/>
         <source>Enter producers</source>
         <translation type="unfinished">Introducir productores</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="503"/>
+        <location filename="../initialize.cpp" line="585"/>
         <source>Enter screenwriters</source>
         <translation type="unfinished">Introducir guionistas</translation>
     </message>
     <message>
-        <location filename="../initialize.cpp" line="518"/>
+        <location filename="../initialize.cpp" line="600"/>
         <source>Enter directors</source>
         <translation type="unfinished">Introducir directores</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1092"/>
-        <location filename="../initialize.cpp" line="582"/>
+        <location filename="../initialize.cpp" line="662"/>
+        <location filename="../mainwin.cpp" line="1084"/>
         <source>The image could not be loaded.</source>
         <translation type="unfinished">No se pudo cargar la imagen.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="385"/>
+        <location filename="../mainwin.cpp" line="69"/>
+        <source>Version %1 is available – download it</source>
+        <extracomment>Tooltip of the update button; %1 is the new version, e.g. 1.0.1</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwin.cpp" line="400"/>
         <source>Changed, saving needed</source>
+        <extracomment>Status of a movie in the list (tooltip)</extracomment>
         <translation type="unfinished">Modificado, hay que guardar</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="385"/>
-        <location filename="../mainwin.cpp" line="1262"/>
+        <location filename="../mainwin.cpp" line="400"/>
+        <location filename="../mainwin.cpp" line="1269"/>
         <source>Unchanged</source>
+        <extracomment>Status of a movie in the list (tooltip): nothing changed since loading or saving</extracomment>
         <translation type="unfinished">Sin cambios</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="486"/>
-        <location filename="../mainwin.cpp" line="495"/>
+        <location filename="../mainwin.cpp" line="498"/>
+        <location filename="../mainwin.cpp" line="508"/>
         <source>Saving %1 of %2 ...</source>
         <translation type="unfinished">Guardando %1 de %2…</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="487"/>
+        <location filename="../mainwin.cpp" line="500"/>
         <source>Saving ...</source>
+        <extracomment>Progress message while the files are written</extracomment>
         <translation type="unfinished">Guardando…</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="522"/>
+        <location filename="../mainwin.cpp" line="535"/>
         <source>Could not save %1: %2</source>
         <translation type="unfinished">No se pudo guardar %1: %2</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="523"/>
+        <location filename="../mainwin.cpp" line="536"/>
         <source>Could not save: %1</source>
         <translation type="unfinished">No se pudo guardar: %1</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="557"/>
+        <location filename="../mainwin.cpp" line="571"/>
         <source>Saved</source>
+        <extracomment>Message after one movie was saved</extracomment>
         <translation type="unfinished">Guardado</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="559"/>
+        <location filename="../mainwin.cpp" line="573"/>
         <source>%n movie(s) saved.</source>
         <translation type="unfinished">
             <numerusform>%n película guardada.</numerusform>
@@ -686,18 +748,18 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="737"/>
-        <location filename="../mainwin.cpp" line="1194"/>
+        <location filename="../mainwin.cpp" line="728"/>
+        <location filename="../mainwin.cpp" line="1184"/>
         <source>No movies found</source>
         <translation type="unfinished">No se encontraron películas</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="745"/>
+        <location filename="../mainwin.cpp" line="736"/>
         <source>Showing %1 of %2 movies</source>
         <translation type="unfinished">Se muestran %1 de %2 películas</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="746"/>
+        <location filename="../mainwin.cpp" line="737"/>
         <source>%n movie(s) found</source>
         <translation type="unfinished">
             <numerusform>%n película encontrada</numerusform>
@@ -705,28 +767,29 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="909"/>
+        <location filename="../mainwin.cpp" line="900"/>
         <source>Double click a search result to see its data.</source>
         <translation type="unfinished">Haz doble clic en un resultado para ver sus datos.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1004"/>
+        <location filename="../mainwin.cpp" line="996"/>
         <source>No text</source>
+        <extracomment>Language of a poster: the poster has no printed text</extracomment>
         <translation type="unfinished">Sin texto</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1044"/>
-        <location filename="../mainwin.cpp" line="1423"/>
+        <location filename="../mainwin.cpp" line="1036"/>
+        <location filename="../mainwin.cpp" line="1426"/>
         <source>Select a movie first</source>
         <translation type="unfinished">Primero selecciona una película</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1079"/>
+        <location filename="../mainwin.cpp" line="1071"/>
         <source>Data applied</source>
         <translation type="unfinished">Datos aplicados</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1199"/>
+        <location filename="../mainwin.cpp" line="1189"/>
         <source>%n file(s) skipped: only MP4 is supported.</source>
         <translation type="unfinished">
             <numerusform>%n archivo omitido: solo se admite MP4.</numerusform>
@@ -734,7 +797,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1202"/>
+        <location filename="../mainwin.cpp" line="1192"/>
         <source>%n file(s) could not be read.</source>
         <translation type="unfinished">
             <numerusform>No se pudo leer %n archivo.</numerusform>
@@ -742,28 +805,29 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1317"/>
+        <location filename="../mainwin.cpp" line="1324"/>
         <source>Other (%1)</source>
+        <extracomment>Content advisory with an unknown value; %1 is the number stored in the file</extracomment>
         <translation type="unfinished">Otro (%1)</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1490"/>
+        <location filename="../mainwin.cpp" line="1493"/>
         <source>Choose movies</source>
         <translation type="unfinished">Elegir películas</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1492"/>
+        <location filename="../mainwin.cpp" line="1495"/>
         <source>Movie files</source>
         <translation type="unfinished">Archivos de películas</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1521"/>
-        <location filename="../mainwin.cpp" line="1529"/>
+        <location filename="../mainwin.cpp" line="1522"/>
+        <location filename="../mainwin.cpp" line="1530"/>
         <source>Remove</source>
         <translation type="unfinished">Quitar</translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1522"/>
+        <location filename="../mainwin.cpp" line="1523"/>
         <source>Really remove %n movie(s)?</source>
         <translation type="unfinished">
             <numerusform>¿Quitar realmente %n película?</numerusform>
@@ -771,8 +835,8 @@
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../mainwin.cpp" line="1525"/>
-        <location filename="../mainwin.cpp" line="1810"/>
+        <location filename="../mainwin.cpp" line="1526"/>
+        <location filename="../mainwin.cpp" line="1831"/>
         <source>%n movie(s) have unsaved changes.</source>
         <translation type="unfinished">
             <numerusform>%n película tiene cambios sin guardar.</numerusform>
@@ -780,63 +844,63 @@
         </translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1526"/>
+        <location filename="../mainwin.cpp" line="1527"/>
         <source>Save them before removing?</source>
         <translation type="unfinished">¿Guardarlas antes de quitarlas?</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1527"/>
+        <location filename="../mainwin.cpp" line="1528"/>
         <source>Save and remove</source>
         <translation type="unfinished">Guardar y quitar</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1531"/>
-        <location filename="../mainwin.cpp" line="1814"/>
+        <location filename="../mainwin.cpp" line="1532"/>
+        <location filename="../mainwin.cpp" line="1835"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1583"/>
+        <location filename="../mainwin.cpp" line="1582"/>
         <source>Please enter a search term</source>
         <translation type="unfinished">Introduce un término de búsqueda</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1677"/>
+        <location filename="../mainwin.cpp" line="1673"/>
         <source>No TMDB token: the movie search is not available.</source>
         <translation type="unfinished">Sin token de TMDB: la búsqueda de películas no está disponible.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1700"/>
+        <location filename="../mainwin.cpp" line="1694"/>
         <source>The movie data could not be loaded.</source>
         <translation type="unfinished">No se pudieron cargar los datos de la película.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1769"/>
+        <location filename="../mainwin.cpp" line="1790"/>
         <source>Settings saved. The language changes after a restart.</source>
         <translation type="unfinished">Ajustes guardados. El idioma cambiará después de reiniciar.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1770"/>
+        <location filename="../mainwin.cpp" line="1791"/>
         <source>Settings saved.</source>
         <translation type="unfinished">Ajustes guardados.</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1774"/>
+        <location filename="../mainwin.cpp" line="1795"/>
         <source>Error: could not save the settings!</source>
         <translation type="unfinished">Error: ¡no se pudieron guardar los ajustes!</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1809"/>
+        <location filename="../mainwin.cpp" line="1830"/>
         <source>Unsaved changes</source>
         <translation type="unfinished">Cambios sin guardar</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1811"/>
+        <location filename="../mainwin.cpp" line="1832"/>
         <source>Save the changes before closing?</source>
         <translation type="unfinished">¿Guardar los cambios antes de cerrar?</translation>
     </message>
     <message>
-        <location filename="../mainwin.cpp" line="1813"/>
+        <location filename="../mainwin.cpp" line="1834"/>
         <source>Discard</source>
         <translation type="unfinished">Descartar</translation>
     </message>
@@ -936,12 +1000,13 @@
         <translation type="unfinished">Guardado seguro</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="89"/>
+        <location filename="../setupdialog.cpp" line="90"/>
         <source>Done</source>
+        <extracomment>Button that closes the first-start dialog and keeps the choices</extracomment>
         <translation type="unfinished">Listo</translation>
     </message>
     <message>
-        <location filename="../setupdialog.cpp" line="90"/>
+        <location filename="../setupdialog.cpp" line="91"/>
         <source>Cancel</source>
         <translation type="unfinished">Cancelar</translation>
     </message>

@@ -22,6 +22,12 @@ This only applies to movies that have no age rating in the saved file yet. If a 
 
 **Only fill empty fields** makes **Apply** (in the movie search) leave everything you have already entered as it is and fill only the gaps, the cover included. Off by default: **Apply** then takes everything TMDB has.
 
+## Updates
+
+With **Check for updates** (on by default) MovieMetaM asks GitHub once a day whether there is a new version. If there is, the button **Update** appears in the toolbar; a click downloads the new version in your browser. Install it as you did the first time, your settings stay.
+
+> For this check only your IP address is transmitted to GitHub, nothing about you or your movies. Turned off, MovieMetaM asks nothing.
+
 ## Own genres
 
 Genres you want in the genre list of the movie info, for example "Series" or "Concert". Type a genre and press Enter, just like the names in the movie info (remove, reorder, the same keys). Your own genres are listed first, then the genres of TMDB. **Show only own genres** leaves the TMDB genres out of the list. The list changes when you save the settings.

@@ -61,6 +61,15 @@ MainWin::MainWin(QWidget *parent)
 
     ui->fileListTableView->setAcceptDrops(true);
     ui->middleGroupBox->setEnabled(false);
+
+    // A newer version out? Then the update button shows up
+    m_updateChecker = new UpdateChecker(this);
+    connect(m_updateChecker, &UpdateChecker::updateAvailable, this, [this](const QString &version) {
+        //: Tooltip of the update button; %1 is the new version, e.g. 1.0.1
+        m_updateBtn->setToolTip(tr("Version %1 is available – download it").arg(version));
+        m_updateBtn->show();
+    });
+    m_updateChecker->check();
 }
 
 void MainWin::fillRatingComboBox(QString countryCode)
@@ -370,6 +379,7 @@ void MainWin::onSettingsChanged() {
         || m_customGenres != m_customGenresWidget->getTags()
         || m_onlyCustomGenres != m_onlyCustomGenresCheck->isChecked()
         || m_fillEmptyOnly != m_fillEmptyOnlyCheck->isChecked()
+        || UpdateChecker::isEnabled() != m_checkUpdatesCheck->isChecked()
         || m_tmdbToken != m_tmdbTokenEdit->text().trimmed()) {
         settingsChanged = true;
         m_saveSettingsBtn->setEnabled(true);
@@ -386,6 +396,7 @@ void MainWin::updateStatus (int row, QString status) {
     QStandardItem *movieItem = m_FilelistModel->item(row, 0);
     if (movieItem) {
         movieItem->setData(m_status, Qt::DecorationRole);
+        //: Status of a movie in the list (tooltip)
         const QString statusText = status == "modified" ? tr("Changed, saving needed") : tr("Unchanged");
         movieItem->setToolTip(movieItem->data(Qt::UserRole).toString() + "\n" + statusText);
     }
@@ -485,6 +496,7 @@ void MainWin::startSaving(const QStringList &keys)
     centralWidget()->setEnabled(false);
     const bool safe = m_safeSave;
     showColumnStatus(StatusColumn::Window, jobs.size() > 1 ? tr("Saving %1 of %2 ...").arg(1).arg(jobs.size())
+                                                           //: Progress message while the files are written
                                                            : tr("Saving ..."),
                      ToastM::Level::Info, 3600000);
 
@@ -555,6 +567,7 @@ void MainWin::savingFinished()
     if (!failed.isEmpty()) {
         showColumnStatus(StatusColumn::Window, failed, ToastM::Level::Error);
     } else if (results.size() == 1) {
+        //: Message after one movie was saved
         showColumnStatus(StatusColumn::Window, tr("Saved"));
     } else {
         showColumnStatus(StatusColumn::Window, tr("%n movie(s) saved.", "", saved));
@@ -979,6 +992,7 @@ void MainWin::fillPosters(const QJsonDocument &jsonDoc)
 
         // Language of the printing in its own name ("Deutsch"); without printing: "No text"
         const QString iso = poster.value("iso_639_1").toString();
+        //: Language of a poster: the poster has no printed text
         QString language = tr("No text");
         if (!iso.isEmpty()) {
             language = QLocale(iso).nativeLanguageName();
@@ -1251,6 +1265,7 @@ void MainWin::addFilePathToModel(const QString &filePath)
     QStandardItem *movieItem = new QStandardItem(combinedText);
     movieItem->setData(filePath, Qt::UserRole);
     movieItem->setData(m_statusGreen, Qt::DecorationRole);
+    //: Status of a movie in the list (tooltip): nothing changed since loading or saving
     movieItem->setToolTip(filePath + "\n" + tr("Unchanged"));
     movieItem->setEditable(false);
 
@@ -1305,6 +1320,7 @@ void MainWin::displayMovie(const MovieData &movie) {
     const int advisory = (movie.advisory == 4) ? 1 : movie.advisory;
     int advisoryIndex = ui->advisoryComboBox->findData(advisory);
     if (advisoryIndex < 0) {
+        //: Content advisory with an unknown value; %1 is the number stored in the file
         ui->advisoryComboBox->addItem(tr("Other (%1)").arg(movie.advisory), movie.advisory);
         advisoryIndex = ui->advisoryComboBox->count() - 1;
     }
@@ -1733,6 +1749,7 @@ void MainWin::loadSettingsPage()
     m_customGenresWidget->setTags(m_customGenres.join(QLatin1Char(',')));
     m_onlyCustomGenresCheck->setChecked(m_onlyCustomGenres);
     m_fillEmptyOnlyCheck->setChecked(m_fillEmptyOnly);
+    m_checkUpdatesCheck->setChecked(UpdateChecker::isEnabled());
     m_tmdbTokenEdit->setText(m_tmdbToken);
     onSettingsChanged();   // nothing to save
 }
@@ -1753,6 +1770,13 @@ void MainWin::handleSaveSettingsButton_Clicked() {
     settings.setValue("General/OnlyCustomGenres", m_onlyCustomGenres);
     m_fillEmptyOnly = m_fillEmptyOnlyCheck->isChecked();
     settings.setValue("General/FillEmptyOnly", m_fillEmptyOnly);
+    // Updates off: the button goes; on again: check at once (the remembered version, GitHub if due)
+    settings.setValue("General/CheckUpdates", m_checkUpdatesCheck->isChecked());
+    if (m_checkUpdatesCheck->isChecked()) {
+        m_updateChecker->check();
+    } else {
+        m_updateBtn->hide();
+    }
     m_tmdbToken = m_tmdbTokenEdit->text().trimmed();
     if (m_tmdbToken.isEmpty()) {
         settings.remove("TMDB/Token");

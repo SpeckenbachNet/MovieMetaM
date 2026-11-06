@@ -16,6 +16,7 @@
  */
 #include "languages.h"
 
+#include <QCoreApplication>
 #include <QFile>
 #include <QLocale>
 #include <QSettings>
@@ -40,6 +41,8 @@ const char *const kDataLanguageCodes[] = {
 // "draft": the word for it in the language itself, with its brackets, shown behind the name in the
 // list (translated by Claude, not yet checked by a native speaker); nullptr = checked.
 // Checked a language? Set its draft to nullptr (and note it in CLAUDE.md).
+// An entry without a compiled .qm (not in APP_LANGUAGES of CMakeLists.txt) does not appear: the
+// drafts stay here, ready for the day they go into the package again.
 struct AppLanguage {
     const char *code;
     const char *name;
@@ -118,6 +121,16 @@ bool Languages::hasDraftLanguages()
         }
     }
     return false;
+}
+
+QString Languages::translationHint()
+{
+    // The website has German and English pages
+    const QString site = appLanguage() == QLatin1String("de") ? QStringLiteral("de") : QStringLiteral("en");
+    const QString url = QStringLiteral("https://software.speckenbach.net/%1/moviemetam/translation").arg(site);
+    //: Below the choice of the app language; the link opens the page about translating on the website
+    return QCoreApplication::translate("Languages", "Your language is missing? <a href=\"%1\">Help translate MovieMetaM</a>.")
+        .arg(url);
 }
 
 QString Languages::resolveAppLanguage(const QString &wanted, const QStringList &available)

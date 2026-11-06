@@ -375,13 +375,29 @@ Es gibt **zwei** Sprachen (`languages.*`):
   sind normale Übersetzungstexte (Kontext `Country`, der englische Name ist der Schlüssel; die Liste
   steht in der erzeugten `countrynames.cpp`, nachgeschlagen wird in `agerating.cpp`). Qt hat keine
   übersetzten Ländernamen, deshalb stehen sie in den `.ts`-Dateien.
-  **Entwurfssprachen** (Französisch und Spanisch mit Hilfe, Italienisch, Portugiesisch (Brasilien),
-  Chinesisch (vereinfacht), Japanisch, Koreanisch nur die Oberfläche): von Claude übersetzt, von keinem Muttersprachler geprüft;
-  die Einträge der `.ts` behalten `type="unfinished"` (kommen trotzdem in die `.qm`). Die
-  Hilfetexte benutzen die Begriffe der Oberfläche in fetter Schrift, sie müssen zusammenpassen.
-  In der Sprachliste steht hinter einem Entwurf das Wort dafür in der eigenen Sprache (Feld `draft`
-  in `kAppLanguages`), daneben erklärt ein Info-Symbol, was das heißt (Start-Dialog und
-  Einstellungen). Ist eine Sprache geprüft: `unfinished` entfernen, `draft` auf `nullptr`.
+  **In der App** sind seit 1.0 nur Deutsch und Englisch (`APP_LANGUAGES en de`). Die
+  **Entwurfssprachen** (Französisch, Spanisch, Italienisch, Portugiesisch (Brasilien), Chinesisch
+  (vereinfacht), Japanisch, Koreanisch; von Claude übersetzt, von keinem Muttersprachler geprüft)
+  bleiben im Repository als Startpunkt für die Community: `i18n/MovieMetaM_<Code>.ts`
+  (Einträge mit `type="unfinished"`), Hilfe in `help/fr/` und `help/es/`. Sie stehen nicht in
+  `APP_LANGUAGES` und nicht in `Help.qrc`, kommen also nicht ins Paket. Das Ziel
+  `update_translations` aktualisiert ihre `.ts` deshalb nicht; dafür der `lupdate`-Befehl für alle
+  `.ts`-Dateien (unter **Regeln**). Unter der Sprachauswahl (Start-Dialog, Einstellungen) steht
+  „Deine Sprache fehlt? Hilf beim Übersetzen.“ mit dem Link auf
+  `software.speckenbach.net/<de|en>/moviemetam/translation` (`Languages::translationHint()`).
+
+  **Eine Sprache ins Paket aufnehmen** (z. B. Spanisch für 1.0.1):
+  1. `CMakeLists.txt`: den Code in `APP_LANGUAGES` eintragen (Oberfläche und Qts eigene Texte).
+  2. `lupdate` laufen lassen (Ziel `update_translations`), die neuen Einträge übersetzen.
+  3. `Help.qrc`: die Zeilen `help/<Code>/…` eintragen (Hilfe, falls vorhanden; fehlt ein Thema,
+     kommt der englische Text).
+  4. Ist die Sprache von einem Muttersprachler geprüft: in der `.ts` alle `type="unfinished"`
+     entfernen, in `kAppLanguages` (`languages.cpp`) `draft` auf `nullptr` setzen. Ungeprüft
+     erscheint sie in der Liste als Entwurf, mit dem Info-Symbol daneben (`hasDraftLanguages()`;
+     ohne Entwurf im Paket gibt es das Symbol nicht).
+
+  Die Hilfetexte benutzen die Begriffe der Oberfläche in fetter Schrift: Beide müssen
+  zusammenpassen.
 - **Sprache der Filmdaten** für TMDB (Genreliste und Suche, z. B. `ja-JP`): Einstellung
   `General/DataLanguage`, gilt sofort. Die Liste sind TMDBs primäre Übersetzungen, die Namen
   kommen aus `QLocale`.
@@ -398,6 +414,18 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
 - Texte, die nicht übersetzt werden, bekommen in der `.ui` `notr="true"`.
 - Nach Änderungen an Texten: `lupdate -no-obsolete` (oder das Ziel `update_translations`), dann
   alle unfertigen deutschen Einträge füllen.
+- **Kommentare für Übersetzer:** Kurze oder mehrdeutige Texte („Clean“, „Data“, „Saved“) bekommen
+  einen englischen Kommentar, im Code mit `//:` direkt über dem `tr()`, in `mainwin.ui` mit dem
+  Attribut `extracomment="…"` am `<string>` (Qt Designer: Feld „Comment“). `lupdate` schreibt ihn
+  als `<extracomment>` in jede `.ts`-Datei; Qt Linguist zeigt ihn als „Developer comments“.
+  Kommentare nur im Quelltext eintragen, nicht in der `.ts`: `lupdate` überschreibt sie dort.
+- **Alle `.ts`-Dateien aktualisieren**, auch die Entwürfe, die nicht in `APP_LANGUAGES` stehen
+  (das Ziel `update_translations` kennt nur diese). Im Projektordner:
+  ```
+  ~/Qt/6.12.0/macos/bin/lupdate -no-obsolete *.cpp *.h *.ui -ts i18n/MovieMetaM_*.ts
+  ```
+  (Linux: `lupdate` aus der Qt-Installation, z. B. `/usr/lib/qt6/bin/lupdate`.) Nur die Dateien
+  im Projektordner, nicht `.`: das würde auch `build/` mit den Quellen von TagLib durchsuchen.
 - Die `.qm`-Dateien baut `qt_add_translations` und bettet sie ein (`:/i18n`); sie liegen nicht
   in Git.
 - Die Hilfetexte liegen als Markdown in `help/<de|en>/<Thema>.md` (Platzhalter `{{version}}`,
@@ -432,6 +460,9 @@ japanischer Nutzer bekommt so die englische App mit japanischen Filmdaten.
 | `General/FillEmptyOnly` | `true`: „Übernehmen“ füllt nur leere Felder (auch Cover und Altersfreigabe); Standard `false` |
 | `General/CustomGenres` | eigene Genres (Liste), stehen in der Genre-Auswahl der Filminfo zuerst |
 | `General/OnlyCustomGenres` | `true`: in der Genre-Auswahl nur die eigenen Genres, ohne die von TMDB; Standard `false` |
+| `General/CheckUpdates` | `true` (Standard): einmal am Tag bei GitHub nach einer neuen Version fragen (`updatechecker.*`); neuere Version: Knopf „Update“ in der Haupt-Toolbar, öffnet den Download des Pakets im Browser |
+| `General/LastUpdateCheck` | Datum der letzten Anfrage bei GitHub (höchstens eine am Tag) |
+| `General/LatestVersion` | die zuletzt gefundene Version (z. B. `1.0.1`): der Knopf erscheint am selben Tag ohne neue Anfrage |
 | `TMDB/Token` | eigener TMDB-Token („API Read Access Token“); leer bzw. fehlend: der eingebaute `TMDB_TOKEN`. Im Klartext in der INI |
 | `General/AgeRatingSystem` | Land des Altersfreigabe-Systems (für Filme ohne Freigabe) |
 | `Window/Geometry` | Größe und Lage des Fensters |
@@ -523,14 +554,17 @@ Voraussetzungen: Qt 6.12 in `~/Qt/6.12.0/macos` (anderes Qt:
 
 **Ablauf:**
 
-1. Release-Build nach `build/release`, universal (arm64 + x86_64).
+1. Release-Build nach `build/release`, universal (arm64 + x86_64), ab macOS 14.4 (das Minimum von
+   Qt 6.12, `CMAKE_OSX_DEPLOYMENT_TARGET` in `CMakeLists.txt`; ohne die Zeile galt die macOS-Version
+   des Build-Macs, z. B. 26.7, und die App startete auf älteren nicht).
 2. `macdeployqt` packt Qt-Frameworks und Plugins ins Bundle. Es nimmt auch das Plugin der
    virtuellen (Touch-)Tastatur mit, das QtQuick, QtQml und mehr nachzieht (etwa 27 MB). Schritt 2b
    entfernt, was eine Widgets-App nicht braucht (`QtOpenGL`, `QtQml*`, `QtQuick`,
    `QtVirtualKeyboard*`, `platforminputcontexts`) und bricht ab, wenn noch etwas im Bundle darauf
    zeigt (sonst startete die App nicht).
 3. Ad-hoc-Signatur (`codesign --sign -`), danach die Prüfung `codesign --verify`.
-4. DMG mit der App und einem Link auf „Programme“.
+4. DMG mit der App, einem Link auf „Programme“ und `ReadMe.txt` (aus `ressources/macos/ReadMe.txt`,
+   Englisch und Deutsch: Installieren, erster Start; `{{version}}` und `{{macos}}` setzt das Skript ein).
 
 **Signatur:** ad hoc, ohne Developer ID und ohne Notarisierung (bewusst, das Programm kostet Geld).
 

@@ -225,7 +225,7 @@
                  <item>
                   <widget class="QLabel" name="descriptionLabel">
                    <property name="text">
-                    <string>Description</string>
+                    <string extracomment="Field label: plot summary of the movie">Description</string>
                    </property>
                   </widget>
                  </item>
@@ -235,7 +235,7 @@
                  <item>
                   <widget class="QLabel" name="releaseLabel">
                    <property name="text">
-                    <string>Release Date</string>
+                    <string extracomment="Field label: release date of the movie">Release Date</string>
                    </property>
                   </widget>
                  </item>
@@ -274,7 +274,7 @@
                  <item>
                   <widget class="QLabel" name="advisoryLabel">
                    <property name="text">
-                    <string>Content Advisory</string>
+                    <string extracomment="Field label: advisory for explicit content (iTunes rating), not the age rating">Content Advisory</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
@@ -300,7 +300,7 @@
                     <enum>Qt::LayoutDirection::LeftToRight</enum>
                    </property>
                    <property name="text">
-                    <string>Producers</string>
+                    <string extracomment='Label of a list of names. The name of the role ("Direction", "Production") may be used instead of the plural of the persons ("Directors", "Producers"), if that is more common in the language.'>Producers</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
@@ -319,7 +319,7 @@
                     <enum>Qt::LayoutDirection::LeftToRight</enum>
                    </property>
                    <property name="text">
-                    <string>Directors</string>
+                    <string extracomment='Label of a list of names. The name of the role ("Direction", "Production") may be used instead of the plural of the persons ("Directors", "Producers"), if that is more common in the language.'>Directors</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
@@ -338,7 +338,7 @@
                     <enum>Qt::LayoutDirection::LeftToRight</enum>
                    </property>
                    <property name="text">
-                    <string>Studio</string>
+                    <string extracomment="Field label: production company of the movie">Studio</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
@@ -354,7 +354,7 @@
                     <enum>Qt::LayoutDirection::LeftToRight</enum>
                    </property>
                    <property name="text">
-                    <string>Screenplay</string>
+                    <string extracomment='Label of a list of names. The name of the role ("Direction", "Production") may be used instead of the plural of the persons ("Directors", "Producers"), if that is more common in the language.'>Screenplay</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
@@ -367,7 +367,7 @@
                     <enum>Qt::LayoutDirection::LeftToRight</enum>
                    </property>
                    <property name="text">
-                    <string>Actors</string>
+                    <string extracomment='Label of a list of names. The name of the role ("Direction", "Production") may be used instead of the plural of the persons ("Directors", "Producers"), if that is more common in the language.'>Actors</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
@@ -380,7 +380,7 @@
                     <enum>Qt::LayoutDirection::LeftToRight</enum>
                    </property>
                    <property name="text">
-                    <string>Title</string>
+                    <string extracomment="Field label: title of the movie">Title</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>
@@ -427,7 +427,7 @@
               </property>
               <widget class="QWidget" name="tab_1">
                <attribute name="title">
-                <string>Results</string>
+                <string extracomment="Tab with the search results from TMDB">Results</string>
                </attribute>
                <layout class="QVBoxLayout" name="verticalLayout_5">
                 <item>
@@ -441,7 +441,7 @@
               </widget>
               <widget class="QWidget" name="tab_2">
                <attribute name="title">
-                <string>Data</string>
+                <string extracomment="Tab with the movie data loaded from TMDB for one search result">Data</string>
                </attribute>
               </widget>
              </widget>
@@ -459,7 +459,7 @@
             <item row="3" column="0">
              <widget class="QLabel" name="poweredLabel">
               <property name="text">
-               <string>Powered by</string>
+               <string extracomment="Followed by the TMDB logo under the search">Powered by</string>
               </property>
              </widget>
             </item>
@@ -580,7 +580,7 @@
                <item row="3" column="0">
                 <widget class="QLabel" name="settingsPreviewLabel">
                  <property name="text">
-                  <string>Preview</string>
+                  <string extracomment="Heading above the preview of the age rating badges in the settings">Preview</string>
                  </property>
                 </widget>
                </item>
@@ -608,7 +608,7 @@
                <item row="4" column="0">
                 <widget class="QLabel" name="settingsSavingLabel">
                  <property name="text">
-                  <string>Saving</string>
+                  <string extracomment="Noun: heading about saving the files, not a progress message">Saving</string>
                  </property>
                 </widget>
                </item>

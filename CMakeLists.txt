@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 
-set(PROJECT_VERSION "0.9.3")
+set(PROJECT_VERSION "1.0.0")
 set(ORGANIZATION_NAME "SpeckenbachNet")
 set(ORGANIZATION_DOMAIN "net.speckenbach")
+
+# Minimum macOS: that of Qt 6.12. Without it the app is built for the macOS of the build machine
+# and does not start on older ones. A normal variable before project(): it wins over the cache entry
+# an existing build directory already has (filled with the macOS of the build machine).
+set(CMAKE_OSX_DEPLOYMENT_TARGET "14.4")
 
 project(
     MovieMetaM
@@ -52,7 +57,10 @@ endif()
 
 # Languages of the app: one .ts file each (i18n/<name>_<code>.ts). A new language: add its code
 # here, the table kAppLanguages in languages.cpp and the help texts in help/<code>/ (Help.qrc).
-set(APP_LANGUAGES en de fr es it pt_BR zh_CN ja ko)
+# Only these go into the package. The drafts (fr es it pt_BR zh_CN ja ko, not checked by native
+# speakers) stay in i18n/ and help/ for the community and come back here once checked (see
+# docs/DEVELOPMENT.md, section 7).
+set(APP_LANGUAGES en de)
 set(TS_FILES)
 foreach(lang IN LISTS APP_LANGUAGES)
     list(APPEND TS_FILES i18n/${PROJECT_NAME}_${lang}.ts)
@@ -87,6 +95,8 @@ qt_add_executable(${PROJECT_NAME}
     toastm.cpp
     fileopener.h
     fileopener.cpp
+    updatechecker.h
+    updatechecker.cpp
     moviedata.h
     moviedata.cpp
     mediainfom.h

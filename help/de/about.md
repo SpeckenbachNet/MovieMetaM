@@ -8,12 +8,16 @@ Editor für die Metadaten von Filmdateien: Titel, Besetzung, Regie, Beschreibung
 
 Michael Speckenbach · SpeckenbachNet
 
-Webseite: [software.speckenbach.net/moviemetam](https://software.speckenbach.net/moviemetam)  
+Webseite: [software.speckenbach.net/de/moviemetam](https://software.speckenbach.net/de/moviemetam)  
 Kontakt: [moviemetam@speckenbach.net](mailto:moviemetam@speckenbach.net)
 
 ## Unterstützen
 
 Gefällt dir MovieMetaM? Spendier mir einen Kaffee: [paypal.me/michaelspeckenbach](https://paypal.me/michaelspeckenbach)
+
+## Übersetzungen
+
+MovieMetaM gibt es auf Deutsch und Englisch. Möchtest du es in deiner Sprache nutzen? Hilf beim Übersetzen: [software.speckenbach.net/de/moviemetam/translation](https://software.speckenbach.net/de/moviemetam/translation)
 
 ## Lizenz
 
