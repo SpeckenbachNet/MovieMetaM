@@ -89,7 +89,7 @@ rm -rf "$APPDIR/usr/include" "$APPDIR/usr/lib" "$APPDIR/usr/bin/taglib-config"
 
 echo "== 6. Qt and the AppImage (linuxdeploy)"
 cd /src/build
-rm -f "$RESULT"
+rm -f "$APP_NAME"*.AppImage                # also files of older name schemes, else the mv below finds two
 export APPIMAGE_EXTRACT_AND_RUN=1          # no FUSE in the container
 export PATH="$CACHE/tools:$PATH"           # linuxdeploy finds its plugins here
 export QMAKE="$QT_DIR/bin/qmake"
