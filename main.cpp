@@ -31,6 +31,16 @@
 
 int main(int argc, char *argv[])
 {
+#ifdef Q_OS_LINUX
+    // AppImage: only the platform theme of the desktop portal is bundled (tools/build-linux.sh).
+    // A theme set in the environment (e.g. QT_QPA_PLATFORMTHEME=gtk3 under niri) is missing there,
+    // and Qt then falls back to its generic theme: light, even in dark mode. So use the portal
+    // theme, it follows the light / dark mode of the desktop. Unset (Plasma): Qt finds its own way.
+    if (qEnvironmentVariableIsSet("APPIMAGE") && !qEnvironmentVariableIsEmpty("QT_QPA_PLATFORMTHEME")
+        && qgetenv("QT_QPA_PLATFORMTHEME") != "xdgdesktopportal") {
+        qputenv("QT_QPA_PLATFORMTHEME", "xdgdesktopportal");
+    }
+#endif
     QApplication a(argc, argv);
     a.setApplicationName(QStringLiteral(APP_NAME));
     a.setApplicationVersion(QLatin1String(APP_VERSION));
