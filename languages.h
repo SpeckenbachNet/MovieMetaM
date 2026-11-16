@@ -20,7 +20,7 @@
 #include <QString>
 #include <QStringList>
 
-// Two languages (see CLAUDE.md): the language of the app (texts, help, names of the countries) and
+// Two languages: the language of the app (texts, help, names of the countries) and
 // the language of the movie data from TMDB (genres, search: many languages). Both follow the
 // system until the user chooses another one (setup dialog, settings).
 //

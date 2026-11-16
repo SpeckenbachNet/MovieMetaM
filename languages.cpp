@@ -39,8 +39,8 @@ const char *const kDataLanguageCodes[] = {
 // The languages the app can have (a translation is only used if its .qm is compiled in), with
 // their names in the language itself (Qt would say "American English" or "Español de España")
 // "draft": the word for it in the language itself, with its brackets, shown behind the name in the
-// list (translated by Claude, not yet checked by a native speaker); nullptr = checked.
-// Checked a language? Set its draft to nullptr (and note it in CLAUDE.md).
+// list (not yet checked by a native speaker); nullptr = checked.
+// Checked a language? Set its draft to nullptr.
 // An entry without a compiled .qm (not in APP_LANGUAGES of CMakeLists.txt) does not appear: the
 // drafts stay here, ready for the day they go into the package again.
 struct AppLanguage {

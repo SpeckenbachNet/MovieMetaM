@@ -25,7 +25,7 @@
 struct RatingEntry {
     QString key;     // shown in the badge, e.g. "12"
     QString code;    // written into the file (iTunEXTC prefix|code|score|), e.g. "FSK 12" – the form
-                     // media servers know (see CLAUDE.md, age ratings)
+                     // media servers know
     int     score;   // order and value in the file, e.g. 200
     QString label;   // text in the combo box, e.g. "ab 12 Jahren" (official text, not translated)
     QString description;   // tooltip (may be empty)

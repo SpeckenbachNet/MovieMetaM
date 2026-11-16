@@ -946,7 +946,7 @@ QString MainWin::ratingCountry(const MovieData &movie) const
 }
 
 // The age rating TMDB has for the country, as a step of our system. Home video before cinema
-// (like the age rating systems, see CLAUDE.md); false if TMDB has none or it fits no step
+// (like the age rating systems); false if TMDB has none or it fits no step
 bool MainWin::findTmdbRating(const QString &country, QString &systemID, RatingEntry &entry) const
 {
     const QString tmdbCountry = (country == QLatin1String("UK")) ? QStringLiteral("GB") : country;

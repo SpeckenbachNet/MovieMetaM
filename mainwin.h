@@ -241,7 +241,7 @@ private:
     // shape: square, circle, diamond, triangle, octagon, hexagon, star; style: filled, outline, light, dark
     QIcon createAgeRatingIcon(QString age, QColor color, QString shape, QString style = "filled");
     // Age rating icon in the combo box: 18 is the largest size that fits centered on macOS.
-    // (macOS draws it about 2 px too high in the closed box – open point, see CLAUDE.md)
+    // (macOS draws it about 2 px too high in the closed box – open point)
     static constexpr int kRatingIconSize = 18;
     static constexpr int kRatingPreviewSize = 28;   // badges in the preview of the settings
 
